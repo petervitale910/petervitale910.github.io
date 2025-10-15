@@ -4,15 +4,20 @@ image: Peter_Vitale.jpg
 about: 
   template: jolla
   image-shape: rounded
-  image-width: 17em
+  image-width: 14em
   links: 
     - text: LinkedIn
       href: https://www.linkedin.com/in/peter-vitale-339407228/
       target: _blank
+      icon: linkedin
     - text: Email
       href: mailto:petervitale910@gmail.com
+      icon: envelope
+    - text: GitHub 
+      href: https://github.com/petervitale910
+      icon: github
 ---
 
-Peter Vitale graduated from University of California, Santa Cruz in 2023 with a B.S. in Marine Biology. Through his undergraduate coursework, he participated in multiple field research projects, including a quarter-long project on the flowering of seagrasses in Calvi, Corsica. He has a deep appreciation for seaweeds and marine plants, and has experience identifying and collecting the former. During his field research he familiarized himself with environmental data science, and became interested in data visualization through a graduate level course that focused on R. After graduating, Peter worked in environmental education at the Marine Science Institute in Redwood City, where he taught students about the marine life of the San Francisco Bay on a 90-foot research vessel. In his free time he aggregated the data collected during these programs to continue growing his skills in data visualization. Peter hopes to translate his experience in the MEDS program into practical tools that support environmental research and communication.
+I’m a marine biologist with a passion for ocean life, data visualization, and science communication. I studied Marine Biology at UC Santa Cruz and have worked in environmental education, field research, and data analysis. I enjoy finding creative ways to connect people with the natural world and make environmental data more engaging and accessible.
 
 

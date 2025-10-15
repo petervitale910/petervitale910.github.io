@@ -2,8 +2,11 @@
 title: "About"
 ---
 
-About this site
 
-```{r}
-1 + 1
-```
+## What I do for work 
+
+I am currently a student who works 
+
+## What I do for fun 
+
+League of Legends; give the ppl what they want.

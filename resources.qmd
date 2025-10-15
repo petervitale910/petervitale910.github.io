@@ -3,3 +3,36 @@ title: "All my favorite resources"
 format: html
 ---
 
+<h1>this is an h1 element</h1>
+
+<h1 class='title'>this is an h1 element with the title class</h1>
+
+<p class='orange-text'>this paragraph is butterscotch</p>
+
+<p class='center-text'>this paragraph is centered</p>
+
+<p class='center-text orange-text'>this paragraph is centered and butterscotch</p>
+
+---
+
+Here's where I'm describing [something fun]{.orange-text} that I enjoy doing
+
+::: {.orange-text}
+This
+
+is
+
+all
+
+butterscotch
+:::
+
+::: {.center-text}
+This
+
+is
+
+all
+
+centered
+:::

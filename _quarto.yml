@@ -4,22 +4,31 @@ project:
 
 website:
   title: "Peter Vitale"
+  favicon: images/favicon.png
   navbar:
+    title: false
+    logo: images/logo.png
+    logo-alt: benson boone without his mustache
     right:
       - href: index.qmd
         text: Home
       - about.qmd
       - href: resources.qmd
         text: Resources
+      - icon: github
+        href: https://github.com/petervitale910/petervitale910.github.io
+  page-footer: 
+    left: Copyright 2025, Peter Vitale
+    right: 
+      - icon: reddit
+      
 
 format:
   html:
-    theme:
-      light: zephyr
-      dark: darkly
-    css: styles.css
+    theme: styles.scss
     toc: true
-    page-layout: full 
+    page-layout: full
+    mainfont: Nunito
 
 editor: visual
 

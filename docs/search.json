@@ -4,13 +4,34 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "I am currently a student who works"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Peter Vitale",
     "section": "",
-    "text": "Peter Vitale graduated from University of California, Santa Cruz in 2023 with a B.S. in Marine Biology. Through his undergraduate coursework, he participated in multiple field research projects, including a quarter-long project on the flowering of seagrasses in Calvi, Corsica. He has a deep appreciation for seaweeds and marine plants, and has experience identifying and collecting the former. During his field research he familiarized himself with environmental data science, and became interested in data visualization through a graduate level course that focused on R. After graduating, Peter worked in environmental education at the Marine Science Institute in Redwood City, where he taught students about the marine life of the San Francisco Bay on a 90-foot research vessel. In his free time he aggregated the data collected during these programs to continue growing his skills in data visualization. Peter hopes to translate his experience in the MEDS program into practical tools that support environmental research and communication."
+    "text": "I’m a marine biologist with a passion for ocean life, data visualization, and science communication. I studied Marine Biology at UC Santa Cruz and have worked in environmental education, field research, and data analysis. I enjoy finding creative ways to connect people with the natural world and make environmental data more engaging and accessible."
+  },
+  {
+    "objectID": "about.html#what-i-do-for-work",
+    "href": "about.html#what-i-do-for-work",
+    "title": "About",
+    "section": "",
+    "text": "I am currently a student who works"
+  },
+  {
+    "objectID": "about.html#what-i-do-for-fun",
+    "href": "about.html#what-i-do-for-fun",
+    "title": "About",
+    "section": "What I do for fun",
+    "text": "What I do for fun\nLeague of Legends; give the ppl what they want."
+  },
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "All my favorite resources",
+    "section": "",
+    "text": "this is an h1 element\n\n\nthis is an h1 element with the title class\n\n\nthis paragraph is butterscotch\n\n\nthis paragraph is centered\n\n\nthis paragraph is centered and butterscotch\n\n\nHere’s where I’m describing something fun that I enjoy doing\n\nThis\nis\nall\nbutterscotch\n\n\nThis\nis\nall\ncentered"
   }
 ]
