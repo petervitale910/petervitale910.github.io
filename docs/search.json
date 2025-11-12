@@ -1,17 +1,17 @@
 [
   {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "All my favorite resources",
+    "section": "",
+    "text": "this is an h1 element\n\n\nthis is an h1 element with the title class\n\n\nthis paragraph is butterscotch\n\n\nthis paragraph is centered\n\n\nthis paragraph is centered and butterscotch\n\n\nHere’s where I’m describing something fun that I enjoy doing\n\nThis\nis\nall\nbutterscotch\n\n\nThis\nis\nall\ncentered"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
     "text": "I am currently a student who works"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Peter Vitale",
-    "section": "",
-    "text": "I’m a marine biologist with a passion for ocean life, data visualization, and science communication. I studied Marine Biology at UC Santa Cruz and have worked in environmental education, field research, and data analysis. I enjoy finding creative ways to connect people with the natural world and make environmental data more engaging and accessible."
   },
   {
     "objectID": "about.html#what-i-do-for-work",
@@ -28,10 +28,31 @@
     "text": "What I do for fun\nLeague of Legends; give the ppl what they want."
   },
   {
-    "objectID": "resources.html",
-    "href": "resources.html",
-    "title": "All my favorite resources",
+    "objectID": "posts/extreme_weather_events/index.html",
+    "href": "posts/extreme_weather_events/index.html",
+    "title": "Extreme Weather Events",
     "section": "",
-    "text": "this is an h1 element\n\n\nthis is an h1 element with the title class\n\n\nthis paragraph is butterscotch\n\n\nthis paragraph is centered\n\n\nthis paragraph is centered and butterscotch\n\n\nHere’s where I’m describing something fun that I enjoy doing\n\nThis\nis\nall\nbutterscotch\n\n\nThis\nis\nall\ncentered"
+    "text": "This is where the body of my blog post begins! I’m going to add a footnote here 1 Here’s and inline footnote2\nCiting reference (Shanny-Csik 2022)\nlets cite a paper using the DOI (Gaynor et al. 2022)"
+  },
+  {
+    "objectID": "posts/extreme_weather_events/index.html#footnotes",
+    "href": "posts/extreme_weather_events/index.html#footnotes",
+    "title": "Extreme Weather Events",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nHere is some additional context that might be helpful↩︎\nhere’s my inline note↩︎"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Peter Vitale",
+    "section": "",
+    "text": "I’m a marine biologist with a passion for ocean life, data visualization, and science communication. I studied Marine Biology at UC Santa Cruz and have worked in environmental education, field research, and data analysis. I enjoy finding creative ways to connect people with the natural world and make environmental data more engaging and accessible."
+  },
+  {
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "Blog Posts",
+    "section": "",
+    "text": "Extreme Weather Events\n\n\n\nMEDS\n\nR\n\nGeospatial\n\n\n\nExamining blackouts in Houston,TX following a 2021 storm\n\n\n\nPeter Vitale\n\n\nNov 12, 2025\n\n\n\n\n\n\nNo matching items"
   }
 ]

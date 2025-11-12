@@ -1,0 +1,10 @@
+# Any options specified here will apply to all posts in posts/ folder
+author:
+  - name: Peter Vitale
+    url: https://petervitale910.github.io/
+    affiliation: Masters of Environmental Data Science at BREN
+    affiliation-url: https://bren.ucsb.edu/
+    
+title-block-banner: true
+
+freeze: auto
