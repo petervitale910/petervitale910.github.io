@@ -32,7 +32,7 @@
     "href": "posts/extreme_weather_events/index.html",
     "title": "Extreme Weather Events",
     "section": "",
-    "text": "This is where the body of my blog post begins! I’m going to add a footnote here 1 Here’s and inline footnote2\nCiting reference (Shanny-Csik 2022)\nlets cite a paper using the DOI (Gaynor et al. 2022)"
+    "text": "This is where the body of my blog post begins! I’m going to add a footnote here 1 Here’s and inline footnote2\nCiting reference (Shanny-Csik 2022)\nlets cite a paper using the DOI (Gaynor et al. 2022)\n\n\n\n\n\nReferences\n\nGaynor, Kaitlyn M., Therese Azevedo, Clarissa Boyajian, Julien Brun, Amber E. Budden, Allie Cole, Samantha Csik, et al. 2022. “Ten Simple Rules to Cultivate Belonging in Collaborative Data Science Research Teams.” PLOS Computational Biology 18 (11): e1010567. https://doi.org/10.1371/journal.pcbi.1010567.\n\n\nShanny-Csik, Samantha. 2022. “Adding a Blog to Your Existing Quarto Website.” October 24, 2022. https://samanthacsik.github.io/posts/2022-10-24-quarto-blogs/.\n\nFootnotes\n\n\nHere is some additional context that might be helpful↩︎\nhere’s my inline note↩︎\n\nCitationBibTeX citation:@online{vitale2025,\n  author = {Peter Vitale},\n  title = {Extreme {Weather} {Events}},\n  date = {2025-11-12},\n  url = {https://petervitale910.github.io/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nPeter Vitale. 2025. “Extreme Weather Events.” November 12,\n2025. https://petervitale910.github.io/."
   },
   {
     "objectID": "posts/extreme_weather_events/index.html#footnotes",
@@ -53,6 +53,6 @@
     "href": "posts.html",
     "title": "Blog Posts",
     "section": "",
-    "text": "Extreme Weather Events\n\n\n\nMEDS\n\nR\n\nGeospatial\n\n\n\nExamining blackouts in Houston,TX following a 2021 storm\n\n\n\nPeter Vitale\n\n\nNov 12, 2025\n\n\n\n\n\n\nNo matching items"
+    "text": "Extreme Weather Events\n\n\n\nMEDS\n\n\nR\n\n\nGeospatial\n\n\n\nExamining blackouts in Houston,TX following a 2021 storm\n\n\n\nPeter Vitale\n\n\nNov 12, 2025\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]
