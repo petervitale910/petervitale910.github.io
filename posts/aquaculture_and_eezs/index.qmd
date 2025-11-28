@@ -1,0 +1,475 @@
+---
+title: "Aquaculture and EEZ's"
+description: "Examining where in the North Pacific Economic Exclusive Zone is best for aquaculture of different species"
+date: 2025-11-12
+categories: [MEDS, R, Geospatial]
+---
+
+DESCRIPTION OF EEZ"S AND WHY I LIKE THIS
+
+```{r}
+#| code-fold: true
+pacman::p_load('tidyverse', 
+               'sf', 
+               'here',
+               'tmap', 
+               'kableExtra',
+               'patchwork',
+               'stars',
+               'terra')
+```
+
+## Data import
+
+### Surface temperature from: [@noaa_crw_sst31]
+
+```{r}
+#| code-fold: true
+sst_2008 <- rast(here('posts', 'aquaculture_and_eezs','data',
+                      'average_annual_sst_2008.tif')) 
+
+sst_2009 <- rast(here('posts', 'aquaculture_and_eezs','data',
+                      'average_annual_sst_2009.tif'))
+sst_2010 <- rast(here('posts', 'aquaculture_and_eezs', 'data',
+                      'average_annual_sst_2010.tif'))
+sst_2011 <- rast(here('posts', 'aquaculture_and_eezs','data',
+                      'average_annual_sst_2011.tif'))
+sst_2012 <- rast(here('posts', 'aquaculture_and_eezs', 'data',
+                      'average_annual_sst_2012.tif'))
+```
+
+### Bathymetry
+
+From: [@gebcobathymetriccompilationgroup20252025]
+
+```{r}
+#| code-fold: true
+bathy <- rast(here('posts', 'aquaculture_and_eezs', 'data','depth.tif')) %>% 
+  project("EPSG:4326") # Coerce into correct crs 
+```
+
+### Exclusive Economic Zones
+
+From: [@marine_regions_eez_v12]
+
+```{r}
+#| code-fold: true
+eez <- st_read(here('posts', 'aquaculture_and_eezs','data',
+                    'wc_regions_clean.shp'), quiet = TRUE) %>% 
+  st_transform("EPSG:4326") # STARS OBJECT
+        
+```
+
+## Surface temperature mean
+
+```{r}
+#| code-fold: true
+# Stacked raster
+stacked_sst <- c(sst_2008, sst_2009, sst_2010, sst_2011, sst_2012) %>% # Here we stack our temperatures and then transform crs
+  project("EPSG:4326") 
+
+# Take mean of stacked raster and transform from Kelvin to Celsius
+mean_sst <- mean(stacked_sst) - 273.15 
+```
+
+## Bathymetry
+
+```{r}
+#| code-fold: true
+# First we need to assure this data is in the same crs as sst
+depth_projected <- project(bathy, mean_sst) # Project the crs of mean sst on depth 
+
+crs(depth_projected) == crs(mean_sst)
+
+# We are going to crop the depth raster to the eez
+depth_cropped <- crop(depth_projected, mean_sst)
+
+# And resample to make sure our pixel sizes match 
+depth_resampled <- resample(depth_projected, mean_sst)
+```
+
+## Oyster Reclassification
+
+We need to reclassify for oysters, which enjoy depth between -70 meters and 0 meters and temperatures between 11 and 30 degrees celcius
+
+```{r}
+#| code-fold: true
+rcl_depth <- matrix(c(-Inf, -70, 0, # Anything below 70 m becomes a 0
+                    -70, 0, 1, # Between 70 and 0 becomes 1
+                    0, Inf, 0), # And above 0 becomes a 0
+                    nrow = 3, 
+                    byrow = TRUE)
+
+rcl_temp <- matrix(c(-Inf, 11, 0, # Below 11 degrees becomes 0
+                     11, 30, 1, # Between 11 and 30 becomes 1
+                     30, Inf, 0), # Above 30 becomes 0
+                   nrow =3,
+                   byrow = TRUE)
+# Apply those matrices
+depth_rcl <- classify(depth_resampled, rcl_depth) 
+
+sst_rcl <- classify(mean_sst, rcl_temp)
+```
+
+We want to keep where both sst and depth equal one, so we can multiply the two rasters.
+
+```{r}
+#| code-fold: true
+suitable_cells <- sst_rcl * depth_rcl
+
+# And make all 0's NA
+suitable_cells[suitable_cells == 0] <- NA
+
+# Finally, since we only have ones, change that to suitable
+names(suitable_cells) <- 'Suitable'
+```
+
+```{r}
+#| code-fold: true
+# Now we want to see the area of the suitable cells, which we can get by multiplying suitable_cells and the cellSize of each cell
+area_raster <- suitable_cells * cellSize(suitable_cells, unit = 'km')  
+
+```
+
+```{r}
+#| code-fold: true
+# Here we extract where that area touches our eez
+area_extracted <- terra::extract(area_raster, 
+                                 eez, 
+                                 touches = TRUE) %>%  
+  group_by(ID) %>% # Then we group_by and summarise the total suitable area per eez region
+  summarise(suitable_area = sum(Suitable, na.rm = TRUE)) %>% 
+  mutate(rgn = eez$rgn)
+
+```
+
+```{r}
+#| code-fold: true
+# Lastly we want to left join to preserve the area information of each eez region
+region_suitable_area <- left_join(x = eez,
+                                  y = area_extracted, 
+                                  by = "rgn") %>% 
+  select(-ID) # Get rid of ID column
+```
+
+### Map
+
+Now we have our final mapping data frame and can build our map
+
+```{r}
+#| code-fold: true
+tm_basemap("Esri.WorldTopoMap")+# I found this basemap fit the best
+tm_shape(region_suitable_area)+
+  tm_polygons(fill = 'suitable_area',
+              fill.scale = tm_scale(values = c('#E1DABD', # Add my color palette 
+                                              '#ABC798',
+                                              '#FFC4EB',
+                                              '#E6983F',
+                                              '#A0185A'),
+                                    breaks = c(0, 
+                                               800, # Specify breaks 
+                                               1600,
+                                               2400, 
+                                               3200,
+                                               4000)),
+              fill.legend = tm_legend( '        Total \nSuitable area (km)'))+ # The blank space makes 'Total' centered
+  tm_title(text = paste('Suitable area for farming Oysters in West Coast EEZ'), 
+           position = tm_pos_out("center", "top", pos.h = "center"))+ # Add title and position in center
+  tm_layout(component.autoscale = FALSE)+ # Autoscale makes our title tiny so we turn it off
+  tm_graticules(alpha = .5)+ # Add graticules (lighter)
+  tm_text('rgn', size = .7)+ # This adds the region name on each polygon centroid
+tm_shape(suitable_cells)+ # I want to add the visual representation of where the suitable area is 
+  tm_raster(col  =  'Suitable',
+             col.scale =  tm_scale(values = '#90AFDA', # This color is also part of my palette
+            labels = 'Suitable Area'), # In place of a title  we will be specific with our legend text
+            col.legend = tm_legend(title = "")) # No need for a legend title with a single raster variable
+
+
+```
+
+### Table
+
+I also want to be able to see a table of our exact suitable area in each region so we can use kable
+
+```{r}
+#| code-fold: true
+region_suitable_area %>% 
+  st_drop_geometry() %>% # The only way to lose geometry
+  select(-rgn_key, -rgn_id, -area_m2) %>% # Drop unnecesary columns
+kbl(col.names = c('Region', 'Total Area (Km2)', 'Suitable Area (Km2)')) %>%  # Rename the columns in our table
+  kable_classic(full_width = F, # This is my favorite type of table
+                html_font = "Cambria") %>% 
+  footnote(number = paste('EEZ region suitable area for farming Oysters')) # Add a footnote
+```
+
+## Function
+
+Now that I have my workflow solidified I can turn it into a function, so with just the species name it can output a map.
+
+```{r}
+#| code-fold: true
+#' Map EEZ
+#' Make a map of a suitable area of a species in west coast EEZ's
+#' @param species 
+#' The name of your species, MUST be wrapped AND Uppercase eg: ('Pacific Oyster')
+#' @returnsA list containing:
+#'   - $map   : tmap object
+#'   - $table : kable table
+#' @export
+#' @examples
+#' 
+map_eez <- function(species){
+
+  species_dict <- list(
+  
+  # -----------------------------
+  # SHELLFISH
+  # -----------------------------
+  
+  "Pacific Oyster" = list(
+    t_lwr = 11, t_upr = 30,
+    d_lower = 70, d_upr = 0
+  ),
+
+  "Olympia Oyster" = list(
+    t_lwr = 8,  t_upr = 20,
+    d_lower = 40, d_upr = 0
+  ),
+
+  "Geoduck" = list(
+    t_lwr = 5, t_upr = 18,
+    d_lower = 100, d_upr = 5
+  ),
+
+  "Razor Clam" = list(
+    t_lwr = 5, t_upr = 17,
+    d_lower = 20, d_upr = 0
+  ),
+
+  "Blue Mussel" = list(
+    t_lwr = 5, t_upr = 20,
+    d_lower = 30, d_upr = 0
+  ),
+
+  "Mediterranean Mussel" = list(
+    t_lwr = 8, t_upr = 26,
+    d_lower = 40, d_upr = 0
+  ),
+
+  "Scallop" = list(
+    t_lwr = 8, t_upr = 20,
+    d_lower = 50, d_upr = 0
+  ),
+  
+  # -----------------------------
+  # KELP + SEAWEEDS
+  # -----------------------------
+  
+  "Bull Kelp" = list(
+    t_lwr = 10, t_upr = 18,
+    d_lower = 40, d_upr = 0
+  ),
+  
+  "Giant Kelp" = list(
+    t_lwr = 6,  t_upr = 20,
+    d_lower = 30, d_upr = 0
+  ),
+  
+  "Sugar Kelp" = list(
+    t_lwr = -2, t_upr = 15,
+    d_lower = 50, d_upr = 1
+  ),
+  
+  "Dulse" = list(
+    t_lwr = 5,  t_upr = 15,
+    d_lower = 10, d_upr = 0
+  ),
+  
+  "Sea Lettuce" = list(
+    t_lwr = 5,  t_upr = 25,
+    d_lower = 10, d_upr = 0
+  ),
+  
+  "Winged Kelp" = list(
+    t_lwr = 2, t_upr = 15,
+    d_lower = 40, d_upr = 0
+  ),
+
+  "Pyropia (Nori)" = list(
+    t_lwr = 5,  t_upr = 15,
+    d_lower = 10, d_upr = 0
+  ),
+  
+  # -----------------------------
+  # ECHINODERMS (URCHINS)
+  # -----------------------------
+  
+  "Green Sea Urchin" = list(
+    t_lwr = 0, t_upr = 15,
+    d_lower = 200, d_upr = 0
+  ),
+
+  "Red Sea Urchin" = list(
+    t_lwr = 5, t_upr = 20,
+    d_lower = 100, d_upr = 3
+  ),
+  
+  # -----------------------------
+  # FINFISH
+  # -----------------------------
+
+  "Chinook Salmon" = list(
+    t_lwr = 8,  t_upr = 14,
+    d_lower = 200, d_upr = 0
+  ),
+
+  "Coho Salmon" = list(
+    t_lwr = 7, t_upr = 14,
+    d_lower = 150, d_upr = 0
+  ),
+
+  "Steelhead Trout" = list(
+    t_lwr = 7, t_upr = 17,
+    d_lower = 100, d_upr = 0
+  ),
+
+  "Pacific Halibut" = list(
+    t_lwr = 3,  t_upr = 12,
+    d_lower = 450, d_upr = 20
+  ),
+
+  "Sablefish" = list(
+    t_lwr = 4,  t_upr = 12,
+    d_lower = 1500, d_upr = 50
+  ),
+
+  "Pacific Sardine" = list(
+    t_lwr = 12, t_upr = 20,
+    d_lower = 0, d_upr = 50
+  ),
+
+  "Northern Anchovy" = list(
+    t_lwr = 12, t_upr = 20,
+    d_lower = 0, d_upr = 50
+  ),
+  
+  # -----------------------------
+  # CRUSTACEANS
+  # -----------------------------
+
+  "Dungeness Crab" = list(
+    t_lwr = 7, t_upr = 18,
+    d_lower = 100, d_upr = 0
+  )
+)
+
+# Extract parameters from the dictionary
+params <- species_dict[[species]]
+if (is.null(params)) stop("Species not found in dictionary. Check spelling.")
+
+# Access individual values
+t_lwr <- params$t_lwr
+t_upr <- params$t_upr
+d_lower <- params$d_lower
+d_upr   <- params$d_upr
+
+# Reclassification matrices
+rcl_depth <- matrix(c(-Inf, -d_lower, 0, # Use variables like values
+                      -d_lower, -d_upr, 1,
+                      -d_upr, Inf, 0), 
+                    nrow = 3, 
+                    byrow = TRUE)
+
+rcl_temp <- matrix(c(-Inf, t_lwr, 0,
+                     t_lwr, t_upr, 1,
+                     t_upr, Inf, 0), 
+                   nrow =3,
+                   byrow = TRUE)
+
+# Reclassify 
+depth_rcl <- classify(depth_resampled, rcl_depth)
+
+sst_rcl <- classify(mean_sst, rcl_temp)
+
+# Calculate suitable cells
+suitable_cells <- sst_rcl * depth_rcl
+
+suitable_cells[suitable_cells == 0] <- NA
+
+names(suitable_cells) <- 'Suitable'
+
+# Calculate area of suitable cells
+area_raster <- suitable_cells * cellSize(suitable_cells, unit = 'km')
+
+# Extract suitable areas 
+area_extracted <- terra::extract(area_raster, 
+                                 eez, 
+                                 touches = TRUE) %>%  
+  group_by(ID) %>% 
+  summarise(suitable_area = sum(Suitable, na.rm = TRUE)) %>% 
+  mutate(rgn = eez$rgn)
+
+# Create geodf with suitable area and eez area
+region_suitable_area <- left_join(x = eez,
+                                  y = area_extracted, 
+                                  by = "rgn") %>% 
+  select(-ID)
+
+
+# Create map
+map <- tm_basemap("Esri.WorldTopoMap")+
+  tm_shape(region_suitable_area)+
+  tm_polygons(fill = 'suitable_area',
+              fill.scale = tm_scale(values = c('#E1DABD',
+                                               '#ABC798',
+                                               '#FFC4EB',
+                                               '#E6983F',
+                                               '#A0185A'),
+                                    n = 5), # Set 5 breaks
+              fill.legend = tm_legend( '        Total \nSuitable area (km)'))+
+  tm_title(text = paste('Suitable area for farming', species, 'in West Coast EEZ'), position = tm_pos_out("center", "top", pos.h = "center"))+ # Paste allows us to manipulate the title of the plot
+  tm_layout(component.autoscale = FALSE)+
+  tm_graticules(alpha = .5)+
+  tm_text('rgn', size = .7)+
+tm_shape(suitable_cells)+
+  tm_raster(col  =  'Suitable',
+             col.scale =  tm_scale(values = '#90AFDA', 
+            labels = 'Suitable Area'),
+            col.legend = tm_legend(title = ""))
+
+# Create table
+table <- region_suitable_area %>% 
+  st_drop_geometry() %>% 
+  select(-rgn_key, -rgn_id, -area_m2) %>% 
+kbl(col.names = c('Region', 
+                  'Total Area (Km2)', 
+                  'Suitable Area (Km2)')) %>% 
+  kable_classic(full_width = F, 
+                html_font = "Cambria") %>% 
+  footnote(number = paste('EEZ region suitable area for farming', species)) # Paste again
+
+return(list( # Make a list of our map and table so they can be called with a buck
+    map = map, 
+    table = table
+  ))
+}
+
+```
+
+Now we can call the function for bull kelp values: 10-18 degrees celsius, 40-0 meters deep according to [@weigel2023] and [@cdfw_kelp]
+
+```{r}
+bull_kelp <- map_eez('Bull Kelp')
+```
+
+Call the map
+
+```{r}
+bull_kelp$map
+```
+
+Call the table
+
+```{r}
+bull_kelp$table
+```
