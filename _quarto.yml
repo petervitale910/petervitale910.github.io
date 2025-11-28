@@ -8,7 +8,7 @@ website:
   navbar:
     title: false
     logo: images/logo.png
-    logo-alt: benson boone without his mustache
+    logo-alt: Black oystercatcher coding in R
     right:
       - href: index.qmd
         text: Home

@@ -8,7 +8,6 @@ about:
   links: 
     - text: LinkedIn
       href: https://www.linkedin.com/in/peter-vitale-339407228/
-      target: _blank
       icon: linkedin
     - text: Email
       href: mailto:petervitale910@gmail.com
@@ -19,5 +18,3 @@ about:
 ---
 
 I’m a marine biologist with a passion for ocean life, data visualization, and science communication. I studied Marine Biology at UC Santa Cruz and have worked in environmental education, field research, and data analysis. I enjoy finding creative ways to connect people with the natural world and make environmental data more engaging and accessible.
-
-
