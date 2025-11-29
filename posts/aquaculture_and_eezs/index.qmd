@@ -157,6 +157,7 @@ region_suitable_area <- left_join(x = eez,
 Now we have our final mapping data frame and can build our map
 
 ```{r}
+#| message: false
 #| code-fold: true
 tm_basemap("Esri.WorldTopoMap")+# I found this basemap fit the best
 tm_shape(region_suitable_area)+
@@ -365,6 +366,10 @@ map_eez <- function(species){
 
 # Extract parameters from the dictionary
 params <- species_dict[[species]]
+if (species == "list") {
+  return(names(species_dict))
+}
+
 if (is.null(params)) stop("Species not found in dictionary. Check spelling.")
 
 # Access individual values
@@ -456,8 +461,14 @@ return(list( # Make a list of our map and table so they can be called with a buc
 
 ```
 
-Now we can call the function for bull kelp values: 10-18 degrees celsius, 40-0 meters deep according to [@weigel2023] and [@cdfw_kelp]
+Now we can call the function for any species in our species list 
 
+To know species options you can run map_eez('list')
+```{r}
+map_eez('list')
+```
+
+Now we can call the function with any species from the list we find interesting, in this case Bull Kelp AND WHY
 ```{r}
 bull_kelp <- map_eez('Bull Kelp')
 ```
@@ -465,6 +476,7 @@ bull_kelp <- map_eez('Bull Kelp')
 Call the map
 
 ```{r}
+#| message: false
 bull_kelp$map
 ```
 
