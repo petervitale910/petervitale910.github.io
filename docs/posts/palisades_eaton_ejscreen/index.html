@@ -241,15 +241,11 @@ div.csl-indent {
   <li><a href="#highlights" id="toc-highlights" class="nav-link" data-scroll-target="#highlights">Highlights:</a></li>
   <li><a href="#background-information" id="toc-background-information" class="nav-link" data-scroll-target="#background-information">Background information</a></li>
   <li><a href="#about-the-data" id="toc-about-the-data" class="nav-link" data-scroll-target="#about-the-data">About the data:</a></li>
-  </ul></li>
-  <li><a href="#we-begin-by-importing-packages-and-datasets" id="toc-we-begin-by-importing-packages-and-datasets" class="nav-link" data-scroll-target="#we-begin-by-importing-packages-and-datasets">We begin by importing packages and datasets</a>
-  <ul class="collapse">
+  <li><a href="#import-packages-and-datasets" id="toc-import-packages-and-datasets" class="nav-link" data-scroll-target="#import-packages-and-datasets">1. Import packages and datasets</a></li>
   <li><a href="#fire-perimeter-data-exploration" id="toc-fire-perimeter-data-exploration" class="nav-link" data-scroll-target="#fire-perimeter-data-exploration">2. Fire perimeter data exploration</a></li>
   <li><a href="#netcdf-data-import-and-exploration" id="toc-netcdf-data-import-and-exploration" class="nav-link" data-scroll-target="#netcdf-data-import-and-exploration">3. NetCDF data import and exploration</a></li>
   <li><a href="#restoring-geospatial-information" id="toc-restoring-geospatial-information" class="nav-link" data-scroll-target="#restoring-geospatial-information">4. Restoring geospatial information</a></li>
-  </ul></li>
-  <li><a href="#true-color-image" id="toc-true-color-image" class="nav-link" data-scroll-target="#true-color-image">5. True color image</a>
-  <ul class="collapse">
+  <li><a href="#true-color-image" id="toc-true-color-image" class="nav-link" data-scroll-target="#true-color-image">5. True color image</a></li>
   <li><a href="#false-color-image" id="toc-false-color-image" class="nav-link" data-scroll-target="#false-color-image">6. False color image</a></li>
   <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map">7. Map</a></li>
   <li><a href="#intersection-with-environmental-justice" id="toc-intersection-with-environmental-justice" class="nav-link" data-scroll-target="#intersection-with-environmental-justice">8. Intersection with environmental justice</a></li>
@@ -300,9 +296,8 @@ div.csl-indent {
 <p>Landsat C2 L2 from Microsoft’s Planetary Computer is a globally available, multi-decadal archive of atmospherically corrected, analysis-ready Landsat imagery. Surface reflectance for multispectral bands and derived land surface temperature from thermal bands are provided in cloud-optimized GeoTIFFs, accessible via a STAC API. Accordingly, it is primarily used for long-term environmental monitoring, spectral studies, and thermal remote sensing, and is designed for scalable, cloud-native remote sensing workflows <span class="citation" data-cites="landsat_c2_l2_2025">(<a href="#ref-landsat_c2_l2_2025" role="doc-biblioref">U.S. Geological Survey 2025</a>)</span></p>
 </section>
 </section>
-</section>
-<section id="we-begin-by-importing-packages-and-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="we-begin-by-importing-packages-and-datasets">We begin by importing packages and datasets</h2>
+<section id="import-packages-and-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="import-packages-and-datasets">1. Import packages and datasets</h3>
 <div id="fbdfdded-86a0-4347-b708-d71cef03804f" class="cell" data-tags="[]" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
@@ -318,6 +313,7 @@ div.csl-indent {
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+</section>
 <section id="fire-perimeter-data-exploration" class="level3">
 <h3 class="anchored" data-anchor-id="fire-perimeter-data-exploration">2. Fire perimeter data exploration</h3>
 <p>Here we import the perimeter data files and do some exploration.</p>
@@ -856,9 +852,8 @@ Data variables:
 </div>
 </div>
 </section>
-</section>
-<section id="true-color-image" class="level2">
-<h2 class="anchored" data-anchor-id="true-color-image">5. True color image</h2>
+<section id="true-color-image" class="level3">
+<h3 class="anchored" data-anchor-id="true-color-image">5. True color image</h3>
 <p>A true color image takes the light bands collected by landsat and plots the colors visible to the human eye. This is how the ground would look if we were sitting on the satelite</p>
 <p>To create a true color plot we need to: - Identify which bands have nan values. - select the red, green, and blue variables (in that order) of the xarray.Dataset holding the Landsat data, - convert it to a numpy.array using the to_array() method, and then - use .plot.imshow() to create an RGB image with the data. - Adjust the scale used for plotting the bands to get a true color image. - Use the .fillna() method for xarray.Datasets to substitute the any nan values in the Landsat data for zero. - Create a true color image that gets plotted without warnings.</p>
 <div id="bf20dfd0-6339-488b-9fb7-e85c71cc3340" class="cell" data-tags="[]" data-execution_count="18">
@@ -888,6 +883,7 @@ The blue band has 109 na values</code></pre>
 </div>
 </div>
 <p>You can <em>sort of</em> see the fire damage, however it isnt as aparant as the false color image.</p>
+</section>
 <section id="false-color-image" class="level3">
 <h3 class="anchored" data-anchor-id="false-color-image">6. False color image</h3>
 <p>False color images plot short wave infared, near infared, and red bands. By assigning infrared bands to visible colors, these images highlight vegetation health, burn severity, and the extent of fire scars. This approach helps researchers and land managers assess recovery efforts, identify high-risk areas, and plan restoration strategies <span class="citation" data-cites="meds_eds220_thomasfire_2025">(<a href="#ref-meds_eds220_thomasfire_2025" role="doc-biblioref"><span>“Assignment 4: Thomas Fire — MEDS-EDS-220 Course”</span> 2025</a>)</span></p>
