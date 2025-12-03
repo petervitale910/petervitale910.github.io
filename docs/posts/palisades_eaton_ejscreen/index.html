@@ -266,8 +266,8 @@ div.csl-indent {
 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="download.webp" class="img-fluid figure-img"></p>
-<figcaption><span class="citation" data-cites="Swope_AP_2025_LA_fires">Swope (<a href="#ref-Swope_AP_2025_LA_fires" role="doc-biblioref">2025</a>)</span></figcaption>
+<p><img src="image.jpg" class="img-fluid figure-img"></p>
+<figcaption><span class="citation" data-cites="SHF_2025_LA_fires">Guillen (<a href="#ref-SHF_2025_LA_fires" role="doc-biblioref">2025</a>)</span></figcaption>
 </figure>
 </div>
 <section id="about-this-project" class="level2">
@@ -283,7 +283,7 @@ div.csl-indent {
 </section>
 <section id="background-information" class="level3">
 <h3 class="anchored" data-anchor-id="background-information">Background information</h3>
-<p>The Palisades and Eaton fires sparked within hours of eachother on January 7th 2025. Due to the Santa Ana winds and arid conditions these fires quickly grew out of control, ultimately burning a combined 40,000 acres <span class="citation" data-cites="vanauken_2025">(<a href="#ref-vanauken_2025" role="doc-biblioref">VanAuken 2025</a>)</span>. The fires led to damage and economic loss, an outcome that is estimated to have lost between $135 billion and $150 billion <span class="citation" data-cites="accuweather_2025">(<a href="#ref-accuweather_2025" role="doc-biblioref"><span>“Media Advisory: AccuWeather Increases Estimate of Total Damage and Economic Loss as Catastrophic Wildfires Continue to Ravage the Los Angeles Area”</span> 2025</a>)</span>. In this project we will examine the total land area covered by the fires as well as examine socioeconomic factors to interpret the communities affected by, as well as the long lasting effects of the fires.</p>
+<p>The Palisades and Eaton fires sparked within hours of each other on January 7th 2025. Due to arid conditions and the Santa Ana winds these fires quickly grew out of control, ultimately burning a combined 40,000 acres <span class="citation" data-cites="vanauken_2025">(<a href="#ref-vanauken_2025" role="doc-biblioref">VanAuken 2025</a>)</span>. The fires led to significant damage and economic loss, estimated between $135 billion and $150 billion <span class="citation" data-cites="accuweather_2025">(<a href="#ref-accuweather_2025" role="doc-biblioref"><span>“Media Advisory: AccuWeather Increases Estimate of Total Damage and Economic Loss as Catastrophic Wildfires Continue to Ravage the Los Angeles Area”</span> 2025</a>)</span>. In this project we will examine the total land area covered by the fires as well as examine socioeconomic factors to interpret the communities affected by, as well as the long lasting effects of the fires.</p>
 </section>
 <section id="about-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="about-the-data">About the data:</h3>
@@ -377,13 +377,13 @@ Datum: World Geodetic System 1984 ensemble
 - Prime Meridian: Greenwich</code></pre>
 </div>
 </div>
-<p>We know we want to merge these datasets at some point, so it is important to check if the column names match in the two perimeter</p>
-<div id="2ea128a4-4a4d-4b27-98d0-e12d8969e364" class="cell" data-tags="[]" data-execution_count="8">
+<p>We know we want to merge these datasets at some point, so it is important to check if the column names match in the two perimeters</p>
+<div id="2ea128a4-4a4d-4b27-98d0-e12d8969e364" class="cell" data-tags="[]">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lets compare the column names to make sure they match </span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f' It is </span><span class="sc">{</span>eaton_perimeter<span class="sc">.</span>columns <span class="op">==</span> palisades_perimeter<span class="sc">.</span>columns<span class="sc">}</span><span class="ss"> that he column names match'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f' It is </span><span class="sc">{</span>eaton_perimeter<span class="sc">.</span>columns <span class="op">==</span> palisades_perimeter<span class="sc">.</span>columns<span class="sc">}</span><span class="ss"> that the column names match'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code> It is [ True  True  True  True  True] that he column names match</code></pre>
@@ -855,7 +855,16 @@ Data variables:
 <section id="true-color-image" class="level3">
 <h3 class="anchored" data-anchor-id="true-color-image">5. True color image</h3>
 <p>A true color image takes the light bands collected by landsat and plots the colors visible to the human eye. This is how the ground would look if we were sitting on the satelite</p>
-<p>To create a true color plot we need to: - Identify which bands have nan values. - select the red, green, and blue variables (in that order) of the xarray.Dataset holding the Landsat data, - convert it to a numpy.array using the to_array() method, and then - use .plot.imshow() to create an RGB image with the data. - Adjust the scale used for plotting the bands to get a true color image. - Use the .fillna() method for xarray.Datasets to substitute the any nan values in the Landsat data for zero. - Create a true color image that gets plotted without warnings.</p>
+<p>To create a true color plot we need to:</p>
+<ul>
+<li>Identify which bands have nan values.</li>
+<li>Select the red, green, and blue variables (in that order) of the xarray.Dataset holding the Landsat data,</li>
+<li>Convert it to a numpy.array using the to_array() method, and then</li>
+<li>Use .plot.imshow() to create an RGB image with the data.</li>
+<li>Adjust the scale used for plotting the bands to get a true color image.</li>
+<li>Use the .fillna() method for xarray.Datasets to substitute any nan values in the Landsat data for zero.</li>
+<li>Create a true color image that gets plotted without warnings.</li>
+</ul>
 <div id="bf20dfd0-6339-488b-9fb7-e85c71cc3340" class="cell" data-tags="[]" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1187,7 +1196,7 @@ The blue band has 109 na values</code></pre>
 </div>
 </div>
 </div>
-<p>From the map you can see that the Palisades fire affected more renters, with a large area of close to 50% renters being found at the lower left of the perimeter.</p>
+<p>From the map you can see that the Palisades fire affected more renters, with a large area of close to 50% renters being found at the lower left of the perimeter (Malibu). While this is an affluent area, it has seen some of the highest level of post-fire price gouging <span class="citation" data-cites="FOXLA_2025">(<a href="#ref-FOXLA_2025" role="doc-biblioref">FOX 11 Los Angeles 2025</a>)</span>. This could alienate those who have historically lived in the communities to move elsewhere, shifting the social and demographic makeup of these areas.</p>
 
 
 
@@ -1204,14 +1213,17 @@ CBS Los Angeles. 2025. <span>“Wildfire Survivors, Renters Face Long Road to Af
 <div id="ref-cdc_eji_2021" class="csl-entry" role="listitem">
 Centers for Disease Control and Prevention, and Agency for Toxic Substances and Disease Registry. 2021. <span>“Environmental Justice Index.”</span> <a href="https://atsdr.cdc.gov/place-health/php/eji/eji-data-download.html">https://atsdr.cdc.gov/place-health/php/eji/eji-data-download.html</a>.
 </div>
+<div id="ref-FOXLA_2025" class="csl-entry" role="listitem">
+FOX 11 Los Angeles. 2025. <span>“Rent Soaring in These LA ZIP Codes After California Wildfires, Report Says.”</span> January 2025. <a href="https://www.cbsnews.com/losangeles/news/wildfire-survivors-renters-affordable-housing/">https://www.cbsnews.com/losangeles/news/wildfire-survivors-renters-affordable-housing/</a>.
+</div>
+<div id="ref-SHF_2025_LA_fires" class="csl-entry" role="listitem">
+Guillen, Victor. 2025. <span>“Service Firefighters in the Street with a Fire Hose in Front of a House on Fire.”</span> Photograph, Flickr. <a href="https://www.npr.org/2025/01/10/g-s1-41873/la-fires-los-angeles-palisades-eaton-hurst-california">https://www.npr.org/2025/01/10/g-s1-41873/la-fires-los-angeles-palisades-eaton-hurst-california</a>.
+</div>
 <div id="ref-accuweather_2025" class="csl-entry" role="listitem">
 <span>“Media Advisory: AccuWeather Increases Estimate of Total Damage and Economic Loss as Catastrophic Wildfires Continue to Ravage the Los Angeles Area.”</span> 2025. <em>AccuWeather</em>. AccuWeather, Inc. <a href="https://www.accuweather.com/en/press/media-advisory-accuweather-increases-estimate-of-total-damage-and-economic-loss-ascatastrophic-wildfires-in-southern-california-continue-to-ravage-the-los-angeles-area-updated-preliminary-estimate-i/1732268?campaign_id=4&amp;emc=edit_dk_20250110&amp;instance_id=144377&amp;nl=dealbook&amp;regi_id=42565251&amp;segment_id=187890&amp;user_id=d34e5f66831c9f0186bea078f383a625">https://www.accuweather.com/en/press/media-advisory-accuweather-increases-estimate-of-total-damage-and-economic-loss-ascatastrophic-wildfires-in-southern-california-continue-to-ravage-the-los-angeles-area-updated-preliminary-estimate-i/1732268?campaign_id=4&amp;emc=edit_dk_20250110&amp;instance_id=144377&amp;nl=dealbook&amp;regi_id=42565251&amp;segment_id=187890&amp;user_id=d34e5f66831c9f0186bea078f383a625</a>.
 </div>
 <div id="ref-la_fire_perimeters_2025" class="csl-entry" role="listitem">
 <span>“Palisades and Eaton Dissolved Fire Perimeters (2025).”</span> 2025. <em>City of Los Angeles GeoHub</em>. City of Los Angeles. <a href="https://geohub.lacity.org/datasets/lacounty::palisades-and-eaton-dissolved-fire-perimeters-2025">https://geohub.lacity.org/datasets/lacounty::palisades-and-eaton-dissolved-fire-perimeters-2025</a>.
-</div>
-<div id="ref-Swope_AP_2025_LA_fires" class="csl-entry" role="listitem">
-Swope, Ethan. 2025. <span>“Palisades &amp; Eaton Fires, Los Angeles, January 2025.”</span> Photograph, Associated Press. <a href="https://www.npr.org/2025/01/10/g-s1-41873/la-fires-los-angeles-palisades-eaton-hurst-california">https://www.npr.org/2025/01/10/g-s1-41873/la-fires-los-angeles-palisades-eaton-hurst-california</a>.
 </div>
 <div id="ref-landsat_c2_l2_2025" class="csl-entry" role="listitem">
 U.S. Geological Survey. 2025. <span>“Landsat Collection 2 Level-2 Science Products.”</span> Microsoft Planetary Computer. <a href="https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2">https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2</a>.
