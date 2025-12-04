@@ -1,0 +1,340 @@
+---
+title: "San Fransisco Bay Catch Dynamics"
+description: "Examining Northern Anchovies ability to predict indicator species"
+date: 2025-12-3
+categories: [MEDS, R, Statistics]
+citation: 
+  url: https://petervitale910.github.io/
+code-fold: true
+---
+ tktktktkt
+ 
+ tktktktk
+### DAG
+
+
+### Import packages
+```{r}
+pacman::p_load('tidyverse', 'here', 'janitor', 'indicspecies', 'MASS', 'ggthemes')
+```
+
+### Import and clean data 
+
+```{r, warning=FALSE, message=FALSE}
+# Raw catch data
+catch_raw <- read_csv(here::here('posts', 'sf_bay_catches', 'data', 'catch_9218.csv'))
+
+# For easy reference we also import species key 
+species_key <- read_csv(here::here('posts', 'sf_bay_catches','data', 'species_key.csv'), col_names = FALSE)
+```
+Now we can clean up the messy dataset and make a functional species key 
+
+```{r}
+# The species key has some very difficult first columns so we need to restrict it down to just species code and name
+species_key_clean <- species_key[c(4,5),3:125] %>% 
+  row_to_names(row_number = 1) %>% 
+  clean_names() %>% 
+  remove_empty(which = "rows") %>% 
+  pivot_longer(cols = everything(),names_to = 'species_code', values_to = 'species_name')%>% 
+  mutate(species_code = str_to_upper(species_code),
+                                     species_name = str_to_title(str_to_lower(species_name)))
+
+species_key_clean
+```
+
+```{r}
+# The catch data is much cleaner, all we need is a quick clean names
+catch_clean <- catch_raw %>% 
+  clean_names()
+
+catch_clean$species_code[is.na(catch_clean$species_code)] <- 'NA'
+
+head(catch_clean)
+```
+### Preliminary analysis: Top Species
+
+We want to display the top 10 species caught by quantity
+```{r}
+top_10_catch <- catch_clean %>%
+  left_join(species_key_clean,
+            by = "species_code") %>%
+  group_by(species_name) %>%
+  summarise(total_catch = sum(number, na.rm = TRUE)) %>%
+  arrange(desc(total_catch)) %>%
+  slice_head(n = 10) 
+
+top_10_catch
+```
+In this analysis we will take the most abundant species, Northern Anchovy, and comparing it with indicator species from the different regions of the bay. 
+
+### Preliminary analysis: Indicator species
+
+Indicator species does tktktktkt. It takes a group *vector* and a species *matrix*
+
+```{r}
+indicator <- catch_clean %>% 
+  dplyr::select(catch_info_trawl_id, species_code, number, locale) %>% 
+  pivot_wider(names_from = species_code, values_from = number, values_fn = sum) %>% 
+  mutate(across(where(is.numeric), ~replace_na(., 0))) %>% 
+  filter(!locale == 'BLANK')
+
+group_vector <- indicator$locale
+
+species_matrix <- as.matrix(indicator[, -c(1, 2)])
+
+```
+
+Now we can run the function indval to find indicator species values for our groups
+
+```{r}
+indval <- multipatt(species_matrix, group_vector, 
+                    control = how(nperm=999)) 
+```
+```{r}
+ summary <- summary(indval, alpha = .1) # Alpha is significance threshold 
+```
+From the summary we can see that the top species for the four San Francisco Bay locales are: 
+
+Group CENTRAL BAY  
+SSD: Speckled Sanddab
+
+Group SAN PABLO BAY  
+BR: Bat Ray   
+
+Group SOUTH BAY  
+CT: California Tonguefish  
+
+Group SUISUN BAY  
+SB: Striped Bass    
+
+
+Next we are going to compare Northern Anchovy catches to these species using a hurdle model
+
+### Hurdle model and create function 
+
+The hurdle model does tktktktk
+
+Because we are running and fitting this model four times, it sounds like I should make it into a function
+
+```{r}
+#' predict indicator
+#'
+#' @param df
+#' Data frame used for analysis
+#' @param sp_code 
+#' Species code (wrapped in '')
+#' @param region 
+#' Locale (all capitals wrapped in '')
+#' @returns
+#' a list containing: 
+#' stage1_summary 
+#' stage2_summary 
+#' stage1_pred 
+#' stage2_pred
+#' combined_pred 
+#' plot 
+#' @export
+#'
+#' @examples
+predict_indicator <- function(df, sp_code, region){
+
+species_name <- species_key_clean %>% 
+  filter(species_code == sp_code) %>% 
+  pull(species_name) %>% 
+  make_clean_names()
+  
+
+
+catch_plot <- df %>% 
+  filter(species_code == 'NA' | species_code == sp_code) %>% 
+  mutate(in_region = ifelse(locale == region, TRUE, FALSE)) %>% 
+  group_by(species_code, catch_info_trawl_id, in_region) %>% 
+  summarize(count = sum(number)) %>% 
+  pivot_wider(names_from = species_code,
+              values_from = count) %>% 
+  set_names(c('trawl_id', 'in_region', 'northern_anchovy', species_name)) 
+
+catch_plot[is.na(catch_plot)] <- 0
+
+a <- mean(catch_plot$northern_anchovy)
+b <- sd(catch_plot$northern_anchovy)
+
+catch_plot <- catch_plot %>% 
+  mutate(northern_anchovy_z = (northern_anchovy - a) / b,
+         presence = ifelse(.data[[species_name]] > 0, 1, 0),
+         abundance = ifelse(.data[[species_name]] > 0, .data[[species_name]], NA))
+
+
+m1 <- glm(presence ~ northern_anchovy_z * in_region, data = catch_plot, family = binomial(link = 'logit'))
+
+m2 <- glm.nb(abundance ~ northern_anchovy_z * in_region, data = catch_plot)
+
+sum_m1 <- summary(m1)
+
+sum_m2 <- summary(m2)
+
+grid_data <- expand_grid(in_region = c(TRUE, FALSE),
+  northern_anchovy_z = seq(min(catch_plot$northern_anchovy_z), max(catch_plot$northern_anchovy_z), by = 1))
+
+predict_pres <-  predict(m1,
+                      newdata = grid_data,
+                      type = "link",
+                      se.fit = TRUE)
+
+predict_abu <-  predict(m2,
+                      newdata = grid_data,
+                      type = "link",
+                      se.fit = TRUE)
+
+pred_pres_result <- grid_data %>% 
+  mutate(
+    fit_link = predict_pres$fit,
+    se = predict_pres$se.fit,
+    pred_tbs = plogis(fit_link),
+    lower = plogis(fit_link - 1.96*se),
+    upper = plogis(fit_link + 1.96*se)
+  )
+
+pred_abu_result <- grid_data %>% 
+  mutate(
+    fit_link = predict_abu$fit,
+    se = predict_abu$se.fit,
+    pred_tbs = exp(fit_link),
+    lower = exp(fit_link - 1.96*se),
+    upper = exp(fit_link + 1.96*se)
+  )
+
+# Merge predictions 
+combined <- pred_pres_result %>% 
+  mutate(
+    expected_count = pred_tbs * pred_abu_result$pred_tbs,
+    lower_expected = lower * pred_abu_result$lower,
+    upper_expected = upper * pred_abu_result$upper
+  )
+
+plot <- ggplot(combined, aes(northern_anchovy_z, expected_count))+
+  facet_wrap(~in_region,
+             labeller = as_labeller(
+      c(`TRUE` = "In Region", `FALSE` = "Outside Region")
+    ))+
+  geom_line(color = '#A0185A')+
+  geom_ribbon(aes(ymin = lower_expected, ymax = upper_expected),
+              alpha = .3, fill = '#ABC798')+
+  labs(x = 'Northern Anchovy Z',
+       y = str_to_title(str_replace_all(species_name, "_", " ")))+
+  theme_clean()
+
+return(list(
+  stage1_summary = sum_m1,
+  stage2_summary = sum_m2,
+  stage1_pred = pred_pres_result,
+  stage2_pred = pred_abu_result,
+  combined_pred = combined,
+  plot = plot
+))
+}
+```
+
+### Function call: Central Bay 
+
+The top indicator for the Central Bay was the Speckled Sanddab so we can call the function for that species and region
+
+```{r}
+speckled <- predict_indicator(catch_clean, 'SSD', 'CENTRAL BAY')
+```
+
+Now `speckled` is encoded with our model summaries, predictions, and plot. For this I will show all outputs, in later chunks I will bypass showing predictions 
+
+#### Presence Summary
+```{r}
+speckled$stage1_summary
+```
+#### Abundance Summary 
+```{r}
+speckled$stage2_summary
+```
+#### Presence Prediction
+```{r}
+speckled$stage1_pred 
+```
+
+#### Abundance Prediction 
+```{r}
+speckled$stage2_pred
+```
+#### Combined Prediction
+```{r}
+speckled$combined_pred
+```
+#### Speckled plot
+```{r}
+speckled$plot
+```
+#### Discussion: Speckled Sanddab
+tktktktktktkttktkktktktktktktktktktk
+
+
+### Function call: San Pablo Bay
+```{r}
+bat_ray <- predict_indicator(catch_clean, 'BR', 'SAN PABLO BAY')
+```
+
+#### Presence Summary
+```{r}
+bat_ray$stage1_summary
+```
+#### Abundance Summary
+```{r}
+bat_ray$stage2_summary
+```
+#### Bat Ray Plot 
+```{r}
+bat_ray$plot
+```
+#### Discussion: Bat Ray 
+tktktktktktktkktktktktktktktktkt
+
+### Function Call: South Bay 
+```{r}
+ca_tonguefish <- predict_indicator(catch_clean, 'CT', 'SOUTH BAY')
+```
+#### Presence Summary 
+```{r}
+ca_tonguefish$stage1_summary
+```
+#### Abundance Summary
+```{r}
+ca_tonguefish$stage2_summary
+```
+#### Tonguefish Plot
+```{r}
+ca_tonguefish$plot
+```
+#### Discussion: California Tonguefish
+tktktktktk
+
+### Function Call: Suisun Bay 
+```{r}
+bass <- predict_indicator(catch_clean, 'SB', 'SUISUN BAY')
+```
+
+#### Presence Summary 
+```{r}
+bass$stage1_summary
+```
+#### Abundance Summary
+```{r}
+bass$stage2_summary
+```
+#### Bass Plot
+```{r}
+bass$plot
+```
+#### Discussion: Striped Bass 
+tktktktktk
+
+### Simulate data
+tktkttktktktk
+
+### Final Discussion 
+tktktktktktktk

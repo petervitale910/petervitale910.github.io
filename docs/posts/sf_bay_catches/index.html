@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Peter Vitale">
+<meta name="dcterms.date" content="2025-12-03">
+<meta name="description" content="Examining Northern Anchovies ability to predict indicator species">
+
+<title>San Fransisco Bay Catch Dynamics – Peter Vitale</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-733df9d86c19cacca2339cda71c1dd3f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/logo.png" alt="Black oystercatcher coding in R" class="navbar-logo light-content">
+    <img src="../../images/logo.png" alt="Black oystercatcher coding in R" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Blog Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/petervitale910/petervitale910.github.io"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">San Fransisco Bay Catch Dynamics</h1>
+                  <div>
+        <div class="description">
+          Examining Northern Anchovies ability to predict indicator species
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">MEDS</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Statistics</div>
+              </div>
+                  </div>
+  </div>
+    
+  <div class="quarto-title-meta-author column-page-left">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://petervitale910.github.io/">Peter Vitale</a> </p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              <a href="https://bren.ucsb.edu/">
+              Masters of Environmental Data Science at BREN
+              </a>
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta column-page-left">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 3, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#import-packages" id="toc-import-packages" class="nav-link active" data-scroll-target="#import-packages">Import packages</a></li>
+  <li><a href="#import-and-clean-data" id="toc-import-and-clean-data" class="nav-link" data-scroll-target="#import-and-clean-data">Import and clean data</a></li>
+  <li><a href="#preliminary-analysis-top-species" id="toc-preliminary-analysis-top-species" class="nav-link" data-scroll-target="#preliminary-analysis-top-species">Preliminary analysis: Top Species</a></li>
+  <li><a href="#preliminary-analysis-indicator-species" id="toc-preliminary-analysis-indicator-species" class="nav-link" data-scroll-target="#preliminary-analysis-indicator-species">Preliminary analysis: Indicator species</a></li>
+  <li><a href="#hurdle-model-and-create-function" id="toc-hurdle-model-and-create-function" class="nav-link" data-scroll-target="#hurdle-model-and-create-function">Hurdle model and create function</a></li>
+  <li><a href="#function-call-central-bay" id="toc-function-call-central-bay" class="nav-link" data-scroll-target="#function-call-central-bay">Function call: Central Bay</a></li>
+  <li><a href="#function-call-san-pablo-bay" id="toc-function-call-san-pablo-bay" class="nav-link" data-scroll-target="#function-call-san-pablo-bay">Function call: San Pablo Bay</a></li>
+  <li><a href="#function-call-south-bay" id="toc-function-call-south-bay" class="nav-link" data-scroll-target="#function-call-south-bay">Function Call: South Bay</a></li>
+  <li><a href="#function-call-suisun-bay" id="toc-function-call-suisun-bay" class="nav-link" data-scroll-target="#function-call-suisun-bay">Function Call: Suisun Bay</a></li>
+  <li><a href="#simulate-data" id="toc-simulate-data" class="nav-link" data-scroll-target="#simulate-data">Simulate data</a></li>
+  <li><a href="#final-discussion" id="toc-final-discussion" class="nav-link" data-scroll-target="#final-discussion">Final Discussion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<p>tktktktkt</p>
+<p>tktktktk ### DAG</p>
+<section id="import-packages" class="level3">
+<h3 class="anchored" data-anchor-id="import-packages">Import packages</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(<span class="st">'tidyverse'</span>, <span class="st">'here'</span>, <span class="st">'janitor'</span>, <span class="st">'indicspecies'</span>, <span class="st">'MASS'</span>, <span class="st">'ggthemes'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="import-and-clean-data" class="level3">
+<h3 class="anchored" data-anchor-id="import-and-clean-data">Import and clean data</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw catch data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>catch_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">'posts'</span>, <span class="st">'sf_bay_catches'</span>, <span class="st">'data'</span>, <span class="st">'catch_9218.csv'</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># For easy reference we also import species key </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>species_key <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">'posts'</span>, <span class="st">'sf_bay_catches'</span>,<span class="st">'data'</span>, <span class="st">'species_key.csv'</span>), <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Now we can clean up the messy dataset and make a functional species key</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The species key has some very difficult first columns so we need to restrict it down to just species code and name</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>species_key_clean <span class="ot">&lt;-</span> species_key[<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>),<span class="dv">3</span><span class="sc">:</span><span class="dv">125</span>] <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_to_names</span>(<span class="at">row_number =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_empty</span>(<span class="at">which =</span> <span class="st">"rows"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(),<span class="at">names_to =</span> <span class="st">'species_code'</span>, <span class="at">values_to =</span> <span class="st">'species_name'</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species_code =</span> <span class="fu">str_to_upper</span>(species_code),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">species_name =</span> <span class="fu">str_to_title</span>(<span class="fu">str_to_lower</span>(species_name)))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>species_key_clean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 123 × 2
+   species_code species_name          
+   &lt;chr&gt;        &lt;chr&gt;                 
+ 1 AG           Arrow Goby            
+ 2 AS           American Shad         
+ 3 BBC          Brown Bullhead Catfish
+ 4 BG           Bay Goby              
+ 5 BHS          Bonyhead Sculpin      
+ 6 BOC          Bocaccio Rockfish     
+ 7 BP           Black Perch           
+ 8 BPF          Bay Pipefish          
+ 9 BR           Bat Ray               
+10 BRF          Bolinas Rockfish      
+# ℹ 113 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The catch data is much cleaner, all we need is a quick clean names</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>catch_clean <span class="ot">&lt;-</span> catch_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>catch_clean<span class="sc">$</span>species_code[<span class="fu">is.na</span>(catch_clean<span class="sc">$</span>species_code)] <span class="ot">&lt;-</span> <span class="st">'NA'</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(catch_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 37
+  catch_info_trawl_id species_code  size class number sex   trawl_map_trawl_id
+                &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;
+1                  10 SSP              0    NA      1 &lt;NA&gt;                  10
+2                  10 SSP             90    NA      1 &lt;NA&gt;                  10
+3                  10 SSP             56    NA      1 &lt;NA&gt;                  10
+4                  10 NA              NA    NA     15 &lt;NA&gt;                  10
+5                  10 CH              NA    NA      4 &lt;NA&gt;                  10
+6                  10 BS             480    NA      1 F                     10
+# ℹ 30 more variables: locale &lt;chr&gt;, trawl_map_training_trawl &lt;lgl&gt;,
+#   trawl_map_data_audit &lt;lgl&gt;, expr1 &lt;dbl&gt;, expr2 &lt;dbl&gt;,
+#   trawl_info_trawl_id &lt;dbl&gt;, hydro_id &lt;dbl&gt;, scientists &lt;chr&gt;, intern &lt;chr&gt;,
+#   date &lt;chr&gt;, school &lt;chr&gt;, trawl_time_begin &lt;dbl&gt;, trawl_time_end &lt;dbl&gt;,
+#   trawl_time_total &lt;dbl&gt;, depth_of_trawl &lt;dbl&gt;, tidal_current &lt;chr&gt;,
+#   last_slack_time &lt;dbl&gt;, last_slack_tide &lt;chr&gt;, last_slack_height &lt;dbl&gt;,
+#   sample_station &lt;chr&gt;, water_type &lt;chr&gt;, substrate &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="preliminary-analysis-top-species" class="level3">
+<h3 class="anchored" data-anchor-id="preliminary-analysis-top-species">Preliminary analysis: Top Species</h3>
+<p>We want to display the top 10 species caught by quantity</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>top_10_catch <span class="ot">&lt;-</span> catch_clean <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(species_key_clean,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="st">"species_code"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species_name) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_catch =</span> <span class="fu">sum</span>(number, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_catch)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>top_10_catch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+   species_name        total_catch
+   &lt;chr&gt;                     &lt;dbl&gt;
+ 1 Northern Anchovy         640618
+ 2 Shiner Surfperch         128489
+ 3 English Sole              84714
+ 4 Staghorn Sculpin          27409
+ 5 Pacific Herring           25755
+ 6 Speckled Sanddab          15305
+ 7 California Halibut        14069
+ 8 Plainfin Midshipman       13662
+ 9 Sanddab Sp.               13231
+10 White Croaker             11443</code></pre>
+</div>
+</div>
+<p>In this analysis we will take the most abundant species, Northern Anchovy, and comparing it with indicator species from the different regions of the bay.</p>
+</section>
+<section id="preliminary-analysis-indicator-species" class="level3">
+<h3 class="anchored" data-anchor-id="preliminary-analysis-indicator-species">Preliminary analysis: Indicator species</h3>
+<p>Indicator species does tktktktkt. It takes a group <em>vector</em> and a species <em>matrix</em></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>indicator <span class="ot">&lt;-</span> catch_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(catch_info_trawl_id, species_code, number, locale) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> species_code, <span class="at">values_from =</span> number, <span class="at">values_fn =</span> sum) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span><span class="fu">replace_na</span>(., <span class="dv">0</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>locale <span class="sc">==</span> <span class="st">'BLANK'</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>group_vector <span class="ot">&lt;-</span> indicator<span class="sc">$</span>locale</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>species_matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(indicator[, <span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Now we can run the function indval to find indicator species values for our groups</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>indval <span class="ot">&lt;-</span> <span class="fu">multipatt</span>(species_matrix, group_vector, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">control =</span> <span class="fu">how</span>(<span class="at">nperm=</span><span class="dv">999</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a> summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(indval, <span class="at">alpha =</span> .<span class="dv">1</span>) <span class="co"># Alpha is significance threshold </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Multilevel pattern analysis
+ ---------------------------
+
+ Association function: IndVal.g
+ Significance level (alpha): 0.1
+
+ Total number of species: 162
+ Selected number of species: 50 
+ Number of species associated to 1 group: 33 
+ Number of species associated to 2 groups: 12 
+ Number of species associated to 3 groups: 5 
+
+ List of species associated to each combination: 
+
+ Group CENTRAL BAY  #sps.  13 
+     stat p.value   
+SSD 0.456   0.006 **
+CLF 0.217   0.042 * 
+POM 0.110   0.031 * 
+ps  0.066   0.053 . 
+HH  0.065   0.067 . 
+CRL 0.065   0.082 . 
+OP  0.059   0.043 * 
+JM  0.059   0.035 * 
+BSC 0.050   0.044 * 
+es  0.046   0.096 . 
+IRL 0.042   0.027 * 
+ssd 0.042   0.031 * 
+STR 0.029   0.086 . 
+
+ Group SAN PABLO BAY  #sps.  4 
+     stat p.value  
+BR  0.449   0.011 *
+DT  0.328   0.040 *
+TS  0.277   0.012 *
+BSK 0.214   0.050 *
+
+ Group SOUTH BAY  #sps.  2 
+     stat p.value  
+CT  0.308   0.052 .
+DSP 0.285   0.092 .
+
+ Group SUISUN BAY  #sps.  14 
+     stat p.value    
+SB  0.880   0.001 ***
+SF  0.768   0.001 ***
+TFS 0.417   0.001 ***
+SST 0.303   0.001 ***
+DLS 0.204   0.006 ** 
+BDG 0.204   0.005 ** 
+TP  0.148   0.014 *  
+CC  0.129   0.003 ** 
+BLP 0.129   0.003 ** 
+CK  0.091   0.015 *  
+KS  0.091   0.019 *  
+DS  0.089   0.021 *  
+BBC 0.088   0.021 *  
+PL  0.086   0.054 .  
+
+ Group CENTRAL BAY+SAN PABLO BAY  #sps.  6 
+     stat p.value    
+PMS 0.652   0.001 ***
+PH  0.535   0.003 ** 
+BG  0.495   0.001 ***
+BPF 0.338   0.014 *  
+WSP 0.320   0.017 *  
+BHS 0.225   0.094 .  
+
+ Group CENTRAL BAY+SOUTH BAY  #sps.  1 
+    stat p.value  
+SD 0.381   0.031 *
+
+ Group CENTRAL BAY+SUISUN BAY  #sps.  1 
+    stat p.value  
+PS 0.267   0.043 *
+
+ Group SAN PABLO BAY+SOUTH BAY  #sps.  1 
+    stat p.value  
+BS 0.343   0.052 .
+
+ Group SAN PABLO BAY+SUISUN BAY  #sps.  2 
+     stat p.value    
+YG  0.574   0.002 ** 
+LFS 0.538   0.001 ***
+
+ Group SOUTH BAY+SUISUN BAY  #sps.  1 
+   stat p.value  
+UG 0.32   0.075 .
+
+ Group CENTRAL BAY+SAN PABLO BAY+SOUTH BAY  #sps.  3 
+     stat p.value   
+NA  0.811   0.002 **
+SSP 0.762   0.002 **
+WC  0.385   0.045 * 
+
+ Group CENTRAL BAY+SAN PABLO BAY+SUISUN BAY  #sps.  1 
+     stat p.value    
+PSD 0.527   0.001 ***
+
+ Group SAN PABLO BAY+SOUTH BAY+SUISUN BAY  #sps.  1 
+    stat p.value  
+LS 0.353   0.042 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 </code></pre>
+</div>
+</div>
+<p>From the summary we can see that the top species for the four San Francisco Bay locales are:</p>
+<p>Group CENTRAL BAY<br>
+SSD: Speckled Sanddab</p>
+<p>Group SAN PABLO BAY<br>
+BR: Bat Ray</p>
+<p>Group SOUTH BAY<br>
+CT: California Tonguefish</p>
+<p>Group SUISUN BAY<br>
+SB: Striped Bass</p>
+<p>Next we are going to compare Northern Anchovy catches to these species using a hurdle model</p>
+</section>
+<section id="hurdle-model-and-create-function" class="level3">
+<h3 class="anchored" data-anchor-id="hurdle-model-and-create-function">Hurdle model and create function</h3>
+<p>The hurdle model does tktktktk</p>
+<p>Because we are running and fitting this model four times, it sounds like I should make it into a function</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' predict indicator</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param df</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' Data frame used for analysis</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param sp_code </span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' Species code (wrapped in '')</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param region </span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#' Locale (all capitals wrapped in '')</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#' @returns</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' a list containing: </span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#' stage1_summary </span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#' stage2_summary </span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#' stage1_pred </span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#' stage2_pred</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#' combined_pred </span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#' plot </span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#' @export</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">#' @examples</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>predict_indicator <span class="ot">&lt;-</span> <span class="cf">function</span>(df, sp_code, region){</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>species_name <span class="ot">&lt;-</span> species_key_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species_code <span class="sc">==</span> sp_code) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(species_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_clean_names</span>()</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>catch_plot <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species_code <span class="sc">==</span> <span class="st">'NA'</span> <span class="sc">|</span> species_code <span class="sc">==</span> sp_code) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">in_region =</span> <span class="fu">ifelse</span>(locale <span class="sc">==</span> region, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species_code, catch_info_trawl_id, in_region) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">sum</span>(number)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> species_code,</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> count) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="fu">c</span>(<span class="st">'trawl_id'</span>, <span class="st">'in_region'</span>, <span class="st">'northern_anchovy'</span>, species_name)) </span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>catch_plot[<span class="fu">is.na</span>(catch_plot)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">mean</span>(catch_plot<span class="sc">$</span>northern_anchovy)</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">sd</span>(catch_plot<span class="sc">$</span>northern_anchovy)</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>catch_plot <span class="ot">&lt;-</span> catch_plot <span class="sc">%&gt;%</span> </span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">northern_anchovy_z =</span> (northern_anchovy <span class="sc">-</span> a) <span class="sc">/</span> b,</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>         <span class="at">presence =</span> <span class="fu">ifelse</span>(.data[[species_name]] <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>         <span class="at">abundance =</span> <span class="fu">ifelse</span>(.data[[species_name]] <span class="sc">&gt;</span> <span class="dv">0</span>, .data[[species_name]], <span class="cn">NA</span>))</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(presence <span class="sc">~</span> northern_anchovy_z <span class="sc">*</span> in_region, <span class="at">data =</span> catch_plot, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">'logit'</span>))</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abundance <span class="sc">~</span> northern_anchovy_z <span class="sc">*</span> in_region, <span class="at">data =</span> catch_plot)</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>sum_m1 <span class="ot">&lt;-</span> <span class="fu">summary</span>(m1)</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>sum_m2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(m2)</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>grid_data <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(<span class="at">in_region =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>  <span class="at">northern_anchovy_z =</span> <span class="fu">seq</span>(<span class="fu">min</span>(catch_plot<span class="sc">$</span>northern_anchovy_z), <span class="fu">max</span>(catch_plot<span class="sc">$</span>northern_anchovy_z), <span class="at">by =</span> <span class="dv">1</span>))</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>predict_pres <span class="ot">&lt;-</span>  <span class="fu">predict</span>(m1,</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>                      <span class="at">newdata =</span> grid_data,</span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>                      <span class="at">type =</span> <span class="st">"link"</span>,</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>                      <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>predict_abu <span class="ot">&lt;-</span>  <span class="fu">predict</span>(m2,</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>                      <span class="at">newdata =</span> grid_data,</span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>                      <span class="at">type =</span> <span class="st">"link"</span>,</span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>                      <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>pred_pres_result <span class="ot">&lt;-</span> grid_data <span class="sc">%&gt;%</span> </span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">fit_link =</span> predict_pres<span class="sc">$</span>fit,</span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> predict_pres<span class="sc">$</span>se.fit,</span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">pred_tbs =</span> <span class="fu">plogis</span>(fit_link),</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower =</span> <span class="fu">plogis</span>(fit_link <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>se),</span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper =</span> <span class="fu">plogis</span>(fit_link <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>se)</span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>pred_abu_result <span class="ot">&lt;-</span> grid_data <span class="sc">%&gt;%</span> </span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">fit_link =</span> predict_abu<span class="sc">$</span>fit,</span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> predict_abu<span class="sc">$</span>se.fit,</span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">pred_tbs =</span> <span class="fu">exp</span>(fit_link),</span>
+<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower =</span> <span class="fu">exp</span>(fit_link <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>se),</span>
+<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper =</span> <span class="fu">exp</span>(fit_link <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>se)</span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge predictions </span></span>
+<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> pred_pres_result <span class="sc">%&gt;%</span> </span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a>    <span class="at">expected_count =</span> pred_tbs <span class="sc">*</span> pred_abu_result<span class="sc">$</span>pred_tbs,</span>
+<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower_expected =</span> lower <span class="sc">*</span> pred_abu_result<span class="sc">$</span>lower,</span>
+<span id="cb13-93"><a href="#cb13-93" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper_expected =</span> upper <span class="sc">*</span> pred_abu_result<span class="sc">$</span>upper</span>
+<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(combined, <span class="fu">aes</span>(northern_anchovy_z, expected_count))<span class="sc">+</span></span>
+<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>in_region,</span>
+<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a>             <span class="at">labeller =</span> <span class="fu">as_labeller</span>(</span>
+<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"In Region"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Outside Region"</span>)</span>
+<span id="cb13-100"><a href="#cb13-100" aria-hidden="true" tabindex="-1"></a>    ))<span class="sc">+</span></span>
+<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">'#A0185A'</span>)<span class="sc">+</span></span>
+<span id="cb13-102"><a href="#cb13-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower_expected, <span class="at">ymax =</span> upper_expected),</span>
+<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> .<span class="dv">3</span>, <span class="at">fill =</span> <span class="st">'#ABC798'</span>)<span class="sc">+</span></span>
+<span id="cb13-104"><a href="#cb13-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Northern Anchovy Z'</span>,</span>
+<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">str_to_title</span>(<span class="fu">str_replace_all</span>(species_name, <span class="st">"_"</span>, <span class="st">" "</span>)))<span class="sc">+</span></span>
+<span id="cb13-106"><a href="#cb13-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span>
+<span id="cb13-107"><a href="#cb13-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-108"><a href="#cb13-108" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(<span class="fu">list</span>(</span>
+<span id="cb13-109"><a href="#cb13-109" aria-hidden="true" tabindex="-1"></a>  <span class="at">stage1_summary =</span> sum_m1,</span>
+<span id="cb13-110"><a href="#cb13-110" aria-hidden="true" tabindex="-1"></a>  <span class="at">stage2_summary =</span> sum_m2,</span>
+<span id="cb13-111"><a href="#cb13-111" aria-hidden="true" tabindex="-1"></a>  <span class="at">stage1_pred =</span> pred_pres_result,</span>
+<span id="cb13-112"><a href="#cb13-112" aria-hidden="true" tabindex="-1"></a>  <span class="at">stage2_pred =</span> pred_abu_result,</span>
+<span id="cb13-113"><a href="#cb13-113" aria-hidden="true" tabindex="-1"></a>  <span class="at">combined_pred =</span> combined,</span>
+<span id="cb13-114"><a href="#cb13-114" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> plot</span>
+<span id="cb13-115"><a href="#cb13-115" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb13-116"><a href="#cb13-116" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="function-call-central-bay" class="level3">
+<h3 class="anchored" data-anchor-id="function-call-central-bay">Function call: Central Bay</h3>
+<p>The top indicator for the Central Bay was the Speckled Sanddab so we can call the function for that species and region</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>speckled <span class="ot">&lt;-</span> <span class="fu">predict_indicator</span>(catch_clean, <span class="st">'SSD'</span>, <span class="st">'CENTRAL BAY'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'species_code', 'catch_info_trawl_id'. You
+can override using the `.groups` argument.</code></pre>
+</div>
+</div>
+<p>Now <code>speckled</code> is encoded with our model summaries, predictions, and plot. For this I will show all outputs, in later chunks I will bypass showing predictions</p>
+<section id="presence-summary" class="level4">
+<h4 class="anchored" data-anchor-id="presence-summary">Presence Summary</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>stage1_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = presence ~ northern_anchovy_z * in_region, family = binomial(link = "logit"), 
+    data = catch_plot)
+
+Coefficients:
+                                 Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                      -1.55639    0.03127 -49.769  &lt; 2e-16 ***
+northern_anchovy_z               -0.53060    0.08660  -6.127 8.96e-10 ***
+in_regionTRUE                     1.08897    0.08073  13.490  &lt; 2e-16 ***
+northern_anchovy_z:in_regionTRUE  0.16045    0.17231   0.931    0.352    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 8776.2  on 8792  degrees of freedom
+Residual deviance: 8543.7  on 8789  degrees of freedom
+AIC: 8551.7
+
+Number of Fisher Scoring iterations: 6</code></pre>
+</div>
+</div>
+</section>
+<section id="abundance-summary" class="level4">
+<h4 class="anchored" data-anchor-id="abundance-summary">Abundance Summary</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>stage2_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm.nb(formula = abundance ~ northern_anchovy_z * in_region, 
+    data = catch_plot, init.theta = 0.7277030758, link = log)
+
+Coefficients:
+                                 Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                       1.96545    0.03315  59.284   &lt;2e-16 ***
+northern_anchovy_z               -0.05767    0.05330  -1.082    0.279    
+in_regionTRUE                     0.81587    0.07736  10.546   &lt;2e-16 ***
+northern_anchovy_z:in_regionTRUE -0.10104    0.14522  -0.696    0.487    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(0.7277) family taken to be 1)
+
+    Null deviance: 2031.5  on 1749  degrees of freedom
+Residual deviance: 1897.4  on 1746  degrees of freedom
+  (7043 observations deleted due to missingness)
+AIC: 11014
+
+Number of Fisher Scoring iterations: 1
+
+              Theta:  0.7277 
+          Std. Err.:  0.0237 
+
+ 2 x log-likelihood:  -11004.1330 </code></pre>
+</div>
+</div>
+</section>
+<section id="presence-prediction" class="level4">
+<h4 class="anchored" data-anchor-id="presence-prediction">Presence Prediction</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>stage1_pred </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 58 × 7
+   in_region northern_anchovy_z fit_link     se pred_tbs   lower upper
+   &lt;lgl&gt;                  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+ 1 TRUE                  -0.273   -0.367 0.0830   0.409  0.371   0.449
+ 2 TRUE                   0.727   -0.737 0.134    0.324  0.269   0.384
+ 3 TRUE                   1.73    -1.11  0.271    0.248  0.163   0.360
+ 4 TRUE                   2.73    -1.48  0.417    0.186  0.0917  0.341
+ 5 TRUE                   3.73    -1.85  0.564    0.136  0.0496  0.323
+ 6 TRUE                   4.73    -2.22  0.712    0.0982 0.0263  0.305
+ 7 TRUE                   5.73    -2.59  0.860    0.0700 0.0137  0.289
+ 8 TRUE                   6.73    -2.96  1.01     0.0494 0.00714 0.273
+ 9 TRUE                   7.73    -3.33  1.16     0.0346 0.00370 0.257
+10 TRUE                   8.73    -3.70  1.31     0.0242 0.00191 0.243
+# ℹ 48 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="abundance-prediction" class="level4">
+<h4 class="anchored" data-anchor-id="abundance-prediction">Abundance Prediction</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>stage2_pred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 58 × 7
+   in_region northern_anchovy_z fit_link     se pred_tbs  lower upper
+   &lt;lgl&gt;                  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+ 1 TRUE                  -0.273     2.82 0.0756    16.9  14.5    19.5
+ 2 TRUE                   0.727     2.67 0.126     14.4  11.2    18.4
+ 3 TRUE                   1.73      2.51 0.250     12.3   7.51   20.0
+ 4 TRUE                   2.73      2.35 0.382     10.5   4.95   22.1
+ 5 TRUE                   3.73      2.19 0.515      8.93  3.25   24.5
+ 6 TRUE                   4.73      2.03 0.649      7.62  2.13   27.2
+ 7 TRUE                   5.73      1.87 0.784      6.50  1.40   30.2
+ 8 TRUE                   6.73      1.71 0.919      5.55  0.917  33.6
+ 9 TRUE                   7.73      1.55 1.05       4.73  0.601  37.3
+10 TRUE                   8.73      1.40 1.19       4.04  0.394  41.5
+# ℹ 48 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="combined-prediction" class="level4">
+<h4 class="anchored" data-anchor-id="combined-prediction">Combined Prediction</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>combined_pred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 58 × 10
+   in_region northern_anchovy_z fit_link     se pred_tbs   lower upper
+   &lt;lgl&gt;                  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+ 1 TRUE                  -0.273   -0.367 0.0830   0.409  0.371   0.449
+ 2 TRUE                   0.727   -0.737 0.134    0.324  0.269   0.384
+ 3 TRUE                   1.73    -1.11  0.271    0.248  0.163   0.360
+ 4 TRUE                   2.73    -1.48  0.417    0.186  0.0917  0.341
+ 5 TRUE                   3.73    -1.85  0.564    0.136  0.0496  0.323
+ 6 TRUE                   4.73    -2.22  0.712    0.0982 0.0263  0.305
+ 7 TRUE                   5.73    -2.59  0.860    0.0700 0.0137  0.289
+ 8 TRUE                   6.73    -2.96  1.01     0.0494 0.00714 0.273
+ 9 TRUE                   7.73    -3.33  1.16     0.0346 0.00370 0.257
+10 TRUE                   8.73    -3.70  1.31     0.0242 0.00191 0.243
+# ℹ 48 more rows
+# ℹ 3 more variables: expected_count &lt;dbl&gt;, lower_expected &lt;dbl&gt;,
+#   upper_expected &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="speckled-plot" class="level4">
+<h4 class="anchored" data-anchor-id="speckled-plot">Speckled plot</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-speckled-sanddab" class="level4">
+<h4 class="anchored" data-anchor-id="discussion-speckled-sanddab">Discussion: Speckled Sanddab</h4>
+<p>tktktktktktkttktkktktktktktktktktktk</p>
+</section>
+</section>
+<section id="function-call-san-pablo-bay" class="level3">
+<h3 class="anchored" data-anchor-id="function-call-san-pablo-bay">Function call: San Pablo Bay</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>bat_ray <span class="ot">&lt;-</span> <span class="fu">predict_indicator</span>(catch_clean, <span class="st">'BR'</span>, <span class="st">'SAN PABLO BAY'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'species_code', 'catch_info_trawl_id'. You
+can override using the `.groups` argument.</code></pre>
+</div>
+</div>
+<section id="presence-summary-1" class="level4">
+<h4 class="anchored" data-anchor-id="presence-summary-1">Presence Summary</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>bat_ray<span class="sc">$</span>stage1_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = presence ~ northern_anchovy_z * in_region, family = binomial(link = "logit"), 
+    data = catch_plot)
+
+Coefficients:
+                                 Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                       2.59814    0.04346  59.788   &lt;2e-16 ***
+northern_anchovy_z               -0.80069    0.03360 -23.834   &lt;2e-16 ***
+in_regionTRUE                    -1.98003    0.95992  -2.063   0.0391 *  
+northern_anchovy_z:in_regionTRUE  1.47628    0.93201   1.584   0.1132    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 5211.7  on 8950  degrees of freedom
+Residual deviance: 4483.0  on 8947  degrees of freedom
+AIC: 4491
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
+</section>
+<section id="abundance-summary-1" class="level4">
+<h4 class="anchored" data-anchor-id="abundance-summary-1">Abundance Summary</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>bat_ray<span class="sc">$</span>stage2_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm.nb(formula = abundance ~ northern_anchovy_z * in_region, 
+    data = catch_plot, init.theta = 0.3735027981, link = log)
+
+Coefficients:
+                                 Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                       4.32149    0.01831 236.057   &lt;2e-16 ***
+northern_anchovy_z               -0.22317    0.02185 -10.216   &lt;2e-16 ***
+in_regionTRUE                    -3.40921    0.91663  -3.719   0.0002 ***
+northern_anchovy_z:in_regionTRUE  0.27641    0.46145   0.599   0.5492    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(0.3735) family taken to be 1)
+
+    Null deviance: 10569  on 8188  degrees of freedom
+Residual deviance: 10476  on 8185  degrees of freedom
+  (762 observations deleted due to missingness)
+AIC: 80013
+
+Number of Fisher Scoring iterations: 1
+
+              Theta:  0.37350 
+          Std. Err.:  0.00480 
+
+ 2 x log-likelihood:  -80002.80600 </code></pre>
+</div>
+</div>
+</section>
+<section id="bat-ray-plot" class="level4">
+<h4 class="anchored" data-anchor-id="bat-ray-plot">Bat Ray Plot</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>bat_ray<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-bat-ray" class="level4">
+<h4 class="anchored" data-anchor-id="discussion-bat-ray">Discussion: Bat Ray</h4>
+<p>tktktktktktktkktktktktktktktktkt</p>
+</section>
+</section>
+<section id="function-call-south-bay" class="level3">
+<h3 class="anchored" data-anchor-id="function-call-south-bay">Function Call: South Bay</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ca_tonguefish <span class="ot">&lt;-</span> <span class="fu">predict_indicator</span>(catch_clean, <span class="st">'CT'</span>, <span class="st">'SOUTH BAY'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'species_code', 'catch_info_trawl_id'. You
+can override using the `.groups` argument.</code></pre>
+</div>
+</div>
+<section id="presence-summary-2" class="level4">
+<h4 class="anchored" data-anchor-id="presence-summary-2">Presence Summary</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ca_tonguefish<span class="sc">$</span>stage1_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = presence ~ northern_anchovy_z * in_region, family = binomial(link = "logit"), 
+    data = catch_plot)
+
+Coefficients:
+                                 Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                        4.6548     1.0872   4.281 1.86e-05 ***
+northern_anchovy_z               -16.4148     3.8546  -4.258 2.06e-05 ***
+in_regionTRUE                     -0.9482     1.0898  -0.870    0.384    
+northern_anchovy_z:in_regionTRUE  16.2278     3.8548   4.210 2.56e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1852.3  on 8383  degrees of freedom
+Residual deviance: 1774.7  on 8380  degrees of freedom
+AIC: 1782.7
+
+Number of Fisher Scoring iterations: 9</code></pre>
+</div>
+</div>
+</section>
+<section id="abundance-summary-2" class="level4">
+<h4 class="anchored" data-anchor-id="abundance-summary-2">Abundance Summary</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ca_tonguefish<span class="sc">$</span>stage2_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm.nb(formula = abundance ~ northern_anchovy_z * in_region, 
+    data = catch_plot, init.theta = 0.3724877985, link = log)
+
+Coefficients:
+                                 Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                        3.8710     0.3475  11.140   &lt;2e-16 ***
+northern_anchovy_z                -3.8196     1.9846  -1.925   0.0543 .  
+in_regionTRUE                      0.4629     0.3480   1.330   0.1834    
+northern_anchovy_z:in_regionTRUE   3.6892     1.9847   1.859   0.0631 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(0.3725) family taken to be 1)
+
+    Null deviance: 10540  on 8188  degrees of freedom
+Residual deviance: 10483  on 8185  degrees of freedom
+  (195 observations deleted due to missingness)
+AIC: 80048
+
+Number of Fisher Scoring iterations: 1
+
+              Theta:  0.37249 
+          Std. Err.:  0.00478 
+
+ 2 x log-likelihood:  -80037.67300 </code></pre>
+</div>
+</div>
+</section>
+<section id="tonguefish-plot" class="level4">
+<h4 class="anchored" data-anchor-id="tonguefish-plot">Tonguefish Plot</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>ca_tonguefish<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-california-tonguefish" class="level4">
+<h4 class="anchored" data-anchor-id="discussion-california-tonguefish">Discussion: California Tonguefish</h4>
+<p>tktktktktk</p>
+</section>
+</section>
+<section id="function-call-suisun-bay" class="level3">
+<h3 class="anchored" data-anchor-id="function-call-suisun-bay">Function Call: Suisun Bay</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>bass <span class="ot">&lt;-</span> <span class="fu">predict_indicator</span>(catch_clean, <span class="st">'SB'</span>, <span class="st">'SUISUN BAY'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'species_code', 'catch_info_trawl_id'. You
+can override using the `.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in predict.lm(object, newdata, se.fit, scale = residual.scale, type =
+if (type == : prediction from rank-deficient fit; attr(*, "non-estim") has
+doubtful cases</code></pre>
+</div>
+</div>
+<section id="presence-summary-3" class="level4">
+<h4 class="anchored" data-anchor-id="presence-summary-3">Presence Summary</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>bass<span class="sc">$</span>stage1_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = presence ~ northern_anchovy_z * in_region, family = binomial(link = "logit"), 
+    data = catch_plot)
+
+Coefficients:
+                                   Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                      -3.647e+00  1.208e-01 -30.195  &lt; 2e-16 ***
+northern_anchovy_z               -2.844e+00  4.959e-01  -5.735 9.76e-09 ***
+in_regionTRUE                    -2.500e+03  1.834e+05  -0.014    0.989    
+northern_anchovy_z:in_regionTRUE -9.033e+03  6.577e+05  -0.014    0.989    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 3454.3  on 8422  degrees of freedom
+Residual deviance: 2756.5  on 8419  degrees of freedom
+AIC: 2764.5
+
+Number of Fisher Scoring iterations: 15</code></pre>
+</div>
+</div>
+</section>
+<section id="abundance-summary-3" class="level4">
+<h4 class="anchored" data-anchor-id="abundance-summary-3">Abundance Summary</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>bass<span class="sc">$</span>stage2_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm.nb(formula = abundance ~ northern_anchovy_z * in_region, 
+    data = catch_plot, init.theta = 3.09286128, link = log)
+
+Coefficients: (1 not defined because of singularities)
+                                 Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                       0.33019    0.09293   3.553 0.000381 ***
+northern_anchovy_z               -0.52114    0.33331  -1.563 0.117935    
+in_regionTRUE                     1.41003    0.08870  15.896  &lt; 2e-16 ***
+northern_anchovy_z:in_regionTRUE       NA         NA      NA       NA    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(3.0929) family taken to be 1)
+
+    Null deviance: 618.93  on 439  degrees of freedom
+Residual deviance: 324.65  on 437  degrees of freedom
+  (7983 observations deleted due to missingness)
+AIC: 1658.2
+
+Number of Fisher Scoring iterations: 1
+
+              Theta:  3.093 
+          Std. Err.:  0.380 
+
+ 2 x log-likelihood:  -1650.219 </code></pre>
+</div>
+</div>
+</section>
+<section id="bass-plot" class="level4">
+<h4 class="anchored" data-anchor-id="bass-plot">Bass Plot</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>bass<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-striped-bass" class="level4">
+<h4 class="anchored" data-anchor-id="discussion-striped-bass">Discussion: Striped Bass</h4>
+<p>tktktktktk</p>
+</section>
+</section>
+<section id="simulate-data" class="level3">
+<h3 class="anchored" data-anchor-id="simulate-data">Simulate data</h3>
+<p>tktkttktktktk</p>
+</section>
+<section id="final-discussion" class="level3">
+<h3 class="anchored" data-anchor-id="final-discussion">Final Discussion</h3>
+<p>tktktktktktktk</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{vitale2025,
+  author = {Vitale, Peter},
+  title = {San {Fransisco} {Bay} {Catch} {Dynamics}},
+  date = {2025-12-03},
+  url = {https://petervitale910.github.io/},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-vitale2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+Vitale, Peter. 2025. <span>“San Fransisco Bay Catch Dynamics.”</span>
+December 3, 2025. <a href="https://petervitale910.github.io/">https://petervitale910.github.io/</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, Peter Vitale</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+      <i class="bi bi-reddit" role="img">
+</i> 
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
