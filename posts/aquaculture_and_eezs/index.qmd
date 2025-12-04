@@ -461,14 +461,16 @@ return(list( # Make a list of our map and table so they can be called with a buc
 
 ```
 
-Now we can call the function for any species in our species list 
+Now we can call the function for any species in our species list
 
 To know species options you can run map_eez('list')
+
 ```{r}
 map_eez('list')
 ```
 
 Now we can call the function with any species from the list we find interesting, in this case Bull Kelp AND WHY
+
 ```{r}
 bull_kelp <- map_eez('Bull Kelp')
 ```
