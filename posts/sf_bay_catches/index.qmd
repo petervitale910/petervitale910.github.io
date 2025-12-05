@@ -80,7 +80,19 @@ species_key_clean <- species_key[c(4,5),3:125] %>%
   mutate(species_code = str_to_upper(species_code),
                                      species_name = str_to_title(str_to_lower(species_name)))
 
-species_key_clean
+species_key_clean %>% 
+   kable( format = "html", digits = 3,
+      caption = "Species Key") %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = FALSE,
+    position   = "center",
+    font_size  = 14
+  ) %>% 
+  row_spec(0, bold = TRUE, color = "white", background = "#A0185A") %>%  # header
+  row_spec(1:nrow(species_key_clean), color = "black", background = "#FFC4EB") %>% 
+  scroll_box(width = "300px", height = "600px")
+  
 ```
 
 ```{r}
@@ -90,7 +102,19 @@ catch_clean <- catch_raw %>%
 
 catch_clean$species_code[is.na(catch_clean$species_code)] <- 'NA'
 
-head(catch_clean)
+catch_clean %>% 
+  head(100) %>% 
+  kable( format = "html", digits = 3,
+      caption = "100 Rows of Catch Data") %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = FALSE,
+    position   = "center",
+    font_size  = 14
+  ) %>% 
+  row_spec(0, bold = TRUE, color = "white", background = "#A0185A") %>%  # header
+  scroll_box(width = "800px", height = "300px")
+  
 ```
 
 ### Preliminary analysis: Top Species
