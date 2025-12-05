@@ -23,20 +23,21 @@ When monitoring the bay, it is often difficult to monitor less populated species
 
 This analysis is predicated on the same environmental factors effecting Northern Anchovies and other species at similar levels. This leads to a DAG which looks like this:
 
-```{r}
+```{r, fig.width=11, fig.height=8}
 dag <- dagitty::dagitty('dag {
 bb="0,0,1,1"
 "Bay Region" [pos="0.375,0.496"]
 "Environmental Variables (EG. Toxic algal bloom)" [pos="0.378,0.222"]
 "Northern Anchovy Population" [pos="0.277,0.343"]
-"Sp Population" [pos="0.495,0.341"]
+"Indicator Sp Population" [pos="0.495,0.341"]
 "Bay Region" -> "Environmental Variables (EG. Toxic algal bloom)"
 "Bay Region" -> "Northern Anchovy Population"
-"Bay Region" -> "Sp Population"
+"Bay Region" -> "Indicator Sp Population"
 "Environmental Variables (EG. Toxic algal bloom)" -> "Northern Anchovy Population"
-"Environmental Variables (EG. Toxic algal bloom)" -> "Sp Population"
+"Environmental Variables (EG. Toxic algal bloom)" -> "Indicator Sp Population"
 }')
 
+par(mar = c(5,5,5,5))
 plot(dagitty::graphLayout(dag))
 ```
 

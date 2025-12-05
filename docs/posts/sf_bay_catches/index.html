@@ -308,20 +308,21 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">"Bay Region" [pos="0.375,0.496"]</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">"Environmental Variables (EG. Toxic algal bloom)" [pos="0.378,0.222"]</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">"Northern Anchovy Population" [pos="0.277,0.343"]</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">"Sp Population" [pos="0.495,0.341"]</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">"Indicator Sp Population" [pos="0.495,0.341"]</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">"Bay Region" -&gt; "Environmental Variables (EG. Toxic algal bloom)"</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">"Bay Region" -&gt; "Northern Anchovy Population"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">"Bay Region" -&gt; "Sp Population"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">"Bay Region" -&gt; "Indicator Sp Population"</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">"Environmental Variables (EG. Toxic algal bloom)" -&gt; "Northern Anchovy Population"</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">"Environmental Variables (EG. Toxic algal bloom)" -&gt; "Sp Population"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">"Environmental Variables (EG. Toxic algal bloom)" -&gt; "Indicator Sp Population"</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">}'</span>)</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dagitty<span class="sc">::</span><span class="fu">graphLayout</span>(dag))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dagitty<span class="sc">::</span><span class="fu">graphLayout</span>(dag))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="1056"></p>
 </figure>
 </div>
 </div>
@@ -553,41 +554,40 @@ window.Quarto = {
  Significance level (alpha): 0.1
 
  Total number of species: 162
- Selected number of species: 51 
- Number of species associated to 1 group: 34 
+ Selected number of species: 50 
+ Number of species associated to 1 group: 33 
  Number of species associated to 2 groups: 12 
  Number of species associated to 3 groups: 5 
 
  List of species associated to each combination: 
 
- Group CENTRAL BAY  #sps.  14 
+ Group CENTRAL BAY  #sps.  13 
      stat p.value   
-SSD 0.456   0.005 **
-CLF 0.217   0.048 * 
-POM 0.110   0.029 * 
-ps  0.066   0.049 * 
-HH  0.065   0.068 . 
-CRL 0.065   0.068 . 
-OP  0.059   0.036 * 
-JM  0.059   0.043 * 
-BSC 0.050   0.037 * 
-es  0.046   0.093 . 
-IRL 0.042   0.032 * 
-ssd 0.042   0.023 * 
-PB  0.039   0.100 . 
-WOS 0.029   0.098 . 
+SSD 0.456   0.009 **
+CLF 0.217   0.039 * 
+POM 0.110   0.031 * 
+ps  0.066   0.057 . 
+HH  0.065   0.085 . 
+CRL 0.065   0.079 . 
+OP  0.059   0.041 * 
+JM  0.059   0.055 . 
+BSC 0.050   0.040 * 
+es  0.046   0.081 . 
+IRL 0.042   0.031 * 
+ssd 0.042   0.020 * 
+PB  0.039   0.093 . 
 
  Group SAN PABLO BAY  #sps.  4 
-     stat p.value  
-BR  0.449   0.014 *
-DT  0.328   0.032 *
-TS  0.277   0.029 *
-BSK 0.214   0.049 *
+     stat p.value   
+BR  0.449   0.010 **
+DT  0.328   0.051 . 
+TS  0.277   0.021 * 
+BSK 0.214   0.057 . 
 
  Group SOUTH BAY  #sps.  2 
      stat p.value  
-CT  0.308   0.063 .
-DSP 0.285   0.090 .
+CT  0.308   0.068 .
+DSP 0.285   0.075 .
 
  Group SUISUN BAY  #sps.  14 
      stat p.value    
@@ -595,25 +595,25 @@ SB  0.880   0.001 ***
 SF  0.768   0.001 ***
 TFS 0.417   0.001 ***
 SST 0.303   0.001 ***
-DLS 0.204   0.004 ** 
-BDG 0.204   0.008 ** 
-TP  0.148   0.009 ** 
+DLS 0.204   0.009 ** 
+BDG 0.204   0.013 *  
+TP  0.148   0.013 *  
 CC  0.129   0.004 ** 
-BLP 0.129   0.003 ** 
-CK  0.091   0.013 *  
-KS  0.091   0.028 *  
-DS  0.089   0.026 *  
-BBC 0.088   0.020 *  
-PL  0.086   0.048 *  
+BLP 0.129   0.004 ** 
+CK  0.091   0.014 *  
+KS  0.091   0.026 *  
+DS  0.089   0.035 *  
+BBC 0.088   0.027 *  
+PL  0.086   0.058 .  
 
  Group CENTRAL BAY+SAN PABLO BAY  #sps.  6 
      stat p.value    
 PMS 0.652   0.001 ***
 PH  0.535   0.003 ** 
-BG  0.495   0.002 ** 
-BPF 0.338   0.018 *  
-WSP 0.320   0.011 *  
-BHS 0.225   0.094 .  
+BG  0.495   0.004 ** 
+BPF 0.338   0.021 *  
+WSP 0.320   0.010 ** 
+BHS 0.225   0.089 .  
 
  Group CENTRAL BAY+SOUTH BAY  #sps.  1 
     stat p.value  
@@ -621,34 +621,34 @@ SD 0.381    0.04 *
 
  Group CENTRAL BAY+SUISUN BAY  #sps.  1 
     stat p.value  
-PS 0.267   0.049 *
+PS 0.267   0.057 .
 
  Group SAN PABLO BAY+SOUTH BAY  #sps.  1 
     stat p.value  
-BS 0.343   0.038 *
+BS 0.343   0.044 *
 
  Group SAN PABLO BAY+SUISUN BAY  #sps.  2 
      stat p.value    
-YG  0.574   0.002 ** 
+YG  0.574   0.001 ***
 LFS 0.538   0.001 ***
 
  Group SOUTH BAY+SUISUN BAY  #sps.  1 
    stat p.value  
-UG 0.32   0.059 .
+UG 0.32    0.05 *
 
  Group CENTRAL BAY+SAN PABLO BAY+SOUTH BAY  #sps.  3 
      stat p.value    
 NA  0.811   0.001 ***
-SSP 0.762   0.003 ** 
-WC  0.385   0.031 *  
+SSP 0.762   0.001 ***
+WC  0.385   0.032 *  
 
  Group CENTRAL BAY+SAN PABLO BAY+SUISUN BAY  #sps.  1 
-     stat p.value   
-PSD 0.527   0.002 **
+     stat p.value    
+PSD 0.527   0.001 ***
 
  Group SAN PABLO BAY+SOUTH BAY+SUISUN BAY  #sps.  1 
     stat p.value  
-LS 0.353   0.044 *
+LS 0.353   0.043 *
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 </code></pre>
 </div>
