@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-US">
+  <info>
+    <title>Spaced Bibliography</title>
+    <id>spaced-biblio</id>
+  </info>
+
+  <macro name="author">
+    <names variable="author">
+      <name form="long" and="text" delimiter=", " initialize-with="."/>
+    </names>
+  </macro>
+
+  <citation>
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <text macro="author"/>
+      <date variable="issued" form="numeric" prefix=" "/>
+    </layout>
+  </citation>
+
+  <!-- BIBLIOGRAPHY FORMAT W/ SPACING -->
+  <bibliography line-spacing="2" entry-spacing="2">
+    <layout>
+      <text macro="author"/>
+      <text variable="issued" prefix=". " suffix=". "/>
+      <text variable="title" suffix=". "/>
+      <text variable="URL" prefix=" " suffix="."/>
+    </layout>
+  </bibliography>
+</style>

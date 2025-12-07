@@ -58,7 +58,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 2em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -217,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#data-import" id="toc-data-import" class="nav-link active" data-scroll-target="#data-import">Data import</a>
   <ul class="collapse">
-  <li><a href="#surface-temperature-from-noaa_crw_sst31" id="toc-surface-temperature-from-noaa_crw_sst31" class="nav-link" data-scroll-target="#surface-temperature-from-noaa_crw_sst31">Surface temperature from: <span class="citation" data-cites="noaa_crw_sst31">[@noaa_crw_sst31]</span></a></li>
+  <li><a href="#surface-temperature-from-noaa_crw_sst31" id="toc-surface-temperature-from-noaa_crw_sst31" class="nav-link" data-scroll-target="#surface-temperature-from-noaa_crw_sst31">Surface temperature from: <span class="citation" data-cites="noaa_crw_sst31">(NOAA Coral Reef Watch 2025)</span></a></li>
   <li><a href="#bathymetry" id="toc-bathymetry" class="nav-link" data-scroll-target="#bathymetry">Bathymetry</a></li>
   <li><a href="#exclusive-economic-zones" id="toc-exclusive-economic-zones" class="nav-link" data-scroll-target="#exclusive-economic-zones">Exclusive Economic Zones</a></li>
   </ul></li>
@@ -227,8 +247,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map">Map</a></li>
   <li><a href="#table" id="toc-table" class="nav-link" data-scroll-target="#table">Table</a></li>
+  <li><a href="#oyster-discussion" id="toc-oyster-discussion" class="nav-link" data-scroll-target="#oyster-discussion">Oyster Discussion</a></li>
   </ul></li>
   <li><a href="#function" id="toc-function" class="nav-link" data-scroll-target="#function">Function</a></li>
+  <li><a href="#bull-kelp-function-call" id="toc-bull-kelp-function-call" class="nav-link" data-scroll-target="#bull-kelp-function-call">Bull Kelp Function call</a>
+  <ul class="collapse">
+  <li><a href="#bull-kelp-discussion" id="toc-bull-kelp-discussion" class="nav-link" data-scroll-target="#bull-kelp-discussion">Bull Kelp discussion</a></li>
+  </ul></li>
+  <li><a href="#species-information-reference-table" id="toc-species-information-reference-table" class="nav-link" data-scroll-target="#species-information-reference-table">Species information reference table</a></li>
   </ul>
 </nav>
     </div>
@@ -239,7 +265,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>DESCRIPTION OF EEZ”S AND WHY I LIKE THIS</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image.jpg" class="img-fluid figure-img"></p>
+<figcaption>Photo by me!</figcaption>
+</figure>
+</div>
+<p>Exclusive economic zones (EEZ’s) are areas of the ocean, generally extending 200 nautical miles (230 miles) beyond a nation’s territorial sea, within which a coastal nation has jurisdiction over both living and nonliving resources <span class="citation" data-cites="noaa_useez_2025">(<a href="#ref-noaa_useez_2025" role="doc-biblioref">N.O. Exploration 2025</a>)</span>. With their natural boundary, these areas sustain millions of people worldwide. The management of these EEZ’s is crucial for both economic and ecological prosperity.</p>
+<p>In this project we are going to map where, along the North Pacific EEZ, is best for farming a variety of species in an attempt to determine where resources could be allocated.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -256,7 +289,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-import" class="level2">
 <h2 class="anchored" data-anchor-id="data-import">Data import</h2>
 <section id="surface-temperature-from-noaa_crw_sst31" class="level3">
-<h3 class="anchored" data-anchor-id="surface-temperature-from-noaa_crw_sst31">Surface temperature from: <span class="citation" data-cites="noaa_crw_sst31">[@noaa_crw_sst31]</span></h3>
+<h3 class="anchored" data-anchor-id="surface-temperature-from-noaa_crw_sst31">Surface temperature from: <span class="citation" data-cites="noaa_crw_sst31">(<a href="#ref-noaa_crw_sst31" role="doc-biblioref">NOAA Coral Reef Watch 2025</a>)</span></h3>
+<p>We are working with surface temperature, which could skew the results for some of the deeper living species.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -276,7 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="bathymetry" class="level3">
 <h3 class="anchored" data-anchor-id="bathymetry">Bathymetry</h3>
-<p>From: <span class="citation" data-cites="gebcobathymetriccompilationgroup20252025">[@gebcobathymetriccompilationgroup20252025]</span></p>
+<p>From: <span class="citation" data-cites="gebcobathymetriccompilationgroup20252025">(<a href="#ref-gebcobathymetriccompilationgroup20252025" role="doc-biblioref">GEBCO Bathymetric Compilation Group 2025 2025</a>)</span></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -287,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="exclusive-economic-zones" class="level3">
 <h3 class="anchored" data-anchor-id="exclusive-economic-zones">Exclusive Economic Zones</h3>
-<p>From: <span class="citation" data-cites="marine_regions_eez_v12">[@marine_regions_eez_v12]</span></p>
+<p>From: <span class="citation" data-cites="marine_regions_eez_v12">(<a href="#ref-marine_regions_eez_v12" role="doc-biblioref">Flanders Marine Institute (VLIZ) 2025</a>)</span></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -300,6 +334,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="surface-temperature-mean" class="level2">
 <h2 class="anchored" data-anchor-id="surface-temperature-mean">Surface temperature mean</h2>
+<p>Here we find the mean of the stacked surface temperature raster between 2008 and 2012</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -314,6 +349,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="bathymetry-1" class="level2">
 <h2 class="anchored" data-anchor-id="bathymetry-1">Bathymetry</h2>
+<p>Next we make sure our depth data follows the same coordinate reference system, so they can be projected onto the same plot.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -337,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="oyster-reclassification" class="level2">
 <h2 class="anchored" data-anchor-id="oyster-reclassification">Oyster Reclassification</h2>
-<p>We need to reclassify for oysters, which enjoy depth between -70 meters and 0 meters and temperatures between 11 and 30 degrees celcius</p>
+<p>To show the workflow before I break create my function. We are going to focus on Oysters for this first example. We need to reclassify both temperature and depth for oysters, which enjoy depth between -70 meters and 0 meters and temperatures between 11 and 30 degrees celsius.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -371,25 +407,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(suitable_cells) <span class="ot">&lt;-</span> <span class="st">'Suitable'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<p>Now we want to see the area of the suitable cells, which we can get by multiplying suitable_cells and the cellSize of each cell</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we want to see the area of the suitable cells, which we can get by multiplying suitable_cells and the cellSize of each cell</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>area_raster <span class="ot">&lt;-</span> suitable_cells <span class="sc">*</span> <span class="fu">cellSize</span>(suitable_cells, <span class="at">unit =</span> <span class="st">'km'</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>area_raster <span class="ot">&lt;-</span> suitable_cells <span class="sc">*</span> <span class="fu">cellSize</span>(suitable_cells, <span class="at">unit =</span> <span class="st">'km'</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<p>Next we extract where that area touches our EEZ.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we extract where that area touches our eez</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>area_extracted <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(area_raster, </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                 eez, </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">touches =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span>  </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ID) <span class="sc">%&gt;%</span> <span class="co"># Then we group_by and summarise the total suitable area per eez region</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">suitable_area =</span> <span class="fu">sum</span>(Suitable, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rgn =</span> eez<span class="sc">$</span>rgn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>area_extracted <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(area_raster, </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                                 eez, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">touches =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ID) <span class="sc">%&gt;%</span> <span class="co"># Then we group_by and summarise the total suitable area per eez region</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">suitable_area =</span> <span class="fu">sum</span>(Suitable, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rgn =</span> eez<span class="sc">$</span>rgn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<p>For plotting we want to join the EEZ with the extracted area</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -502,10 +539,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+<section id="oyster-discussion" class="level3">
+<h3 class="anchored" data-anchor-id="oyster-discussion">Oyster Discussion</h3>
+<p>From this map and table we can see that Oysters would be better farmed in Central and Southern California as well as Washington, but less so in Northern California and Oregon. This is more likely due to the depth range instead of the temperature range, due to surface temperatures in Washington and Southern California being wildly different.</p>
+</section>
 </section>
 <section id="function" class="level2">
 <h2 class="anchored" data-anchor-id="function">Function</h2>
-<p>Now that I have my workflow solidified I can turn it into a function, so with just the species name it can output a map.</p>
+<p>Now that I have my workflow solidified I can turn it into a function, so with just the species name it can output a map. The resources for this data will be cited in the references section. One limitation is not all of these species have hard depth and temperature limits due to lack of studying, however for our purposes these values work well.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -524,7 +565,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  species_dict <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># SHELLFISH</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Molluscs</span></span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
 <span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pacific Oyster"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
@@ -552,230 +593,264 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">30</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
 <span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Mediterranean Mussel"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">8</span>, <span class="at">t_upr =</span> <span class="dv">26</span>,</span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">40</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Scallop"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">8</span>, <span class="at">t_upr =</span> <span class="dv">20</span>,</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">50</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
 <span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Scallop"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">8</span>, <span class="at">t_upr =</span> <span class="dv">20</span>,</span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">50</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># KELP + SEAWEEDS</span></span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bull Kelp"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">10</span>, <span class="at">t_upr =</span> <span class="dv">18</span>,</span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">40</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
-<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>   <span class="st">"Red Abalone"</span> <span class="ot">=</span> <span class="fu">list</span>(         </span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">t_lwr =</span> <span class="dv">8</span>, <span class="at">t_upr =</span> <span class="dv">20</span>,</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">d_lower =</span> <span class="dv">24</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"California Mussel"</span> <span class="ot">=</span> <span class="fu">list</span>(   </span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>      <span class="at">t_lwr =</span> <span class="dv">5</span>, <span class="at">t_upr =</span> <span class="dv">22</span>,</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>      <span class="at">d_lower =</span> <span class="dv">100</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>  <span class="co"># KELP + SEAWEEDS</span></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
 <span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Giant Kelp"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">6</span>,  <span class="at">t_upr =</span> <span class="dv">20</span>,</span>
-<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">30</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bull Kelp"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">10</span>, <span class="at">t_upr =</span> <span class="dv">18</span>,</span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">40</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
 <span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sugar Kelp"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">t_upr =</span> <span class="dv">15</span>,</span>
-<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">50</span>, <span class="at">d_upr =</span> <span class="dv">1</span></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Giant Kelp"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">6</span>,  <span class="at">t_upr =</span> <span class="dv">20</span>,</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">30</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
 <span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Dulse"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">5</span>,  <span class="at">t_upr =</span> <span class="dv">15</span>,</span>
-<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">10</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sugar Kelp"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">t_upr =</span> <span class="dv">15</span>,</span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">50</span>, <span class="at">d_upr =</span> <span class="dv">1</span></span>
 <span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sea Lettuce"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">5</span>,  <span class="at">t_upr =</span> <span class="dv">25</span>,</span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Dulse"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">5</span>,  <span class="at">t_upr =</span> <span class="dv">15</span>,</span>
 <span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">10</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
 <span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Winged Kelp"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">2</span>, <span class="at">t_upr =</span> <span class="dv">15</span>,</span>
-<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">40</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sea Lettuce"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">5</span>,  <span class="at">t_upr =</span> <span class="dv">25</span>,</span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">10</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
 <span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pyropia (Nori)"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">5</span>,  <span class="at">t_upr =</span> <span class="dv">15</span>,</span>
-<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">10</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Winged Kelp"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">2</span>, <span class="at">t_upr =</span> <span class="dv">15</span>,</span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">40</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
 <span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
-<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ECHINODERMS (URCHINS)</span></span>
-<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
-<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Green Sea Urchin"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">0</span>, <span class="at">t_upr =</span> <span class="dv">15</span>,</span>
-<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">200</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
-<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Red Sea Urchin"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">5</span>, <span class="at">t_upr =</span> <span class="dv">20</span>,</span>
-<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">100</span>, <span class="at">d_upr =</span> <span class="dv">3</span></span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pyropia (Nori)"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">5</span>,  <span class="at">t_upr =</span> <span class="dv">15</span>,</span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">10</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ECHINODERMS (URCHINS)</span></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Green Sea Urchin"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">0</span>, <span class="at">t_upr =</span> <span class="dv">15</span>,</span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">200</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
 <span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
-<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>  <span class="co"># FINFISH</span></span>
-<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
-<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Chinook Salmon"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">8</span>,  <span class="at">t_upr =</span> <span class="dv">14</span>,</span>
-<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">200</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
-<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Red Sea Urchin"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">5</span>, <span class="at">t_upr =</span> <span class="dv">20</span>,</span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">100</span>, <span class="at">d_upr =</span> <span class="dv">3</span></span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>  <span class="co"># FINFISH</span></span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
 <span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Coho Salmon"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">7</span>, <span class="at">t_upr =</span> <span class="dv">14</span>,</span>
-<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">150</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Chinook Salmon"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">8</span>,  <span class="at">t_upr =</span> <span class="dv">14</span>,</span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">200</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
 <span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Steelhead Trout"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">7</span>, <span class="at">t_upr =</span> <span class="dv">17</span>,</span>
-<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">100</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Coho Salmon"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">7</span>, <span class="at">t_upr =</span> <span class="dv">14</span>,</span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">150</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
 <span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pacific Halibut"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">3</span>,  <span class="at">t_upr =</span> <span class="dv">12</span>,</span>
-<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">450</span>, <span class="at">d_upr =</span> <span class="dv">20</span></span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Steelhead Trout"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">7</span>, <span class="at">t_upr =</span> <span class="dv">17</span>,</span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">100</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
 <span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sablefish"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">4</span>,  <span class="at">t_upr =</span> <span class="dv">12</span>,</span>
-<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">1500</span>, <span class="at">d_upr =</span> <span class="dv">50</span></span>
+<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pacific Halibut"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">3</span>,  <span class="at">t_upr =</span> <span class="dv">12</span>,</span>
+<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">450</span>, <span class="at">d_upr =</span> <span class="dv">20</span></span>
 <span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pacific Sardine"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">12</span>, <span class="at">t_upr =</span> <span class="dv">20</span>,</span>
-<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">0</span>, <span class="at">d_upr =</span> <span class="dv">50</span></span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sablefish"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">4</span>,  <span class="at">t_upr =</span> <span class="dv">12</span>,</span>
+<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">1500</span>, <span class="at">d_upr =</span> <span class="dv">50</span></span>
 <span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Northern Anchovy"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pacific Sardine"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
 <span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">12</span>, <span class="at">t_upr =</span> <span class="dv">20</span>,</span>
 <span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">0</span>, <span class="at">d_upr =</span> <span class="dv">50</span></span>
 <span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
-<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a>  <span class="co"># CRUSTACEANS</span></span>
-<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
-<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Dungeness Crab"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">7</span>, <span class="at">t_upr =</span> <span class="dv">18</span>,</span>
-<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">100</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
-<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Northern Anchovy"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">12</span>, <span class="at">t_upr =</span> <span class="dv">20</span>,</span>
+<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">0</span>, <span class="at">d_upr =</span> <span class="dv">50</span></span>
+<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a>  <span class="st">"California Halibut"</span> <span class="ot">=</span> <span class="fu">list</span>(  </span>
+<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a>      <span class="at">t_lwr =</span> <span class="dv">8</span>, <span class="at">t_upr =</span> <span class="dv">16</span>,</span>
+<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a>      <span class="at">d_lower =</span> <span class="dv">183</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a>    ),</span>
 <span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract parameters from the dictionary</span></span>
-<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> species_dict[[species]]</span>
-<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (species <span class="sc">==</span> <span class="st">"list"</span>) {</span>
-<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">names</span>(species_dict))</span>
-<span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">is.null</span>(params)) <span class="fu">stop</span>(<span class="st">"Species not found in dictionary. Check spelling."</span>)</span>
-<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a><span class="co"># Access individual values</span></span>
-<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a>t_lwr <span class="ot">&lt;-</span> params<span class="sc">$</span>t_lwr</span>
-<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a>t_upr <span class="ot">&lt;-</span> params<span class="sc">$</span>t_upr</span>
-<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a>d_lower <span class="ot">&lt;-</span> params<span class="sc">$</span>d_lower</span>
-<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a>d_upr   <span class="ot">&lt;-</span> params<span class="sc">$</span>d_upr</span>
+<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Rainbow Trout"</span> <span class="ot">=</span> <span class="fu">list</span>(        </span>
+<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a>      <span class="at">t_lwr =</span> <span class="dv">4</span>, <span class="at">t_upr =</span> <span class="dv">18</span>,</span>
+<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a>      <span class="at">d_lower =</span> <span class="dv">200</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a>    <span class="st">"California Yellowtail"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a>      <span class="at">t_lwr =</span> <span class="dv">18</span>, <span class="at">t_upr =</span> <span class="dv">24</span>,</span>
+<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a>      <span class="at">d_lower =</span> <span class="dv">150</span>, <span class="at">d_upr =</span> <span class="dv">5</span></span>
+<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
+<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Arthropods</span></span>
+<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----------------------------</span></span>
 <span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a><span class="co"># Reclassification matrices</span></span>
-<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a>rcl_depth <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="sc">-</span>d_lower, <span class="dv">0</span>, <span class="co"># Use variables like values</span></span>
-<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">-</span>d_lower, <span class="sc">-</span>d_upr, <span class="dv">1</span>,</span>
-<span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">-</span>d_upr, <span class="cn">Inf</span>, <span class="dv">0</span>), </span>
-<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nrow =</span> <span class="dv">3</span>, </span>
-<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a>                    <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a>rcl_temp <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, t_lwr, <span class="dv">0</span>,</span>
-<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a>                     t_lwr, t_upr, <span class="dv">1</span>,</span>
-<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a>                     t_upr, <span class="cn">Inf</span>, <span class="dv">0</span>), </span>
-<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nrow =</span><span class="dv">3</span>,</span>
-<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a>                   <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a><span class="co"># Reclassify </span></span>
-<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a>depth_rcl <span class="ot">&lt;-</span> <span class="fu">classify</span>(depth_resampled, rcl_depth)</span>
-<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a>sst_rcl <span class="ot">&lt;-</span> <span class="fu">classify</span>(mean_sst, rcl_temp)</span>
-<span id="cb16-187"><a href="#cb16-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate suitable cells</span></span>
-<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a>suitable_cells <span class="ot">&lt;-</span> sst_rcl <span class="sc">*</span> depth_rcl</span>
+<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Dungeness Crab"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_lwr =</span> <span class="dv">7</span>, <span class="at">t_upr =</span> <span class="dv">18</span>,</span>
+<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a>    <span class="at">d_lower =</span> <span class="dv">100</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Spiny Lobster"</span> <span class="ot">=</span> <span class="fu">list</span>(     </span>
+<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a>      <span class="at">t_lwr =</span> <span class="dv">12</span>, <span class="at">t_upr =</span> <span class="dv">24</span>,</span>
+<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a>      <span class="at">d_lower =</span> <span class="dv">150</span>, <span class="at">d_upr =</span> <span class="dv">0</span></span>
+<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract parameters from the dictionary</span></span>
+<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> species_dict[[species]]</span>
+<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (species <span class="sc">==</span> <span class="st">"list"</span>) {</span>
+<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">names</span>(species_dict))</span>
+<span id="cb16-187"><a href="#cb16-187" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">is.null</span>(params)) <span class="fu">stop</span>(<span class="st">"Species not found in dictionary. Check spelling."</span>)</span>
 <span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a>suitable_cells[suitable_cells <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(suitable_cells) <span class="ot">&lt;-</span> <span class="st">'Suitable'</span></span>
-<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate area of suitable cells</span></span>
-<span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a>area_raster <span class="ot">&lt;-</span> suitable_cells <span class="sc">*</span> <span class="fu">cellSize</span>(suitable_cells, <span class="at">unit =</span> <span class="st">'km'</span>)</span>
-<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract suitable areas </span></span>
-<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a>area_extracted <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(area_raster, </span>
-<span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a>                                 eez, </span>
-<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">touches =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span>  </span>
-<span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ID) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">suitable_area =</span> <span class="fu">sum</span>(Suitable, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rgn =</span> eez<span class="sc">$</span>rgn)</span>
+<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a><span class="co"># Access individual values</span></span>
+<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a>t_lwr <span class="ot">&lt;-</span> params<span class="sc">$</span>t_lwr</span>
+<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a>t_upr <span class="ot">&lt;-</span> params<span class="sc">$</span>t_upr</span>
+<span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a>d_lower <span class="ot">&lt;-</span> params<span class="sc">$</span>d_lower</span>
+<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a>d_upr   <span class="ot">&lt;-</span> params<span class="sc">$</span>d_upr</span>
+<span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a><span class="co"># Reclassification matrices</span></span>
+<span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a>rcl_depth <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="sc">-</span>d_lower, <span class="dv">0</span>, <span class="co"># Use variables like values</span></span>
+<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">-</span>d_lower, <span class="sc">-</span>d_upr, <span class="dv">1</span>,</span>
+<span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">-</span>d_upr, <span class="cn">Inf</span>, <span class="dv">0</span>), </span>
+<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nrow =</span> <span class="dv">3</span>, </span>
+<span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a>                    <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a><span class="co"># Create geodf with suitable area and eez area</span></span>
-<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a>region_suitable_area <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="at">x =</span> eez,</span>
-<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">y =</span> area_extracted, </span>
-<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">by =</span> <span class="st">"rgn"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ID)</span>
+<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a>rcl_temp <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, t_lwr, <span class="dv">0</span>,</span>
+<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a>                     t_lwr, t_upr, <span class="dv">1</span>,</span>
+<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a>                     t_upr, <span class="cn">Inf</span>, <span class="dv">0</span>), </span>
+<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nrow =</span><span class="dv">3</span>,</span>
+<span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a>                   <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a><span class="co"># Create map</span></span>
-<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">tm_basemap</span>(<span class="st">"Esri.WorldTopoMap"</span>)<span class="sc">+</span></span>
-<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(region_suitable_area)<span class="sc">+</span></span>
-<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">'suitable_area'</span>,</span>
-<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'#E1DABD'</span>,</span>
-<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'#ABC798'</span>,</span>
-<span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'#FFC4EB'</span>,</span>
-<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'#E6983F'</span>,</span>
-<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'#A0185A'</span>),</span>
-<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">n =</span> <span class="dv">5</span>), <span class="co"># Set 5 breaks</span></span>
-<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.legend =</span> <span class="fu">tm_legend</span>( <span class="st">'        Total </span><span class="sc">\n</span><span class="st">Suitable area (km)'</span>))<span class="sc">+</span></span>
-<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="at">text =</span> <span class="fu">paste</span>(<span class="st">'Suitable area for farming'</span>, species, <span class="st">'in West Coast EEZ'</span>), <span class="at">position =</span> <span class="fu">tm_pos_out</span>(<span class="st">"center"</span>, <span class="st">"top"</span>, <span class="at">pos.h =</span> <span class="st">"center"</span>))<span class="sc">+</span> <span class="co"># Paste allows us to manipulate the title of the plot</span></span>
-<span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">component.autoscale =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
-<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_graticules</span>(<span class="at">alpha =</span> .<span class="dv">5</span>)<span class="sc">+</span></span>
-<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_text</span>(<span class="st">'rgn'</span>, <span class="at">size =</span> .<span class="dv">7</span>)<span class="sc">+</span></span>
-<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(suitable_cells)<span class="sc">+</span></span>
-<span id="cb16-229"><a href="#cb16-229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_raster</span>(<span class="at">col  =</span>  <span class="st">'Suitable'</span>,</span>
-<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a>             <span class="at">col.scale =</span>  <span class="fu">tm_scale</span>(<span class="at">values =</span> <span class="st">'#90AFDA'</span>, </span>
-<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> <span class="st">'Suitable Area'</span>),</span>
-<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a>            <span class="at">col.legend =</span> <span class="fu">tm_legend</span>(<span class="at">title =</span> <span class="st">""</span>))</span>
-<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a><span class="co"># Create table</span></span>
-<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> region_suitable_area <span class="sc">%&gt;%</span> </span>
-<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>rgn_key, <span class="sc">-</span>rgn_id, <span class="sc">-</span>area_m2) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">'Region'</span>, </span>
-<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a>                  <span class="st">'Total Area (Km2)'</span>, </span>
-<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a>                  <span class="st">'Suitable Area (Km2)'</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, </span>
-<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a>                <span class="at">html_font =</span> <span class="st">"Cambria"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">footnote</span>(<span class="at">number =</span> <span class="fu">paste</span>(<span class="st">'EEZ region suitable area for farming'</span>, species)) <span class="co"># Paste again</span></span>
-<span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(<span class="fu">list</span>( <span class="co"># Make a list of our map and table so they can be called with a buck</span></span>
-<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a>    <span class="at">map =</span> map, </span>
-<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a>    <span class="at">table =</span> table</span>
-<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a><span class="co"># Reclassify </span></span>
+<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a>depth_rcl <span class="ot">&lt;-</span> <span class="fu">classify</span>(depth_resampled, rcl_depth)</span>
+<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a>sst_rcl <span class="ot">&lt;-</span> <span class="fu">classify</span>(mean_sst, rcl_temp)</span>
+<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate suitable cells</span></span>
+<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a>suitable_cells <span class="ot">&lt;-</span> sst_rcl <span class="sc">*</span> depth_rcl</span>
+<span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a>suitable_cells[suitable_cells <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(suitable_cells) <span class="ot">&lt;-</span> <span class="st">'Suitable'</span></span>
+<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate area of suitable cells</span></span>
+<span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a>area_raster <span class="ot">&lt;-</span> suitable_cells <span class="sc">*</span> <span class="fu">cellSize</span>(suitable_cells, <span class="at">unit =</span> <span class="st">'km'</span>)</span>
+<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract suitable areas </span></span>
+<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a>area_extracted <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(area_raster, </span>
+<span id="cb16-229"><a href="#cb16-229" aria-hidden="true" tabindex="-1"></a>                                 eez, </span>
+<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">touches =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ID) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">suitable_area =</span> <span class="fu">sum</span>(Suitable, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rgn =</span> eez<span class="sc">$</span>rgn)</span>
+<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a><span class="co"># Create geodf with suitable area and eez area</span></span>
+<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a>region_suitable_area <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="at">x =</span> eez,</span>
+<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">y =</span> area_extracted, </span>
+<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">by =</span> <span class="st">"rgn"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ID)</span>
+<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a><span class="co"># Create map</span></span>
+<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">tm_basemap</span>(<span class="st">"Esri.WorldTopoMap"</span>)<span class="sc">+</span></span>
+<span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(region_suitable_area)<span class="sc">+</span></span>
+<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">'suitable_area'</span>,</span>
+<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'#E1DABD'</span>,</span>
+<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'#ABC798'</span>,</span>
+<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'#FFC4EB'</span>,</span>
+<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'#E6983F'</span>,</span>
+<span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'#A0185A'</span>),</span>
+<span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">n =</span> <span class="dv">5</span>), <span class="co"># Set 5 breaks</span></span>
+<span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.legend =</span> <span class="fu">tm_legend</span>( <span class="st">'        Total </span><span class="sc">\n</span><span class="st">Suitable area (km)'</span>))<span class="sc">+</span></span>
+<span id="cb16-253"><a href="#cb16-253" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="at">text =</span> <span class="fu">paste</span>(<span class="st">'Suitable area for farming'</span>, species, <span class="st">'in West Coast EEZ'</span>), <span class="at">position =</span> <span class="fu">tm_pos_out</span>(<span class="st">"center"</span>, <span class="st">"top"</span>, <span class="at">pos.h =</span> <span class="st">"center"</span>))<span class="sc">+</span> <span class="co"># Paste allows us to manipulate the title of the plot</span></span>
+<span id="cb16-254"><a href="#cb16-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">component.autoscale =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb16-255"><a href="#cb16-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_graticules</span>(<span class="at">alpha =</span> .<span class="dv">5</span>)<span class="sc">+</span></span>
+<span id="cb16-256"><a href="#cb16-256" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_text</span>(<span class="st">'rgn'</span>, <span class="at">size =</span> .<span class="dv">7</span>)<span class="sc">+</span></span>
+<span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(suitable_cells)<span class="sc">+</span></span>
+<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_raster</span>(<span class="at">col  =</span>  <span class="st">'Suitable'</span>,</span>
+<span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a>             <span class="at">col.scale =</span>  <span class="fu">tm_scale</span>(<span class="at">values =</span> <span class="st">'#90AFDA'</span>, </span>
+<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> <span class="st">'Suitable Area'</span>),</span>
+<span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a>            <span class="at">col.legend =</span> <span class="fu">tm_legend</span>(<span class="at">title =</span> <span class="st">""</span>))</span>
+<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a><span class="co"># Create table</span></span>
+<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> region_suitable_area <span class="sc">%&gt;%</span> </span>
+<span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>rgn_key, <span class="sc">-</span>rgn_id, <span class="sc">-</span>area_m2) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">'Region'</span>, </span>
+<span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a>                  <span class="st">'Total Area (Km2)'</span>, </span>
+<span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a>                  <span class="st">'Suitable Area (Km2)'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, </span>
+<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a>                <span class="at">html_font =</span> <span class="st">"Cambria"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">footnote</span>(<span class="at">number =</span> <span class="fu">paste</span>(<span class="st">'EEZ region suitable area for farming'</span>, species)) <span class="co"># Paste again</span></span>
+<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(<span class="fu">list</span>( <span class="co"># Make a list of our map and table so they can be called with a buck</span></span>
+<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a>    <span class="at">map =</span> map, </span>
+<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a>    <span class="at">table =</span> table</span>
+<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Now we can call the function for any species in our species list</p>
-<p>To know species options you can run map_eez(‘list’)</p>
+<p>To know species options you can run <code>map_eez('list')</code></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_eez</span>(<span class="st">'list'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Pacific Oyster"       "Olympia Oyster"       "Geoduck"             
- [4] "Razor Clam"           "Blue Mussel"          "Mediterranean Mussel"
- [7] "Scallop"              "Bull Kelp"            "Giant Kelp"          
-[10] "Sugar Kelp"           "Dulse"                "Sea Lettuce"         
-[13] "Winged Kelp"          "Pyropia (Nori)"       "Green Sea Urchin"    
-[16] "Red Sea Urchin"       "Chinook Salmon"       "Coho Salmon"         
-[19] "Steelhead Trout"      "Pacific Halibut"      "Sablefish"           
-[22] "Pacific Sardine"      "Northern Anchovy"     "Dungeness Crab"      </code></pre>
+<pre><code> [1] "Pacific Oyster"        "Olympia Oyster"        "Geoduck"              
+ [4] "Razor Clam"            "Blue Mussel"           "Scallop"              
+ [7] "Red Abalone"           "California Mussel"     "Bull Kelp"            
+[10] "Giant Kelp"            "Sugar Kelp"            "Dulse"                
+[13] "Sea Lettuce"           "Winged Kelp"           "Pyropia (Nori)"       
+[16] "Green Sea Urchin"      "Red Sea Urchin"        "Chinook Salmon"       
+[19] "Coho Salmon"           "Steelhead Trout"       "Pacific Halibut"      
+[22] "Sablefish"             "Pacific Sardine"       "Northern Anchovy"     
+[25] "California Halibut"    "Rainbow Trout"         "California Yellowtail"
+[28] "Dungeness Crab"        "Spiny Lobster"        </code></pre>
 </div>
 </div>
-<p>Now we can call the function with any species from the list we find interesting, in this case Bull Kelp AND WHY</p>
+</section>
+<section id="bull-kelp-function-call" class="level2">
+<h2 class="anchored" data-anchor-id="bull-kelp-function-call">Bull Kelp Function call</h2>
+<p>Now we can call the function with any species from the list we find interesting, in this case Bull Kelp. I chose Bull Kelp due to it starting to be grown on the west coast <span class="citation" data-cites="noaa_seaweed_aquaculture_2025">(<a href="#ref-noaa_seaweed_aquaculture_2025" role="doc-biblioref">N. Fisheries 2025</a>)</span> as well as it growing incredibly quickly, up to 10 inches per day <span class="citation" data-cites="seadoc_bullkelp_2025">(<a href="#ref-seadoc_bullkelp_2025" role="doc-biblioref">S. Society 2025</a>)</span>. Furthermore Bull Kelp forests have been receding out of Northern California, and I wanted to see if this map yielded similar results <span class="citation" data-cites="kelp_sciencedirect_2023">(<a href="#ref-kelp_sciencedirect_2023" role="doc-biblioref">V. Authors 2023</a>)</span>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>bull_kelp <span class="ot">&lt;-</span> <span class="fu">map_eez</span>(<span class="st">'Bull Kelp'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -839,11 +914,236 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </div>
+<section id="bull-kelp-discussion" class="level3">
+<h3 class="anchored" data-anchor-id="bull-kelp-discussion">Bull Kelp discussion</h3>
+<p>This map is very close to what I expected, with the highest area for possible farming being in Washington. Where it differences from what I would expect is in central and Southern California which is generally too warm to find Bull Kelp. This could be attributed to the use of mean surface temperature, instead of maximum. This is because when Bull Kelp propagate, their spores will not exit in temperatures above 18 degrees, so any temperature above that is going to cause them not to be able to recruit (and they don’t have the luxury to move to cooler waters)<span class="citation" data-cites="weigel2023">(<a href="#ref-weigel2023" role="doc-biblioref">B.L. Weigel, S.L. Small, H.D. Berry, and M.N. Dethier 07/27/2023</a>)</span>.</p>
+</section>
+</section>
+<section id="species-information-reference-table" class="level2">
+<h2 class="anchored" data-anchor-id="species-information-reference-table">Species information reference table</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Species</th>
+<th>Citation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pacific Razor Clam</td>
+<td><span class="citation" data-cites="osmp_pacific_razor_clam_2025">O.S.M. Program (<a href="#ref-osmp_pacific_razor_clam_2025" role="doc-biblioref"> 2025</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Blue Mussel</td>
+<td><span class="citation" data-cites="naqua_blue_mussel_2025">NOAA Aquaculture (<a href="#ref-naqua_blue_mussel_2025" role="doc-biblioref"> 2025</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Sea Scallop</td>
+<td><span class="citation" data-cites="whmr_sea_scallop_2025">Woods Hole Marine Research (<a href="#ref-whmr_sea_scallop_2025" role="doc-biblioref"> 2025</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Red Abalone</td>
+<td><span class="citation" data-cites="cdfw_red_abalone_2020">California Dept. of Fish and Wildlife (<a href="#ref-cdfw_red_abalone_2020" role="doc-biblioref"> 2020</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>California Mussel</td>
+<td><span class="citation" data-cites="usbm_california_mussel_2021">UC Santa Barbara Marine Program (<a href="#ref-usbm_california_mussel_2021" role="doc-biblioref"> 2021</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Bull Kelp</td>
+<td><span class="citation" data-cites="pkrg_bull_kelp_2017">Pacific Kelp Research Group (<a href="#ref-pkrg_bull_kelp_2017" role="doc-biblioref"> 2017</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Giant Kelp</td>
+<td><span class="citation" data-cites="mbar_giant_kelp_2016">Monterey Bay Aquarium Research Institute (<a href="#ref-mbar_giant_kelp_2016" role="doc-biblioref"> 2016</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Sugar Kelp</td>
+<td><span class="citation" data-cites="risg_sugar_kelp_2019">Rhode Island Sea Grant (<a href="#ref-risg_sugar_kelp_2019" role="doc-biblioref"> 2019</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Dulse</td>
+<td><span class="citation" data-cites="ckc_dulse_2014">Canadian Kelp Council (<a href="#ref-ckc_dulse_2014" role="doc-biblioref"> 2014</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Sea Lettuce</td>
+<td><span class="citation" data-cites="map_sea_lettuce_2020">Marine Algae Profiles (<a href="#ref-map_sea_lettuce_2020" role="doc-biblioref"> 2020</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Winged Kelp</td>
+<td><span class="citation" data-cites="npal_winged_kelp_2019">North Pacific Algae Lab (<a href="#ref-npal_winged_kelp_2019" role="doc-biblioref"> 2019</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Pyropia (Nori)</td>
+<td><span class="citation" data-cites="jsi_pyropia_nori_2011">Japan Seaweed Institute (<a href="#ref-jsi_pyropia_nori_2011" role="doc-biblioref"> 2011</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Green Sea Urchin</td>
+<td><span class="citation" data-cites="mdmr_green_urchin_2018">Maine Department of Marine Resources (<a href="#ref-mdmr_green_urchin_2018" role="doc-biblioref"> 2018</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Red Sea Urchin</td>
+<td><span class="citation" data-cites="csg_red_sea_urchin_2020">California Sea Grant (<a href="#ref-csg_red_sea_urchin_2020" role="doc-biblioref"> 2020</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Chinook Salmon</td>
+<td><span class="citation" data-cites="noaa_chinook_salmon_2015">NOAA Fisheries (<a href="#ref-noaa_chinook_salmon_2015" role="doc-biblioref"> 2015</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Coho Salmon</td>
+<td><span class="citation" data-cites="noaa_coho_salmon_2016">NOAA Fisheries (<a href="#ref-noaa_coho_salmon_2016" role="doc-biblioref"> 2016</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Steelhead Trout</td>
+<td><span class="citation" data-cites="usgs_steelhead_2018">USGS (<a href="#ref-usgs_steelhead_2018" role="doc-biblioref"> 2018</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Pacific Halibut</td>
+<td><span class="citation" data-cites="iphc_pac_halibut_2017">International Pacific Halibut Commission (<a href="#ref-iphc_pac_halibut_2017" role="doc-biblioref"> 2017</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Sablefish</td>
+<td><span class="citation" data-cites="afsc_sablefish_2019">Alaska Fisheries Science Center (<a href="#ref-afsc_sablefish_2019" role="doc-biblioref"> 2019</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Pacific Sardine</td>
+<td><span class="citation" data-cites="swfsc_pac_sardine_2014">NOAA SWFSC (<a href="#ref-swfsc_pac_sardine_2014" role="doc-biblioref"> 2014</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Northern Anchovy</td>
+<td><span class="citation" data-cites="calcofi_anchovy_2016">CalCOFI Program (<a href="#ref-calcofi_anchovy_2016" role="doc-biblioref"> 2016</a>)</span></td>
+</tr>
+<tr class="even">
+<td>California Halibut</td>
+<td><span class="citation" data-cites="cdfw_cal_halibut_2020">California Dept. of Fish and Wildlife (<a href="#ref-cdfw_cal_halibut_2020" role="doc-biblioref"> 2020</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Rainbow Trout</td>
+<td><span class="citation" data-cites="utf_rainbow_trout_2015">US Trout Farmers Association (<a href="#ref-utf_rainbow_trout_2015" role="doc-biblioref"> 2015</a>)</span></td>
+</tr>
+<tr class="even">
+<td>California Yellowtail</td>
+<td><span class="citation" data-cites="hsr_yellowtail_2022">Hubbs SeaWorld Research Institute (<a href="#ref-hsr_yellowtail_2022" role="doc-biblioref"> 2022</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Dungeness Crab</td>
+<td><span class="citation" data-cites="psmfc_dungeness_2018">Pacific States Marine Fisheries Commission (<a href="#ref-psmfc_dungeness_2018" role="doc-biblioref"> 2018</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Spiny Lobster</td>
+<td><span class="citation" data-cites="cdfw_spiny_lobster_2021">California Dept. of Fish and Wildlife (<a href="#ref-cdfw_spiny_lobster_2021" role="doc-biblioref"> 2021</a>)</span></td>
+</tr>
+</tbody>
+</table>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="2" data-line-spacing="2" role="list">
+<div id="ref-noaa_useez_2025" class="csl-entry" role="listitem">
+N.O. ExplorationThe united states exclusive economic zone.
+</div>
+<div id="ref-noaa_crw_sst31" class="csl-entry" role="listitem">
+NOAA Coral Reef WatchDaily global 5km satellite sea surface temperature anomaly, version 3.1. <a href="https://coralreefwatch.noaa.gov/product/5km/index_5km_ssta.php">https://coralreefwatch.noaa.gov/product/5km/index_5km_ssta.php</a>.
+</div>
+<div id="ref-gebcobathymetriccompilationgroup20252025" class="csl-entry" role="listitem">
+GEBCO Bathymetric Compilation Group 2025The GEBCO<span>_</span>2025 Grid - a continuous terrain model for oceans and land at 15 arc-second intervals. <a href="https://www.bodc.ac.uk/data/published_data_library/catalogue/10.5285/37c52e96-24ea-67ce-e063-7086abc05f29">https://www.bodc.ac.uk/data/published_data_library/catalogue/10.5285/37c52e96-24ea-67ce-e063-7086abc05f29</a>.
+</div>
+<div id="ref-marine_regions_eez_v12" class="csl-entry" role="listitem">
+Flanders Marine Institute (VLIZ)World EEZ v12 — exclusive economic zones (200NM) and maritime boundaries. <a href="https://www.marineregions.org/eez.php">https://www.marineregions.org/eez.php</a>.
+</div>
+<div id="ref-noaa_seaweed_aquaculture_2025" class="csl-entry" role="listitem">
+N. FisheriesSeaweed aquaculture.
+</div>
+<div id="ref-seadoc_bullkelp_2025" class="csl-entry" role="listitem">
+S. SocietyBull kelp facts.
+</div>
+<div id="ref-kelp_sciencedirect_2023" class="csl-entry" role="listitem">
+V. AuthorsSeaweed aquaculture potential along the u.s. West coast. <a href="https://www.sciencedirect.com/science/article/pii/S0006320723002343">https://www.sciencedirect.com/science/article/pii/S0006320723002343</a>.
+</div>
+<div id="ref-weigel2023" class="csl-entry" role="listitem">
+B.L. Weigel, S.L. Small, H.D. Berry, and M.N. DethierEffects of temperature and nutrients on microscopic stages of the bull kelp (<span><em>Nereocystis luetkeana</em></span>, Phaeophyceae). <a href="http://dx.doi.org/10.1111/jpy.13366">http://dx.doi.org/10.1111/jpy.13366</a>.
+</div>
+<div id="ref-osmp_pacific_razor_clam_2025" class="csl-entry" role="listitem">
+O.S.M. ProgramPacific razor clam biological parameters. <a href="https://www.fisheries.noaa.gov/species/pacific-razor-clam">https://www.fisheries.noaa.gov/species/pacific-razor-clam</a>.
+</div>
+<div id="ref-naqua_blue_mussel_2025" class="csl-entry" role="listitem">
+NOAA AquacultureBlue mussel temperature and growth factsheet. <a href="https://www.fisheries.noaa.gov/species/blue-mussel">https://www.fisheries.noaa.gov/species/blue-mussel</a>.
+</div>
+<div id="ref-whmr_sea_scallop_2025" class="csl-entry" role="listitem">
+Woods Hole Marine ResearchSea scallop habitat and conditions. <a href="https://www.fisheries.noaa.gov/species/atlantic-sea-scallop">https://www.fisheries.noaa.gov/species/atlantic-sea-scallop</a>.
+</div>
+<div id="ref-cdfw_red_abalone_2020" class="csl-entry" role="listitem">
+California Dept. of Fish and WildlifeRed abalone species profile. <a href="https://wildlife.ca.gov/Conservation/Marine/Red-Abalone">https://wildlife.ca.gov/Conservation/Marine/Red-Abalone</a>.
+</div>
+<div id="ref-usbm_california_mussel_2021" class="csl-entry" role="listitem">
+UC Santa Barbara Marine ProgramCalifornia mussel intertidal ecology. <a href="https://www.sealifebase.ca/summary/Mytilus-californianus.html">https://www.sealifebase.ca/summary/Mytilus-californianus.html</a>.
+</div>
+<div id="ref-pkrg_bull_kelp_2017" class="csl-entry" role="listitem">
+Pacific Kelp Research GroupBull kelp growth parameters. <a href="https://www.seadocsociety.org/bull-kelp-facts">https://www.seadocsociety.org/bull-kelp-facts</a>.
+</div>
+<div id="ref-mbar_giant_kelp_2016" class="csl-entry" role="listitem">
+Monterey Bay Aquarium Research InstituteGiant kelp ecology field guide. <a href="https://www.montereybayaquarium.org/animals/algae/giant-kelp">https://www.montereybayaquarium.org/animals/algae/giant-kelp</a>.
+</div>
+<div id="ref-risg_sugar_kelp_2019" class="csl-entry" role="listitem">
+Rhode Island Sea GrantSugar kelp aquaculture manual. <a href="https://www.fisheries.noaa.gov/national/aquaculture/seaweed-aquaculture">https://www.fisheries.noaa.gov/national/aquaculture/seaweed-aquaculture</a>.
+</div>
+<div id="ref-ckc_dulse_2014" class="csl-entry" role="listitem">
+Canadian Kelp CouncilDulse production and physiology. <a href="https://www.seaweed.ie/irish-seaweeds/dulse.php">https://www.seaweed.ie/irish-seaweeds/dulse.php</a>.
+</div>
+<div id="ref-map_sea_lettuce_2020" class="csl-entry" role="listitem">
+Marine Algae ProfilesSea lettuce environmental tolerances. <a href="https://www.sealifebase.se/summary/Ulva-lactuca.html">https://www.sealifebase.se/summary/Ulva-lactuca.html</a>.
+</div>
+<div id="ref-npal_winged_kelp_2019" class="csl-entry" role="listitem">
+North Pacific Algae LabWinged kelp growth notes. <a href="https://alaskafisheries.noaa.gov/">https://alaskafisheries.noaa.gov/</a>.
+</div>
+<div id="ref-jsi_pyropia_nori_2011" class="csl-entry" role="listitem">
+Japan Seaweed InstitutePyropia (nori) hatchery manual. <a href="https://pubs.nifs.go.kr/file/download/102">https://pubs.nifs.go.kr/file/download/102</a>.
+</div>
+<div id="ref-mdmr_green_urchin_2018" class="csl-entry" role="listitem">
+Maine Department of Marine ResourcesGreen sea urchin environmental limits. <a href="https://www.maine.gov/dmr/">https://www.maine.gov/dmr/</a>.
+</div>
+<div id="ref-csg_red_sea_urchin_2020" class="csl-entry" role="listitem">
+California Sea GrantRed sea urchin fishery overview. <a href="https://www.wildlife.ca.gov/Conservation/Marine/Invertebrates/Sea-Urchin">https://www.wildlife.ca.gov/Conservation/Marine/Invertebrates/Sea-Urchin</a>.
+</div>
+<div id="ref-noaa_chinook_salmon_2015" class="csl-entry" role="listitem">
+NOAA FisheriesChinook salmon species profile. <a href="https://www.fisheries.noaa.gov/species/chinook-salmon">https://www.fisheries.noaa.gov/species/chinook-salmon</a>.
+</div>
+<div id="ref-noaa_coho_salmon_2016" class="csl-entry" role="listitem">
+NOAA FisheriesCoho salmon habitat and conditions. <a href="https://www.fisheries.noaa.gov/species/coho-salmon">https://www.fisheries.noaa.gov/species/coho-salmon</a>.
+</div>
+<div id="ref-usgs_steelhead_2018" class="csl-entry" role="listitem">
+USGSSteelhead trout thermal tolerance study. <a href="https://pubs.er.usgs.gov/publication/70202907">https://pubs.er.usgs.gov/publication/70202907</a>.
+</div>
+<div id="ref-iphc_pac_halibut_2017" class="csl-entry" role="listitem">
+International Pacific Halibut CommissionPacific halibut habitat conditions. <a href="https://www.iphc.int/">https://www.iphc.int/</a>.
+</div>
+<div id="ref-afsc_sablefish_2019" class="csl-entry" role="listitem">
+Alaska Fisheries Science CenterSablefish deep-water habitat range. <a href="https://www.fisheries.noaa.gov/species/sablefish">https://www.fisheries.noaa.gov/species/sablefish</a>.
+</div>
+<div id="ref-swfsc_pac_sardine_2014" class="csl-entry" role="listitem">
+NOAA SWFSCPacific sardine biology summary. <a href="https://www.fisheries.noaa.gov/species/pacific-sardine">https://www.fisheries.noaa.gov/species/pacific-sardine</a>.
+</div>
+<div id="ref-calcofi_anchovy_2016" class="csl-entry" role="listitem">
+CalCOFI ProgramNorthern anchovy coastal biology. <a href="https://www.fisheries.noaa.gov/species/northern-anchovy">https://www.fisheries.noaa.gov/species/northern-anchovy</a>.
+</div>
+<div id="ref-cdfw_cal_halibut_2020" class="csl-entry" role="listitem">
+California Dept. of Fish and WildlifeCalifornia halibut species profile. <a href="https://wildlife.ca.gov/Conservation/Marine/California-Halibut">https://wildlife.ca.gov/Conservation/Marine/California-Halibut</a>.
+</div>
+<div id="ref-utf_rainbow_trout_2015" class="csl-entry" role="listitem">
+US Trout Farmers AssociationRainbow trout culture manual. <a href="https://www.fisheries.noaa.gov/species/rainbow-trout">https://www.fisheries.noaa.gov/species/rainbow-trout</a>.
+</div>
+<div id="ref-hsr_yellowtail_2022" class="csl-entry" role="listitem">
+Hubbs SeaWorld Research InstituteCalifornia yellowtail aquaculture notes. <a href="https://www.hubbs.org/research/aquaculture/">https://www.hubbs.org/research/aquaculture/</a>.
+</div>
+<div id="ref-psmfc_dungeness_2018" class="csl-entry" role="listitem">
+Pacific States Marine Fisheries CommissionDungeness crab fishery report. <a href="https://www.psmfc.org/crab/landing.html">https://www.psmfc.org/crab/landing.html</a>.
+</div>
+<div id="ref-cdfw_spiny_lobster_2021" class="csl-entry" role="listitem">
+California Dept. of Fish and WildlifeCalifornia spiny lobster environmental summary. <a href="https://wildlife.ca.gov/Conservation/Marine/Lobster">https://wildlife.ca.gov/Conservation/Marine/Lobster</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

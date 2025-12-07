@@ -3,9 +3,16 @@ title: "Aquaculture and EEZ's"
 description: "Examining where in the North Pacific Economic Exclusive Zone is best for aquaculture of different species"
 date: 2025-11-28
 categories: [MEDS, R, Geospatial]
+bibliography: references.bib
+csl: spaced-bibliography.csl
+image: image.jpg
 ---
+![Photo by me!](image.jpg)
 
-DESCRIPTION OF EEZ"S AND WHY I LIKE THIS
+
+Exclusive economic zones (EEZ's) are areas of the ocean, generally extending 200 nautical miles (230 miles) beyond a nation’s territorial sea, within which a coastal nation has jurisdiction over both living and nonliving resources [@noaa_useez_2025]. With their natural boundary, these areas sustain millions of people worldwide. The management of these EEZ's is crucial for both economic and ecological prosperity.
+
+In this project we are going to map where, along the North Pacific EEZ, is best for farming a variety of species in an attempt to determine where resources could be allocated.
 
 ```{r}
 #| code-fold: true
@@ -22,6 +29,8 @@ pacman::p_load('tidyverse',
 ## Data import
 
 ### Surface temperature from: [@noaa_crw_sst31]
+
+We are working with surface temperature, which could skew the results for some of the deeper living species.
 
 ```{r}
 #| code-fold: true
@@ -62,6 +71,8 @@ eez <- st_read(here('posts', 'aquaculture_and_eezs','data',
 
 ## Surface temperature mean
 
+Here we find the mean of the stacked surface temperature raster between 2008 and 2012
+
 ```{r}
 #| code-fold: true
 # Stacked raster
@@ -73,6 +84,8 @@ mean_sst <- mean(stacked_sst) - 273.15
 ```
 
 ## Bathymetry
+
+Next we make sure our depth data follows the same coordinate reference system, so they can be projected onto the same plot.
 
 ```{r}
 #| code-fold: true
@@ -90,7 +103,7 @@ depth_resampled <- resample(depth_projected, mean_sst)
 
 ## Oyster Reclassification
 
-We need to reclassify for oysters, which enjoy depth between -70 meters and 0 meters and temperatures between 11 and 30 degrees celcius
+To show the workflow before I break create my function. We are going to focus on Oysters for this first example. We need to reclassify both temperature and depth for oysters, which enjoy depth between -70 meters and 0 meters and temperatures between 11 and 30 degrees celsius.
 
 ```{r}
 #| code-fold: true
@@ -124,16 +137,18 @@ suitable_cells[suitable_cells == 0] <- NA
 names(suitable_cells) <- 'Suitable'
 ```
 
+Now we want to see the area of the suitable cells, which we can get by multiplying suitable_cells and the cellSize of each cell
+
 ```{r}
 #| code-fold: true
-# Now we want to see the area of the suitable cells, which we can get by multiplying suitable_cells and the cellSize of each cell
 area_raster <- suitable_cells * cellSize(suitable_cells, unit = 'km')  
 
 ```
 
+Next we extract where that area touches our EEZ.
+
 ```{r}
 #| code-fold: true
-# Here we extract where that area touches our eez
 area_extracted <- terra::extract(area_raster, 
                                  eez, 
                                  touches = TRUE) %>%  
@@ -142,6 +157,8 @@ area_extracted <- terra::extract(area_raster,
   mutate(rgn = eez$rgn)
 
 ```
+
+For plotting we want to join the EEZ with the extracted area
 
 ```{r}
 #| code-fold: true
@@ -202,10 +219,11 @@ kbl(col.names = c('Region', 'Total Area (Km2)', 'Suitable Area (Km2)')) %>%  # R
                 html_font = "Cambria") %>% 
   footnote(number = paste('EEZ region suitable area for farming Oysters')) # Add a footnote
 ```
+### Oyster Discussion
+From this map and table we can see that Oysters would be better farmed in Central and Southern California as well as Washington, but less so in Northern California and Oregon. This is more likely due to the depth range instead of the temperature range, due to surface temperatures in Washington and Southern California being wildly different. 
 
 ## Function
-
-Now that I have my workflow solidified I can turn it into a function, so with just the species name it can output a map.
+Now that I have my workflow solidified I can turn it into a function, so with just the species name it can output a map. The resources for this data will be cited in the references section. One limitation is not all of these species have hard depth and temperature limits due to lack of studying, however for our purposes these values work well.
 
 ```{r}
 #| code-fold: true
@@ -224,7 +242,7 @@ map_eez <- function(species){
   species_dict <- list(
   
   # -----------------------------
-  # SHELLFISH
+  # Molluscs
   # -----------------------------
   
   "Pacific Oyster" = list(
@@ -252,16 +270,21 @@ map_eez <- function(species){
     d_lower = 30, d_upr = 0
   ),
 
-  "Mediterranean Mussel" = list(
-    t_lwr = 8, t_upr = 26,
-    d_lower = 40, d_upr = 0
-  ),
-
   "Scallop" = list(
     t_lwr = 8, t_upr = 20,
     d_lower = 50, d_upr = 0
   ),
   
+   "Red Abalone" = list(         
+      t_lwr = 8, t_upr = 20,
+      d_lower = 24, d_upr = 0
+    ),
+
+    "California Mussel" = list(   
+      t_lwr = 5, t_upr = 22,
+      d_lower = 100, d_upr = 0
+    ),
+
   # -----------------------------
   # KELP + SEAWEEDS
   # -----------------------------
@@ -354,23 +377,47 @@ map_eez <- function(species){
     d_lower = 0, d_upr = 50
   ),
   
+  "California Halibut" = list(  
+      t_lwr = 8, t_upr = 16,
+      d_lower = 183, d_upr = 0
+    ),
+
+    "Rainbow Trout" = list(        
+      t_lwr = 4, t_upr = 18,
+      d_lower = 200, d_upr = 0
+    ),
+  
+    "California Yellowtail" = list(
+      t_lwr = 18, t_upr = 24,
+      d_lower = 150, d_upr = 5
+    ),
+  
   # -----------------------------
-  # CRUSTACEANS
+  # Arthropods
   # -----------------------------
 
   "Dungeness Crab" = list(
     t_lwr = 7, t_upr = 18,
     d_lower = 100, d_upr = 0
-  )
+  ),
+  
+  "Spiny Lobster" = list(     
+      t_lwr = 12, t_upr = 24,
+      d_lower = 150, d_upr = 0
+    )
+
 )
 
 # Extract parameters from the dictionary
 params <- species_dict[[species]]
+  
 if (species == "list") {
   return(names(species_dict))
 }
 
 if (is.null(params)) stop("Species not found in dictionary. Check spelling.")
+
+
 
 # Access individual values
 t_lwr <- params$t_lwr
@@ -463,13 +510,13 @@ return(list( # Make a list of our map and table so they can be called with a buc
 
 Now we can call the function for any species in our species list
 
-To know species options you can run map_eez('list')
+To know species options you can run `map_eez('list')`
 
 ```{r}
 map_eez('list')
 ```
-
-Now we can call the function with any species from the list we find interesting, in this case Bull Kelp AND WHY
+## Bull Kelp Function call 
+Now we can call the function with any species from the list we find interesting, in this case Bull Kelp. I chose Bull Kelp due to it starting to be grown on the west coast [@noaa_seaweed_aquaculture_2025] as well as it growing incredibly quickly, up to 10 inches per day [@seadoc_bullkelp_2025]. Furthermore Bull Kelp forests have been receding out of Northern California, and I wanted to see if this map yielded similar results [@kelp_sciencedirect_2023].
 
 ```{r}
 bull_kelp <- map_eez('Bull Kelp')
@@ -487,3 +534,37 @@ Call the table
 ```{r}
 bull_kelp$table
 ```
+### Bull Kelp discussion
+This map is very close to what I expected, with the highest area for possible farming being in Washington. Where it differences from what I would expect is in central and Southern California which is generally too warm to find Bull Kelp. This could be attributed to the use of mean surface temperature, instead of maximum. This is because when Bull Kelp propagate, their spores will not exit in temperatures above 18 degrees, so any temperature above that is going to cause them not to be able to recruit (and they don't have the luxury to move to cooler waters)[@weigel2023]. 
+
+
+## Species information reference table
+
+| Species | Citation |
+|---|---|
+| Pacific Razor Clam | @osmp_pacific_razor_clam_2025 |
+| Blue Mussel | @naqua_blue_mussel_2025 |
+| Sea Scallop | @whmr_sea_scallop_2025 |
+| Red Abalone | @cdfw_red_abalone_2020 |
+| California Mussel | @usbm_california_mussel_2021 |
+| Bull Kelp | @pkrg_bull_kelp_2017 |
+| Giant Kelp | @mbar_giant_kelp_2016 |
+| Sugar Kelp | @risg_sugar_kelp_2019 |
+| Dulse | @ckc_dulse_2014 |
+| Sea Lettuce | @map_sea_lettuce_2020 |
+| Winged Kelp | @npal_winged_kelp_2019 |
+| Pyropia (Nori) | @jsi_pyropia_nori_2011 |
+| Green Sea Urchin | @mdmr_green_urchin_2018 |
+| Red Sea Urchin | @csg_red_sea_urchin_2020 |
+| Chinook Salmon | @noaa_chinook_salmon_2015 |
+| Coho Salmon | @noaa_coho_salmon_2016 |
+| Steelhead Trout | @usgs_steelhead_2018 |
+| Pacific Halibut | @iphc_pac_halibut_2017 |
+| Sablefish | @afsc_sablefish_2019 |
+| Pacific Sardine | @swfsc_pac_sardine_2014 |
+| Northern Anchovy | @calcofi_anchovy_2016 |
+| California Halibut | @cdfw_cal_halibut_2020 |
+| Rainbow Trout | @utf_rainbow_trout_2015 |
+| California Yellowtail | @hsr_yellowtail_2022 |
+| Dungeness Crab | @psmfc_dungeness_2018 |
+| Spiny Lobster | @cdfw_spiny_lobster_2021 |
