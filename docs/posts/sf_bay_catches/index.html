@@ -270,9 +270,9 @@ window.Quarto = {
   <li><a href="#preliminary-analysis-top-species" id="toc-preliminary-analysis-top-species" class="nav-link" data-scroll-target="#preliminary-analysis-top-species">Preliminary analysis: Top Species</a></li>
   <li><a href="#preliminary-analysis-indicator-species" id="toc-preliminary-analysis-indicator-species" class="nav-link" data-scroll-target="#preliminary-analysis-indicator-species">Preliminary analysis: Indicator species</a></li>
   <li><a href="#hurdle-model-and-create-function" id="toc-hurdle-model-and-create-function" class="nav-link" data-scroll-target="#hurdle-model-and-create-function">Hurdle model and create function</a></li>
-  <li><a href="#function" id="toc-function" class="nav-link" data-scroll-target="#function">Function</a></li>
   <li><a href="#simulate-data" id="toc-simulate-data" class="nav-link" data-scroll-target="#simulate-data">Simulate data</a></li>
   <li><a href="#simulated-data-model" id="toc-simulated-data-model" class="nav-link" data-scroll-target="#simulated-data-model">Simulated Data model</a></li>
+  <li><a href="#function" id="toc-function" class="nav-link" data-scroll-target="#function">Function</a></li>
   <li><a href="#function-call-central-bay" id="toc-function-call-central-bay" class="nav-link" data-scroll-target="#function-call-central-bay">Function Call: Central Bay</a></li>
   <li><a href="#function-call-san-pablo-bay" id="toc-function-call-san-pablo-bay" class="nav-link" data-scroll-target="#function-call-san-pablo-bay">Function Call: San Pablo Bay</a></li>
   <li><a href="#function-call-south-bay" id="toc-function-call-south-bay" class="nav-link" data-scroll-target="#function-call-south-bay">Function Call: South Bay</a></li>
@@ -296,7 +296,7 @@ window.Quarto = {
 </div>
 <p>The San Francisco Bay is a large estuarine bay in Northern California which spans 60 miles <span class="citation" data-cites="Britannica_SanFranciscoBay">(<a href="#ref-Britannica_SanFranciscoBay" role="doc-biblioref">Britannica, n.d.</a>)</span>. The San Francisco Estuary is the largest estuary in California, with rivers from the ridgeline of the Sierra Nevada mountains leading to the strait of the Golden Gate, including almost 60,000 square miles and nearly 40% of California <span class="citation" data-cites="SFEP_AboutEstuary">(<a href="#ref-SFEP_AboutEstuary" role="doc-biblioref">Partnership, n.d.</a>)</span>. As of 2002, San Francisco Bay sustains nearly 500 species of fish, invertebrates, birds, mammals, insects and amphibians. It is an essential resting place, feeding area, and wintering ground for millions of birds on the Pacific Flyway. Nearly half of the state’s waterfowl and shorebirds and two-third of the state’s salmon pass through the Bay during their migrations <span class="citation" data-cites="BCDC_2002_SF_Bay_Ecology">(<a href="#ref-BCDC_2002_SF_Bay_Ecology" role="doc-biblioref">Conservation and Commission 2002</a>)</span>.</p>
 <p>In recent years harmful algal blooms (HABs) have decimated many populations in the bay. HABs are becoming more frequent and more intense across California as waters warm. Decreased flows from inland rivers and streams, and increased concentrations of nutrients and other land-based pollutants additionally exacerbate the growth of algae and cyanotoxins <span class="citation" data-cites="OPC_HarmfulAlgalBloom2022">(<a href="#ref-OPC_HarmfulAlgalBloom2022" role="doc-biblioref">Council 2022</a>)</span>.</p>
-<p>When monitoring the bay, it is often difficult to monitor less populated species to the extent of more frequent species. To combat this in this project I will be comparing populations of Northern Anchovy, the most populous species in the bay, to that of other more niche species.</p>
+<p>When monitoring the bay, it is often difficult to monitor less populated species to the extent of more frequent species. To combat this in this project I will be comparing populations of Northern Anchovy, the most populous species in the bay, to that of other more niche species. For example while we might catch thousands of Northern Anchovy in a season, there may be only one or two Tonguefish.</p>
 <section id="dag" class="level3">
 <h3 class="anchored" data-anchor-id="dag">DAG</h3>
 <p>This analysis is predicated on the same environmental factors effecting Northern Anchovies and other species at similar levels. This leads to a DAG which looks like this:</p>
@@ -348,7 +348,7 @@ window.Quarto = {
 </section>
 <section id="import-and-clean-data" class="level3">
 <h3 class="anchored" data-anchor-id="import-and-clean-data">Import and clean data</h3>
-<p>First we import data which was requested from <span class="citation" data-cites="MSI_SF_Bay_Institute">(<a href="#ref-MSI_SF_Bay_Institute" role="doc-biblioref">Institute n.d.</a>)</span></p>
+<p>First we import data which was requested from <span class="citation" data-cites="MSI_SF_Bay_Institute">(<a href="#ref-MSI_SF_Bay_Institute" role="doc-biblioref">Institute n.d.</a>)</span>. This data encapsulates individual otter trawls which were taken in the Bay between 1992 and 2017. The net is kept in the water for 5 minutes and then retrieved. A majority of the trawls are taken in the South Bay, however there are consistent year over year trawls in the other regions (Central bay, San Pablo bay, and Suisun bay).</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -911,7 +911,7 @@ window.Quarto = {
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">position   =</span> <span class="st">"center"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">position   =</span> <span class="st">"left"</span>,</span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">font_size  =</span> <span class="dv">14</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">background =</span> <span class="st">"#A0185A"</span>) <span class="sc">%&gt;%</span>  <span class="co"># header</span></span>
@@ -4992,7 +4992,7 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a> summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(indval, <span class="at">alpha =</span> .<span class="dv">1</span>) <span class="co"># Alpha is significance threshold </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(indval, <span class="at">alpha =</span> .<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -5003,41 +5003,41 @@ window.Quarto = {
  Significance level (alpha): 0.1
 
  Total number of species: 162
- Selected number of species: 51 
+ Selected number of species: 50 
  Number of species associated to 1 group: 34 
- Number of species associated to 2 groups: 12 
+ Number of species associated to 2 groups: 11 
  Number of species associated to 3 groups: 5 
 
  List of species associated to each combination: 
 
  Group CENTRAL BAY  #sps.  14 
      stat p.value   
-SSD 0.456   0.008 **
-CLF 0.217   0.044 * 
-POM 0.110   0.032 * 
-ps  0.066   0.063 . 
-HH  0.065   0.060 . 
-CRL 0.065   0.069 . 
-OP  0.059   0.046 * 
-JM  0.059   0.044 * 
-BSC 0.050   0.051 . 
+SSD 0.456   0.009 **
+CLF 0.217   0.031 * 
+POM 0.110   0.029 * 
+ps  0.066   0.050 * 
+HH  0.065   0.061 . 
+CRL 0.065   0.066 . 
+OP  0.059   0.042 * 
+JM  0.059   0.049 * 
+BSC 0.050   0.031 * 
 es  0.046   0.098 . 
-IRL 0.042   0.027 * 
+IRL 0.042   0.022 * 
 ssd 0.042   0.037 * 
-PB  0.039   0.092 . 
-STR 0.029   0.097 . 
+PB  0.039   0.093 . 
+STR 0.029   0.090 . 
 
  Group SAN PABLO BAY  #sps.  4 
-     stat p.value   
-BR  0.449   0.009 **
-DT  0.328   0.051 . 
-TS  0.277   0.029 * 
-BSK 0.214   0.057 . 
+     stat p.value  
+BR  0.449   0.013 *
+DT  0.328   0.033 *
+TS  0.277   0.025 *
+BSK 0.214   0.047 *
 
  Group SOUTH BAY  #sps.  2 
      stat p.value  
-CT  0.308   0.072 .
-DSP 0.285   0.077 .
+CT  0.308   0.066 .
+DSP 0.285   0.082 .
 
  Group SUISUN BAY  #sps.  14 
      stat p.value    
@@ -5046,36 +5046,35 @@ SF  0.768   0.001 ***
 TFS 0.417   0.001 ***
 SST 0.303   0.001 ***
 DLS 0.204   0.009 ** 
-BDG 0.204   0.005 ** 
-TP  0.148   0.014 *  
-CC  0.129   0.004 ** 
-BLP 0.129   0.008 ** 
-CK  0.091   0.009 ** 
-KS  0.091   0.016 *  
-DS  0.089   0.021 *  
-BBC 0.088   0.019 *  
+BDG 0.204   0.006 ** 
+TP  0.148   0.009 ** 
+CC  0.129   0.002 ** 
+BLP 0.129   0.003 ** 
+CK  0.091   0.017 *  
+KS  0.091   0.027 *  
+DS  0.089   0.029 *  
+BBC 0.088   0.031 *  
 PL  0.086   0.048 *  
 
- Group CENTRAL BAY+SAN PABLO BAY  #sps.  6 
+ Group CENTRAL BAY+SAN PABLO BAY  #sps.  5 
      stat p.value    
 PMS 0.652   0.001 ***
-PH  0.535   0.002 ** 
-BG  0.495   0.003 ** 
-BPF 0.338   0.024 *  
-WSP 0.320   0.012 *  
-BHS 0.225   0.081 .  
+PH  0.535   0.001 ***
+BG  0.495   0.002 ** 
+BPF 0.338   0.018 *  
+WSP 0.320   0.014 *  
 
  Group CENTRAL BAY+SOUTH BAY  #sps.  1 
     stat p.value  
-SD 0.381    0.04 *
+SD 0.381   0.038 *
 
  Group CENTRAL BAY+SUISUN BAY  #sps.  1 
     stat p.value  
-PS 0.267   0.055 .
+PS 0.267   0.052 .
 
  Group SAN PABLO BAY+SOUTH BAY  #sps.  1 
     stat p.value  
-BS 0.343   0.032 *
+BS 0.343   0.033 *
 
  Group SAN PABLO BAY+SUISUN BAY  #sps.  2 
      stat p.value    
@@ -5084,13 +5083,13 @@ LFS 0.538   0.001 ***
 
  Group SOUTH BAY+SUISUN BAY  #sps.  1 
    stat p.value  
-UG 0.32   0.047 *
+UG 0.32   0.065 .
 
  Group CENTRAL BAY+SAN PABLO BAY+SOUTH BAY  #sps.  3 
      stat p.value    
 NA  0.811   0.001 ***
-SSP 0.762   0.001 ***
-WC  0.385   0.038 *  
+SSP 0.762   0.002 ** 
+WC  0.385   0.050 *  
 
  Group CENTRAL BAY+SAN PABLO BAY+SUISUN BAY  #sps.  1 
      stat p.value    
@@ -5098,9 +5097,121 @@ PSD 0.527   0.001 ***
 
  Group SAN PABLO BAY+SOUTH BAY+SUISUN BAY  #sps.  1 
     stat p.value  
-LS 0.353   0.039 *
+LS 0.353   0.044 *
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 </code></pre>
+</div>
+</div>
+<p>The output of that looks pretty bad, and the function does not let you pull out different pieces without the P-values changing so I made this reference table of the top 2 species in each <em>singular</em> group.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ind_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Species =</span> <span class="fu">c</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SSD"</span>, <span class="st">"CLF"</span>,        <span class="co"># CENTRAL BAY top 2</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BR"</span>, <span class="st">"DT"</span>,          <span class="co"># SAN PABLO BAY top 2</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"CT"</span>, <span class="st">"DSP"</span>,         <span class="co"># SOUTH BAY top 2</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SB"</span>, <span class="st">"SF"</span>           <span class="co"># SUISUN BAY top 2</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Group =</span> <span class="fu">c</span>(</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">"CENTRAL BAY"</span>, <span class="dv">2</span>),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">"SAN PABLO BAY"</span>, <span class="dv">2</span>),</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">"SOUTH BAY"</span>, <span class="dv">2</span>),</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">"SUISUN BAY"</span>, <span class="dv">2</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Stat =</span> <span class="fu">c</span>(</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.456</span>, <span class="fl">0.217</span>,        <span class="co"># CENTRAL BAY</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.449</span>, <span class="fl">0.328</span>,        <span class="co"># SAN PABLO BAY</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.308</span>, <span class="fl">0.285</span>,        <span class="co"># SOUTH BAY</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.880</span>, <span class="fl">0.768</span>         <span class="co"># SUISUN BAY</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">'P_Value'</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.008</span>, <span class="fl">0.044</span>,        <span class="co"># CENTRAL BAY</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.009</span>, <span class="fl">0.051</span>,        <span class="co"># SAN PABLO BAY</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.072</span>, <span class="fl">0.077</span>,        <span class="co"># SOUTH BAY</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.001</span>, <span class="fl">0.001</span>         <span class="co"># SUISUN BAY</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>ind_table <span class="sc">%&gt;%</span> </span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>( <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Top 2 indicator species in each region "</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">position   =</span> <span class="st">"center"</span>,</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">font_size  =</span> <span class="dv">14</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">background =</span> <span class="st">"#A0185A"</span>) <span class="sc">%&gt;%</span>  <span class="co"># header</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(ind_table), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">background =</span> <span class="st">"#FFC4EB"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"300px"</span>, <span class="at">height =</span> <span class="st">"400px"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:400px; overflow-x: scroll; width:300px; ">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed caption-top table-sm small">
+<caption>Top 2 indicator species in each region</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold; color: white !important; background-color: rgba(160, 24, 90, 255) !important; position: sticky; top: 0; background-color: #FFFFFF;">Species</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold; color: white !important; background-color: rgba(160, 24, 90, 255) !important; position: sticky; top: 0; background-color: #FFFFFF;">Group</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; color: white !important; background-color: rgba(160, 24, 90, 255) !important; position: sticky; top: 0; background-color: #FFFFFF;">Stat</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; color: white !important; background-color: rgba(160, 24, 90, 255) !important; position: sticky; top: 0; background-color: #FFFFFF;">P_Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">SSD</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">CENTRAL BAY</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.456</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.008</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">CLF</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">CENTRAL BAY</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.217</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.044</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">BR</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">SAN PABLO BAY</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.449</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.009</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">DT</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">SAN PABLO BAY</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.328</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.051</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">CT</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">SOUTH BAY</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.308</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.072</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">DSP</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">SOUTH BAY</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.285</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.077</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">SB</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">SUISUN BAY</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.880</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">SF</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">SUISUN BAY</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.768</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <p>From the summary we can see that the top species for the four San Francisco Bay locales are:</p>
@@ -5120,196 +5231,24 @@ logit(p) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inregio
 \end{align}
 \]</span> Abundance: <span class="math display">\[
 \begin{align}
-\text{Presence} &amp;\sim NegBin(\lambda, \theta) \\
+\text{Abundance} &amp;\sim NegBin(\lambda, \theta) \\
 log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inregion}
 \end{align}
-\]</span> We use the z-score transformed count of Northern Anchovy as it:</p>
+\]</span></p>
+<p>If we can use Northern Anchovy as a predictor for indicator species, we would expect both</p>
+<p>Assumption: <span class="math display">\[
+\begin{align}
+\ H_0 = \beta_1presence = 0 \\
+\ H_0 = \beta_1abundance = 0 \\
+\ H_A = \beta_1presence \ne 0\\
+\ H_A = \beta_1abundance \ne 0\\
+\end{align}
+\]</span></p>
+<p>We use the z-score transformed count of Northern Anchovy as it:</p>
 <ul>
 <li>Helps with numerical stability, especially in interaction terms</li>
 <li>Is useful when comparing effect sizes across variables on different scales</li>
 </ul>
-<p>Because we are running and fitting this model four times, it sounds like I should make it into a function</p>
-</section>
-<section id="function" class="level3">
-<h3 class="anchored" data-anchor-id="function">Function</h3>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' predict indicator</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param df</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' Data frame used for analysis</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param sp_code </span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' Species code (wrapped in '')</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param region </span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#' Locale (all capitals wrapped in '')</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#' @returns</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' a list containing: </span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#' stage1_summary </span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#' stage2_summary </span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#' stage1_pred </span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#' stage2_pred</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#' combined_pred </span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#' plot </span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#' @export</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co">#' @examples</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>predict_indicator <span class="ot">&lt;-</span> <span class="cf">function</span>(df, sp_code, region) {</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  species_name <span class="ot">&lt;-</span> species_key_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(species_code <span class="sc">==</span> sp_code) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(species_name) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">make_clean_names</span>()</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  catch_plot <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(species_code <span class="sc">==</span> <span class="st">'NA'</span> <span class="sc">|</span> species_code <span class="sc">==</span> sp_code) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">in_region =</span> <span class="fu">ifelse</span>(locale <span class="sc">==</span> region, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(species_code, catch_info_trawl_id, in_region) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">sum</span>(number), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> species_code,</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>                <span class="at">values_from =</span> count) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="fu">c</span>(<span class="st">'trawl_id'</span>, <span class="st">'in_region'</span>, <span class="st">'northern_anchovy'</span>, species_name)) </span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  catch_plot[<span class="fu">is.na</span>(catch_plot)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>  a <span class="ot">&lt;-</span> <span class="fu">mean</span>(catch_plot<span class="sc">$</span>northern_anchovy)</span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>  b <span class="ot">&lt;-</span> <span class="fu">sd</span>(catch_plot<span class="sc">$</span>northern_anchovy)</span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>  catch_plot <span class="ot">&lt;-</span> catch_plot <span class="sc">%&gt;%</span> </span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">northern_anchovy_z =</span> (northern_anchovy <span class="sc">-</span> a) <span class="sc">/</span> b,</span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>      <span class="at">presence =</span> <span class="fu">ifelse</span>(.data[[species_name]] <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>      <span class="at">abundance =</span> <span class="fu">ifelse</span>(.data[[species_name]] <span class="sc">&gt;</span> <span class="dv">0</span>, .data[[species_name]], <span class="cn">NA</span>)</span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Stage 1 &amp; 2 models</span></span>
-<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>  m1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(presence <span class="sc">~</span> northern_anchovy_z <span class="sc">*</span> in_region, <span class="at">data =</span> catch_plot, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">'logit'</span>))</span>
-<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>  m2 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abundance <span class="sc">~</span> northern_anchovy_z <span class="sc">*</span> in_region, <span class="at">data =</span> catch_plot)</span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Tidy outputs</span></span>
-<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>  m1_tidy <span class="ot">&lt;-</span> <span class="fu">tidy</span>(m1) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"Presence (Logit)"</span>)</span>
-<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>  m2_tidy <span class="ot">&lt;-</span> <span class="fu">tidy</span>(m2) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"Abundance (NegBin)"</span>)</span>
-<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>  all_models <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(m1_tidy, m2_tidy) <span class="sc">%&gt;%</span></span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(model, term, estimate, std.error, statistic, p.value) <span class="sc">%&gt;%</span></span>
-<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(</span>
-<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>      <span class="at">Model =</span> model,</span>
-<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>      <span class="at">Term =</span> term,</span>
-<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>      <span class="at">Estimate =</span> estimate,</span>
-<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>      <span class="at">SE =</span> std.error,</span>
-<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>      <span class="st">'Test Stat'</span> <span class="ot">=</span> statistic,</span>
-<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>      <span class="st">'P-Value'</span> <span class="ot">=</span> p.value</span>
-<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Styled kable for model summary</span></span>
-<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>  summary_table <span class="ot">&lt;-</span> all_models <span class="sc">%&gt;%</span> </span>
-<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">"Joint Model Output: Presence vs Abundance"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(</span>
-<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>      <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
-<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a>      <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="st">"center"</span>,</span>
-<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a>      <span class="at">font_size =</span> <span class="dv">14</span></span>
-<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">background =</span> <span class="st">"#A0185A"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(all_models), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">background =</span> <span class="st">"#FFC4EB"</span>)</span>
-<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Prediction grid</span></span>
-<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a>  grid_data <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(</span>
-<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">in_region =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
-<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a>    <span class="at">northern_anchovy_z =</span> <span class="fu">seq</span>(<span class="fu">min</span>(catch_plot<span class="sc">$</span>northern_anchovy_z), <span class="fu">max</span>(catch_plot<span class="sc">$</span>northern_anchovy_z), <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Predictions</span></span>
-<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a>  predict_pres <span class="ot">&lt;-</span> <span class="fu">predict</span>(m1, <span class="at">newdata =</span> grid_data, <span class="at">type =</span> <span class="st">"link"</span>, <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a>  predict_abu  <span class="ot">&lt;-</span> <span class="fu">predict</span>(m2, <span class="at">newdata =</span> grid_data, <span class="at">type =</span> <span class="st">"link"</span>, <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a>  pred_pres_result <span class="ot">&lt;-</span> grid_data <span class="sc">%&gt;%</span> </span>
-<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a>      <span class="at">fit_link =</span> predict_pres<span class="sc">$</span>fit,</span>
-<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a>      <span class="at">se =</span> predict_pres<span class="sc">$</span>se.fit,</span>
-<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a>      <span class="at">pred_tbs =</span> <span class="fu">plogis</span>(fit_link),</span>
-<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a>      <span class="at">lower =</span> <span class="fu">plogis</span>(fit_link <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>se),</span>
-<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a>      <span class="at">upper =</span> <span class="fu">plogis</span>(fit_link <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>se)</span>
-<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a>  pred_abu_result <span class="ot">&lt;-</span> grid_data <span class="sc">%&gt;%</span> </span>
-<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a>      <span class="at">fit_link =</span> predict_abu<span class="sc">$</span>fit,</span>
-<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">se =</span> predict_abu<span class="sc">$</span>se.fit,</span>
-<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">pred_tbs =</span> <span class="fu">exp</span>(fit_link),</span>
-<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">lower =</span> <span class="fu">exp</span>(fit_link <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>se),</span>
-<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">upper =</span> <span class="fu">exp</span>(fit_link <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>se)</span>
-<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Merge predictions</span></span>
-<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a>  combined_pred <span class="ot">&lt;-</span> pred_pres_result <span class="sc">%&gt;%</span> </span>
-<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a>      <span class="at">expected_count =</span> pred_tbs <span class="sc">*</span> pred_abu_result<span class="sc">$</span>pred_tbs,</span>
-<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a>      <span class="at">lower_expected =</span> lower <span class="sc">*</span> pred_abu_result<span class="sc">$</span>lower,</span>
-<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a>      <span class="at">upper_expected =</span> upper <span class="sc">*</span> pred_abu_result<span class="sc">$</span>upper</span>
-<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Styled kables for predictions</span></span>
-<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a>  pred_pres_table <span class="ot">&lt;-</span> pred_pres_result <span class="sc">%&gt;%</span> </span>
-<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">"Presence Predictions"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(</span>
-<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a>      <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
-<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a>      <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="st">"center"</span>,</span>
-<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a>      <span class="at">font_size =</span> <span class="dv">14</span></span>
-<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">background =</span> <span class="st">"#A0185A"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(pred_pres_result), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">background =</span> <span class="st">"#FFC4EB"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"800px"</span>, <span class="at">height =</span> <span class="st">"300px"</span>)</span>
-<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a>  pred_abu_table <span class="ot">&lt;-</span> pred_abu_result <span class="sc">%&gt;%</span> </span>
-<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">"Abundance Predictions"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(</span>
-<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a>      <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
-<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a>      <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="st">"center"</span>,</span>
-<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a>      <span class="at">font_size =</span> <span class="dv">14</span></span>
-<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">background =</span> <span class="st">"#A0185A"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(pred_abu_result), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">background =</span> <span class="st">"#FFC4EB"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"800px"</span>, <span class="at">height =</span> <span class="st">"300px"</span>)</span>
-<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a>  combined_table <span class="ot">&lt;-</span> combined_pred <span class="sc">%&gt;%</span> </span>
-<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">"Expected Counts (Presence × Abundance)"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(</span>
-<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a>      <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
-<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a>      <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="st">"center"</span>,</span>
-<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a>      <span class="at">font_size =</span> <span class="dv">14</span></span>
-<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">background =</span> <span class="st">"#A0185A"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(combined_pred), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">background =</span> <span class="st">"#FFC4EB"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"800px"</span>, <span class="at">height =</span> <span class="st">"300px"</span>)</span>
-<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot</span></span>
-<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a>  plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(combined_pred, <span class="fu">aes</span>(northern_anchovy_z, expected_count)) <span class="sc">+</span></span>
-<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>in_region,</span>
-<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a>               <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"In Region"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Outside Region"</span>))) <span class="sc">+</span></span>
-<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">'#A0185A'</span>) <span class="sc">+</span></span>
-<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower_expected, <span class="at">ymax =</span> upper_expected),</span>
-<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a>                <span class="at">alpha =</span> .<span class="dv">3</span>, <span class="at">fill =</span> <span class="st">'#ABC798'</span>) <span class="sc">+</span></span>
-<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Northern Anchovy Z'</span>,</span>
-<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="fu">str_to_title</span>(<span class="fu">str_replace_all</span>(species_name, <span class="st">"_"</span>, <span class="st">" "</span>))) <span class="sc">+</span></span>
-<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_clean</span>()</span>
-<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(</span>
-<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a>    <span class="at">summary_table =</span> summary_table,</span>
-<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a>    <span class="at">pred_pres_table =</span> pred_pres_table,</span>
-<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a>    <span class="at">pred_abu_table =</span> pred_abu_table,</span>
-<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a>    <span class="at">combined_table =</span> combined_table,</span>
-<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a>    <span class="at">stage1_pred =</span> pred_pres_result,</span>
-<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a>    <span class="at">stage2_pred =</span> pred_abu_result,</span>
-<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a>    <span class="at">combined_pred =</span> combined_pred,</span>
-<span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot =</span> plot</span>
-<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
 </section>
 <section id="simulate-data" class="level3">
 <h3 class="anchored" data-anchor-id="simulate-data">Simulate data</h3>
@@ -5499,7 +5438,191 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 </div>
 </div>
 </div>
+<p>That looks great! Our values for the parameters were returned!</p>
+<p>Because we are running and fitting this model four times, it sounds like I should make it into a function</p>
 </section>
+</section>
+<section id="function" class="level3">
+<h3 class="anchored" data-anchor-id="function">Function</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' predict indicator</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param df</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' Data frame used for analysis</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param sp_code </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' Species code (wrapped in '')</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param region </span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#' Locale (all capitals wrapped in '')</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#' @returns</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#' a list containing: </span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' summary_table </span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#' pred_pres_table</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#'  pred_abu_table </span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#'  combined_table </span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#'  stage1_pred </span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#'  stage2_pred</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#'  combined_pred </span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">#'  plot </span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">#' @export</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">#' @examples</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>predict_indicator <span class="ot">&lt;-</span> <span class="cf">function</span>(df, sp_code, region) {</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  species_name <span class="ot">&lt;-</span> species_key_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(species_code <span class="sc">==</span> sp_code) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(species_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">make_clean_names</span>()</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  catch_plot <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(species_code <span class="sc">==</span> <span class="st">'NA'</span> <span class="sc">|</span> species_code <span class="sc">==</span> sp_code) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">in_region =</span> <span class="fu">ifelse</span>(locale <span class="sc">==</span> region, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(species_code, catch_info_trawl_id, in_region) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">sum</span>(number), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> species_code,</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>                <span class="at">values_from =</span> count) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_names</span>(<span class="fu">c</span>(<span class="st">'trawl_id'</span>, <span class="st">'in_region'</span>, <span class="st">'northern_anchovy'</span>, species_name)) </span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  catch_plot[<span class="fu">is.na</span>(catch_plot)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  a <span class="ot">&lt;-</span> <span class="fu">mean</span>(catch_plot<span class="sc">$</span>northern_anchovy)</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>  b <span class="ot">&lt;-</span> <span class="fu">sd</span>(catch_plot<span class="sc">$</span>northern_anchovy)</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  catch_plot <span class="ot">&lt;-</span> catch_plot <span class="sc">%&gt;%</span> </span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>      <span class="at">northern_anchovy_z =</span> (northern_anchovy <span class="sc">-</span> a) <span class="sc">/</span> b,</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>      <span class="at">presence =</span> <span class="fu">ifelse</span>(.data[[species_name]] <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">abundance =</span> <span class="fu">ifelse</span>(.data[[species_name]] <span class="sc">&gt;</span> <span class="dv">0</span>, .data[[species_name]], <span class="cn">NA</span>)</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Stage 1 &amp; 2 models</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>  m1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(presence <span class="sc">~</span> northern_anchovy_z <span class="sc">*</span> in_region, <span class="at">data =</span> catch_plot, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">'logit'</span>))</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>  m2 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(abundance <span class="sc">~</span> northern_anchovy_z <span class="sc">*</span> in_region, <span class="at">data =</span> catch_plot)</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Tidy outputs</span></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>  m1_tidy <span class="ot">&lt;-</span> <span class="fu">tidy</span>(m1) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"Presence (Logit)"</span>)</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>  m2_tidy <span class="ot">&lt;-</span> <span class="fu">tidy</span>(m2) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"Abundance (NegBin)"</span>)</span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>  all_models <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(m1_tidy, m2_tidy) <span class="sc">%&gt;%</span></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(model, term, estimate, std.error, statistic, p.value) <span class="sc">%&gt;%</span></span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>      <span class="at">Model =</span> model,</span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>      <span class="at">Term =</span> term,</span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>      <span class="at">Estimate =</span> estimate,</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>      <span class="at">SE =</span> std.error,</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>      <span class="st">'Test Stat'</span> <span class="ot">=</span> statistic,</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>      <span class="st">'P-Value'</span> <span class="ot">=</span> p.value</span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Styled kable for model summary</span></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>  summary_table <span class="ot">&lt;-</span> all_models <span class="sc">%&gt;%</span> </span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">"Joint Model Output: Presence vs Abundance"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(</span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>      <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>      <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="st">"center"</span>,</span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>      <span class="at">font_size =</span> <span class="dv">14</span></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">background =</span> <span class="st">"#A0185A"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(all_models), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">background =</span> <span class="st">"#FFC4EB"</span>)</span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Prediction grid</span></span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>  grid_data <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>    <span class="at">in_region =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">northern_anchovy_z =</span> <span class="fu">seq</span>(<span class="fu">min</span>(catch_plot<span class="sc">$</span>northern_anchovy_z), <span class="fu">max</span>(catch_plot<span class="sc">$</span>northern_anchovy_z), <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Predictions</span></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>  predict_pres <span class="ot">&lt;-</span> <span class="fu">predict</span>(m1, <span class="at">newdata =</span> grid_data, <span class="at">type =</span> <span class="st">"link"</span>, <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>  predict_abu  <span class="ot">&lt;-</span> <span class="fu">predict</span>(m2, <span class="at">newdata =</span> grid_data, <span class="at">type =</span> <span class="st">"link"</span>, <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>  pred_pres_result <span class="ot">&lt;-</span> grid_data <span class="sc">%&gt;%</span> </span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>      <span class="at">fit_link =</span> predict_pres<span class="sc">$</span>fit,</span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>      <span class="at">se =</span> predict_pres<span class="sc">$</span>se.fit,</span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>      <span class="at">pred_tbs =</span> <span class="fu">plogis</span>(fit_link),</span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>      <span class="at">lower =</span> <span class="fu">plogis</span>(fit_link <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>se),</span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>      <span class="at">upper =</span> <span class="fu">plogis</span>(fit_link <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>se)</span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>  pred_abu_result <span class="ot">&lt;-</span> grid_data <span class="sc">%&gt;%</span> </span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">fit_link =</span> predict_abu<span class="sc">$</span>fit,</span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">se =</span> predict_abu<span class="sc">$</span>se.fit,</span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">pred_tbs =</span> <span class="fu">exp</span>(fit_link),</span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">lower =</span> <span class="fu">exp</span>(fit_link <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>se),</span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a>      <span class="at">upper =</span> <span class="fu">exp</span>(fit_link <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>se)</span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Merge predictions</span></span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a>  combined_pred <span class="ot">&lt;-</span> pred_pres_result <span class="sc">%&gt;%</span> </span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a>      <span class="at">expected_count =</span> pred_tbs <span class="sc">*</span> pred_abu_result<span class="sc">$</span>pred_tbs,</span>
+<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a>      <span class="at">lower_expected =</span> lower <span class="sc">*</span> pred_abu_result<span class="sc">$</span>lower,</span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>      <span class="at">upper_expected =</span> upper <span class="sc">*</span> pred_abu_result<span class="sc">$</span>upper</span>
+<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Styled kables for predictions</span></span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a>  pred_pres_table <span class="ot">&lt;-</span> pred_pres_result <span class="sc">%&gt;%</span> </span>
+<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">"Presence Predictions"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(</span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a>      <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a>      <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="st">"center"</span>,</span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a>      <span class="at">font_size =</span> <span class="dv">14</span></span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">background =</span> <span class="st">"#A0185A"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(pred_pres_result), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">background =</span> <span class="st">"#FFC4EB"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"800px"</span>, <span class="at">height =</span> <span class="st">"300px"</span>)</span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a>  pred_abu_table <span class="ot">&lt;-</span> pred_abu_result <span class="sc">%&gt;%</span> </span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">"Abundance Predictions"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(</span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a>      <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a>      <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="st">"center"</span>,</span>
+<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a>      <span class="at">font_size =</span> <span class="dv">14</span></span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">background =</span> <span class="st">"#A0185A"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(pred_abu_result), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">background =</span> <span class="st">"#FFC4EB"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"800px"</span>, <span class="at">height =</span> <span class="st">"300px"</span>)</span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a>  combined_table <span class="ot">&lt;-</span> combined_pred <span class="sc">%&gt;%</span> </span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">"Expected Counts (Presence × Abundance)"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(</span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a>      <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>      <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="st">"center"</span>,</span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a>      <span class="at">font_size =</span> <span class="dv">14</span></span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">background =</span> <span class="st">"#A0185A"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_spec</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(combined_pred), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">background =</span> <span class="st">"#FFC4EB"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"800px"</span>, <span class="at">height =</span> <span class="st">"300px"</span>)</span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot</span></span>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a>  plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(combined_pred, <span class="fu">aes</span>(northern_anchovy_z, expected_count)) <span class="sc">+</span></span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>in_region,</span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a>               <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"In Region"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Outside Region"</span>))) <span class="sc">+</span></span>
+<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">'#A0185A'</span>) <span class="sc">+</span></span>
+<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower_expected, <span class="at">ymax =</span> upper_expected),</span>
+<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a>                <span class="at">alpha =</span> .<span class="dv">3</span>, <span class="at">fill =</span> <span class="st">'#ABC798'</span>) <span class="sc">+</span></span>
+<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Northern Anchovy Z'</span>,</span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="fu">str_to_title</span>(<span class="fu">str_replace_all</span>(species_name, <span class="st">"_"</span>, <span class="st">" "</span>))) <span class="sc">+</span></span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_clean</span>()</span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(</span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a>    <span class="at">summary_table =</span> summary_table,</span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a>    <span class="at">pred_pres_table =</span> pred_pres_table,</span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a>    <span class="at">pred_abu_table =</span> pred_abu_table,</span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a>    <span class="at">combined_table =</span> combined_table,</span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a>    <span class="at">stage1_pred =</span> pred_pres_result,</span>
+<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a>    <span class="at">stage2_pred =</span> pred_abu_result,</span>
+<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a>    <span class="at">combined_pred =</span> combined_pred,</span>
+<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot =</span> plot</span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 </section>
 <section id="function-call-central-bay" class="level3">
 <h3 class="anchored" data-anchor-id="function-call-central-bay">Function Call: Central Bay</h3>
@@ -5507,7 +5630,7 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>speckled <span class="ot">&lt;-</span> <span class="fu">predict_indicator</span>(catch_clean, <span class="st">'SSD'</span>, <span class="st">'CENTRAL BAY'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>speckled <span class="ot">&lt;-</span> <span class="fu">predict_indicator</span>(catch_clean, <span class="st">'SSD'</span>, <span class="st">'CENTRAL BAY'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Now <code>speckled</code> is encoded with our model summaries, predictions, and plot. For this I will show all outputs, in later chunks I will bypass showing predictions</p>
@@ -5516,7 +5639,7 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>summary_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>summary_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="table-responsive">
@@ -5603,12 +5726,16 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 </div>
 </div>
 </section>
+<section id="coefficient-discussion" class="level4">
+<h4 class="anchored" data-anchor-id="coefficient-discussion">Coefficient discussion</h4>
+<p>Each coefficient table will have 8 estimates and p-values. The first 4 refer to the Presence (logit) model, the second 4 refer to the Abundance (negbin) model. Each of the models have the same structure as well: intercept, northern_anchovy_z, in_regionTRUE, and northern_anchovy_z:in_regionTRUE. The intercept is set at the level in_regionFalse, meaning its the outcome of not being in the indicators region, and not having Anchovies present. Northern_anchovy_z estimate and p_value show the effect on Northern_anchovy_z outside the region. In_regionTRUE estimate and p_value show the effect of being in the the region on the indicator Presence and Abundance. Lastly northern_anchovy_z:in_regionTRUE shows the interaction between northern anchovies and being inside an indicators region.</p>
+</section>
 <section id="presence-prediction" class="level4">
 <h4 class="anchored" data-anchor-id="presence-prediction">Presence Prediction</h4>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>pred_pres_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>pred_pres_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:800px; ">
@@ -6161,7 +6288,7 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>pred_abu_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>pred_abu_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:800px; ">
@@ -6714,7 +6841,7 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>combined_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>combined_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:800px; ">
@@ -7444,12 +7571,12 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>speckled<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -7465,7 +7592,7 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bat_ray <span class="ot">&lt;-</span> <span class="fu">predict_indicator</span>(catch_clean, <span class="st">'BR'</span>, <span class="st">'SAN PABLO BAY'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bat_ray <span class="ot">&lt;-</span> <span class="fu">predict_indicator</span>(catch_clean, <span class="st">'BR'</span>, <span class="st">'SAN PABLO BAY'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="model-summary-1" class="level4">
@@ -7473,7 +7600,7 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bat_ray<span class="sc">$</span>summary_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>bat_ray<span class="sc">$</span>summary_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="table-responsive">
@@ -7565,12 +7692,12 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>bat_ray<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>bat_ray<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -7586,7 +7713,7 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ca_tonguefish <span class="ot">&lt;-</span> <span class="fu">predict_indicator</span>(catch_clean, <span class="st">'CT'</span>, <span class="st">'SOUTH BAY'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ca_tonguefish <span class="ot">&lt;-</span> <span class="fu">predict_indicator</span>(catch_clean, <span class="st">'CT'</span>, <span class="st">'SOUTH BAY'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="model-summary-2" class="level4">
@@ -7594,7 +7721,7 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ca_tonguefish<span class="sc">$</span>summary_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ca_tonguefish<span class="sc">$</span>summary_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="table-responsive">
@@ -7686,12 +7813,12 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ca_tonguefish<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ca_tonguefish<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -7707,7 +7834,7 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>bass <span class="ot">&lt;-</span> <span class="fu">predict_indicator</span>(catch_clean, <span class="st">'SB'</span>, <span class="st">'SUISUN BAY'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>bass <span class="ot">&lt;-</span> <span class="fu">predict_indicator</span>(catch_clean, <span class="st">'SB'</span>, <span class="st">'SUISUN BAY'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
@@ -7723,7 +7850,7 @@ doubtful cases</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>bass<span class="sc">$</span>summary_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bass<span class="sc">$</span>summary_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="table-responsive">
@@ -7807,12 +7934,12 @@ doubtful cases</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bass<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>bass<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

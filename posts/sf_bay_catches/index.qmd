@@ -17,7 +17,7 @@ The San Francisco Bay is a large estuarine bay in Northern California which span
 
 In recent years harmful algal blooms (HABs) have decimated many populations in the bay. HABs are becoming more frequent and more intense across California as waters warm. Decreased flows from inland rivers and streams, and increased concentrations of nutrients and other land-based pollutants additionally exacerbate the growth of algae and cyanotoxins [@OPC_HarmfulAlgalBloom2022].
 
-When monitoring the bay, it is often difficult to monitor less populated species to the extent of more frequent species. To combat this in this project I will be comparing populations of Northern Anchovy, the most populous species in the bay, to that of other more niche species.
+When monitoring the bay, it is often difficult to monitor less populated species to the extent of more frequent species. To combat this in this project I will be comparing populations of Northern Anchovy, the most populous species in the bay, to that of other more niche species. For example while we might catch thousands of Northern Anchovy in a season, there may be only one or two Tonguefish.
 
 ### DAG
 
@@ -58,7 +58,7 @@ pacman::p_load('tidyverse',
 
 ### Import and clean data
 
-First we import data which was requested from [@MSI_SF_Bay_Institute]
+First we import data which was requested from [@MSI_SF_Bay_Institute]. This data encapsulates individual otter trawls which were taken in the Bay between 1992 and 2017. The net is kept in the water for 5 minutes and then retrieved. A majority of the trawls are taken in the South Bay, however there are consistent year over year trawls in the other regions (Central bay, San Pablo bay, and Suisun bay).
 
 ```{r, warning=FALSE, message=FALSE}
 # Raw catch data
@@ -92,7 +92,6 @@ species_key_clean %>%
   row_spec(0, bold = TRUE, color = "white", background = "#A0185A") %>%  # header
   row_spec(1:nrow(species_key_clean), color = "black", background = "#FFC4EB") %>% 
   scroll_box(width = "300px", height = "600px")
-  
 ```
 
 ```{r}
@@ -109,7 +108,7 @@ catch_clean %>%
   kable_styling(
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
     full_width = FALSE,
-    position   = "center",
+    position   = "left",
     font_size  = 14
   ) %>% 
   row_spec(0, bold = TRUE, color = "white", background = "#A0185A") %>%  # header
@@ -157,7 +156,7 @@ Indicator species:
 
 -   predict the diversity of other species, taxa or communities within an area.
 
-By comparing Anchovy population to that of indicator species, it may shed light on whether Anchovy population can be representative of the indicator. 
+By comparing Anchovy population to that of indicator species, it may shed light on whether Anchovy population can be representative of the indicator.
 
 To perform the indicator species analysis we will be using the function `multipatt` from the package `indispecies`. The function takes a group *vector* and a species *matrix*
 
@@ -182,54 +181,210 @@ indval <- multipatt(species_matrix, group_vector,
 ```
 
 ```{r}
- summary <- summary(indval, alpha = .1) # Alpha is significance threshold 
+summary(indval, alpha = .1)
+
+```
+
+The output of that looks pretty bad, and the function does not let you pull out different pieces without the P-values changing so I made this reference table of the top 2 species in each *singular* group.
+
+```{r}
+ind_table <- data.frame(
+  Species = c(
+    "SSD", "CLF",        # CENTRAL BAY top 2
+    "BR", "DT",          # SAN PABLO BAY top 2
+    "CT", "DSP",         # SOUTH BAY top 2
+    "SB", "SF"           # SUISUN BAY top 2
+  ),
+  Group = c(
+    rep("CENTRAL BAY", 2),
+    rep("SAN PABLO BAY", 2),
+    rep("SOUTH BAY", 2),
+    rep("SUISUN BAY", 2)
+  ),
+  Stat = c(
+    0.456, 0.217,        # CENTRAL BAY
+    0.449, 0.328,        # SAN PABLO BAY
+    0.308, 0.285,        # SOUTH BAY
+    0.880, 0.768         # SUISUN BAY
+  ),
+  'P_Value' = c(
+    0.008, 0.044,        # CENTRAL BAY
+    0.009, 0.051,        # SAN PABLO BAY
+    0.072, 0.077,        # SOUTH BAY
+    0.001, 0.001         # SUISUN BAY
+  )
+) 
+  
+ind_table %>% 
+  kable( format = "html", digits = 3,
+      caption = "Top 2 indicator species in each region ") %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = FALSE,
+    position   = "center",
+    font_size  = 14
+  ) %>% 
+  row_spec(0, bold = TRUE, color = "white", background = "#A0185A") %>%  # header
+  row_spec(1:nrow(ind_table), color = "black", background = "#FFC4EB") %>% 
+  scroll_box(width = "300px", height = "400px")
 ```
 
 From the summary we can see that the top species for the four San Francisco Bay locales are:
 
-Group CENTRAL BAY
-SSD: Speckled Sanddab
+Group CENTRAL BAY SSD: Speckled Sanddab
 
-Group SAN PABLO BAY
-BR: Bat Ray
+Group SAN PABLO BAY BR: Bat Ray
 
-Group SOUTH BAY
-CT: California Tonguefish
+Group SOUTH BAY CT: California Tonguefish
 
-Group SUISUN BAY
-SB: Striped Bass
+Group SUISUN BAY SB: Striped Bass
 
 Next we are going to compare Northern Anchovy catches to these species using a hurdle model
 
 ### Hurdle model and create function
-Hurdle Models are a class of models for count data that help handle excess zeros and overdispersion, which fits our data to a T. It handles these by treating presence as a binary operator (present vs not present) and running a binomial(link = 'logit') model. The model also includes abundance, which analyzes count data using a negative binomial model. 
 
-Presence:
-$$
+Hurdle Models are a class of models for count data that help handle excess zeros and overdispersion, which fits our data to a T. It handles these by treating presence as a binary operator (present vs not present) and running a binomial(link = 'logit') model. The model also includes abundance, which analyzes count data using a negative binomial model.
+
+Presence: $$
 \begin{align}
 \text{Presence} &\sim Binomial(1, p) \\
 logit(p) &= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inregion}
 \end{align}
-$$
-Abundance:
-$$
+$$ Abundance: $$
 \begin{align}
-\text{Presence} &\sim NegBin(\lambda, \theta) \\
+\text{Abundance} &\sim NegBin(\lambda, \theta) \\
 log(\lambda) &= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inregion}
 \end{align}
 $$
+
+If we can use Northern Anchovy as a predictor for indicator species, we would expect both
+
+Assumption: $$
+\begin{align}
+\ H_0 = \beta_1presence = 0 \\
+\ H_0 = \beta_1abundance = 0 \\
+\ H_A = \beta_1presence \ne 0\\
+\ H_A = \beta_1abundance \ne 0\\ 
+\end{align}
+$$
+
 We use the z-score transformed count of Northern Anchovy as it:
 
--  Helps with numerical stability, especially in interaction terms
--  Is useful when comparing effect sizes across variables on different scales
+-   Helps with numerical stability, especially in interaction terms
+-   Is useful when comparing effect sizes across variables on different scales
 
+### Simulate data
+
+Before we use this model we will be simulating data in an attempt to see if the model is appropriate for our data.
+
+```{r}
+set.seed(42)
+
+n_sim <- 1000
+
+# Predictor: standardized anchovy index
+northern_anchovy_z <- rnorm(n_sim, mean = 0, sd = 1)
+
+# in_region alternates TRUE / FALSE / TRUE / FALSE ...
+in_region <- rep(c(TRUE, FALSE), length.out = n_sim)
+
+# Logistic (presence/absence)
+beta0_presence <- -.5
+beta1_presence <-  1.2
+
+# Abundance (given present)
+beta0_abundance <- 0.7
+beta1_abundance <- 0.4
+
+theta <- 1.8  # NB dispersion
+
+# Probability of presence
+p_presence <- plogis(beta0_presence + beta1_presence * northern_anchovy_z)
+
+# Storage
+presence  <- rep(0, n_sim)
+abundance <- rep(0, n_sim)
+
+for (i in 1:n_sim){
+
+  presence[i] <- rbinom(1, 1, p_presence[i])
+
+  if(presence[i] == 1){
+
+    lambda_i <- exp(beta0_abundance + beta1_abundance * northern_anchovy_z[i])
+
+    # truncated NB — no zeros allowed
+    repeat {
+      y <- rnbinom(1, mu = lambda_i, size = theta)
+      if(y > 0){
+        abundance[i] <- y
+        break
+      }
+    }
+  }
+}
+
+sim_data <- tibble(
+  northern_anchovy_z,
+  in_region,
+  presence,
+  abundance
+)
+
+```
+
+### Simulated Data model
+
+To make sure the model returns the coefficients from the simulated data we can run our model on the dataframe of the model
+
+#### Model Simulated data
+
+```{r}
+m1 <- glm(presence ~ northern_anchovy_z * in_region, 
+          data = sim_data, 
+          family = binomial(link = 'logit'))
+
+m2 <- glm.nb(abundance ~ northern_anchovy_z * in_region, 
+             data = sim_data)
+
+m1_tidy <- tidy(m1)%>% 
+  mutate(model = "Presence (Logit)")
+m2_tidy <- tidy(m2)%>% 
+  mutate(model = "Abundance (NegBin)")
+
+# combine and format
+all_models <- bind_rows(m1_tidy, m2_tidy) %>%
+  dplyr::select(model, term, estimate, std.error, statistic, p.value)%>%
+  rename(
+    Model = model,
+    Term = term,
+    Estimate = estimate,
+    SE = std.error,
+    'Test Stat' = statistic,
+    'P-Value'   = p.value
+  ) 
+
+kable(all_models, format = "html", digits = 3,
+      caption = "Joint Model Output: Presence vs Abundance")%>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = FALSE,
+    position   = "center",
+    font_size  = 14
+  ) %>% 
+  row_spec(0, bold = TRUE, color = "white", background = "#A0185A") %>%  # header
+  row_spec(1:nrow(all_models), color = "black", background = "#FFC4EB")  # body rows
+
+```
+
+That looks great! Our values for the parameters were returned!
 
 Because we are running and fitting this model four times, it sounds like I should make it into a function
 
-### Function 
+### Function
+
 ```{r}
 #' predict indicator
-#'
 #' @param df
 #' Data frame used for analysis
 #' @param sp_code 
@@ -238,12 +393,14 @@ Because we are running and fitting this model four times, it sounds like I shoul
 #' Locale (all capitals wrapped in '')
 #' @returns
 #' a list containing: 
-#' stage1_summary 
-#' stage2_summary 
-#' stage1_pred 
-#' stage2_pred
-#' combined_pred 
-#' plot 
+#' summary_table 
+#' pred_pres_table
+#'  pred_abu_table 
+#'  combined_table 
+#'  stage1_pred 
+#'  stage2_pred
+#'  combined_pred 
+#'  plot 
 #' @export
 #'
 #' @examples
@@ -404,110 +561,6 @@ predict_indicator <- function(df, sp_code, region) {
 
 ```
 
-### Simulate data
-
-Before we use this model we will be simulating data in an attempt to see if the model is appropriate for our data.
-
-```{r}
-set.seed(42)
-
-n_sim <- 1000
-
-# Predictor: standardized anchovy index
-northern_anchovy_z <- rnorm(n_sim, mean = 0, sd = 1)
-
-# in_region alternates TRUE / FALSE / TRUE / FALSE ...
-in_region <- rep(c(TRUE, FALSE), length.out = n_sim)
-
-# Logistic (presence/absence)
-beta0_presence <- -.5
-beta1_presence <-  1.2
-
-# Abundance (given present)
-beta0_abundance <- 0.7
-beta1_abundance <- 0.4
-
-theta <- 1.8  # NB dispersion
-
-# Probability of presence
-p_presence <- plogis(beta0_presence + beta1_presence * northern_anchovy_z)
-
-# Storage
-presence  <- rep(0, n_sim)
-abundance <- rep(0, n_sim)
-
-for (i in 1:n_sim){
-
-  presence[i] <- rbinom(1, 1, p_presence[i])
-
-  if(presence[i] == 1){
-
-    lambda_i <- exp(beta0_abundance + beta1_abundance * northern_anchovy_z[i])
-
-    # truncated NB — no zeros allowed
-    repeat {
-      y <- rnbinom(1, mu = lambda_i, size = theta)
-      if(y > 0){
-        abundance[i] <- y
-        break
-      }
-    }
-  }
-}
-
-sim_data <- tibble(
-  northern_anchovy_z,
-  in_region,
-  presence,
-  abundance
-)
-
-```
-
-### Simulated Data model
-
-To make sure the model returns the coefficients from the simulated data we can run our model on the dataframe of the model
-
-#### Model Simulated data
-
-```{r}
-m1 <- glm(presence ~ northern_anchovy_z * in_region, 
-          data = sim_data, 
-          family = binomial(link = 'logit'))
-
-m2 <- glm.nb(abundance ~ northern_anchovy_z * in_region, 
-             data = sim_data)
-
-m1_tidy <- tidy(m1)%>% 
-  mutate(model = "Presence (Logit)")
-m2_tidy <- tidy(m2)%>% 
-  mutate(model = "Abundance (NegBin)")
-
-# combine and format
-all_models <- bind_rows(m1_tidy, m2_tidy) %>%
-  dplyr::select(model, term, estimate, std.error, statistic, p.value)%>%
-  rename(
-    Model = model,
-    Term = term,
-    Estimate = estimate,
-    SE = std.error,
-    'Test Stat' = statistic,
-    'P-Value'   = p.value
-  ) 
-
-kable(all_models, format = "html", digits = 3,
-      caption = "Joint Model Output: Presence vs Abundance")%>%
-  kable_styling(
-    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-    full_width = FALSE,
-    position   = "center",
-    font_size  = 14
-  ) %>% 
-  row_spec(0, bold = TRUE, color = "white", background = "#A0185A") %>%  # header
-  row_spec(1:nrow(all_models), color = "black", background = "#FFC4EB")  # body rows
-
-```
-
 ### Function Call: Central Bay
 
 The top indicator for the Central Bay was the Speckled Sanddab so we can call the function for that species and region
@@ -523,6 +576,12 @@ Now `speckled` is encoded with our model summaries, predictions, and plot. For t
 ```{r}
 speckled$summary_table
 ```
+
+#### Coefficient discussion
+
+
+Each coefficient table will have 8 estimates and p-values. The first 4 refer to the Presence (logit) model, the second 4 refer to the Abundance (negbin) model. Each of the models have the same structure as well: intercept, northern_anchovy_z, in_regionTRUE, and northern_anchovy_z:in_regionTRUE. The intercept is set at the level in_regionFalse, meaning its the outcome of not being in the indicators region, and not having Anchovies present. Northern_anchovy_z estimate and p_value show the effect on Northern_anchovy_z outside the region. In_regionTRUE estimate and p_value show the effect of being in the the region on the indicator Presence and Abundance. Lastly northern_anchovy_z:in_regionTRUE shows the interaction between northern anchovies and being inside an indicators region. 
+
 
 #### Presence Prediction
 
@@ -549,7 +608,8 @@ speckled$plot
 ```
 
 #### Discussion: Speckled Sanddab
-Based on the function we can see significance in presence of Anchovy and the region in both presence and abundance. This indicates that the presence of Anchovy comes at the cost of presence of Sanddabs. This model does not seem to fit incredibly well when looking at the plot, which can be seen by the flat lines and giant confidence intervals. 
+
+Based on the function we can see significance in presence of Anchovy and the region in both presence and abundance. This indicates that the presence of Anchovy comes at the cost of presence of Sanddabs. This model does not seem to fit incredibly well when looking at the plot, which can be seen by the flat lines and giant confidence intervals.
 
 ### Function Call: San Pablo Bay
 
@@ -570,7 +630,8 @@ bat_ray$plot
 ```
 
 #### Discussion: Bat Ray
-Based on the summary table, we can see significance of both presence and abundance in relation to Northern Anchovy. Interestingly the presence is barely insignificant while abundance is significant in region, indicating that this species is an indicator based more on abundance. 
+
+Based on the summary table, we can see significance of both presence and abundance in relation to Northern Anchovy. Interestingly the presence is barely insignificant while abundance is significant in region, indicating that this species is an indicator based more on abundance.
 
 ### Function Call: South Bay
 
@@ -591,7 +652,8 @@ ca_tonguefish$plot
 ```
 
 #### Discussion: California Tonguefish
-In my opinion this is the most interesting interaction. Presence in region, based on Northern Anchovy, *and* the interaction between the two are all significant. This is the only case in the analysis where any interaction is significant. When looking at abundance, both Anchovies and the interaction between them and `in_region` are minimally insignificant. When looking at the plot we see the best looking curve in the plot of within region. All this is super interesting in the context that in recent years there have been very few catches of Tonguefish, which indicates some sort of temporal skew. 
+
+In my opinion this is the most interesting interaction. Presence in region, based on Northern Anchovy, *and* the interaction between the two are all significant. This is the only case in the analysis where any interaction is significant. When looking at abundance, both Anchovies and the interaction between them and `in_region` are minimally insignificant. When looking at the plot we see the best looking curve in the plot of within region. All this is super interesting in the context that in recent years there have been very few catches of Tonguefish, which indicates some sort of temporal skew.
 
 ### Function Call: Suisun Bay
 
@@ -612,7 +674,9 @@ bass$plot
 ```
 
 #### Discussion: Striped Bass
-If Tonguefish was our best model, this would be our worst. When fitting the model we get the warning: prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases. This indicates that the function is having trouble fitting the model to this data. This means that the summary and plot end up being generally unreliable. This was a big surprise to me as I expected Striped Bass to show an intense correlation, as they like less salty water when they pass through the bay (as infants and juveniles). 
+
+If Tonguefish was our best model, this would be our worst. When fitting the model we get the warning: prediction from rank-deficient fit; attr(\*, "non-estim") has doubtful cases. This indicates that the function is having trouble fitting the model to this data. This means that the summary and plot end up being generally unreliable. This was a big surprise to me as I expected Striped Bass to show an intense correlation, as they like less salty water when they pass through the bay (as infants and juveniles).
 
 ### Final Discussion
-Despite the effort, this analysis indicates that there is no real correlation between these indicator species and Northern Anchovy populations. In the future it may be possible to fit specific models to specific fish, and alter the models based on the fish species. Furthermore the integration of actual water quality variables such as temperature and salinity may yield more significance and representation within the data. 
+
+Despite the effort, this analysis indicates that there is no real correlation between these indicator species and Northern Anchovy populations. In the future it may be possible to fit specific models to specific fish, and alter the models based on the fish species. Furthermore the integration of actual water quality variables such as temperature and salinity may yield more significance and representation within the data.
