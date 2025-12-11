@@ -19,6 +19,19 @@ In recent years harmful algal blooms (HABs) have decimated many populations in t
 
 When monitoring the bay, it is often difficult to monitor less populated species to the extent of more frequent species. To combat this in this project I will be comparing populations of Northern Anchovy, the most populous species in the bay, to that of other more niche species. For example while we might catch thousands of Northern Anchovy in a season, there may be only one or two Tonguefish.
 
+This project is organized in this way:
+
+-   Directed Acyclic Graph
+-   Data import and preliminary analysis
+-   Indicator species analysis
+-   Simulate data to test Hurdle model validity
+-   Create function for Hurdle model
+-   Call function on indicator species in the four regions of the bay:
+    -   South Bay
+    -   Central Bay
+    -   San Pablo Bay
+    -   Suisun Bay
+
 ### DAG
 
 This analysis is predicated on the same environmental factors effecting Northern Anchovies and other species at similar levels. This leads to a DAG which looks like this:
@@ -53,7 +66,8 @@ pacman::p_load('tidyverse',
                'stargazer',
                'broom',
                'knitr',
-               'kableExtra')
+               'kableExtra',
+               'htmltools')
 ```
 
 ### Import and clean data
@@ -104,7 +118,10 @@ catch_clean$species_code[is.na(catch_clean$species_code)] <- 'NA'
 catch_clean %>% 
   head(100) %>% 
   kable( format = "html", digits = 3,
-      caption = "100 Rows of Catch Data") %>% 
+      caption = tags$caption(
+      "100 Rows of Catch Data",
+      style = "caption-side: top; text-align: left; font-weight: bold; color: #A0185A; font-size: 16px;"
+    )) %>% 
   kable_styling(
     bootstrap_options = c("striped", "hover", "condensed", "responsive"),
     full_width = FALSE,
@@ -146,6 +163,7 @@ kable( format = "html", digits = 3,
 
 In this analysis we will take the most abundant species, Northern Anchovy, and compare it with indicator species from the different regions of the bay.
 
+
 ### Preliminary analysis: Indicator species
 
 Indicator species:
@@ -159,6 +177,51 @@ Indicator species:
 By comparing Anchovy population to that of indicator species, it may shed light on whether Anchovy population can be representative of the indicator.
 
 To perform the indicator species analysis we will be using the function `multipatt` from the package `indispecies`. The function takes a group *vector* and a species *matrix*
+
+Here is a plot of the catch based on date with anchovies colored Pink as to get an idea of what the data looks like.
+
+```{r, warning = FALSE}
+library(patchwork)
+catch_plot <- catch_clean %>% 
+  mutate(date = dmy(date)) 
+
+
+catch_plot$species_group <- ifelse(catch_plot$species_code == "NA",
+                                   "Anchovy",
+                                   "Not Anchovy")
+
+p1 <- ggplot(catch_plot, aes(x = date, y = number,
+                       color = species_group)) +
+  geom_point(alpha = .3) +
+  ggthemes::theme_few() +
+  theme(legend.position = 'none')+
+  labs(x = "Date",
+       y = "Number Caught (Per Trawl)",
+       title = "Number of Fish Caught per Year",
+       color = "Species") +
+  scale_color_manual(values = c("Not Anchovy" = "black",
+                                "Anchovy" = "#A0185A"))+
+  facet_wrap(~species_group)
+
+catch_plot <- catch_plot %>% 
+  dplyr::filter(expr1 > 1980 & expr1 < 1990)
+
+p2 <- ggplot(catch_plot, aes(x = date, y = number,
+                       color = species_group)) +
+  geom_point(alpha = .3) +
+  ggthemes::theme_few() +
+  labs(x = "Date",
+       y = "Number Caught (Per Trawl)",
+       color = "Species") +
+  scale_color_manual(values = c("Not Anchovy" = "black",
+                                "Anchovy" = "#A0185A"))+
+  facet_wrap(~species_group)+
+  theme(strip.text = element_blank()) 
+
+(p1/p2)+
+  plot_layout(axis_titles = "collect")
+```
+In this plot we can see that we catch Anchovies at a much higher quantity per trawl as well as over time. The bottom plots show a smaller date range so we can see peaks in Anchovies that are not as apparent in other species. There are some sampling gaps that become apparent in 1984 as well as 1988, with much fewer observations in general in the 80's. This may result in less representative data. 
 
 ```{r}
 indicator <- catch_clean %>% 
@@ -243,7 +306,7 @@ Next we are going to compare Northern Anchovy catches to these species using a h
 
 ### Hurdle model and create function
 
-Hurdle Models are a class of models for count data that help handle excess zeros and overdispersion, which fits our data to a T. It handles these by treating presence as a binary operator (present vs not present) and running a binomial(link = 'logit') model. The model also includes abundance, which analyzes count data using a negative binomial model.
+Hurdle Models are a class of models for count data that help handle excess zeros and over dispersion, which fits our data nicely. It handles these by treating presence as a binary operator (present vs not present) and running a binomial(link = 'logit') model. The model also includes abundance, which analyzes count data using a negative binomial model.
 
 Presence: $$
 \begin{align}
@@ -579,9 +642,7 @@ speckled$summary_table
 
 #### Coefficient discussion
 
-
-Each coefficient table will have 8 estimates and p-values. The first 4 refer to the Presence (logit) model, the second 4 refer to the Abundance (negbin) model. Each of the models have the same structure as well: intercept, northern_anchovy_z, in_regionTRUE, and northern_anchovy_z:in_regionTRUE. The intercept is set at the level in_regionFalse, meaning its the outcome of not being in the indicators region, and not having Anchovies present. Northern_anchovy_z estimate and p_value show the effect on Northern_anchovy_z outside the region. In_regionTRUE estimate and p_value show the effect of being in the the region on the indicator Presence and Abundance. Lastly northern_anchovy_z:in_regionTRUE shows the interaction between northern anchovies and being inside an indicators region. 
-
+Each coefficient table will have 8 estimates and p-values. The first 4 refer to the Presence (logit) model, the second 4 refer to the Abundance (negbin) model. Each of the models have the same structure as well: intercept, northern_anchovy_z, in_regionTRUE, and northern_anchovy_z:in_regionTRUE. The intercept is set at the level in_regionFalse, meaning its the outcome of not being in the indicators region, and not having Anchovies present. Northern_anchovy_z estimate and p_value show the effect on Northern_anchovy_z outside the region. In_regionTRUE estimate and p_value show the effect of being in the the region on the indicator Presence and Abundance. Lastly northern_anchovy_z:in_regionTRUE shows the interaction between northern anchovies and being inside an indicators region.
 
 #### Presence Prediction
 
