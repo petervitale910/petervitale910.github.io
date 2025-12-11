@@ -271,7 +271,6 @@ window.Quarto = {
   <li><a href="#preliminary-analysis-indicator-species" id="toc-preliminary-analysis-indicator-species" class="nav-link" data-scroll-target="#preliminary-analysis-indicator-species">Preliminary analysis: Indicator species</a></li>
   <li><a href="#hurdle-model-and-create-function" id="toc-hurdle-model-and-create-function" class="nav-link" data-scroll-target="#hurdle-model-and-create-function">Hurdle model and create function</a></li>
   <li><a href="#simulate-data" id="toc-simulate-data" class="nav-link" data-scroll-target="#simulate-data">Simulate data</a></li>
-  <li><a href="#simulated-data-model" id="toc-simulated-data-model" class="nav-link" data-scroll-target="#simulated-data-model">Simulated Data model</a></li>
   <li><a href="#function" id="toc-function" class="nav-link" data-scroll-target="#function">Function</a></li>
   <li><a href="#function-call-central-bay" id="toc-function-call-central-bay" class="nav-link" data-scroll-target="#function-call-central-bay">Function Call: Central Bay</a></li>
   <li><a href="#function-call-san-pablo-bay" id="toc-function-call-san-pablo-bay" class="nav-link" data-scroll-target="#function-call-san-pablo-bay">Function Call: San Pablo Bay</a></li>
@@ -364,7 +363,7 @@ window.Quarto = {
 </section>
 <section id="import-and-clean-data" class="level3">
 <h3 class="anchored" data-anchor-id="import-and-clean-data">Import and clean data</h3>
-<p>First we import data which was requested from <span class="citation" data-cites="MSI_SF_Bay_Institute">(<a href="#ref-MSI_SF_Bay_Institute" role="doc-biblioref">Institute n.d.</a>)</span>. This data encapsulates individual otter trawls which were taken in the Bay between 1992 and 2017. The net is kept in the water for 5 minutes and then retrieved. A majority of the trawls are taken in the South Bay, however there are consistent year over year trawls in the other regions (Central bay, San Pablo bay, and Suisun bay).</p>
+<p>First we import data which was requested from <span class="citation" data-cites="MSI_SF_Bay_Institute">(<a href="#ref-MSI_SF_Bay_Institute" role="doc-biblioref">Institute n.d.</a>)</span>. This data encapsulates individual otter trawls which were taken in the Bay between 1972 and 2017. The net is kept in the water for 5 minutes and then retrieved. A majority of the trawls are taken in the South Bay, however there are consistent year over year trawls in the other regions (Central bay, San Pablo bay, and Suisun bay).</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -4971,17 +4970,6 @@ window.Quarto = {
 </div>
 </div>
 <p>In this analysis we will take the most abundant species, Northern Anchovy, and compare it with indicator species from the different regions of the bay.</p>
-</section>
-<section id="preliminary-analysis-indicator-species" class="level3">
-<h3 class="anchored" data-anchor-id="preliminary-analysis-indicator-species">Preliminary analysis: Indicator species</h3>
-<p>Indicator species:</p>
-<ul>
-<li><p>reflect the biotic or abiotic state of the environment;</p></li>
-<li><p>provide evidence for the impacts of environmental change; or</p></li>
-<li><p>predict the diversity of other species, taxa or communities within an area.</p></li>
-</ul>
-<p>By comparing Anchovy population to that of indicator species, it may shed light on whether Anchovy population can be representative of the indicator.</p>
-<p>To perform the indicator species analysis we will be using the function <code>multipatt</code> from the package <code>indispecies</code>. The function takes a group <em>vector</em> and a species <em>matrix</em></p>
 <p>Here is a plot of the catch based on date with anchovies colored Pink as to get an idea of what the data looks like.</p>
 <div class="cell">
 <details class="code-fold">
@@ -5007,36 +4995,17 @@ Attaching package: 'patchwork'</code></pre>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Anchovy"</span>,</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Not Anchovy"</span>)</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(catch_plot, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> number,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(catch_plot, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> number,</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> species_group)) <span class="sc">+</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_few</span>() <span class="sc">+</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>)<span class="sc">+</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date"</span>,</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number Caught (Per Trawl)"</span>,</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Number of Fish Caught per Year"</span>,</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Species"</span>) <span class="sc">+</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Not Anchovy"</span> <span class="ot">=</span> <span class="st">"black"</span>,</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Anchovy"</span> <span class="ot">=</span> <span class="st">"#A0185A"</span>))<span class="sc">+</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species_group)</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>catch_plot <span class="ot">&lt;-</span> catch_plot <span class="sc">%&gt;%</span> </span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(expr1 <span class="sc">&gt;</span> <span class="dv">1980</span> <span class="sc">&amp;</span> expr1 <span class="sc">&lt;</span> <span class="dv">1990</span>)</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(catch_plot, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> number,</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> species_group)) <span class="sc">+</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_few</span>() <span class="sc">+</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date"</span>,</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number Caught (Per Trawl)"</span>,</span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Species"</span>) <span class="sc">+</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Not Anchovy"</span> <span class="ot">=</span> <span class="st">"black"</span>,</span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Anchovy"</span> <span class="ot">=</span> <span class="st">"#A0185A"</span>))<span class="sc">+</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species_group)<span class="sc">+</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text =</span> <span class="fu">element_blank</span>()) </span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>(p1<span class="sc">/</span>p2)<span class="sc">+</span></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">axis_titles =</span> <span class="st">"collect"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_few</span>()<span class="sc">+</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number Caught (Per Trawl)"</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Number of Fish Caught per Year"</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Species"</span>) <span class="sc">+</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Not Anchovy"</span> <span class="ot">=</span> <span class="st">"black"</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Anchovy"</span> <span class="ot">=</span> <span class="st">"#A0185A"</span>))<span class="sc">+</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species_group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -5047,6 +5016,17 @@ Attaching package: 'patchwork'</code></pre>
 </div>
 </div>
 <p>In this plot we can see that we catch Anchovies at a much higher quantity per trawl as well as over time. The bottom plots show a smaller date range so we can see peaks in Anchovies that are not as apparent in other species. There are some sampling gaps that become apparent in 1984 as well as 1988, with much fewer observations in general in the 80’s. This may result in less representative data.</p>
+</section>
+<section id="preliminary-analysis-indicator-species" class="level3">
+<h3 class="anchored" data-anchor-id="preliminary-analysis-indicator-species">Preliminary analysis: Indicator species</h3>
+<p>Indicator species:</p>
+<ul>
+<li><p>reflect the biotic or abiotic state of the environment;</p></li>
+<li><p>provide evidence for the impacts of environmental change; or</p></li>
+<li><p>predict the diversity of other species, taxa or communities within a <em>area group</em></p></li>
+</ul>
+<p>By comparing Anchovy population to that of indicator species, it may shed light on whether Anchovy population can be representative of the indicator. We will be performing analyses on the four locales apparent in the bay as the indicator analysis is predicated on the fact the indicator species indicates the <em>area group</em> it is in.</p>
+<p>To perform the indicator species analysis we will be using the function <code>multipatt</code> from the package <code>indispecies</code>. The function takes a group <em>vector</em> and a species <em>matrix</em></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -5092,31 +5072,31 @@ Attaching package: 'patchwork'</code></pre>
 
  Group CENTRAL BAY  #sps.  13 
      stat p.value   
-SSD 0.456   0.007 **
-CLF 0.217   0.028 * 
-POM 0.110   0.036 * 
-ps  0.066   0.054 . 
-HH  0.065   0.062 . 
-CRL 0.065   0.073 . 
-OP  0.059   0.043 * 
-JM  0.059   0.039 * 
-BSC 0.050   0.046 * 
-es  0.046   0.096 . 
-IRL 0.042   0.028 * 
-ssd 0.042   0.036 * 
-STR 0.029   0.099 . 
+SSD 0.456   0.010 **
+CLF 0.217   0.033 * 
+POM 0.110   0.020 * 
+ps  0.066   0.068 . 
+HH  0.065   0.075 . 
+CRL 0.065   0.089 . 
+OP  0.059   0.040 * 
+JM  0.059   0.037 * 
+BSC 0.050   0.048 * 
+es  0.046   0.077 . 
+IRL 0.042   0.040 * 
+ssd 0.042   0.029 * 
+PB  0.039   0.089 . 
 
  Group SAN PABLO BAY  #sps.  4 
      stat p.value  
-BR  0.449   0.012 *
-DT  0.328   0.051 .
-TS  0.277   0.022 *
-BSK 0.214   0.051 .
+BR  0.449   0.017 *
+DT  0.328   0.043 *
+TS  0.277   0.024 *
+BSK 0.214   0.053 .
 
  Group SOUTH BAY  #sps.  2 
      stat p.value  
-CT  0.308   0.065 .
-DSP 0.285   0.086 .
+CT  0.308   0.061 .
+DSP 0.285   0.085 .
 
  Group SUISUN BAY  #sps.  14 
      stat p.value    
@@ -5124,37 +5104,37 @@ SB  0.880   0.001 ***
 SF  0.768   0.001 ***
 TFS 0.417   0.001 ***
 SST 0.303   0.001 ***
-DLS 0.204   0.009 ** 
-BDG 0.204   0.008 ** 
-TP  0.148   0.010 ** 
+DLS 0.204   0.007 ** 
+BDG 0.204   0.006 ** 
+TP  0.148   0.008 ** 
 CC  0.129   0.004 ** 
-BLP 0.129   0.004 ** 
-CK  0.091   0.017 *  
-KS  0.091   0.022 *  
-DS  0.089   0.023 *  
-BBC 0.088   0.027 *  
-PL  0.086   0.051 .  
+BLP 0.129   0.003 ** 
+CK  0.091   0.014 *  
+KS  0.091   0.024 *  
+DS  0.089   0.026 *  
+BBC 0.088   0.015 *  
+PL  0.086   0.059 .  
 
  Group CENTRAL BAY+SAN PABLO BAY  #sps.  6 
      stat p.value    
 PMS 0.652   0.001 ***
-PH  0.535   0.004 ** 
+PH  0.535   0.003 ** 
 BG  0.495   0.002 ** 
 BPF 0.338   0.015 *  
-WSP 0.320   0.015 *  
-BHS 0.225   0.089 .  
+WSP 0.320   0.013 *  
+BHS 0.225   0.083 .  
 
  Group CENTRAL BAY+SOUTH BAY  #sps.  1 
     stat p.value  
-SD 0.381   0.033 *
+SD 0.381   0.042 *
 
  Group CENTRAL BAY+SUISUN BAY  #sps.  1 
     stat p.value  
-PS 0.267   0.058 .
+PS 0.267   0.038 *
 
  Group SAN PABLO BAY+SOUTH BAY  #sps.  1 
     stat p.value  
-BS 0.343    0.04 *
+BS 0.343   0.034 *
 
  Group SAN PABLO BAY+SUISUN BAY  #sps.  2 
      stat p.value    
@@ -5163,21 +5143,21 @@ LFS 0.538   0.001 ***
 
  Group SOUTH BAY+SUISUN BAY  #sps.  1 
    stat p.value  
-UG 0.32    0.06 .
+UG 0.32   0.047 *
 
  Group CENTRAL BAY+SAN PABLO BAY+SOUTH BAY  #sps.  3 
      stat p.value    
 NA  0.811   0.001 ***
-SSP 0.762   0.001 ***
-WC  0.385   0.039 *  
+SSP 0.762   0.004 ** 
+WC  0.385   0.044 *  
 
  Group CENTRAL BAY+SAN PABLO BAY+SUISUN BAY  #sps.  1 
-     stat p.value   
-PSD 0.527   0.002 **
+     stat p.value    
+PSD 0.527   0.001 ***
 
  Group SAN PABLO BAY+SOUTH BAY+SUISUN BAY  #sps.  1 
     stat p.value  
-LS 0.353    0.04 *
+LS 0.353   0.041 *
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 </code></pre>
 </div>
@@ -5343,57 +5323,67 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictor: standardized anchovy index</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>northern_anchovy_z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_sim, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># in_region alternates TRUE / FALSE / TRUE / FALSE ...</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># in_region (TRUE/FALSE)</span></span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>in_region <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), <span class="at">length.out =</span> n_sim)</span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Logistic (presence/absence)</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>beta0_presence <span class="ot">&lt;-</span> <span class="sc">-</span>.<span class="dv">5</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>beta0_presence <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.5</span></span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>beta1_presence <span class="ot">&lt;-</span>  <span class="fl">1.2</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Abundance (given present)</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>beta0_abundance <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>beta1_abundance <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fl">1.8</span>  <span class="co"># NB dispersion</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Probability of presence</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>p_presence <span class="ot">&lt;-</span> <span class="fu">plogis</span>(beta0_presence <span class="sc">+</span> beta1_presence <span class="sc">*</span> northern_anchovy_z)</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Storage</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>presence  <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_sim)</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>abundance <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_sim)</span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sim){</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>  presence[i] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>, p_presence[i])</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(presence[i] <span class="sc">==</span> <span class="dv">1</span>){</span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    lambda_i <span class="ot">&lt;-</span> <span class="fu">exp</span>(beta0_abundance <span class="sc">+</span> beta1_abundance <span class="sc">*</span> northern_anchovy_z[i])</span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># truncated NB — no zeros allowed</span></span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">repeat</span> {</span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>      y <span class="ot">&lt;-</span> <span class="fu">rnbinom</span>(<span class="dv">1</span>, <span class="at">mu =</span> lambda_i, <span class="at">size =</span> theta)</span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(y <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>        abundance[i] <span class="ot">&lt;-</span> y</span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>sim_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>  northern_anchovy_z,</span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>  in_region,</span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>  presence,</span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>  abundance</span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>beta_region_presence <span class="ot">&lt;-</span> <span class="fl">0.5</span>              </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>beta_interaction_presence <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.3</span>        </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Abundance (given present)</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>beta0_abundance <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>beta1_abundance <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>beta_region_abundance <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.6</span>            </span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>beta_interaction_abundance <span class="ot">&lt;-</span> <span class="fl">0.2</span>        </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fl">1.8</span>  <span class="co"># NB dispersion</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Probability of presence *including region + interaction*</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>linpred_presence <span class="ot">&lt;-</span> beta0_presence <span class="sc">+</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  beta1_presence <span class="sc">*</span> northern_anchovy_z <span class="sc">+</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  beta_region_presence <span class="sc">*</span> in_region <span class="sc">+</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>  beta_interaction_presence <span class="sc">*</span> northern_anchovy_z <span class="sc">*</span> in_region</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>p_presence <span class="ot">&lt;-</span> <span class="fu">plogis</span>(linpred_presence)</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Storage</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>presence  <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_sim)</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>abundance <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_sim)</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sim) {</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>  presence[i] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>, p_presence[i])</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (presence[i] <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># abundance linear predictor</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>    linpred_abundance <span class="ot">&lt;-</span> beta0_abundance <span class="sc">+</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>      beta1_abundance <span class="sc">*</span> northern_anchovy_z[i] <span class="sc">+</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>      beta_region_abundance <span class="sc">*</span> in_region[i] <span class="sc">+</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>      beta_interaction_abundance <span class="sc">*</span> northern_anchovy_z[i] <span class="sc">*</span> in_region[i]</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>    lambda_i <span class="ot">&lt;-</span> <span class="fu">exp</span>(linpred_abundance)</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">repeat</span> {</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>      y <span class="ot">&lt;-</span> <span class="fu">rnbinom</span>(<span class="dv">1</span>, <span class="at">mu =</span> lambda_i, <span class="at">size =</span> theta)</span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (y <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>        abundance[i] <span class="ot">&lt;-</span> y</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>sim_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>  northern_anchovy_z,</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>  in_region,</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>  presence,</span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>  abundance</span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-</section>
-<section id="simulated-data-model" class="level3">
-<h3 class="anchored" data-anchor-id="simulated-data-model">Simulated Data model</h3>
-<p>To make sure the model returns the coefficients from the simulated data we can run our model on the dataframe of the model</p>
 <section id="model-simulated-data" class="level4">
 <h4 class="anchored" data-anchor-id="model-simulated-data">Model Simulated data</h4>
 <div class="cell">
@@ -5452,66 +5442,66 @@ log(\lambda) &amp;= \beta_0 + \beta_1 \text{NorthernAnchovyZ}* \beta_2 \text{inr
 <tr class="odd">
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Presence (Logit)</td>
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">(Intercept)</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-0.463</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.101</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-4.568</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.000</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-0.277</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.103</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-2.690</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.007</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Presence (Logit)</td>
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">northern_anchovy_z</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">1.022</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.121</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">8.427</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">1.233</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.132</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">9.362</td>
 <td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.000</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Presence (Logit)</td>
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">in_regionTRUE</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-0.087</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.146</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-0.599</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.549</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.212</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.141</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">1.508</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.131</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Presence (Logit)</td>
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">northern_anchovy_z:in_regionTRUE</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.116</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.176</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.659</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.510</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-0.388</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.172</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-2.260</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.024</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Abundance (NegBin)</td>
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">(Intercept)</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-0.030</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.079</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-0.376</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.707</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.025</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.072</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.345</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.730</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Abundance (NegBin)</td>
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">northern_anchovy_z</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.839</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.081</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">10.415</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.972</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.072</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">13.463</td>
 <td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.000</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Abundance (NegBin)</td>
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">in_regionTRUE</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-0.099</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.114</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-0.873</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.382</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-0.045</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.100</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-0.449</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.653</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Abundance (NegBin)</td>
 <td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">northern_anchovy_z:in_regionTRUE</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.086</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.117</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.733</td>
-<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.464</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-0.251</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.102</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">-2.464</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">0.014</td>
 </tr>
 </tbody>
 </table>

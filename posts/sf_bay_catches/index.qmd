@@ -72,7 +72,7 @@ pacman::p_load('tidyverse',
 
 ### Import and clean data
 
-First we import data which was requested from [@MSI_SF_Bay_Institute]. This data encapsulates individual otter trawls which were taken in the Bay between 1992 and 2017. The net is kept in the water for 5 minutes and then retrieved. A majority of the trawls are taken in the South Bay, however there are consistent year over year trawls in the other regions (Central bay, San Pablo bay, and Suisun bay).
+First we import data which was requested from [@MSI_SF_Bay_Institute]. This data encapsulates individual otter trawls which were taken in the Bay between 1972 and 2017. The net is kept in the water for 5 minutes and then retrieved. A majority of the trawls are taken in the South Bay, however there are consistent year over year trawls in the other regions (Central bay, San Pablo bay, and Suisun bay).
 
 ```{r, warning=FALSE, message=FALSE}
 # Raw catch data
@@ -163,21 +163,6 @@ kable( format = "html", digits = 3,
 
 In this analysis we will take the most abundant species, Northern Anchovy, and compare it with indicator species from the different regions of the bay.
 
-
-### Preliminary analysis: Indicator species
-
-Indicator species:
-
--   reflect the biotic or abiotic state of the environment;
-
--   provide evidence for the impacts of environmental change; or
-
--   predict the diversity of other species, taxa or communities within an area.
-
-By comparing Anchovy population to that of indicator species, it may shed light on whether Anchovy population can be representative of the indicator.
-
-To perform the indicator species analysis we will be using the function `multipatt` from the package `indispecies`. The function takes a group *vector* and a species *matrix*
-
 Here is a plot of the catch based on date with anchovies colored Pink as to get an idea of what the data looks like.
 
 ```{r, warning = FALSE}
@@ -190,11 +175,10 @@ catch_plot$species_group <- ifelse(catch_plot$species_code == "NA",
                                    "Anchovy",
                                    "Not Anchovy")
 
-p1 <- ggplot(catch_plot, aes(x = date, y = number,
+ggplot(catch_plot, aes(x = date, y = number,
                        color = species_group)) +
   geom_point(alpha = .3) +
-  ggthemes::theme_few() +
-  theme(legend.position = 'none')+
+  ggthemes::theme_few()+
   labs(x = "Date",
        y = "Number Caught (Per Trawl)",
        title = "Number of Fish Caught per Year",
@@ -202,26 +186,23 @@ p1 <- ggplot(catch_plot, aes(x = date, y = number,
   scale_color_manual(values = c("Not Anchovy" = "black",
                                 "Anchovy" = "#A0185A"))+
   facet_wrap(~species_group)
-
-catch_plot <- catch_plot %>% 
-  dplyr::filter(expr1 > 1980 & expr1 < 1990)
-
-p2 <- ggplot(catch_plot, aes(x = date, y = number,
-                       color = species_group)) +
-  geom_point(alpha = .3) +
-  ggthemes::theme_few() +
-  labs(x = "Date",
-       y = "Number Caught (Per Trawl)",
-       color = "Species") +
-  scale_color_manual(values = c("Not Anchovy" = "black",
-                                "Anchovy" = "#A0185A"))+
-  facet_wrap(~species_group)+
-  theme(strip.text = element_blank()) 
-
-(p1/p2)+
-  plot_layout(axis_titles = "collect")
 ```
+
 In this plot we can see that we catch Anchovies at a much higher quantity per trawl as well as over time. The bottom plots show a smaller date range so we can see peaks in Anchovies that are not as apparent in other species. There are some sampling gaps that become apparent in 1984 as well as 1988, with much fewer observations in general in the 80's. This may result in less representative data. 
+
+### Preliminary analysis: Indicator species
+
+Indicator species:
+
+-   reflect the biotic or abiotic state of the environment;
+
+-   provide evidence for the impacts of environmental change; or
+
+-   predict the diversity of other species, taxa or communities within a *area group*
+
+By comparing Anchovy population to that of indicator species, it may shed light on whether Anchovy population can be representative of the indicator. We will be performing analyses on the four locales apparent in the bay as the indicator analysis is predicated on the fact the indicator species indicates the *area group* it is in. 
+
+To perform the indicator species analysis we will be using the function `multipatt` from the package `indispecies`. The function takes a group *vector* and a species *matrix*
 
 ```{r}
 indicator <- catch_clean %>% 
@@ -348,38 +329,52 @@ n_sim <- 1000
 # Predictor: standardized anchovy index
 northern_anchovy_z <- rnorm(n_sim, mean = 0, sd = 1)
 
-# in_region alternates TRUE / FALSE / TRUE / FALSE ...
+# in_region (TRUE/FALSE)
 in_region <- rep(c(TRUE, FALSE), length.out = n_sim)
 
 # Logistic (presence/absence)
-beta0_presence <- -.5
+beta0_presence <- -0.5
 beta1_presence <-  1.2
+beta_region_presence <- 0.5              
+beta_interaction_presence <- -0.3        
 
 # Abundance (given present)
 beta0_abundance <- 0.7
 beta1_abundance <- 0.4
+beta_region_abundance <- -0.6            
+beta_interaction_abundance <- 0.2        
 
 theta <- 1.8  # NB dispersion
 
-# Probability of presence
-p_presence <- plogis(beta0_presence + beta1_presence * northern_anchovy_z)
+# Probability of presence *including region + interaction*
+linpred_presence <- beta0_presence +
+  beta1_presence * northern_anchovy_z +
+  beta_region_presence * in_region +
+  beta_interaction_presence * northern_anchovy_z * in_region
+
+p_presence <- plogis(linpred_presence)
 
 # Storage
 presence  <- rep(0, n_sim)
 abundance <- rep(0, n_sim)
 
-for (i in 1:n_sim){
+for (i in 1:n_sim) {
 
   presence[i] <- rbinom(1, 1, p_presence[i])
 
-  if(presence[i] == 1){
+  if (presence[i] == 1) {
 
-    lambda_i <- exp(beta0_abundance + beta1_abundance * northern_anchovy_z[i])
+    # abundance linear predictor
+    linpred_abundance <- beta0_abundance +
+      beta1_abundance * northern_anchovy_z[i] +
+      beta_region_abundance * in_region[i] +
+      beta_interaction_abundance * northern_anchovy_z[i] * in_region[i]
 
-    # truncated NB — no zeros allowed
+    lambda_i <- exp(linpred_abundance)
+
     repeat {
       y <- rnbinom(1, mu = lambda_i, size = theta)
-      if(y > 0){
+      if (y > 0) {
         abundance[i] <- y
         break
       }
@@ -394,11 +389,9 @@ sim_data <- tibble(
   abundance
 )
 
+
 ```
 
-### Simulated Data model
-
-To make sure the model returns the coefficients from the simulated data we can run our model on the dataframe of the model
 
 #### Model Simulated data
 
