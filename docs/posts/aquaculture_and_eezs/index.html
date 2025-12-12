@@ -99,7 +99,7 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-733df9d86c19cacca2339cda71c1dd3f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-4e47306d9073e776f4ff2fcb73ac6bac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -254,6 +254,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#bull-kelp-discussion" id="toc-bull-kelp-discussion" class="nav-link" data-scroll-target="#bull-kelp-discussion">Bull Kelp discussion</a></li>
   </ul></li>
+  <li><a href="#final-discussion" id="toc-final-discussion" class="nav-link" data-scroll-target="#final-discussion">Final Discussion</a></li>
   <li><a href="#species-information-reference-table" id="toc-species-information-reference-table" class="nav-link" data-scroll-target="#species-information-reference-table">Species information reference table</a></li>
   </ul>
 </nav>
@@ -272,7 +273,7 @@ div.csl-indent {
 </figure>
 </div>
 <p>Exclusive economic zones (EEZ’s) are areas of the ocean, generally extending 200 nautical miles (230 miles) beyond a nation’s territorial sea, within which a coastal nation has jurisdiction over both living and nonliving resources <span class="citation" data-cites="noaa_useez_2025">(<a href="#ref-noaa_useez_2025" role="doc-biblioref">N.O. Exploration 2025</a>)</span>. With their natural boundary, these areas sustain millions of people worldwide. The management of these EEZ’s is crucial for both economic and ecological prosperity.</p>
-<p>In this project we are going to map where, along the North Pacific EEZ, is best for farming a variety of species in an attempt to determine where resources could be allocated.</p>
+<p>In this project we are going to map where, along the North Pacific EEZ, is best for farming a variety of species in an attempt to determine where resources could be allocated. We will accomplish this by first showing the generalized workflow, and then showing a function which completes the workflow for a list of species.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -290,7 +291,7 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="data-import">Data import</h2>
 <section id="surface-temperature-from-noaa_crw_sst31" class="level3">
 <h3 class="anchored" data-anchor-id="surface-temperature-from-noaa_crw_sst31">Surface temperature from: <span class="citation" data-cites="noaa_crw_sst31">(<a href="#ref-noaa_crw_sst31" role="doc-biblioref">NOAA Coral Reef Watch 2025</a>)</span></h3>
-<p>We are working with surface temperature, which could skew the results for some of the deeper living species.</p>
+<p>The surface temperature raster contains global surface temperatures provided by NOAA. Because it represents only surface conditions, relying on this raster may skew results for species that primarily occupy deeper waters.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -310,18 +311,18 @@ div.csl-indent {
 </section>
 <section id="bathymetry" class="level3">
 <h3 class="anchored" data-anchor-id="bathymetry">Bathymetry</h3>
-<p>From: <span class="citation" data-cites="gebcobathymetriccompilationgroup20252025">(<a href="#ref-gebcobathymetriccompilationgroup20252025" role="doc-biblioref">GEBCO Bathymetric Compilation Group 2025 2025</a>)</span></p>
+<p>The bathymetry raster data are sourced from the GEBCO Bathymetric Compilation Group (2025), which provides global seafloor depth information. From: <span class="citation" data-cites="gebcobathymetriccompilationgroup20252025">(<a href="#ref-gebcobathymetriccompilationgroup20252025" role="doc-biblioref">GEBCO Bathymetric Compilation Group 2025 2025</a>)</span></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bathy <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="fu">here</span>(<span class="st">'posts'</span>, <span class="st">'aquaculture_and_eezs'</span>, <span class="st">'data'</span>,<span class="st">'depth.tif'</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">project</span>(<span class="st">"EPSG:4326"</span>) <span class="co"># Coerce into correct crs </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">project</span>(<span class="st">"EPSG:4326"</span>) <span class="co"># Coerce into correct CRS</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="exclusive-economic-zones" class="level3">
 <h3 class="anchored" data-anchor-id="exclusive-economic-zones">Exclusive Economic Zones</h3>
-<p>From: <span class="citation" data-cites="marine_regions_eez_v12">(<a href="#ref-marine_regions_eez_v12" role="doc-biblioref">Flanders Marine Institute (VLIZ) 2025</a>)</span></p>
+<p>The EEZ layer contains global Exclusive Economic Zone vector boundaries provided by Marine Regions (v12). From: <span class="citation" data-cites="marine_regions_eez_v12">(<a href="#ref-marine_regions_eez_v12" role="doc-biblioref">Flanders Marine Institute (VLIZ) 2025</a>)</span></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -373,7 +374,7 @@ div.csl-indent {
 </section>
 <section id="oyster-reclassification" class="level2">
 <h2 class="anchored" data-anchor-id="oyster-reclassification">Oyster Reclassification</h2>
-<p>To show the workflow before I break create my function. We are going to focus on Oysters for this first example. We need to reclassify both temperature and depth for oysters, which enjoy depth between -70 meters and 0 meters and temperatures between 11 and 30 degrees celsius.</p>
+<p>This is the point in the workflow where we are ready for reclassification, where a function may come into play. To highlight the workflow of the function, I will be showing one example of the analysis outside the function. We are going to focus on Oysters for this first example. We need to reclassify both temperature and depth for oysters, which enjoy depth between -70 meters and 0 meters and temperatures between 11 and 30 degrees Celsius.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -434,7 +435,7 @@ div.csl-indent {
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>region_suitable_area <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="at">x =</span> eez,</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">y =</span> area_extracted, </span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">by =</span> <span class="st">"rgn"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ID) <span class="co"># Get rid of ID column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>ID) <span class="co"># Get rid of ID column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="map" class="level3">
@@ -446,11 +447,11 @@ div.csl-indent {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_basemap</span>(<span class="st">"Esri.WorldTopoMap"</span>)<span class="sc">+</span><span class="co"># I found this basemap fit the best</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(region_suitable_area)<span class="sc">+</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">'suitable_area'</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'#E1DABD'</span>, <span class="co"># Add my color palette </span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">'#ABC798'</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">'#FFC4EB'</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">'#E6983F'</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">'#A0185A'</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#FFE4F2"</span>,  </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"#F7B5D4"</span>, </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"#E698C3"</span>, </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"#C75A8C"</span>, </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"#A0185A"</span>),</span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, </span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>                                               <span class="dv">800</span>, <span class="co"># Specify breaks </span></span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                                               <span class="dv">1600</span>,</span>
@@ -484,58 +485,77 @@ div.csl-indent {
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>region_suitable_area <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> <span class="co"># The only way to lose geometry</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>rgn_key, <span class="sc">-</span>rgn_id, <span class="sc">-</span>area_m2) <span class="sc">%&gt;%</span> <span class="co"># Drop unnecesary columns</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">'Region'</span>, <span class="st">'Total Area (Km2)'</span>, <span class="st">'Suitable Area (Km2)'</span>)) <span class="sc">%&gt;%</span>  <span class="co"># Rename the columns in our table</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, <span class="co"># This is my favorite type of table</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">html_font =</span> <span class="st">"Cambria"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">footnote</span>(<span class="at">number =</span> <span class="fu">paste</span>(<span class="st">'EEZ region suitable area for farming Oysters'</span>)) <span class="co"># Add a footnote</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tbl_data <span class="ot">&lt;-</span> region_suitable_area <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>rgn_key, <span class="sc">-</span>rgn_id, <span class="sc">-</span>area_m2)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>n_rows <span class="ot">&lt;-</span> <span class="fu">nrow</span>(tbl_data)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>tbl_data <span class="sc">%&gt;%</span> </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">'Region'</span>, <span class="st">'Total Area (Km2)'</span>, <span class="st">'Suitable Area (Km2)'</span>),</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Suitable Area for Farming Oysters"</span>,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">format =</span> <span class="st">"html"</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">position   =</span> <span class="st">"center"</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">font_size  =</span> <span class="dv">14</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>,</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="st">"#A0185A"</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span>n_rows,</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="st">"#FFC4EB"</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<table class="lightable-classic caption-top table table-sm table-striped small">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed caption-top table-sm small">
+<caption>Suitable Area for Farming Oysters</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Region</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Total Area (Km2)</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Suitable Area (Km2)</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold; color: white !important; background-color: rgba(160, 24, 90, 255) !important;">Region</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; color: white !important; background-color: rgba(160, 24, 90, 255) !important;">Total Area (Km2)</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; color: white !important; background-color: rgba(160, 24, 90, 255) !important;">Suitable Area (Km2)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Oregon</td>
-<td style="text-align: right;">179994.06</td>
-<td style="text-align: right;">1147.883</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Oregon</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">179994.06</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">1147.883</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Northern California</td>
-<td style="text-align: right;">164378.81</td>
-<td style="text-align: right;">194.126</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Northern California</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">164378.81</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">194.126</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Central California</td>
-<td style="text-align: right;">202738.33</td>
-<td style="text-align: right;">3673.514</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Central California</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">202738.33</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">3673.514</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Southern California</td>
-<td style="text-align: right;">206860.78</td>
-<td style="text-align: right;">3259.485</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Southern California</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">206860.78</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">3259.485</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Washington</td>
-<td style="text-align: right;">66898.31</td>
-<td style="text-align: right;">2524.804</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Washington</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">66898.31</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">2524.804</td>
 </tr>
-</tbody><tfoot>
-<tr class="odd">
-<td style="text-align: left; padding: 0;"><sup>1</sup> EEZ region suitable area for farming Oysters</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-</tfoot>
-
+</tbody>
 </table>
+</div>
 </div>
 </div>
 </section>
@@ -546,7 +566,7 @@ div.csl-indent {
 </section>
 <section id="function" class="level2">
 <h2 class="anchored" data-anchor-id="function">Function</h2>
-<p>Now that I have my workflow solidified I can turn it into a function, so with just the species name it can output a map. The resources for this data will be cited in the references section. One limitation is not all of these species have hard depth and temperature limits due to lack of studying, however for our purposes these values work well.</p>
+<p>Now that I have my workflow solidified I can turn it into a function, so with just the species name it can output a map. I am doing this in an attempt to generalize the workflow so theoretically any species could be farmed. The resources for this data will be cited in the references section. One limitation is not all of these species have hard depth and temperature limits due to lack of studying, however for our purposes these values work well.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -795,11 +815,11 @@ div.csl-indent {
 <span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">tm_basemap</span>(<span class="st">"Esri.WorldTopoMap"</span>)<span class="sc">+</span></span>
 <span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(region_suitable_area)<span class="sc">+</span></span>
 <span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">'suitable_area'</span>,</span>
-<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'#E1DABD'</span>,</span>
-<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'#ABC798'</span>,</span>
-<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'#FFC4EB'</span>,</span>
-<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'#E6983F'</span>,</span>
-<span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'#A0185A'</span>),</span>
+<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#FFE4F2"</span>,  </span>
+<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"#F7B5D4"</span>, </span>
+<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"#E698C3"</span>, </span>
+<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"#C75A8C"</span>, </span>
+<span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"#A0185A"</span>),</span>
 <span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">n =</span> <span class="dv">5</span>), <span class="co"># Set 5 breaks</span></span>
 <span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.legend =</span> <span class="fu">tm_legend</span>( <span class="st">'        Total </span><span class="sc">\n</span><span class="st">Suitable area (km)'</span>))<span class="sc">+</span></span>
 <span id="cb16-253"><a href="#cb16-253" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="at">text =</span> <span class="fu">paste</span>(<span class="st">'Suitable area for farming'</span>, species, <span class="st">'in West Coast EEZ'</span>), <span class="at">position =</span> <span class="fu">tm_pos_out</span>(<span class="st">"center"</span>, <span class="st">"top"</span>, <span class="at">pos.h =</span> <span class="st">"center"</span>))<span class="sc">+</span> <span class="co"># Paste allows us to manipulate the title of the plot</span></span>
@@ -813,21 +833,43 @@ div.csl-indent {
 <span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a>            <span class="at">col.legend =</span> <span class="fu">tm_legend</span>(<span class="at">title =</span> <span class="st">""</span>))</span>
 <span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a><span class="co"># Create table</span></span>
-<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> region_suitable_area <span class="sc">%&gt;%</span> </span>
+<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a>tbl_data <span class="ot">&lt;-</span> region_suitable_area <span class="sc">%&gt;%</span> </span>
 <span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>rgn_key, <span class="sc">-</span>rgn_id, <span class="sc">-</span>area_m2) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">'Region'</span>, </span>
-<span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a>                  <span class="st">'Total Area (Km2)'</span>, </span>
-<span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a>                  <span class="st">'Suitable Area (Km2)'</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, </span>
-<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a>                <span class="at">html_font =</span> <span class="st">"Cambria"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">footnote</span>(<span class="at">number =</span> <span class="fu">paste</span>(<span class="st">'EEZ region suitable area for farming'</span>, species)) <span class="co"># Paste again</span></span>
-<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(<span class="fu">list</span>( <span class="co"># Make a list of our map and table so they can be called with a buck</span></span>
-<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a>    <span class="at">map =</span> map, </span>
-<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a>    <span class="at">table =</span> table</span>
-<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>rgn_key, <span class="sc">-</span>rgn_id, <span class="sc">-</span>area_m2)</span>
+<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a>n_rows <span class="ot">&lt;-</span> <span class="fu">nrow</span>(tbl_data)</span>
+<span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> tbl_data <span class="sc">%&gt;%</span> </span>
+<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(</span>
+<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">'Region'</span>, <span class="st">'Total Area (Km2)'</span>, <span class="st">'Suitable Area (Km2)'</span>),</span>
+<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="fu">paste</span>(<span class="st">'EEZ region suitable area for farming'</span>, species),</span>
+<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a>    <span class="at">format =</span> <span class="st">"html"</span></span>
+<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(</span>
+<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb16-280"><a href="#cb16-280" aria-hidden="true" tabindex="-1"></a>    <span class="at">position   =</span> <span class="st">"center"</span>,</span>
+<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a>    <span class="at">font_size  =</span> <span class="dv">14</span></span>
+<span id="cb16-282"><a href="#cb16-282" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-283"><a href="#cb16-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(</span>
+<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>,</span>
+<span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a>    <span class="at">bold =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="st">"#A0185A"</span></span>
+<span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
+<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(</span>
+<span id="cb16-290"><a href="#cb16-290" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span>n_rows,</span>
+<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb16-292"><a href="#cb16-292" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="st">"#FFC4EB"</span></span>
+<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-294"><a href="#cb16-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-295"><a href="#cb16-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-296"><a href="#cb16-296" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(<span class="fu">list</span>( <span class="co"># Make a list of our map and table so they can be called with a buck</span></span>
+<span id="cb16-297"><a href="#cb16-297" aria-hidden="true" tabindex="-1"></a>    <span class="at">map =</span> map, </span>
+<span id="cb16-298"><a href="#cb16-298" aria-hidden="true" tabindex="-1"></a>    <span class="at">table =</span> table</span>
+<span id="cb16-299"><a href="#cb16-299" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb16-300"><a href="#cb16-300" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Now we can call the function for any species in our species list</p>
@@ -854,7 +896,7 @@ div.csl-indent {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>bull_kelp <span class="ot">&lt;-</span> <span class="fu">map_eez</span>(<span class="st">'Bull Kelp'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Call the map</p>
+<p>Now we can call the map to see the amount of area in each region suitable for farming Bull Kelp as well as where in the regions is suitable for farming the Kelp.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bull_kelp<span class="sc">$</span>map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -865,59 +907,59 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>Call the table</p>
+<p>Now we call the table showing the amount of area in each region suitable for farming Bull Kelp.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bull_kelp<span class="sc">$</span>table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<table class="lightable-classic caption-top table table-sm table-striped small">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed caption-top table-sm small">
+<caption>EEZ region suitable area for farming Bull Kelp</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Region</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Total Area (Km2)</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Suitable Area (Km2)</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold; color: white !important; background-color: rgba(160, 24, 90, 255) !important;">Region</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; color: white !important; background-color: rgba(160, 24, 90, 255) !important;">Total Area (Km2)</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold; color: white !important; background-color: rgba(160, 24, 90, 255) !important;">Suitable Area (Km2)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Oregon</td>
-<td style="text-align: right;">179994.06</td>
-<td style="text-align: right;">1065.055</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Oregon</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">179994.06</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">1065.055</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Northern California</td>
-<td style="text-align: right;">164378.81</td>
-<td style="text-align: right;">1023.031</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Northern California</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">164378.81</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">1023.031</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Central California</td>
-<td style="text-align: right;">202738.33</td>
-<td style="text-align: right;">1674.401</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Central California</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">202738.33</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">1674.401</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Southern California</td>
-<td style="text-align: right;">206860.78</td>
-<td style="text-align: right;">1622.344</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Southern California</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">206860.78</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">1622.344</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Washington</td>
-<td style="text-align: right;">66898.31</td>
-<td style="text-align: right;">3246.458</td>
+<td style="text-align: left; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">Washington</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">66898.31</td>
+<td style="text-align: right; color: black !important; background-color: rgba(255, 196, 235, 255) !important;">3246.458</td>
 </tr>
-</tbody><tfoot>
-<tr class="odd">
-<td style="text-align: left; padding: 0;"><sup>1</sup> EEZ region suitable area for farming Bull Kelp</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-</tfoot>
-
+</tbody>
 </table>
+</div>
 </div>
 </div>
 <section id="bull-kelp-discussion" class="level3">
 <h3 class="anchored" data-anchor-id="bull-kelp-discussion">Bull Kelp discussion</h3>
 <p>This map is very close to what I expected, with the highest area for possible farming being in Washington. Where it differences from what I would expect is in central and Southern California which is generally too warm to find Bull Kelp. This could be attributed to the use of mean surface temperature, instead of maximum. This is because when Bull Kelp propagate, their spores will not exit in temperatures above 18 degrees, so any temperature above that is going to cause them not to be able to recruit (and they don’t have the luxury to move to cooler waters)<span class="citation" data-cites="weigel2023">(<a href="#ref-weigel2023" role="doc-biblioref">B.L. Weigel, S.L. Small, H.D. Berry, and M.N. Dethier 07/27/2023</a>)</span>.</p>
 </section>
+</section>
+<section id="final-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="final-discussion">Final Discussion</h2>
+<p>This project is a small example of how easy it can be to work with publicly available temperature and depth data. Even with a few limitations—like Bull Kelp’s actual temperature range compared to the surface-temperature inputs—I’m still pretty happy with how realistic the results are for identifying potential aquaculture spots. The code ended up being really modular too, which means I can keep adding species or tweaking their ranges as new info comes out. And honestly, that’s what excites me most: this could grow into a much more complete tool over time, especially if I layer in more environmental variables or species traits. For now, though, it feels like a solid starting point and a fun way to blend data, ecology, and mapping into something genuinely useful.</p>
 </section>
 <section id="species-information-reference-table" class="level2">
 <h2 class="anchored" data-anchor-id="species-information-reference-table">Species information reference table</h2>

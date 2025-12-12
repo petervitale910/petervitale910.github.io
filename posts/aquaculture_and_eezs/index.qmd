@@ -12,7 +12,7 @@ image: image.jpg
 
 Exclusive economic zones (EEZ's) are areas of the ocean, generally extending 200 nautical miles (230 miles) beyond a nation’s territorial sea, within which a coastal nation has jurisdiction over both living and nonliving resources [@noaa_useez_2025]. With their natural boundary, these areas sustain millions of people worldwide. The management of these EEZ's is crucial for both economic and ecological prosperity.
 
-In this project we are going to map where, along the North Pacific EEZ, is best for farming a variety of species in an attempt to determine where resources could be allocated.
+In this project we are going to map where, along the North Pacific EEZ, is best for farming a variety of species in an attempt to determine where resources could be allocated. We will accomplish this by first showing the generalized workflow, and then showing a function which completes the workflow for a list of species. 
 
 ```{r}
 #| code-fold: true
@@ -29,8 +29,7 @@ pacman::p_load('tidyverse',
 ## Data import
 
 ### Surface temperature from: [@noaa_crw_sst31]
-
-We are working with surface temperature, which could skew the results for some of the deeper living species.
+The surface temperature raster contains global surface temperatures provided by NOAA. Because it represents only surface conditions, relying on this raster may skew results for species that primarily occupy deeper waters.
 
 ```{r}
 #| code-fold: true
@@ -49,16 +48,18 @@ sst_2012 <- rast(here('posts', 'aquaculture_and_eezs', 'data',
 
 ### Bathymetry
 
+The bathymetry raster data are sourced from the GEBCO Bathymetric Compilation Group (2025), which provides global seafloor depth information.
 From: [@gebcobathymetriccompilationgroup20252025]
 
 ```{r}
 #| code-fold: true
 bathy <- rast(here('posts', 'aquaculture_and_eezs', 'data','depth.tif')) %>% 
-  project("EPSG:4326") # Coerce into correct crs 
+  project("EPSG:4326") # Coerce into correct CRS
 ```
 
 ### Exclusive Economic Zones
 
+The EEZ layer contains global Exclusive Economic Zone vector boundaries provided by Marine Regions (v12).
 From: [@marine_regions_eez_v12]
 
 ```{r}
@@ -103,7 +104,7 @@ depth_resampled <- resample(depth_projected, mean_sst)
 
 ## Oyster Reclassification
 
-To show the workflow before I break create my function. We are going to focus on Oysters for this first example. We need to reclassify both temperature and depth for oysters, which enjoy depth between -70 meters and 0 meters and temperatures between 11 and 30 degrees celsius.
+This is the point in the workflow where we are ready for reclassification, where a function may come into play. To highlight the workflow of the function, I will be showing one example of the analysis outside the function. We are going to focus on Oysters for this first example. We need to reclassify both temperature and depth for oysters, which enjoy depth between -70 meters and 0 meters and temperatures between 11 and 30 degrees Celsius.
 
 ```{r}
 #| code-fold: true
@@ -166,7 +167,7 @@ For plotting we want to join the EEZ with the extracted area
 region_suitable_area <- left_join(x = eez,
                                   y = area_extracted, 
                                   by = "rgn") %>% 
-  select(-ID) # Get rid of ID column
+  dplyr::select(-ID) # Get rid of ID column
 ```
 
 ### Map
@@ -179,11 +180,11 @@ Now we have our final mapping data frame and can build our map
 tm_basemap("Esri.WorldTopoMap")+# I found this basemap fit the best
 tm_shape(region_suitable_area)+
   tm_polygons(fill = 'suitable_area',
-              fill.scale = tm_scale(values = c('#E1DABD', # Add my color palette 
-                                              '#ABC798',
-                                              '#FFC4EB',
-                                              '#E6983F',
-                                              '#A0185A'),
+              fill.scale = tm_scale(values = c("#FFE4F2",  
+                                               "#F7B5D4", 
+                                               "#E698C3", 
+                                               "#C75A8C", 
+                                               "#A0185A"),
                                     breaks = c(0, 
                                                800, # Specify breaks 
                                                1600,
@@ -211,19 +212,44 @@ I also want to be able to see a table of our exact suitable area in each region 
 
 ```{r}
 #| code-fold: true
-region_suitable_area %>% 
-  st_drop_geometry() %>% # The only way to lose geometry
-  select(-rgn_key, -rgn_id, -area_m2) %>% # Drop unnecesary columns
-kbl(col.names = c('Region', 'Total Area (Km2)', 'Suitable Area (Km2)')) %>%  # Rename the columns in our table
-  kable_classic(full_width = F, # This is my favorite type of table
-                html_font = "Cambria") %>% 
-  footnote(number = paste('EEZ region suitable area for farming Oysters')) # Add a footnote
+tbl_data <- region_suitable_area %>% 
+  st_drop_geometry() %>% 
+  select(-rgn_key, -rgn_id, -area_m2)
+
+n_rows <- nrow(tbl_data)
+
+tbl_data %>% 
+  kbl(
+    col.names = c('Region', 'Total Area (Km2)', 'Suitable Area (Km2)'),
+    digits = 3,
+    caption = "Suitable Area for Farming Oysters",
+    format = "html"
+  ) %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = FALSE,
+    position   = "center",
+    font_size  = 14
+  ) %>% 
+  row_spec(
+    0,
+    bold = TRUE,
+    color = "white",
+    background = "#A0185A"
+  ) %>%  
+  row_spec(
+    1:n_rows,
+    color = "black",
+    background = "#FFC4EB"
+  )
+
 ```
 ### Oyster Discussion
 From this map and table we can see that Oysters would be better farmed in Central and Southern California as well as Washington, but less so in Northern California and Oregon. This is more likely due to the depth range instead of the temperature range, due to surface temperatures in Washington and Southern California being wildly different. 
 
 ## Function
-Now that I have my workflow solidified I can turn it into a function, so with just the species name it can output a map. The resources for this data will be cited in the references section. One limitation is not all of these species have hard depth and temperature limits due to lack of studying, however for our purposes these values work well.
+
+Now that I have my workflow solidified I can turn it into a function, so with just the species name it can output a map. I am doing this in an attempt to generalize the workflow so theoretically any species could be farmed. The resources for this data will be cited in the references section. One limitation is not all of these species have hard depth and temperature limits due to lack of studying, however for our purposes these values work well.
 
 ```{r}
 #| code-fold: true
@@ -472,11 +498,11 @@ region_suitable_area <- left_join(x = eez,
 map <- tm_basemap("Esri.WorldTopoMap")+
   tm_shape(region_suitable_area)+
   tm_polygons(fill = 'suitable_area',
-              fill.scale = tm_scale(values = c('#E1DABD',
-                                               '#ABC798',
-                                               '#FFC4EB',
-                                               '#E6983F',
-                                               '#A0185A'),
+              fill.scale = tm_scale(values = c("#FFE4F2",  
+                                               "#F7B5D4", 
+                                               "#E698C3", 
+                                               "#C75A8C", 
+                                               "#A0185A"),
                                     n = 5), # Set 5 breaks
               fill.legend = tm_legend( '        Total \nSuitable area (km)'))+
   tm_title(text = paste('Suitable area for farming', species, 'in West Coast EEZ'), position = tm_pos_out("center", "top", pos.h = "center"))+ # Paste allows us to manipulate the title of the plot
@@ -490,15 +516,37 @@ tm_shape(suitable_cells)+
             col.legend = tm_legend(title = ""))
 
 # Create table
-table <- region_suitable_area %>% 
+tbl_data <- region_suitable_area %>% 
   st_drop_geometry() %>% 
-  select(-rgn_key, -rgn_id, -area_m2) %>% 
-kbl(col.names = c('Region', 
-                  'Total Area (Km2)', 
-                  'Suitable Area (Km2)')) %>% 
-  kable_classic(full_width = F, 
-                html_font = "Cambria") %>% 
-  footnote(number = paste('EEZ region suitable area for farming', species)) # Paste again
+  select(-rgn_key, -rgn_id, -area_m2)
+
+n_rows <- nrow(tbl_data)
+
+table <- tbl_data %>% 
+  kbl(
+    col.names = c('Region', 'Total Area (Km2)', 'Suitable Area (Km2)'),
+    digits = 3,
+    caption = paste('EEZ region suitable area for farming', species),
+    format = "html"
+  ) %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = FALSE,
+    position   = "center",
+    font_size  = 14
+  ) %>% 
+  row_spec(
+    0,
+    bold = TRUE,
+    color = "white",
+    background = "#A0185A"
+  ) %>%  
+  row_spec(
+    1:n_rows,
+    color = "black",
+    background = "#FFC4EB"
+  )
+
 
 return(list( # Make a list of our map and table so they can be called with a buck
     map = map, 
@@ -522,14 +570,14 @@ Now we can call the function with any species from the list we find interesting,
 bull_kelp <- map_eez('Bull Kelp')
 ```
 
-Call the map
+Now we can call the map to see the amount of area in each region suitable for farming Bull Kelp as well as where in the regions is suitable for farming the Kelp. 
 
 ```{r}
 #| message: false
 bull_kelp$map
 ```
 
-Call the table
+Now we call the table showing the amount of area in each region suitable for farming Bull Kelp. 
 
 ```{r}
 bull_kelp$table
@@ -537,6 +585,9 @@ bull_kelp$table
 ### Bull Kelp discussion
 This map is very close to what I expected, with the highest area for possible farming being in Washington. Where it differences from what I would expect is in central and Southern California which is generally too warm to find Bull Kelp. This could be attributed to the use of mean surface temperature, instead of maximum. This is because when Bull Kelp propagate, their spores will not exit in temperatures above 18 degrees, so any temperature above that is going to cause them not to be able to recruit (and they don't have the luxury to move to cooler waters)[@weigel2023]. 
 
+## Final Discussion
+
+This project is a small example of how easy it can be to work with publicly available temperature and depth data. Even with a few limitations—like Bull Kelp’s actual temperature range compared to the surface-temperature inputs—I’m still pretty happy with how realistic the results are for identifying potential aquaculture spots. The code ended up being really modular too, which means I can keep adding species or tweaking their ranges as new info comes out. And honestly, that’s what excites me most: this could grow into a much more complete tool over time, especially if I layer in more environmental variables or species traits. For now, though, it feels like a solid starting point and a fun way to blend data, ecology, and mapping into something genuinely useful.
 
 ## Species information reference table
 
