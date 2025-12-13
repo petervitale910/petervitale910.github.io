@@ -301,7 +301,7 @@ div.csl-indent {
 </section>
 <section id="import-packages-and-datasets" class="level3">
 <h3 class="anchored" data-anchor-id="import-packages-and-datasets">1. Import packages and datasets</h3>
-<div id="fbdfdded-86a0-4347-b708-d71cef03804f" class="cell" data-tags="[]" data-execution_count="1">
+<div id="fbdfdded-86a0-4347-b708-d71cef03804f" class="cell" data-tags="[]" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -321,47 +321,25 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="fire-perimeter-data-exploration">2. Fire perimeter data exploration</h3>
 <p>Here we import the perimeter data files and do some exploration.</p>
 <p>I am going to import both perimeters and then look at the CRS, or coordinate reference system. This allows us to map all datasets using the same projection.</p>
-<div id="8e71ce21-e7b8-41c8-812c-f0d198647d1b" class="cell" data-tags="[]" data-execution_count="2">
+<div id="8e71ce21-e7b8-41c8-812c-f0d198647d1b" class="cell" data-tags="[]" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fp <span class="op">=</span> os.path.join(<span class="st">'data'</span>,<span class="st">'Eaton_Perimeter_20250121'</span>,<span class="st">'Eaton_Perimeter_20250121.shp'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>eaton_perimeter <span class="op">=</span> gpd.read_file(fp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="d12e488b-3a01-4782-acc3-83f1bd377861" class="cell" data-tags="[]" data-execution_count="3">
+<div id="d12e488b-3a01-4782-acc3-83f1bd377861" class="cell" data-tags="[]" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fp <span class="op">=</span> os.path.join(<span class="st">'data'</span>,<span class="st">'Palisades_Perimeter_20250121'</span>,<span class="st">'Palisades_Perimeter_20250121.shp'</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>palisades_perimeter <span class="op">=</span> gpd.read_file(fp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="31ab11ef-b030-4155-b167-7130b42c27b8" class="cell" data-tags="[]" data-execution_count="4">
+<div id="31ab11ef-b030-4155-b167-7130b42c27b8" class="cell" data-tags="[]" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we can look at the crs's and do some exploration </span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>palisades_perimeter.crs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>&lt;Projected CRS: EPSG:3857&gt;
-Name: WGS 84 / Pseudo-Mercator
-Axis Info [cartesian]:
-- X[east]: Easting (metre)
-- Y[north]: Northing (metre)
-Area of Use:
-- name: World between 85.06°S and 85.06°N.
-- bounds: (-180.0, -85.06, 180.0, 85.06)
-Coordinate Operation:
-- name: Popular Visualisation Pseudo-Mercator
-- method: Popular Visualisation Pseudo Mercator
-Datum: World Geodetic System 1984 ensemble
-- Ellipsoid: WGS 84
-- Prime Meridian: Greenwich</code></pre>
-</div>
-</div>
-<div id="b3fe7906-1101-4b74-aa09-16382fd113e5" class="cell" data-tags="[]" data-execution_count="5">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>eaton_perimeter.crs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>&lt;Projected CRS: EPSG:3857&gt;
@@ -380,8 +358,30 @@ Datum: World Geodetic System 1984 ensemble
 - Prime Meridian: Greenwich</code></pre>
 </div>
 </div>
+<div id="b3fe7906-1101-4b74-aa09-16382fd113e5" class="cell" data-tags="[]" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>eaton_perimeter.crs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>&lt;Projected CRS: EPSG:3857&gt;
+Name: WGS 84 / Pseudo-Mercator
+Axis Info [cartesian]:
+- X[east]: Easting (metre)
+- Y[north]: Northing (metre)
+Area of Use:
+- name: World between 85.06°S and 85.06°N.
+- bounds: (-180.0, -85.06, 180.0, 85.06)
+Coordinate Operation:
+- name: Popular Visualisation Pseudo-Mercator
+- method: Popular Visualisation Pseudo Mercator
+Datum: World Geodetic System 1984 ensemble
+- Ellipsoid: WGS 84
+- Prime Meridian: Greenwich</code></pre>
+</div>
+</div>
 <p>We know we want to merge these datasets at some point, so it is important to check if the column names match in the two perimeters</p>
-<div id="2ea128a4-4a4d-4b27-98d0-e12d8969e364" class="cell" data-tags="[]" data-execution_count="6">
+<div id="2ea128a4-4a4d-4b27-98d0-e12d8969e364" class="cell" data-tags="[]" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lets compare the column names to make sure they match </span></span>
@@ -392,7 +392,7 @@ Datum: World Geodetic System 1984 ensemble
 <pre><code> It is [ True  True  True  True  True] that the column names match</code></pre>
 </div>
 </div>
-<div id="67447c58-4643-4715-bb1d-ac786228f6c5" class="cell" data-tags="[]" data-execution_count="7">
+<div id="67447c58-4643-4715-bb1d-ac786228f6c5" class="cell" data-tags="[]" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Thats great we only need to look at one of the dataframes columns </span></span>
@@ -408,245 +408,12 @@ Datum: World Geodetic System 1984 ensemble
 <section id="netcdf-data-import-and-exploration" class="level3">
 <h3 class="anchored" data-anchor-id="netcdf-data-import-and-exploration">3. NetCDF data import and exploration</h3>
 <p>Here we will import and explore the Landsat data using <code>xr.open_dataset()</code>.</p>
-<div id="4b1202f7-c33b-4cec-a6b1-5130532d27d0" class="cell" data-tags="[]" data-execution_count="52">
+<div id="4b1202f7-c33b-4cec-a6b1-5130532d27d0" class="cell" data-tags="[]" data-execution_count="27">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fp <span class="op">=</span> os.path.join(<span class="st">'data'</span>,<span class="st">'landsat8-2025-02-23-palisades-eaton.nc'</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>netcdf <span class="op">=</span> xr.open_dataset(fp)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>netcdf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>netcdf <span class="op">=</span> xr.open_dataset(fp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">InvalidVersion</span>                            Traceback (most recent call last)
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/IPython/core/formatters.py:770</span>, in <span class="ansi-cyan-fg">PlainTextFormatter.__call__</span><span class="ansi-blue-fg">(self, obj)</span>
-<span class="ansi-green-fg">    763</span> stream = StringIO()
-<span class="ansi-green-fg">    764</span> printer = pretty.RepresentationPrinter(stream, <span style="color:rgb(0,135,0)">self</span>.verbose,
-<span class="ansi-green-fg">    765</span>     <span style="color:rgb(0,135,0)">self</span>.max_width, <span style="color:rgb(0,135,0)">self</span>.newline,
-<span class="ansi-green-fg">    766</span>     max_seq_length=<span style="color:rgb(0,135,0)">self</span>.max_seq_length,
-<span class="ansi-green-fg">    767</span>     singleton_pprinters=<span style="color:rgb(0,135,0)">self</span>.singleton_printers,
-<span class="ansi-green-fg">    768</span>     type_pprinters=<span style="color:rgb(0,135,0)">self</span>.type_printers,
-<span class="ansi-green-fg">    769</span>     deferred_pprinters=<span style="color:rgb(0,135,0)">self</span>.deferred_printers)
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">770</span> <span class="ansi-yellow-bg">printer</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">pretty</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">obj</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">    771</span> printer.flush()
-<span class="ansi-green-fg">    772</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> stream.getvalue()
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/IPython/lib/pretty.py:411</span>, in <span class="ansi-cyan-fg">RepresentationPrinter.pretty</span><span class="ansi-blue-fg">(self, obj)</span>
-<span class="ansi-green-fg">    400</span>                         <span style="font-weight:bold;color:rgb(0,135,0)">return</span> meth(obj, <span style="color:rgb(0,135,0)">self</span>, cycle)
-<span class="ansi-green-fg">    401</span>                 <span style="font-weight:bold;color:rgb(0,135,0)">if</span> (
-<span class="ansi-green-fg">    402</span>                     <span style="color:rgb(0,135,0)">cls</span> <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="color:rgb(0,135,0)">object</span>
-<span class="ansi-green-fg">    403</span>                     <span style="font-style:italic;color:rgb(95,135,135)"># check if cls defines __repr__</span>
-<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">    409</span>                     <span style="font-weight:bold;color:rgb(175,0,255)">and</span> <span style="color:rgb(0,135,0)">callable</span>(_safe_getattr(<span style="color:rgb(0,135,0)">cls</span>, <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">__repr__</span><span class="ansi-yellow-fg">"</span>, <span style="font-weight:bold;color:rgb(0,135,0)">None</span>))
-<span class="ansi-green-fg">    410</span>                 ):
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">411</span>                     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">_repr_pprint</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">obj</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">cycle</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">    413</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> _default_pprint(obj, <span style="color:rgb(0,135,0)">self</span>, cycle)
-<span class="ansi-green-fg">    414</span> <span style="font-weight:bold;color:rgb(0,135,0)">finally</span>:
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/IPython/lib/pretty.py:786</span>, in <span class="ansi-cyan-fg">_repr_pprint</span><span class="ansi-blue-fg">(obj, p, cycle)</span>
-<span class="ansi-green-fg">    784</span> <span style="font-style:italic" class="ansi-yellow-fg">"""A pprint that just redirects to the normal repr function."""</span>
-<span class="ansi-green-fg">    785</span> <span style="font-style:italic;color:rgb(95,135,135)"># Find newlines and replace them with p.break_()</span>
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">786</span> output = <span style="color:rgb(0,135,0)">repr</span>(obj)
-<span class="ansi-green-fg">    787</span> lines = output.splitlines()
-<span class="ansi-green-fg">    788</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> p.group():
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/dataset.py:2616</span>, in <span class="ansi-cyan-fg">Dataset.__repr__</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-fg">   2615</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg">__repr__</span>(<span style="color:rgb(0,135,0)">self</span>) -&gt; <span style="color:rgb(0,135,0)">str</span>:
-<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">2616</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">formatting</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">dataset_repr</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">)</span>
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/reprlib.py:21</span>, in <span class="ansi-cyan-fg">recursive_repr.&lt;locals&gt;.decorating_function.&lt;locals&gt;.wrapper</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-fg">     19</span> repr_running.add(key)
-<span class="ansi-green-fg">     20</span> <span style="font-weight:bold;color:rgb(0,135,0)">try</span>:
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">21</span>     result = <span class="ansi-yellow-bg">user_function</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">     22</span> <span style="font-weight:bold;color:rgb(0,135,0)">finally</span>:
-<span class="ansi-green-fg">     23</span>     repr_running.discard(key)
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/formatting.py:747</span>, in <span class="ansi-cyan-fg">dataset_repr</span><span class="ansi-blue-fg">(ds)</span>
-<span class="ansi-green-fg">    744</span> summary.append(<span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>dims_start<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">(</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>dims_values<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">)</span><span class="ansi-yellow-fg">"</span>)
-<span class="ansi-green-fg">    746</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> ds.coords:
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">747</span>     summary.append(<span class="ansi-yellow-bg">coords_repr</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">ds</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">coords</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">col_width</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">col_width</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">max_rows</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">max_rows</span><span class="ansi-yellow-bg">)</span>)
-<span class="ansi-green-fg">    749</span> unindexed_dims_str = unindexed_dims_repr(ds.dims, ds.coords, max_rows=max_rows)
-<span class="ansi-green-fg">    750</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> unindexed_dims_str:
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/formatting.py:438</span>, in <span class="ansi-cyan-fg">coords_repr</span><span class="ansi-blue-fg">(coords, col_width, max_rows)</span>
-<span class="ansi-green-fg">    436</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> col_width <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>:
-<span class="ansi-green-fg">    437</span>     col_width = _calculate_col_width(coords)
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">438</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">_mapping_repr</span><span class="ansi-yellow-bg">(</span>
-<span class="ansi-green-fg">    439</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">coords</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">    440</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">title</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">Coordinates</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">    441</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">summarizer</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">summarize_variable</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">    442</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">expand_option_name</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">display_expand_coords</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">    443</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">col_width</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">col_width</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">    444</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">indexes</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">coords</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">xindexes</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">    445</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">max_rows</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">max_rows</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">    446</span> <span class="ansi-yellow-bg">)</span>
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/formatting.py:411</span>, in <span class="ansi-cyan-fg">_mapping_repr</span><span class="ansi-blue-fg">(mapping, title, summarizer, expand_option_name, col_width, max_rows, indexes)</span>
-<span class="ansi-green-fg">    406</span>             summary += [
-<span class="ansi-green-fg">    407</span>                 summarizer(k, mapping[k], col_width, **summarizer_kwargs[k])
-<span class="ansi-green-fg">    408</span>                 <span style="font-weight:bold;color:rgb(0,135,0)">for</span> k <span style="font-weight:bold;color:rgb(175,0,255)">in</span> keys[-last_rows:]
-<span class="ansi-green-fg">    409</span>             ]
-<span class="ansi-green-fg">    410</span>     <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">411</span>         summary += <span class="ansi-yellow-bg">[</span>
-<span class="ansi-green-fg">    412</span> <span class="ansi-yellow-bg">            </span><span class="ansi-yellow-bg">summarizer</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">k</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">v</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">col_width</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">summarizer_kwargs</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">k</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">    413</span> <span class="ansi-yellow-bg">            </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">for</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">k</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">v</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(175,0,255)" class="ansi-yellow-bg">in</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">mapping</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">items</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">    414</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">]</span>
-<span class="ansi-green-fg">    415</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
-<span class="ansi-green-fg">    416</span>     summary += [EMPTY_REPR]
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/formatting.py:412</span>, in <span class="ansi-cyan-fg">&lt;listcomp&gt;</span><span class="ansi-blue-fg">(.0)</span>
-<span class="ansi-green-fg">    406</span>             summary += [
-<span class="ansi-green-fg">    407</span>                 summarizer(k, mapping[k], col_width, **summarizer_kwargs[k])
-<span class="ansi-green-fg">    408</span>                 <span style="font-weight:bold;color:rgb(0,135,0)">for</span> k <span style="font-weight:bold;color:rgb(175,0,255)">in</span> keys[-last_rows:]
-<span class="ansi-green-fg">    409</span>             ]
-<span class="ansi-green-fg">    410</span>     <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
-<span class="ansi-green-fg">    411</span>         summary += [
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">412</span>             <span class="ansi-yellow-bg">summarizer</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">k</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">v</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">col_width</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">summarizer_kwargs</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">k</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">    413</span>             <span style="font-weight:bold;color:rgb(0,135,0)">for</span> k, v <span style="font-weight:bold;color:rgb(175,0,255)">in</span> mapping.items()
-<span class="ansi-green-fg">    414</span>         ]
-<span class="ansi-green-fg">    415</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
-<span class="ansi-green-fg">    416</span>     summary += [EMPTY_REPR]
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/formatting.py:348</span>, in <span class="ansi-cyan-fg">summarize_variable</span><span class="ansi-blue-fg">(name, var, col_width, max_width, is_index)</span>
-<span class="ansi-green-fg">    345</span> front_str = <span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>first_col<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>dims_str<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>variable.dtype<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>nbytes_str<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">    347</span> values_width = max_width - <span style="color:rgb(0,135,0)">len</span>(front_str)
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">348</span> values_str = <span class="ansi-yellow-bg">inline_variable_array_repr</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">variable</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">values_width</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">    350</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> front_str + values_str
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/formatting.py:307</span>, in <span class="ansi-cyan-fg">inline_variable_array_repr</span><span class="ansi-blue-fg">(var, max_width)</span>
-<span class="ansi-green-fg">    305</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">getattr</span>(var, <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">_in_memory</span><span class="ansi-yellow-fg">"</span>, <span style="font-weight:bold;color:rgb(0,135,0)">False</span>):
-<span class="ansi-green-fg">    306</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> format_array_flat(var, max_width)
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">307</span> dask_array_type = <span class="ansi-yellow-bg">array_type</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">dask</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">    308</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">isinstance</span>(var._data, dask_array_type):
-<span class="ansi-green-fg">    309</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> inline_dask_repr(var.data)
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/namedarray/pycompat.py:83</span>, in <span class="ansi-cyan-fg">array_type</span><span class="ansi-blue-fg">(mod)</span>
-<span class="ansi-green-fg">     81</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg">array_type</span>(mod: ModType) -&gt; DuckArrayTypes:
-<span class="ansi-green-fg">     82</span> <span style="color:rgb(188,188,188)">    </span><span style="font-style:italic" class="ansi-yellow-fg">"""Quick wrapper to get the array class of the module."""</span>
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">83</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">_get_cached_duck_array_module</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">mod</span><span class="ansi-yellow-bg">)</span>.type
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/namedarray/pycompat.py:74</span>, in <span class="ansi-cyan-fg">_get_cached_duck_array_module</span><span class="ansi-blue-fg">(mod)</span>
-<span class="ansi-green-fg">     72</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg">_get_cached_duck_array_module</span>(mod: ModType) -&gt; DuckArrayModule:
-<span class="ansi-green-fg">     73</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> mod <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> _cached_duck_array_modules:
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">74</span>         duckmod = <span class="ansi-yellow-bg">DuckArrayModule</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">mod</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">     75</span>         _cached_duck_array_modules[mod] = duckmod
-<span class="ansi-green-fg">     76</span>         <span style="font-weight:bold;color:rgb(0,135,0)">return</span> duckmod
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/namedarray/pycompat.py:40</span>, in <span class="ansi-cyan-fg">DuckArrayModule.__init__</span><span class="ansi-blue-fg">(self, mod)</span>
-<span class="ansi-green-fg">     38</span> <span style="font-weight:bold;color:rgb(0,135,0)">try</span>:
-<span class="ansi-green-fg">     39</span>     duck_array_module = import_module(mod)
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">40</span>     duck_array_version = <span class="ansi-yellow-bg">Version</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">duck_array_module</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">__version__</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">     42</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> mod == <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">dask</span><span class="ansi-yellow-fg">"</span>:
-<span class="ansi-green-fg">     43</span>         duck_array_type = (import_module(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">dask.array</span><span class="ansi-yellow-fg">"</span>).Array,)
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/packaging/version.py:202</span>, in <span class="ansi-cyan-fg">Version.__init__</span><span class="ansi-blue-fg">(self, version)</span>
-<span class="ansi-green-fg">    200</span> match = <span style="color:rgb(0,135,0)">self</span>._regex.search(version)
-<span class="ansi-green-fg">    201</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> match:
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">202</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> InvalidVersion(<span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Invalid version: </span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>version<span style="font-weight:bold;color:rgb(175,95,135)">!r}</span><span class="ansi-yellow-fg">"</span>)
-<span class="ansi-green-fg">    204</span> <span style="font-style:italic;color:rgb(95,135,135)"># Store the parsed out pieces of the version</span>
-<span class="ansi-green-fg">    205</span> <span style="color:rgb(0,135,0)">self</span>._version = _Version(
-<span class="ansi-green-fg">    206</span>     epoch=<span style="color:rgb(0,135,0)">int</span>(match.group(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">epoch</span><span class="ansi-yellow-fg">"</span>)) <span style="font-weight:bold;color:rgb(0,135,0)">if</span> match.group(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">epoch</span><span class="ansi-yellow-fg">"</span>) <span style="font-weight:bold;color:rgb(0,135,0)">else</span> <span class="ansi-green-fg">0</span>,
-<span class="ansi-green-fg">    207</span>     release=<span style="color:rgb(0,135,0)">tuple</span>(<span style="color:rgb(0,135,0)">int</span>(i) <span style="font-weight:bold;color:rgb(0,135,0)">for</span> i <span style="font-weight:bold;color:rgb(175,0,255)">in</span> match.group(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">release</span><span class="ansi-yellow-fg">"</span>).split(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">.</span><span class="ansi-yellow-fg">"</span>)),
-<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">    213</span>     local=_parse_local_version(match.group(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">local</span><span class="ansi-yellow-fg">"</span>)),
-<span class="ansi-green-fg">    214</span> )
-
-<span class="ansi-red-fg">InvalidVersion</span>: Invalid version: 'unknown'</pre>
-</div>
-</div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">InvalidVersion</span>                            Traceback (most recent call last)
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/IPython/core/formatters.py:406</span>, in <span class="ansi-cyan-fg">BaseFormatter.__call__</span><span class="ansi-blue-fg">(self, obj)</span>
-<span class="ansi-green-fg">    404</span>     method = get_real_method(obj, <span style="color:rgb(0,135,0)">self</span>.print_method)
-<span class="ansi-green-fg">    405</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> method <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>:
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">406</span>         <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">method</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">    407</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>
-<span class="ansi-green-fg">    408</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/dataset.py:2621</span>, in <span class="ansi-cyan-fg">Dataset._repr_html_</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-fg">   2619</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> OPTIONS[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">display_style</span><span class="ansi-yellow-fg">"</span>] == <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">text</span><span class="ansi-yellow-fg">"</span>:
-<span class="ansi-green-fg">   2620</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">&lt;pre&gt;</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>escape(<span style="color:rgb(0,135,0)">repr</span>(<span style="color:rgb(0,135,0)">self</span>))<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">&lt;/pre&gt;</span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">2621</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">formatting_html</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">dataset_repr</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">)</span>
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/formatting_html.py:342</span>, in <span class="ansi-cyan-fg">dataset_repr</span><span class="ansi-blue-fg">(ds)</span>
-<span class="ansi-green-fg">    336</span> obj_type = <span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">xarray.</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span><span style="color:rgb(0,135,0)">type</span>(ds).<span class="ansi-blue-fg">__name__</span><span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">    338</span> header_components = [<span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">&lt;div class=</span><span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">xr-obj-type</span><span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">&gt;</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>escape(obj_type)<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">&lt;/div&gt;</span><span class="ansi-yellow-fg">"</span>]
-<span class="ansi-green-fg">    340</span> sections = [
-<span class="ansi-green-fg">    341</span>     dim_section(ds),
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">342</span>     <span class="ansi-yellow-bg">coord_section</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">ds</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">coords</span><span class="ansi-yellow-bg">)</span>,
-<span class="ansi-green-fg">    343</span>     datavar_section(ds.data_vars),
-<span class="ansi-green-fg">    344</span>     index_section(_get_indexes_dict(ds.xindexes)),
-<span class="ansi-green-fg">    345</span>     attr_section(ds.attrs),
-<span class="ansi-green-fg">    346</span> ]
-<span class="ansi-green-fg">    348</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> _obj_repr(ds, header_components, sections)
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/formatting_html.py:206</span>, in <span class="ansi-cyan-fg">_mapping_section</span><span class="ansi-blue-fg">(mapping, name, details_func, max_items_collapse, expand_option_name, enabled)</span>
-<span class="ansi-green-fg">    199</span> expanded = _get_boolean_with_default(
-<span class="ansi-green-fg">    200</span>     expand_option_name, n_items &lt; max_items_collapse
-<span class="ansi-green-fg">    201</span> )
-<span class="ansi-green-fg">    202</span> collapsed = <span style="font-weight:bold;color:rgb(175,0,255)">not</span> expanded
-<span class="ansi-green-fg">    204</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> collapsible_section(
-<span class="ansi-green-fg">    205</span>     name,
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">206</span>     details=<span class="ansi-yellow-bg">details_func</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">mapping</span><span class="ansi-yellow-bg">)</span>,
-<span class="ansi-green-fg">    207</span>     n_items=n_items,
-<span class="ansi-green-fg">    208</span>     enabled=enabled,
-<span class="ansi-green-fg">    209</span>     collapsed=collapsed,
-<span class="ansi-green-fg">    210</span> )
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/formatting_html.py:122</span>, in <span class="ansi-cyan-fg">summarize_coords</span><span class="ansi-blue-fg">(variables)</span>
-<span class="ansi-green-fg">    120</span> li_items = []
-<span class="ansi-green-fg">    121</span> <span style="font-weight:bold;color:rgb(0,135,0)">for</span> k, v <span style="font-weight:bold;color:rgb(175,0,255)">in</span> variables.items():
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">122</span>     li_content = <span class="ansi-yellow-bg">summarize_variable</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">k</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">v</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">is_index</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">k</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(175,0,255)" class="ansi-yellow-bg">in</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">variables</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">xindexes</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">    123</span>     li_items.append(<span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">&lt;li class=</span><span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">xr-var-item</span><span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">&gt;</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>li_content<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">&lt;/li&gt;</span><span class="ansi-yellow-fg">"</span>)
-<span class="ansi-green-fg">    125</span> vars_li = <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">"</span>.join(li_items)
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/formatting_html.py:95</span>, in <span class="ansi-cyan-fg">summarize_variable</span><span class="ansi-blue-fg">(name, var, is_index, dtype)</span>
-<span class="ansi-green-fg">     92</span> data_id = <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">data-</span><span class="ansi-yellow-fg">"</span> + <span style="color:rgb(0,135,0)">str</span>(uuid.uuid4())
-<span class="ansi-green-fg">     93</span> disabled = <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">"</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">len</span>(var.attrs) <span style="font-weight:bold;color:rgb(0,135,0)">else</span> <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">disabled</span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">95</span> preview = escape(<span class="ansi-yellow-bg">inline_variable_array_repr</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">variable</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-green-fg ansi-yellow-bg">35</span><span class="ansi-yellow-bg">)</span>)
-<span class="ansi-green-fg">     96</span> attrs_ul = summarize_attrs(var.attrs)
-<span class="ansi-green-fg">     97</span> data_repr = short_data_repr_html(variable)
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/core/formatting.py:307</span>, in <span class="ansi-cyan-fg">inline_variable_array_repr</span><span class="ansi-blue-fg">(var, max_width)</span>
-<span class="ansi-green-fg">    305</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">getattr</span>(var, <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">_in_memory</span><span class="ansi-yellow-fg">"</span>, <span style="font-weight:bold;color:rgb(0,135,0)">False</span>):
-<span class="ansi-green-fg">    306</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> format_array_flat(var, max_width)
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">307</span> dask_array_type = <span class="ansi-yellow-bg">array_type</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">dask</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">    308</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">isinstance</span>(var._data, dask_array_type):
-<span class="ansi-green-fg">    309</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> inline_dask_repr(var.data)
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/namedarray/pycompat.py:83</span>, in <span class="ansi-cyan-fg">array_type</span><span class="ansi-blue-fg">(mod)</span>
-<span class="ansi-green-fg">     81</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg">array_type</span>(mod: ModType) -&gt; DuckArrayTypes:
-<span class="ansi-green-fg">     82</span> <span style="color:rgb(188,188,188)">    </span><span style="font-style:italic" class="ansi-yellow-fg">"""Quick wrapper to get the array class of the module."""</span>
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">83</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">_get_cached_duck_array_module</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">mod</span><span class="ansi-yellow-bg">)</span>.type
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/namedarray/pycompat.py:74</span>, in <span class="ansi-cyan-fg">_get_cached_duck_array_module</span><span class="ansi-blue-fg">(mod)</span>
-<span class="ansi-green-fg">     72</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg">_get_cached_duck_array_module</span>(mod: ModType) -&gt; DuckArrayModule:
-<span class="ansi-green-fg">     73</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> mod <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> _cached_duck_array_modules:
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">74</span>         duckmod = <span class="ansi-yellow-bg">DuckArrayModule</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">mod</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">     75</span>         _cached_duck_array_modules[mod] = duckmod
-<span class="ansi-green-fg">     76</span>         <span style="font-weight:bold;color:rgb(0,135,0)">return</span> duckmod
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/xarray/namedarray/pycompat.py:40</span>, in <span class="ansi-cyan-fg">DuckArrayModule.__init__</span><span class="ansi-blue-fg">(self, mod)</span>
-<span class="ansi-green-fg">     38</span> <span style="font-weight:bold;color:rgb(0,135,0)">try</span>:
-<span class="ansi-green-fg">     39</span>     duck_array_module = import_module(mod)
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">40</span>     duck_array_version = <span class="ansi-yellow-bg">Version</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">duck_array_module</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">__version__</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">     42</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> mod == <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">dask</span><span class="ansi-yellow-fg">"</span>:
-<span class="ansi-green-fg">     43</span>         duck_array_type = (import_module(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">dask.array</span><span class="ansi-yellow-fg">"</span>).Array,)
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/anaconda3/envs/eds220-env/lib/python3.11/site-packages/packaging/version.py:202</span>, in <span class="ansi-cyan-fg">Version.__init__</span><span class="ansi-blue-fg">(self, version)</span>
-<span class="ansi-green-fg">    200</span> match = <span style="color:rgb(0,135,0)">self</span>._regex.search(version)
-<span class="ansi-green-fg">    201</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> match:
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">202</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> InvalidVersion(<span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Invalid version: </span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>version<span style="font-weight:bold;color:rgb(175,95,135)">!r}</span><span class="ansi-yellow-fg">"</span>)
-<span class="ansi-green-fg">    204</span> <span style="font-style:italic;color:rgb(95,135,135)"># Store the parsed out pieces of the version</span>
-<span class="ansi-green-fg">    205</span> <span style="color:rgb(0,135,0)">self</span>._version = _Version(
-<span class="ansi-green-fg">    206</span>     epoch=<span style="color:rgb(0,135,0)">int</span>(match.group(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">epoch</span><span class="ansi-yellow-fg">"</span>)) <span style="font-weight:bold;color:rgb(0,135,0)">if</span> match.group(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">epoch</span><span class="ansi-yellow-fg">"</span>) <span style="font-weight:bold;color:rgb(0,135,0)">else</span> <span class="ansi-green-fg">0</span>,
-<span class="ansi-green-fg">    207</span>     release=<span style="color:rgb(0,135,0)">tuple</span>(<span style="color:rgb(0,135,0)">int</span>(i) <span style="font-weight:bold;color:rgb(0,135,0)">for</span> i <span style="font-weight:bold;color:rgb(175,0,255)">in</span> match.group(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">release</span><span class="ansi-yellow-fg">"</span>).split(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">.</span><span class="ansi-yellow-fg">"</span>)),
-<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">    213</span>     local=_parse_local_version(match.group(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">local</span><span class="ansi-yellow-fg">"</span>)),
-<span class="ansi-green-fg">    214</span> )
-
-<span class="ansi-red-fg">InvalidVersion</span>: Invalid version: 'unknown'</pre>
-</div>
-</div>
 </div>
 <p>This <code>xarray</code> has 1418 y dimensions and 2742 x dimensions. The coordinates are x, y, and time which are are float64, float64, and datetime64 types (respectively). The variables are red, green, blue, near infared and short wave infared light bands as well as a spatial reference. The bands are in float32 while the spatial_ref is an int64, this shouldn’t be an issue going further - however as the analysis continues it may become an issue.</p>
 </section>
@@ -663,7 +430,7 @@ Datum: World Geodetic System 1984 ensemble
 </div>
 </div>
 <p>Oh no! Theres no CRS meaning that it will be harder to plot, however there actually is! It’s just encoded in the <code>spatial_ref</code> variable.</p>
-<div id="37e73bac-815d-42cb-8cd5-a36b2580acd8" class="cell" data-tags="[]" data-execution_count="49">
+<div id="37e73bac-815d-42cb-8cd5-a36b2580acd8" class="cell" data-tags="[]" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f' The actual CRS of the xarray is: </span><span class="sc">{</span>netcdf<span class="sc">.</span>spatial_ref<span class="sc">.</span>crs_wkt<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -679,13 +446,13 @@ Datum: World Geodetic System 1984 ensemble
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>netcdf <span class="op">=</span> netcdf.rio.write_crs(netcdf.spatial_ref.crs_wkt) <span class="co"># Need to write_crs due to being an xarrray</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="f469941c-f013-4846-9f39-affa3b63c7f3" class="cell" data-tags="[]" data-execution_count="50">
+<div id="f469941c-f013-4846-9f39-affa3b63c7f3" class="cell" data-tags="[]" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'The xarray now has the CRS: </span><span class="sc">{</span>netcdf<span class="sc">.</span>rio<span class="sc">.</span>crs<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>The xarray now has the CRS: None</code></pre>
+<pre><code>The xarray now has the CRS: EPSG:32611</code></pre>
 </div>
 </div>
 </section>
@@ -715,7 +482,7 @@ The green band has 1 na values
 The blue band has 109 na values</code></pre>
 </div>
 </div>
-<div id="a562dc3b-c349-44d1-b87e-8413e226e6a9" class="cell">
+<div id="a562dc3b-c349-44d1-b87e-8413e226e6a9" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>netcdf[[<span class="st">'red'</span>, <span class="st">'green'</span>, <span class="st">'blue'</span>]].fillna(<span class="dv">0</span>).to_array().plot.imshow(robust <span class="op">=</span> <span class="va">True</span>) <span class="co"># Robust and fillna allow us to plot despite the NA values</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -762,7 +529,7 @@ The blue band has 109 na values</code></pre>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>eaton_perimeter <span class="op">=</span> eaton_perimeter.to_crs(netcdf.rio.crs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="7c6ade15-d6d5-4c15-95a6-08d92cfc9c58" class="cell" data-tags="[]" data-execution_count="28">
+<div id="7c6ade15-d6d5-4c15-95a6-08d92cfc9c58" class="cell" data-tags="[]" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a> </span>
@@ -818,7 +585,7 @@ The blue band has 109 na values</code></pre>
 <h3 class="anchored" data-anchor-id="intersection-with-environmental-justice">8. Intersection with environmental justice</h3>
 <p>In this and the following sections we will be accessing data from the California Environmental Justice Index (EJI), and plotting census count information in the context of the fire perimeters.</p>
 <p>We begin by importing the EJI. <span class="citation" data-cites="cdc_eji_2021">(<a href="#ref-cdc_eji_2021" role="doc-biblioref">Centers for Disease Control and Prevention and Agency for Toxic Substances and Disease Registry 2021</a>)</span></p>
-<div id="ae3207a4" class="cell" data-execution_count="76">
+<div id="ae3207a4" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fp <span class="op">=</span> os.path.join(<span class="st">'data'</span>,<span class="st">'EJI_2024_California '</span>,<span class="st">'EJI_2024_California.gdb'</span>)</span>
@@ -836,7 +603,7 @@ The blue band has 109 na values</code></pre>
 <section id="polygon-intersection" class="level3">
 <h3 class="anchored" data-anchor-id="polygon-intersection">9. Polygon intersection</h3>
 <p>To find where social variables intersect our fire perimeters we can use polygon intersection, where we examine where the shape of the census tracts intersect with the shape of the fire perimeter.</p>
-<div id="0a29e159" class="cell">
+<div id="0a29e159" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From previous exploration I know the CRS does not match </span></span>
@@ -862,7 +629,7 @@ The blue band has 109 na values</code></pre>
 </div>
 </div>
 <p>Polygon intersection includes the entire census tracts that are touching the fire, see orange. This problem becomes more aparent when we plot the Eaton fire.</p>
-<div id="1bfb5f6d" class="cell">
+<div id="1bfb5f6d" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spatially join EJI with palisades</span></span>
@@ -980,7 +747,7 @@ The blue band has 109 na values</code></pre>
 <p>For this section I chose to examine the percentage of the census tracts which were renters. I chose this because, following the fires, renters faced issues with: - Loss of homes - Rent increases (double to triple the price) - Landlords trying to push out long-term renters who pay lower rents to make way for displaced fire victims who have more money to spend - Paying out of pocket to clean and fix partially damaged rental space <span class="citation" data-cites="CBSNews_2025_WildfireSurvivors">(<a href="#ref-CBSNews_2025_WildfireSurvivors" role="doc-biblioref">CBS Los Angeles 2025</a>)</span></p>
 <p>These issues compound the already devistating fire and reduce quality of life for renters.</p>
 <p>To plot this I used the percentage of census tracts which are renters.</p>
-<div id="8c341855" class="cell">
+<div id="8c341855" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">12</span>))</span>
