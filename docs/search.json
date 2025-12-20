@@ -2,23 +2,23 @@
   {
     "objectID": "resources.html",
     "href": "resources.html",
-    "title": "All my favorite resources",
+    "title": "Curriculum Vitae",
     "section": "",
-    "text": "this is an h1 element\n\n\nthis is an h1 element with the title class\n\n\nthis paragraph is butterscotch\n\n\nthis paragraph is centered\n\n\nthis paragraph is centered and butterscotch\n\n\nHere’s where I’m describing something fun that I enjoy doing\n\nThis\nis\nall\nbutterscotch\n\n\nThis\nis\nall\ncentered"
+    "text": "Education\n\nMaster of Environmental Data Science Student - UC Santa Barbara, Bren School of Environmental Science & Management | UC Santa Barbara (2025-Present)\nB.S. Marine Biology | University of California, Santa Cruz (2019-2023)\n\nExperience\n\nMarine Educator and Instructor | The Marine Science Institute, Redwood City (May 2023 - July 2025)\n\nEducated Kindergarten-College students from the San Francisco Bay Area and the Sacramento-San Joaquin Delta about the processes and animals in local habitats\nUsed R to analyze and visualize data collected by the Marine Science institute\nTrained as a crew member on a 90 foot research vessel\nBecame proficient in handling animals such as invertebrates, bony fishes, and cartilaginous fishes\n\nSubstitute Teacher | Santa Cruz (January 2025 – June 2025)\n\nTaught students across K–12 grade levels, adapting to diverse classroom needs.\nImplemented prepared lesson plans effectively to maximize student engagement and learning.\n\nKelp Collector | U.C. Santa Cruz, Santa Cruz (March 2022–May 2022)\n\nCollected kelp for the Marine Botany classes’ labs\nIdentified up to 10 species a week, a total of around 30 local kelp species\n\n\nSkills\n\nData Analysis: Proficient in analyzing large datasets using languages such as R and Python to derive meaningful insights and visualizations for environmental and ecologic research\nDiving: PADI Rescue Diver; AAUS Scientific Diver\nHelmsmanship: engine maintenance, knots, and emergency procedures\nLanguages: Fluent in Italian; proficient in Spanish"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "I am currently a student who works"
+    "text": "I grew up in the San Francisco Bay area, in proximity to the ocean, mountains, and bay. Growing up in nature led me to pursue a career in Marine Biology. At UC Santa Cruz I participated in numerous research projects including a study on Posedonia Oceanica in Corsica, France. This research project was analyzed and visualized in JMP, which made me think: there must be a better way.\nAfter that project I began to teach myself R, along with taking a graduate course on analysis and visualization using the program. This course made me realize a passion for visualization as a means for scientific communication.\nPost graduation I went back to the San Francisco Bay to work at the Marine Science Institute, an environmental education institution in Redwood City. At the institute I taught K-college level students about the ecology and dynamics of the bay, often from our 90 foot research vessel. This position taught me alot about how to communicate scientific ideas to different groups and age ranges. This position made me yearn for more opportunities to communicate and study ecology and marine environments, which led to me to finding my current program at UCSB.\nThe Masters of Environmental Data Science (MEDS) program has really taught me alot, despite me only being in the second quarter. I have expanded my horizons on python, geospatial data, and more rigorous statistical analyses. In the winter quarter I will be starting my capstone which examines Bird population dynamics in different GAP statuses. More to come on that soon!\n\nWhat I’m doing for fun!\n\nWhen i’m not working on assignments i’ve been enjoying playing soccer, crocheting, and going for sunrise cold plunges in the Pacific ocean (I still don’t know the difference between Sands and Devereux)"
   },
   {
     "objectID": "about.html#what-i-do-for-work",
     "href": "about.html#what-i-do-for-work",
     "title": "About",
-    "section": "",
-    "text": "I am currently a student who works"
+    "section": "What I do for work",
+    "text": "What I do for work\nI am currently a student who works"
   },
   {
     "objectID": "about.html#what-i-do-for-fun",
@@ -109,7 +109,7 @@
     "href": "index.html",
     "title": "Peter Vitale",
     "section": "",
-    "text": "I’m a marine biologist with a passion for ocean life, data visualization, and science communication. I studied Marine Biology at UC Santa Cruz and have worked in environmental education, field research, and data analysis. I enjoy finding creative ways to connect people with the natural world and make environmental data more engaging and accessible."
+    "text": "I’m an environmental data scientist with a focus on data visualization and science communication. I’m currently completing a Master’s in Environmental Data Science at UC Santa Barbara, where my work combines spatial analysis, data visualization, and applied environmental research. With a background in marine biology spanning fieldwork, environmental education, and data-driven analysis, I enjoy building tools and stories that make environmental data accessible and meaningful to diverse audiences."
   },
   {
     "objectID": "posts.html",
@@ -152,5 +152,12 @@
     "title": "Aquaculture and EEZ’s",
     "section": "Final Discussion",
     "text": "Final Discussion\nThis project is a small example of how easy it can be to work with publicly available temperature and depth data. Even with a few limitations, like Bull Kelp’s actual temperature range compared to the surface-temperature inputs, I’m still pretty happy with how realistic the results are for identifying potential aquaculture spots. The code ended up being really modular too, which means I can keep adding species or tweaking their ranges as new info comes out. And honestly, that’s what excites me most: this could grow into a much more complete tool over time, especially if I layer in more environmental variables or species traits. For now, though, it feels like a solid starting point and a fun way to blend data, ecology, and mapping into something genuinely useful."
+  },
+  {
+    "objectID": "CV.html",
+    "href": "CV.html",
+    "title": "Curriculum Vitae",
+    "section": "",
+    "text": "Education\n\nMaster of Environmental Data Science Student - UC Santa Barbara, Bren School of Environmental Science & Management | UC Santa Barbara (2025-Present)\nB.S. Marine Biology | University of California, Santa Cruz (2019-2023)\n\nExperience\n\nMarine Educator and Instructor | The Marine Science Institute, Redwood City (May 2023 - July 2025)\n\nEducated Kindergarten-College students from the San Francisco Bay Area and the Sacramento-San Joaquin Delta about the processes and animals in local habitats\nUsed R to analyze and visualize data collected by the Marine Science institute\nTrained as a crew member on a 90 foot research vessel\nBecame proficient in handling animals such as invertebrates, bony fishes, and cartilaginous fishes\n\nSubstitute Teacher | Santa Cruz (January 2025 – June 2025)\n\nTaught students across K–12 grade levels, adapting to diverse classroom needs.\nImplemented prepared lesson plans effectively to maximize student engagement and learning.\n\nKelp Collector | U.C. Santa Cruz, Santa Cruz (March 2022–May 2022)\n\nCollected kelp for the Marine Botany classes’ labs\nIdentified up to 10 species a week, a total of around 30 local kelp species\n\n\nSkills\n\nData Analysis: Proficient in analyzing large datasets using languages such as R and Python to derive meaningful insights and visualizations for environmental and ecologic research\nDiving: PADI Rescue Diver; AAUS Scientific Diver\nHelmsmanship: engine maintenance, knots, and emergency procedures\nLanguages: Fluent in Italian; proficient in Spanish"
   }
 ]

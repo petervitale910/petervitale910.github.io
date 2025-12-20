@@ -1,0 +1,45 @@
+---
+title: "Curriculum Vitae"
+format: html
+---
+
+<h2 class='title'>Education</h2>
+Master of Environmental Data Science Student - UC Santa Barbara, Bren School of Environmental Science & Management | UC Santa Barbara (2025-Present)
+
+B.S. Marine Biology | University of California, Santa Cruz (2019-2023)
+
+<h2 class='title'>Experience</h2>
+
+Marine Educator and Instructor | The Marine Science Institute, Redwood City (May 2023 - July 2025)
+
+- Educated Kindergarten-College students from the San Francisco Bay Area and the Sacramento-San Joaquin Delta about the processes and animals in local habitats
+
+- Used R to analyze and visualize data collected by the Marine Science institute
+
+- Trained as a crew member on a 90 foot research vessel
+
+- Became proficient in handling animals such as invertebrates, bony fishes, and cartilaginous fishes
+
+Substitute Teacher | Santa Cruz (January 2025 – June 2025)
+
+- Taught students across K–12 grade levels, adapting to diverse classroom needs.
+
+- Implemented prepared lesson plans effectively to maximize student engagement and learning.
+
+
+Kelp Collector | U.C. Santa Cruz, Santa Cruz (March 2022–May 2022)
+
+- Collected kelp for the Marine Botany classes’ labs
+
+- Identified up to 10 species a week, a total of around 30 local kelp species 
+
+
+<h2 class='title'>Skills</h2>
+
+Data Analysis: Proficient in analyzing large datasets using languages such as R and Python to derive meaningful insights and visualizations for environmental and ecologic research
+
+Diving: PADI Rescue Diver; AAUS Scientific Diver
+
+Helmsmanship: engine maintenance, knots, and emergency procedures
+
+Languages:  Fluent in Italian; proficient in Spanish

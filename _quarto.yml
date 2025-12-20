@@ -14,8 +14,8 @@ website:
         text: Home
       - about.qmd
       - posts.qmd
-      - href: resources.qmd
-        text: Resources
+      - href: CV.qmd
+        text: CV
       - icon: github
         href: https://github.com/petervitale910/petervitale910.github.io
   page-footer: 

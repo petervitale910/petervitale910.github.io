@@ -4,7 +4,7 @@ image: Peter_Vitale.jpg
 about: 
   template: jolla
   image-shape: rounded
-  image-width: 14em
+  image-width: 12em
   links: 
     - text: LinkedIn
       href: https://www.linkedin.com/in/peter-vitale-339407228/
@@ -17,4 +17,4 @@ about:
       icon: github
 ---
 
-I’m a marine biologist with a passion for ocean life, data visualization, and science communication. I studied Marine Biology at UC Santa Cruz and have worked in environmental education, field research, and data analysis. I enjoy finding creative ways to connect people with the natural world and make environmental data more engaging and accessible.
+I’m an environmental data scientist with a focus on data visualization and science communication. I’m currently completing a Master’s in Environmental Data Science at UC Santa Barbara, where my work combines spatial analysis, data visualization, and applied environmental research. With a background in marine biology spanning fieldwork, environmental education, and data-driven analysis, I enjoy building tools and stories that make environmental data accessible and meaningful to diverse audiences.
