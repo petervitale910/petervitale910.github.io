@@ -1,5 +1,7 @@
 ---
 title: "Miage or Mirage?"
+description: "Examining Glacier recession and glacier lake fragmentation"
+categories: [MEDS, R, Geospatial, Data Viz]
 author: "Peter Vitale"
 format: html
 editor: visual
