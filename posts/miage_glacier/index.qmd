@@ -237,13 +237,59 @@ ggsave(filename = 'AREA.pdf', width = 1500,
 showtext.auto(enable = FALSE)
 ```
 
-## Design and approach
 
-The basis of this infographics is maps. Before this project I was sick of maps, and I still am. They are really hard to show from a data visualization perspective, especially when zooming in on an area that is pretty remote. This graphic format necessitates a reference as to where we are, which is hard to do with most basemaps. I settled on this beautiful visualization from Johann Georg Mayr in 1874 which gives this old paper feel - almost like an old trail guide (Mayr, J. G. (1874)). I tried to keep this trail- guide aesthetic throughout. In my text I decided to do dual text in English and Italian, with flag markers you would commonly see in the area. Furthermore, all my text is 'spoken' by an alpine guide png which I put together as if a guide is giving a hiker information. I wanted to keep my theme consistent on this so I referenced some trail maps from the area to lock in on my visuals. One thing that is striking about the area is the colors of the nature, so all my colors came from pictures of the landscape. I tested my colors using a color blind simulator extension through google chrome. My color palette was this: 
+## Design Elements
+
+::: panel-tabset
+### Graphic Form
+
+**Graphic Form:** The basis of this infographic is maps. Before this project I was sick of maps, and I still am. They are really hard to show from a data visualization perspective, especially when zooming in on an area that is pretty remote. This graphic format necessitates a reference as to where we are, which is hard to do with most basemaps. See the `Data Context` section for more information on my basemap. 
+
+### Text
+
+**Text:** A majority of the text in the infographic was added in afinity, only the plot text being added in R. This was done to correctly scale it based on the final product. The fonts I used can be found in the `typography` section
+
+### Icons
+
+**Icons:** All my text is 'spoken' by an alpine guide png which I put together as if a guide is giving a hiker information. Furthermore the Italian and English flags were used and obtained from flaticon, and were created by the creators `Creatype` and `IconMarketPk` respectively. 
+
+### Themes
+
+**Themes:** I tried to keep this trail- guide aesthetic throughout. In my text I decided to do dual text in English and Italian, with flag markers you would commonly see in the area. I wanted to keep my theme consistent on this so I referenced some trail maps from the area to lock in on my visuals.
+
+### Colors
+
+**Colors:** One thing that is striking about the area is the colors of the nature, so all my colors came from pictures of the landscape. My color palette was this: 
 
 ![](color_palette.jpg)
 
-Typography is tricky for me, as it is something I don't really think about naturally. Personally I have no differentiation between serif versus sans. My title font, `Academy Engraved LET`, was chosen because of its 'gravitasse' as well as its similarity to my basemap. My main text font for my annotations `DIN Condensed` was chosen for readability. For my plots I chose a font - `Fira Sans Condensed` - as it displays well on the picture of the actual miage lake. My data to ink ratio is very high, but It gives the feel of the old trail maps which comes first for my purposes. In the future I would love to reach out to locals to see their opinion of the lake and its decline. 
+### Typography
+
+**Typography:** Typography is tricky for me, as it is something I don't really think about naturally. Personally I have no differentiation between serif versus sans. My title font, `Academy Engraved LET`, was chosen because of its 'gravitasse' as well as its similarity to my basemap. My main text font for my annotations `DIN Condensed` was chosen for readability. For my plots I chose a font - `Fira Sans Condensed` - as it displays well on the picture of the actual miage lake.
+
+### General Design
+
+**General Design:** I made the infographic with the idea of starting big and shrinking down. First I want the eyes to be drawn to the map of the glaciers. Along with the caption, this gives the idea that the glacier is receding. Next we zoom into the lake, with both a map and an area. I wanted these to be on the same level so they could be viewed simultaneously. 
+
+### Data Context
+
+**Data Context:** To contextualize any map a good basemap is necessary. I settled on this beautiful visualization from Johann Georg Mayr in 1874 which gives this old paper feel - almost like an old trail guide (Mayr, J. G. (1874)).
+
+![The Basemap](basemap.jpg)
+
+### Message
+
+**Message:** My main message is that glacier recession is leading to glacier fragmentation and decline in area. I feel like given my data, I put together a tight infographic which displays this message to wide audiences, from Italy to any English speaking country. 
+
+### Accessibility
+
+**Accessibility:** I tested my colors using a color blind simulator extension through google chrome. I found that the results were distinguishable and the plot was viewable in all the lenses availaible to the extension. This being said, those with Monochromacy / Achromatopsia would have the hardest time reading the infographic.
+
+### DEI
+
+**Diversity, Equity, and Inclusion (DEI):** DEI is essential to consider for any data that visualizes people, places, and/or communities. While my family is from the area, we are not exactly locals.In the future I would love to reach out to locals to see their opinion of the lake and its decline. 
+:::
+
 
 ## Conclusion 
 

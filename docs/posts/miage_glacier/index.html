@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#why-miage" id="toc-why-miage" class="nav-link active" data-scroll-target="#why-miage">Why Miage?</a></li>
-  <li><a href="#design-and-approach" id="toc-design-and-approach" class="nav-link" data-scroll-target="#design-and-approach">Design and approach</a></li>
+  <li><a href="#design-elements" id="toc-design-elements" class="nav-link" data-scroll-target="#design-elements">Design Elements</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a>
   <ul class="collapse">
@@ -450,11 +450,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="design-and-approach" class="level2">
-<h2 class="anchored" data-anchor-id="design-and-approach">Design and approach</h2>
-<p>The basis of this infographics is maps. Before this project I was sick of maps, and I still am. They are really hard to show from a data visualization perspective, especially when zooming in on an area that is pretty remote. This graphic format necessitates a reference as to where we are, which is hard to do with most basemaps. I settled on this beautiful visualization from Adolph Hartleben in 1888 which gives this old paper feel - almost like an old trail guide (Hartleben, A. (1888)). I tried to keep this trail- guide aesthetic throughout. In my text I decided to do dual text in English and Italian, with flag markers you would commonly see in the area. Furthermore, all my text is ‘spoken’ by an alpine guide png which I put together as if a guide is giving a hiker information. I wanted to keep my theme consistent on this so I referenced some trail maps from the area to lock in on my visuals. One thing that is striking about the area is the colors of the nature, so all my colors came from pictures of the landscape. I tested my colors using a color blind simulator extension through google chrome. My color palette was this:</p>
+<section id="design-elements" class="level2">
+<h2 class="anchored" data-anchor-id="design-elements">Design Elements</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Graphic Form</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Text</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Icons</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Themes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">Colors</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false" href="">Typography</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-7-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-7" role="tab" aria-controls="tabset-1-7" aria-selected="false" href="">General Design</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-8-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-8" role="tab" aria-controls="tabset-1-8" aria-selected="false" href="">Data Context</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-9-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-9" role="tab" aria-controls="tabset-1-9" aria-selected="false" href="">Message</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-10-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-10" role="tab" aria-controls="tabset-1-10" aria-selected="false" href="">Accessibility</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-11-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-11" role="tab" aria-controls="tabset-1-11" aria-selected="false" href="">DEI</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><strong>Graphic Form:</strong> The basis of this infographic is maps. Before this project I was sick of maps, and I still am. They are really hard to show from a data visualization perspective, especially when zooming in on an area that is pretty remote. This graphic format necessitates a reference as to where we are, which is hard to do with most basemaps. See the <code>Data Context</code> section for more information on my basemap.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><strong>Text:</strong> A majority of the text in the infographic was added in afinity, only the plot text being added in R. This was done to correctly scale it based on the final product. The fonts I used can be found in the <code>typography</code> section</p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p><strong>Icons:</strong> All my text is ‘spoken’ by an alpine guide png which I put together as if a guide is giving a hiker information. Furthermore the Italian and English flags were used and obtained from flaticon, and were created by the creators <code>Creatype</code> and <code>IconMarketPk</code> respectively.</p>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<p><strong>Themes:</strong> I tried to keep this trail- guide aesthetic throughout. In my text I decided to do dual text in English and Italian, with flag markers you would commonly see in the area. I wanted to keep my theme consistent on this so I referenced some trail maps from the area to lock in on my visuals.</p>
+</div>
+<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
+<p><strong>Colors:</strong> One thing that is striking about the area is the colors of the nature, so all my colors came from pictures of the landscape. My color palette was this:</p>
 <p><img src="color_palette.jpg" class="img-fluid"></p>
-<p>Typography is tricky for me, as it is something I don’t really think about naturally. Personally I have no differentiation between serif versus sans. My title font, <code>Academy Engraved LET</code>, was chosen because of its ‘gravitasse’ as well as its similarity to my basemap. My main text font for my annotations <code>DIN Condensed</code> was chosen for readability. For my plots I chose a font - <code>Fira Sans Condensed</code> - as it displays well on the picture of the actual miage lake. My data to ink ratio is very high, but It gives the feel of the old trail maps which comes first for my purposes. In the future I would love to reach out to locals to see their opinion of the lake and its decline.</p>
+</div>
+<div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
+<p><strong>Typography:</strong> Typography is tricky for me, as it is something I don’t really think about naturally. Personally I have no differentiation between serif versus sans. My title font, <code>Academy Engraved LET</code>, was chosen because of its ‘gravitasse’ as well as its similarity to my basemap. My main text font for my annotations <code>DIN Condensed</code> was chosen for readability. For my plots I chose a font - <code>Fira Sans Condensed</code> - as it displays well on the picture of the actual miage lake.</p>
+</div>
+<div id="tabset-1-7" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-7-tab">
+<p><strong>General Design:</strong> I made the infographic with the idea of starting big and shrinking down. First I want the eyes to be drawn to the map of the glaciers. Along with the caption, this gives the idea that the glacier is receding. Next we zoom into the lake, with both a map and an area. I wanted these to be on the same level so they could be viewed simultaneously.</p>
+</div>
+<div id="tabset-1-8" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-8-tab">
+<p><strong>Data Context:</strong> To contextualize any map a good basemap is necessary. I settled on this beautiful visualization from Johann Georg Mayr in 1874 which gives this old paper feel - almost like an old trail guide (Mayr, J. G. (1874)).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="basemap.jpg" class="img-fluid figure-img"></p>
+<figcaption>The Basemap</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-1-9" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-9-tab">
+<p><strong>Message:</strong> My main message is that glacier recession is leading to glacier fragmentation and decline in area. I feel like given my data, I put together a tight infographic which displays this message to wide audiences, from Italy to any English speaking country.</p>
+</div>
+<div id="tabset-1-10" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-10-tab">
+<p><strong>Accessibility:</strong> I tested my colors using a color blind simulator extension through google chrome. I found that the results were distinguishable and the plot was viewable in all the lenses availaible to the extension. This being said, those with Monochromacy / Achromatopsia would have the hardest time reading the infographic.</p>
+</div>
+<div id="tabset-1-11" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-11-tab">
+<p><strong>Diversity, Equity, and Inclusion (DEI):</strong> DEI is essential to consider for any data that visualizes people, places, and/or communities. While my family is from the area, we are not exactly locals.In the future I would love to reach out to locals to see their opinion of the lake and its decline.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
@@ -470,7 +512,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="background" class="level3">
 <h3 class="anchored" data-anchor-id="background">Background</h3>
-<p>Hartleben, A. (1888). The Alps [Map]. Hartleben, A. David Rumsey Map Collection. https://www.davidrumsey.com/luna/servlet/detail/RUMSEY<sub>8</sub>1<sub>371215</sub>90138021</p>
+<p>Mayr, J. G. (1874). Atlas der Alpenländer. Blatt IV [Map]. Justus Perthes. David Rumsey Map Collection, No.&nbsp;14243.005. https://www.davidrumsey.com</p>
 <p>Masetti, M., Diolaiuti, G., D’Agata, C., &amp; Smiraglia, C. (2009). Hydrological characterization of an ice-contact lake: Miage Lake (Monte Bianco, Italy). Water Resources Management, 24, 1677–1696. https://doi.org/10.1007/s11269-009-9519-x</p>
 
 
