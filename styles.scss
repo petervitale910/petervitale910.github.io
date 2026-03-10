@@ -62,3 +62,34 @@ h1, h2 {
   box-shadow: 0 5px 8px rgba($black, 0.6);
   //transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+// Panel tabset
+.panel-tabset {
+  .nav-tabs {
+    border-bottom-color: $dark-purple;
+
+    .nav-link {
+      color: $dark-purple;
+      min-width: 140px;
+      text-align: center;
+      border: 1px solid $dark-purple;
+      
+      &:hover {
+        color: $butterscotch;
+        border-color: $dark-purple;
+        background-color: $olivine;
+      }
+
+      &.active {
+        color: $pearl;
+        background-color: $butterscotch;
+        border-color: $dark-purple;
+      }
+    }
+  }
+
+  .tab-content {
+    border: 1px solid $dark-purple;
+    padding-top: 1rem;
+  }
+}
