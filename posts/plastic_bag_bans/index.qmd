@@ -25,7 +25,7 @@ bibliography: references.bib
 
 Across the United States growing concern over plastic bag pollution in marine and freshwater environments has prompted jurisdictions at multiple levels to propose and enact policies restricting plastic bag distribution. The goals of these policies are to reduce plastic bags at the point of consumption and prevent bag litter from ending up in downstream bodies of water. At the same time, this trend has prompted some opposing states to issue bans on bag policies, superseding plastic bag policies enacted by lower jurisdictions. While existing research finds that plastic bag policies reduce bag consumption [@taylor2015] no systematic studies prior to this paper examine the causal linkage between enacting bag policies and reductions in bag pollution [@papp2025]. The authors look at jurisdictions at the city, county, and state levels that have enacted plastic bag policies, as bans or fees, that also had regular, volunteer-attended shoreline litter cleanups. The study uses a difference-in-differences (DiD) causal identification approach with five different variations of estimators including a simple two-way fixed effects (TWFE) regression model controlling for the panel data varying across location (zip code, grid cell) and time (year). The analysis uses both overall effects (s1) and dynamic effects (s2) to estimate an event-study version of the TWFE model.
 
-## Data Description
+## Data Description {#sec-data}
 
 Each row of the processed study data represents a shoreline cleanup event at a unit of observation, year, treatment status, outcome measurement, number and age group of attendees, distance covered, and median income.
 
@@ -97,7 +97,7 @@ add_common_theme <- theme_bw() +
 
 ### Preparing panel data
 
-The data in this study is described in the `Data Description` section, however we need to prepare our two datasets. To do this we use a function, however this process could be manually reproduced for each dataset.
+The data in this study is described in the [Data Description](#sec-data) section, however we need to prepare our two datasets. To do this we use a function, however this process could be manually reproduced for each dataset.
 
 ```{r}
 prepare_panel <- function(file, 
