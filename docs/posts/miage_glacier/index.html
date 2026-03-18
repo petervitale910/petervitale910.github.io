@@ -231,11 +231,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="why-miage" class="level2">
 <h2 class="anchored" data-anchor-id="why-miage">Why Miage?</h2>
-<p>Growing up Lago del Miage, outside of Courmayeur, was one of the hikes often done when visiting family in Italy. The lake had a destinctive <code>J</code> shape which I always associated with my sister: Julia. In 2023 Julia got married in Courmayeur, and the day after we hiked up to the lake. It seemed serendipedous, the lake I had always associated with my sister the day after her wedding - perfect. After an hour and a half of walking we reached the lake, and when I reached the top of the hill: nothing. Two small ponds remained. My parents explained it away as a natural process that happens every so often but it was still very disheartening.</p>
+<p>Growing up, Lago del Miage (outside of Courmayeur) was one of the hikes often done when visiting family in Italy. The lake had a destinctive <code>J</code> shape which I always associated with my sister: Julia. In 2023 Julia got married in Courmayeur, and the day after we hiked up to the lake. It seemed serendipedous, the lake I had always associated with my sister the day after her wedding - perfect. After an hour and a half of walking we reached the lake, and when I reached the top of the hill: nothing. Two small ponds remained. My parents explained it away as a natural process that happens every so often but it was still very disheartening.</p>
 <p>When finding data for my data visualization class I came across a dataset on glacial lakes in Aosta, the region of Italy where Miage is. When I downloaded it I searched for Miage and found that there was some data. My goal was to see: was what I saw in 2023 just a fluke, or have conditions lead to lake losing water faster than it can be replaced.</p>
 <p>The Miage Glacier supplies the similarly named lake with its water. The glacier has recessed around 2 kilometers since 1820, and within my lifetime I can remember the extent getting noticably smaller. The data on the actual glacier was very tricky to access, as I needed an Italian Electronic ID card - which I do not have. Thankfully I do have a friend who graciously took time to get me said data, thank you Simone. Once I received this data the project really opened up. It contained glacial perimeters and areas from 1820 to 2005, as well as glacial lake shapefiles in 1999 and 2021. These all came together in my infographic.</p>
-<p><img src="MIAGE_FIRST_DRAFT.jpg" class="img-fluid"></p>
-<p>Below is the code used to generate the plots for this infographic, however there was a lot of editing done in <code>afinity</code> as well.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Miage_final.jpg" class="img-fluid figure-img"></p>
+<figcaption>Infographic showing glacier decline, coupled with glacier lake fragmentation</figcaption>
+</figure>
+</div>
+<p>Below is the code used to generate the plots for this infographic, however there was a lot of editing done in <code>Affinity</code> as well.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -322,131 +327,109 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"MIAGE"</span>, nome_gs)) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">anno =</span> <span class="fu">as.character</span>(anno))</span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- Next we created the plot of TOTAL GLACIER AREA ------------</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- Next we created the plot of TOTAL GLACIER AREA as 7 individual plots ------------</span></span>
 <span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_layout</span>(<span class="at">inner.margins =</span> <span class="fu">c</span>(<span class="fl">0.15</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_tiles</span>(<span class="fu">c</span>(<span class="at">CartoDB =</span> <span class="st">"CartoDB.PositronOnlyLabels"</span>)) <span class="sc">+</span></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(miage_perimeter) <span class="sc">+</span></span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_lines</span>(</span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">'anno'</span>,</span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.scale =</span> <span class="fu">tm_scale_ordinal</span>(<span class="at">values =</span> <span class="st">'brewer.blues'</span>),  </span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.legend =</span> <span class="fu">tm_legend</span>(</span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">'Year'</span>,</span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels.format =</span> <span class="fu">list</span>(<span class="at">big.mark =</span> <span class="st">''</span>),</span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>      <span class="at">orientation =</span> <span class="st">'landscape'</span>,</span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">1</span>),</span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>      <span class="at">bg.color =</span> <span class="st">'#876D4D'</span></span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">col_alpha =</span> <span class="st">'anno'</span>,</span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="at">col_alpha.scale =</span> <span class="fu">tm_scale_ordinal</span>(<span class="at">values =</span> <span class="fu">seq</span>(.<span class="dv">4</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">8</span>)),</span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>    <span class="at">lwd =</span> <span class="st">'anno'</span>,</span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>    <span class="at">lwd.scale =</span> <span class="fu">tm_scale_ordinal</span>(<span class="at">values =</span> <span class="fu">seq</span>(<span class="dv">8</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">8</span>)),<span class="co"># adjust 8 to number of years</span></span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd.legend =</span> <span class="fu">tm_legend</span>(<span class="at">show =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="at">col_alpha.legend =</span> <span class="fu">tm_legend</span>(<span class="at">show =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(miage_label) <span class="sc">+</span></span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_text</span>(</span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="st">'nome'</span>, <span class="at">col =</span> <span class="st">'black'</span>,</span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>    <span class="at">xmod =</span> <span class="sc">-</span>.<span class="dv">9</span>, <span class="at">ymod =</span> <span class="sc">-</span><span class="fl">3.2</span>, <span class="at">angle =</span> <span class="sc">-</span><span class="dv">45</span>, <span class="at">size =</span> .<span class="dv">7</span></span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"4star"</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>))</span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_save</span>(<span class="at">filename =</span> <span class="st">'MAP.pdf'</span>)</span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="co">#------------- Next was the Miage lake in 1999 and 2021 ----------------</span></span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>miage <span class="ot">&lt;-</span> miage <span class="sc">%&gt;%</span> </span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anno_rilie <span class="sc">==</span> <span class="st">'1999'</span>)</span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>miage_2021 <span class="ot">&lt;-</span>  miage_2021 <span class="sc">%&gt;%</span> </span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>nome <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'MIAGE I'</span>, </span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'MIAGE II'</span>,</span>
-<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'MIAGE III'</span>,</span>
-<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'MIAGE IV'</span>,</span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'MIAGE V'</span>))</span>
-<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>miage_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(miage_2021)<span class="sc">+</span></span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_layout</span>(<span class="at">bg.color =</span> <span class="st">'#876D4D'</span>,</span>
-<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>          <span class="at">outer.bg.color =</span> <span class="st">'#876D4D'</span>, <span class="co"># This is essentially cobolt style but works with the legend I add </span></span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>          <span class="at">frame.color =</span> <span class="cn">NA</span>,</span>
-<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>          <span class="at">frame.lwd =</span> <span class="dv">0</span>)<span class="sc">+</span></span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(miage) <span class="sc">+</span> <span class="co"># Add lake in 2006 and 1999</span></span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">'anno_rilie'</span>,</span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale_categorical</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'lightblue'</span>, <span class="st">'lightblue'</span>)),</span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill.legend =</span> <span class="fu">tm_legend</span>(<span class="at">show =</span> <span class="cn">FALSE</span>))<span class="sc">+</span></span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>   <span class="fu">tm_tiles</span>(<span class="fu">c</span>(<span class="at">CartoDB =</span> <span class="st">"CartoDB.PositronOnlyLabels"</span>))<span class="sc">+</span></span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(miage_glacier)<span class="sc">+</span> <span class="co"># Add the glacier</span></span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">'white'</span>,</span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">'#08316B'</span>,</span>
-<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>              <span class="at">lwd =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(miage_2021)<span class="sc">+</span> <span class="co"># add 2021 lake</span></span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">'anno_rilie'</span>,</span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale_categorical</span>(</span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>                <span class="at">values =</span> <span class="st">'red'</span>),</span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.legend =</span> <span class="fu">tm_legend</span>(<span class="at">show =</span> <span class="cn">FALSE</span>))<span class="sc">+</span></span>
-<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add a legend so we can include the 2 different sets</span></span>
-<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_add_legend</span>(<span class="at">type =</span> <span class="st">'polygons'</span>, </span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'1999'</span>, <span class="st">'2021'</span>), </span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="fu">c</span>(<span class="st">'lightblue'</span>, <span class="st">'red'</span>),</span>
-<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>               <span class="at">bg.color =</span> <span class="st">"#876D4D"</span>,</span>
-<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>              <span class="at">text.color =</span> <span class="st">'white'</span>,</span>
-<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>              <span class="at">title.color =</span> <span class="st">'white'</span>,</span>
-<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>              <span class="at">frame.color =</span> <span class="cn">NA</span>,</span>
-<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>              <span class="at">frame.lwd =</span> <span class="dv">2</span>,</span>
-<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">'Year'</span>)</span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_save</span>(<span class="at">filename =</span> <span class="st">'MIAGE_MAP.pdf'</span>, miage_map)  </span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="co">#------------ And lastly the plot of the Miage Area over time------------</span></span>
-<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a><span class="co"># Add font</span></span>
-<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a><span class="fu">font_add_google</span>(<span class="at">name =</span> <span class="st">'Fira Sans Condensed'</span>, <span class="co"># Fire sans for non-title</span></span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>                <span class="at">family =</span> <span class="st">'fira_sans_condensed'</span>)</span>
-<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab years for x-axis</span></span>
-<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> lake_joined <span class="sc">%&gt;%</span> </span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"Miage"</span>, lake)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(date_time) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>miage_area <span class="ot">&lt;-</span> lake_joined <span class="sc">%&gt;%</span> </span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"Miage"</span>, lake)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date_time) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_area =</span> (<span class="fu">sum</span>(area_m_2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date_time, <span class="at">y =</span> total_area)) <span class="sc">+</span></span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">'#68452E'</span>,</span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>            <span class="at">lwd =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>)<span class="sc">+</span></span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> years)<span class="sc">+</span></span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">'Year'</span>,</span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">'Area (Meters&lt;sup&gt;2&lt;/sup&gt;)'</span></span>
-<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
-<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte</span>()<span class="sc">+</span></span>
-<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#048F7A'</span>), <span class="co"># Cobalt </span></span>
-<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span>  ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">'black'</span>,</span>
-<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">family =</span> <span class="st">'fira_sans_condensed'</span>,</span>
-<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">size =</span> <span class="dv">20</span>),</span>
-<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(),</span>
-<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'black'</span>,</span>
-<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="st">'fira_sans_condensed'</span>,</span>
-<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'black'</span>,</span>
-<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">family =</span> <span class="st">'quicksand'</span>),</span>
-<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">1</span>)</span>
-<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext.auto</span>(<span class="at">enable =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>miage_area</span>
-<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">'AREA.pdf'</span>, <span class="at">width =</span> <span class="dv">1500</span>, </span>
-<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">1000</span>, <span class="at">units =</span> <span class="st">'px'</span>)</span>
-<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext.auto</span>(<span class="at">enable =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>years    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1820</span>, <span class="dv">1882</span>, <span class="dv">1930</span>, <span class="dv">1947</span>, <span class="dv">1975</span>, <span class="dv">1999</span>, <span class="dv">2005</span>)</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>lwd_vals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="fl">5.5</span>, <span class="fl">4.5</span>, <span class="fl">3.5</span>, <span class="fl">2.5</span>, <span class="fl">1.5</span>, <span class="dv">1</span>)</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>colors   <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">7</span>, <span class="st">"Blues"</span>)</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(years)) {</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>  yr  <span class="ot">&lt;-</span> years[i]</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">tm_layout</span>(<span class="at">inner.margins =</span> <span class="fu">c</span>(<span class="fl">0.15</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_shape</span>(miage_perimeter <span class="sc">|&gt;</span> <span class="fu">filter</span>(anno <span class="sc">==</span> yr),</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>             <span class="at">bbox =</span> <span class="fu">st_bbox</span>(miage_perimeter)) <span class="sc">+</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_lines</span>(<span class="at">col =</span> colors[i], <span class="at">lwd =</span> lwd_vals[i])</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tmap_save</span>(p, <span class="fu">paste0</span>(<span class="st">"miage_"</span>, yr, <span class="st">".pdf"</span>))</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a><span class="co">#------------- Next was the Miage lake in 1999 and 2021 ----------------</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>miage <span class="ot">&lt;-</span> miage <span class="sc">%&gt;%</span> </span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anno_rilie <span class="sc">==</span> <span class="st">'1999'</span>)</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>miage_2021 <span class="ot">&lt;-</span>  miage_2021 <span class="sc">%&gt;%</span> </span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>nome <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'MIAGE I'</span>, </span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'MIAGE II'</span>,</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'MIAGE III'</span>,</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'MIAGE IV'</span>,</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'MIAGE V'</span>))</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>lake_bbox <span class="ot">&lt;-</span> <span class="fu">st_bbox</span>(miage) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sfc</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_buffer</span>(<span class="dv">200</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_bbox</span>()</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>miage_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(miage) <span class="sc">+</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">'#c6dbef'</span>, <span class="at">col =</span> <span class="st">'#6baed6'</span>,</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill_alpha =</span> <span class="fl">0.4</span>, <span class="at">lwd =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(miage_glacier, <span class="at">bbox =</span> lake_bbox) <span class="sc">+</span></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">'white'</span>, <span class="at">col =</span> <span class="st">'#08316B'</span>, <span class="at">lwd =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(miage_2021) <span class="sc">+</span></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">'#08306b'</span>, <span class="at">col =</span> <span class="st">'#08306b'</span>, <span class="at">lwd =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_tiles</span>(<span class="fu">c</span>(<span class="at">CartoDB =</span> <span class="st">"CartoDB.PositronOnlyLabels"</span>)) <span class="sc">+</span></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_add_legend</span>(<span class="at">type =</span> <span class="st">'polygons'</span>,</span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'1999'</span>, <span class="st">'2021'</span>),</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="fu">c</span>(<span class="st">'#c6dbef'</span>, <span class="st">'#08306b'</span>),</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>              <span class="at">bg.color =</span> <span class="st">'#876D4D'</span>,</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>              <span class="at">text.color =</span> <span class="st">'white'</span>,</span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>              <span class="at">title.color =</span> <span class="st">'white'</span>,</span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>              <span class="at">frame.color =</span> <span class="cn">NA</span>,</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">'Year'</span>) <span class="sc">+</span></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_layout</span>(<span class="at">bg.color =</span> <span class="st">'#876D4D'</span>,</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>          <span class="at">outer.bg.color =</span> <span class="st">'#876D4D'</span>,</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>          <span class="at">frame.color =</span> <span class="cn">NA</span>,</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>          <span class="at">frame.lwd =</span> <span class="dv">0</span>)</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a><span class="co">#------------ And lastly the plot of the Miage Area over time------------</span></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="co"># Add font</span></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a><span class="fu">font_add_google</span>(<span class="at">name =</span> <span class="st">'Fira Sans Condensed'</span>, <span class="co"># Fire sans for non-title</span></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>                <span class="at">family =</span> <span class="st">'fira_sans_condensed'</span>)</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab years for x-axis</span></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> lake_joined <span class="sc">%&gt;%</span> </span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"Miage"</span>, lake)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(date_time) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>miage_area <span class="ot">&lt;-</span> lake_joined <span class="sc">%&gt;%</span> </span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"Miage"</span>, lake)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date_time) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_area =</span> (<span class="fu">sum</span>(area_m_2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date_time, <span class="at">y =</span> total_area)) <span class="sc">+</span></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">'#68452E'</span>,</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>            <span class="at">lwd =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>)<span class="sc">+</span></span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> years)<span class="sc">+</span></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">'Year'</span>,</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">'Area (Meters&lt;sup&gt;2&lt;/sup&gt;)'</span></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte</span>()<span class="sc">+</span></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#048F7A'</span>), <span class="co"># Cobalt </span></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span>  ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">'black'</span>,</span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">family =</span> <span class="st">'fira_sans_condensed'</span>,</span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(),</span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'black'</span>,</span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="st">'fira_sans_condensed'</span>,</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'black'</span>,</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">family =</span> <span class="st">'quicksand'</span>),</span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext.auto</span>(<span class="at">enable =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>miage_area</span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">'AREA.pdf'</span>, <span class="at">width =</span> <span class="dv">1500</span>, </span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">1000</span>, <span class="at">units =</span> <span class="st">'px'</span>)</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext.auto</span>(<span class="at">enable =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>

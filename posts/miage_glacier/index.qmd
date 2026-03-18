@@ -7,20 +7,20 @@ format: html
 editor: visual
 date: '2026-03-08'
 ---
+
 ![Photo by: Willian Justen de Vasconcellos](willianjusten.jpg)
 
+## Why Miage?
 
-## Why Miage? 
+Growing up, Lago del Miage (outside of Courmayeur) was one of the hikes often done when visiting family in Italy. The lake had a destinctive `J` shape which I always associated with my sister: Julia. In 2023 Julia got married in Courmayeur, and the day after we hiked up to the lake. It seemed serendipedous, the lake I had always associated with my sister the day after her wedding - perfect. After an hour and a half of walking we reached the lake, and when I reached the top of the hill: nothing. Two small ponds remained. My parents explained it away as a natural process that happens every so often but it was still very disheartening.
 
-Growing up Lago del Miage, outside of Courmayeur, was one of the hikes often done when visiting family in Italy. The lake had a destinctive `J` shape which I always associated with my sister: Julia. In 2023 Julia got married in Courmayeur, and the day after we hiked up to the lake. It seemed serendipedous, the lake I had always associated with my sister the day after her wedding - perfect. After an hour and a half of walking we reached the lake, and when I reached the top of the hill: nothing. Two small ponds remained. My parents explained it away as a natural process that happens every so often but it was still very disheartening.
-
-When finding data for my data visualization class I came across a dataset on glacial lakes in Aosta, the region of Italy where Miage is. When I downloaded it I searched for Miage and found that there was some data. My goal was to see: was what I saw in 2023 just a fluke, or have conditions lead to lake losing water faster than it can be replaced. 
+When finding data for my data visualization class I came across a dataset on glacial lakes in Aosta, the region of Italy where Miage is. When I downloaded it I searched for Miage and found that there was some data. My goal was to see: was what I saw in 2023 just a fluke, or have conditions lead to lake losing water faster than it can be replaced.
 
 The Miage Glacier supplies the similarly named lake with its water. The glacier has recessed around 2 kilometers since 1820, and within my lifetime I can remember the extent getting noticably smaller. The data on the actual glacier was very tricky to access, as I needed an Italian Electronic ID card - which I do not have. Thankfully I do have a friend who graciously took time to get me said data, thank you Simone. Once I received this data the project really opened up. It contained glacial perimeters and areas from 1820 to 2005, as well as glacial lake shapefiles in 1999 and 2021. These all came together in my infographic.
 
-![](MIAGE_FIRST_DRAFT.jpg)
+![Infographic showing glacier decline, coupled with glacier lake fragmentation](Miage_final.jpg)
 
-Below is the code used to generate the plots for this infographic, however there was a lot of editing done in `afinity`  as well. 
+Below is the code used to generate the plots for this infographic, however there was a lot of editing done in `Affinity` as well.
 
 ```{r}
 #| code-fold: true
@@ -110,36 +110,22 @@ miage_perimeter <- glacier_permimeter %>%
   filter(grepl("MIAGE", nome_gs)) %>% 
   mutate(anno = as.character(anno))
 
-# ---------- Next we created the plot of TOTAL GLACIER AREA ------------
+# ---------- Next we created the plot of TOTAL GLACIER AREA as 7 individual plots ------------
 
-tm_layout(inner.margins = c(0.15, 0, 0, 0)) +
-tm_tiles(c(CartoDB = "CartoDB.PositronOnlyLabels")) +
-tm_shape(miage_perimeter) +
-  tm_lines(
-    col = 'anno',
-    col.scale = tm_scale_ordinal(values = 'brewer.blues'),  
-    col.legend = tm_legend(
-      title = 'Year',
-      labels.format = list(big.mark = ''),
-      orientation = 'landscape',
-      position = c(0, .1),
-      bg.color = '#876D4D'
-    ),
-    col_alpha = 'anno',
-col_alpha.scale = tm_scale_ordinal(values = seq(.4, 1, length.out = 8)),
-    lwd = 'anno',
-    lwd.scale = tm_scale_ordinal(values = seq(8, 1, length.out = 8)),# adjust 8 to number of years
-  lwd.legend = tm_legend(show = FALSE),
-col_alpha.legend = tm_legend(show = FALSE)
-  ) +
-tm_shape(miage_label) +
-  tm_text(
-    text = 'nome', col = 'black',
-    xmod = -.9, ymod = -3.2, angle = -45, size = .7
-  ) +
-tm_compass(type = "4star", size = 2, position = c("right", "top"))
+years    <- c(1820, 1882, 1930, 1947, 1975, 1999, 2005)
+lwd_vals <- c(6, 5.5, 4.5, 3.5, 2.5, 1.5, 1)
+colors   <- RColorBrewer::brewer.pal(7, "Blues")
+
+for(i in seq_along(years)) {
+  yr  <- years[i]
   
-tmap_save(filename = 'MAP.pdf')
+  p <- tm_layout(inner.margins = c(0.15, 0, 0, 0)) +
+    tm_shape(miage_perimeter |> filter(anno == yr),
+             bbox = st_bbox(miage_perimeter)) +
+    tm_lines(col = colors[i], lwd = lwd_vals[i])
+  
+  tmap_save(p, paste0("miage_", yr, ".pdf"))
+}
 
 #------------- Next was the Miage lake in 1999 and 2021 ----------------
 
@@ -153,39 +139,31 @@ miage_2021 <-  miage_2021 %>%
                      'MIAGE IV',
                      'MIAGE V'))
 
+lake_bbox <- st_bbox(miage) %>% 
+  st_as_sfc() %>% 
+  st_buffer(200) %>% 
+  st_bbox()
 
-
-miage_map <- tm_shape(miage_2021)+
-tm_layout(bg.color = '#876D4D',
-          outer.bg.color = '#876D4D', # This is essentially cobolt style but works with the legend I add 
-          frame.color = NA,
-          frame.lwd = 0)+
-tm_shape(miage) + # Add lake in 2006 and 1999
-  tm_polygons(fill = 'anno_rilie',
-              fill.scale = tm_scale_categorical(values = c('lightblue', 'lightblue')),
-               fill.legend = tm_legend(show = FALSE))+
-   tm_tiles(c(CartoDB = "CartoDB.PositronOnlyLabels"))+
-  tm_shape(miage_glacier)+ # Add the glacier
-  tm_polygons(fill = 'white',
-              col = '#08316B',
-              lwd = 3)+
-  tm_shape(miage_2021)+ # add 2021 lake
-  tm_polygons(fill = 'anno_rilie',
-              fill.scale = tm_scale_categorical(
-                values = 'red'),
-              fill.legend = tm_legend(show = FALSE))+
-  # Add a legend so we can include the 2 different sets
-tm_add_legend(type = 'polygons', 
-              labels = c('1999', '2021'), 
-              fill = c('lightblue', 'red'),
-               bg.color = "#876D4D",
+miage_map <- tm_shape(miage) +
+  tm_polygons(fill = '#c6dbef', col = '#6baed6',
+              fill_alpha = 0.4, lwd = 1.5) +
+  tm_shape(miage_glacier, bbox = lake_bbox) +
+  tm_polygons(fill = 'white', col = '#08316B', lwd = 2) +
+tm_shape(miage_2021) +
+  tm_polygons(fill = '#08306b', col = '#08306b', lwd = 0.5) +
+tm_tiles(c(CartoDB = "CartoDB.PositronOnlyLabels")) +
+tm_add_legend(type = 'polygons',
+              labels = c('1999', '2021'),
+              fill = c('#c6dbef', '#08306b'),
+              bg.color = '#876D4D',
               text.color = 'white',
               title.color = 'white',
               frame.color = NA,
-              frame.lwd = 2,
-              title = 'Year')
-
-tmap_save(filename = 'MIAGE_MAP.pdf', miage_map)  
+              title = 'Year') +
+tm_layout(bg.color = '#876D4D',
+          outer.bg.color = '#876D4D',
+          frame.color = NA,
+          frame.lwd = 0)
 
 #------------ And lastly the plot of the Miage Area over time------------
 
@@ -237,13 +215,12 @@ ggsave(filename = 'AREA.pdf', width = 1500,
 showtext.auto(enable = FALSE)
 ```
 
-
 ## Design Elements
 
 ::: panel-tabset
 ### Graphic Form
 
-**Graphic Form:** The basis of this infographic is maps. Before this project I was sick of maps, and I still am. They are really hard to show from a data visualization perspective, especially when zooming in on an area that is pretty remote. This graphic format necessitates a reference as to where we are, which is hard to do with most basemaps. See the `Data Context` section for more information on my basemap. 
+**Graphic Form:** The basis of this infographic is maps. Before this project I was sick of maps, and I still am. They are really hard to show from a data visualization perspective, especially when zooming in on an area that is pretty remote. This graphic format necessitates a reference as to where we are, which is hard to do with most basemaps. See the `Data Context` section for more information on my basemap.
 
 ### Text
 
@@ -251,7 +228,7 @@ showtext.auto(enable = FALSE)
 
 ### Icons
 
-**Icons:** All my text is 'spoken' by an alpine guide png which I put together as if a guide is giving a hiker information. Furthermore the Italian and English flags were used and obtained from flaticon, and were created by the creators `Creatype` and `IconMarketPk` respectively. 
+**Icons:** All my text is 'spoken' by an alpine guide png which I put together as if a guide is giving a hiker information. Furthermore the Italian and English flags were used and obtained from flaticon, and were created by the creators `Creatype` and `IconMarketPk` respectively.
 
 ### Themes
 
@@ -259,7 +236,7 @@ showtext.auto(enable = FALSE)
 
 ### Colors
 
-**Colors:** One thing that is striking about the area is the colors of the nature, so all my colors came from pictures of the landscape. My color palette was this: 
+**Colors:** One thing that is striking about the area is the colors of the nature, so all my colors came from pictures of the landscape. My color palette was this:
 
 ![](color_palette.jpg)
 
@@ -269,7 +246,7 @@ showtext.auto(enable = FALSE)
 
 ### General Design
 
-**General Design:** I made the infographic with the idea of starting big and shrinking down. First I want the eyes to be drawn to the map of the glaciers. Along with the caption, this gives the idea that the glacier is receding. Next we zoom into the lake, with both a map and an area. I wanted these to be on the same level so they could be viewed simultaneously. 
+**General Design:** I made the infographic with the idea of starting big and shrinking down. First I want the eyes to be drawn to the map of the glaciers. Along with the caption, this gives the idea that the glacier is receding. Next we zoom into the lake, with both a map and an area. I wanted these to be on the same level so they could be viewed simultaneously.
 
 ### Data Context
 
@@ -279,7 +256,7 @@ showtext.auto(enable = FALSE)
 
 ### Message
 
-**Message:** My main message is that glacier recession is leading to glacier fragmentation and decline in area. I feel like given my data, I put together a tight infographic which displays this message to wide audiences, from Italy to any English speaking country. 
+**Message:** My main message is that glacier recession is leading to glacier fragmentation and decline in area. I feel like given my data, I put together a tight infographic which displays this message to wide audiences, from Italy to any English speaking country.
 
 ### Accessibility
 
@@ -287,30 +264,25 @@ showtext.auto(enable = FALSE)
 
 ### DEI
 
-**Diversity, Equity, and Inclusion (DEI):** DEI is essential to consider for any data that visualizes people, places, and/or communities. While my family is from the area, we are not exactly locals.In the future I would love to reach out to locals to see their opinion of the lake and its decline. 
+**Diversity, Equity, and Inclusion (DEI):** DEI is essential to consider for any data that visualizes people, places, and/or communities. While my family is from the area, we are not exactly locals.In the future I would love to reach out to locals to see their opinion of the lake and its decline.
 :::
 
+## Conclusion
 
-## Conclusion 
+Along with the data-driven infographic, I also looked at the literature. According to Masetti et al. the lake does in fact go through periods of rapid draw down followed by a gradual refill. One such drawdown period saw about 320,000 m<sup>3</sup> of water in a period between 48 and 72 h (Masetti et al. 2009). The issue is in recent years refill has not kept up with the drawdown. Will the lake fill up again? Hopefully! However going on year 4 of this low level of lake does not inspire much hope.
 
-Along with the data-driven infographic, I also looked at the literature. According to Masetti et al. the lake does in fact go through periods of rapid draw down followed by a gradual refill. One such drawdown period saw about 320,000 m<sup>3</sup> of water in a period between 48 and 72 h (Masetti et al. 2009). 
-The issue is in recent years refill has not kept up with the drawdown. Will the lake fill up again? Hopefully! However going on year 4 of this low level of lake does not inspire much hope. 
-
-
-## References 
+## References
 
 ### Data
-Viani, Cristina (2018): Inventories of glacier lakes in the Western Italian Alps from the 1930s to 2012 [dataset publication series]. PANGAEA, https://doi.org/10.1594/PANGAEA.896023,
 
-Glacier perimeters (2005):
-Regione Valle d'Aosta. (2005). Perimetri ghiacciai [Dataset]. Catasto Ghiacciai, Geoportale Regionale. https://mappe.regione.vda.it/pub/geoCartoSCT/
+Viani, Cristina (2018): Inventories of glacier lakes in the Western Italian Alps from the 1930s to 2012 \[dataset publication series\]. PANGAEA, https://doi.org/10.1594/PANGAEA.896023,
 
-Glacial lakes (2021):
-Regione Valle d'Aosta. (2021). Laghi glaciali [Dataset]. Catasto Ghiacciai, Geoportale Regionale. https://mappe.regione.vda.it/pub/geoCartoSCT/
+Glacier perimeters (2005): Regione Valle d'Aosta. (2005). Perimetri ghiacciai \[Dataset\]. Catasto Ghiacciai, Geoportale Regionale. https://mappe.regione.vda.it/pub/geoCartoSCT/
+
+Glacial lakes (2021): Regione Valle d'Aosta. (2021). Laghi glaciali \[Dataset\]. Catasto Ghiacciai, Geoportale Regionale. https://mappe.regione.vda.it/pub/geoCartoSCT/
 
 ### Background
-Mayr, J. G. (1874). Atlas der Alpenländer. Blatt IV [Map]. Justus Perthes. David Rumsey Map Collection, No. 14243.005. https://www.davidrumsey.com
+
+Mayr, J. G. (1874). Atlas der Alpenländer. Blatt IV \[Map\]. Justus Perthes. David Rumsey Map Collection, No. 14243.005. https://www.davidrumsey.com
 
 Masetti, M., Diolaiuti, G., D'Agata, C., & Smiraglia, C. (2009). Hydrological characterization of an ice-contact lake: Miage Lake (Monte Bianco, Italy). Water Resources Management, 24, 1677–1696. https://doi.org/10.1007/s11269-009-9519-x
-
-

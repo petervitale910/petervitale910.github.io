@@ -258,7 +258,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
-  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data">Data Description</a>
+  <li><a href="#gitsec-data" id="toc-gitsec-data" class="nav-link" data-scroll-target="#gitsec-data">Data Description</a>
   <ul class="collapse">
   <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a></li>
   </ul></li>
@@ -306,8 +306,8 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="background">Background</h2>
 <p>Across the United States growing concern over plastic bag pollution in marine and freshwater environments has prompted jurisdictions at multiple levels to propose and enact policies restricting plastic bag distribution. The goals of these policies are to reduce plastic bags at the point of consumption and prevent bag litter from ending up in downstream bodies of water. At the same time, this trend has prompted some opposing states to issue bans on bag policies, superseding plastic bag policies enacted by lower jurisdictions. While existing research finds that plastic bag policies reduce bag consumption <span class="citation" data-cites="taylor2015">(<a href="#ref-taylor2015" role="doc-biblioref">Taylor and Villas-Boas 2015</a>)</span> no systematic studies prior to this paper examine the causal linkage between enacting bag policies and reductions in bag pollution <span class="citation" data-cites="papp2025">(<a href="#ref-papp2025" role="doc-biblioref">Papp and Oremus 2025</a>)</span>. The authors look at jurisdictions at the city, county, and state levels that have enacted plastic bag policies, as bans or fees, that also had regular, volunteer-attended shoreline litter cleanups. The study uses a difference-in-differences (DiD) causal identification approach with five different variations of estimators including a simple two-way fixed effects (TWFE) regression model controlling for the panel data varying across location (zip code, grid cell) and time (year). The analysis uses both overall effects (s1) and dynamic effects (s2) to estimate an event-study version of the TWFE model.</p>
 </section>
-<section id="sec-data" class="level2">
-<h2 class="anchored" data-anchor-id="sec-data">Data Description</h2>
+<section id="gitsec-data" class="level2">
+<h2 class="anchored" data-anchor-id="gitsec-data">Data Description</h2>
 <p>Each row of the processed study data represents a shoreline cleanup event at a unit of observation, year, treatment status, outcome measurement, number and age group of attendees, distance covered, and median income.</p>
 <p>Two units of observation are used: zip codes to aggregate plastic bag policies and 0.1° cells (~ 11.1 km2) to aggregate shoreline cleanup events between the time period January 2016 and December 2023, aggregated by year. The geographic scope of these observations span the entire United States, including Hawaii and Alaska.</p>
 <p>Treatment is measured as a binary constructed variable of having a plastic bag policy, beginning in the first full year after policy enactment between January 2017 and December 2023. Plastic bag policies are counted as any of the following restrictions: complete bans (no plastic bag distribution), partial bans (only bags of thickness greater than 2.25mm permitted), and fees (5 to 25 cent surcharge for each bag consumed) enacted at the town, city, or state level. In total, 182 policies were considered in the analysis.</p>
