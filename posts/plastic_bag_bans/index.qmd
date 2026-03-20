@@ -29,22 +29,138 @@ Across the United States growing concern over plastic bag pollution in marine an
 
 Each row of the processed study data represents a shoreline cleanup event at a unit of observation, year, treatment status, outcome measurement, number and age group of attendees, distance covered, and median income.
 
-Two units of observation are used: zip codes to aggregate plastic bag policies and 0.1° cells (~ 11.1 km2) to aggregate shoreline cleanup events between the time period January 2016 and December 2023, aggregated by year. The geographic scope of these observations span the entire United States, including Hawaii and Alaska.
+Two units of observation are used: zip codes to aggregate plastic bag policies and 0.1° cells (\~ 11.1 km2) to aggregate shoreline cleanup events between the time period January 2016 and December 2023, aggregated by year. The geographic scope of these observations span the entire United States, including Hawaii and Alaska.
 
 Treatment is measured as a binary constructed variable of having a plastic bag policy, beginning in the first full year after policy enactment between January 2017 and December 2023. Plastic bag policies are counted as any of the following restrictions: complete bans (no plastic bag distribution), partial bans (only bags of thickness greater than 2.25mm permitted), and fees (5 to 25 cent surcharge for each bag consumed) enacted at the town, city, or state level. In total, 182 policies were considered in the analysis.
 
-The outcome measurement is the plastic bags collected as a percentage of total items collected from shoreline cleanups. Percentage of total items collected in shoreline cleanups is used as a proxy for the overall reduction in plastic bags in aquatic environments. Additionally, a constructed variable for plastic bags is used, composed of both plastic grocery bags and other plastic bags, due to ambiguity in identification between the two by cleanup attendees. 
+The outcome measurement is the plastic bags collected as a percentage of total items collected from shoreline cleanups. Percentage of total items collected in shoreline cleanups is used as a proxy for the overall reduction in plastic bags in aquatic environments. Additionally, a constructed variable for plastic bags is used, composed of both plastic grocery bags and other plastic bags, due to ambiguity in identification between the two by cleanup attendees.
 
 Fixed effects for time and location are both used in this study to control for when cleanups occur during the year, while location fixed effects control for unit characteristics such as environmental attitudes within a community, differences in litter behavior, and income.
 
-### Data Cleaning 
+### Data Cleaning
 
-A number of observations were dropped resulting in a sample size of 45,067 shoreline cleanups. Of the original 118,414 observations: 15,230 cleanup events dropped that lacked item-level information, 2,625 events were dropped that failed to record distance covered and weight of litter collected, and 2,694 outlier events were dropped that had the top percentile of distance covered per attendee, items collected per attendee, and items collected per attendee per unit distance. 
+A number of observations were dropped resulting in a sample size of 45,067 shoreline cleanups. Of the original 118,414 observations: 15,230 cleanup events dropped that lacked item-level information, 2,625 events were dropped that failed to record distance covered and weight of litter collected, and 2,694 outlier events were dropped that had the top percentile of distance covered per attendee, items collected per attendee, and items collected per attendee per unit distance.
 
-The resulting 97,775 cleanup events were further reduced to the final sample size based primarily on: areas with existing bag policies, cleanup events with low item identification certainty, and to account for spillover effects. Areas with existing bag policies as of 2016, like California, and areas with bag policies that were implemented but later repealed, like towns and counties in Florida and Texas, were excluded. Including these areas would interfere with treatment measurement, as the policies would not have started during the treatment period. Because cleanup events are often carried out by public volunteers as part of citizen science initiatives, the accuracy of data collection is a concern to this study. For this reason, cleanups with children attendees were excluded, as item identification and recording may be hindered. 
+The resulting 97,775 cleanup events were further reduced to the final sample size based primarily on: areas with existing bag policies, cleanup events with low item identification certainty, and to account for spillover effects. Areas with existing bag policies as of 2016, like California, and areas with bag policies that were implemented but later repealed, like towns and counties in Florida and Texas, were excluded. Including these areas would interfere with treatment measurement, as the policies would not have started during the treatment period. Because cleanup events are often carried out by public volunteers as part of citizen science initiatives, the accuracy of data collection is a concern to this study. For this reason, cleanups with children attendees were excluded, as item identification and recording may be hindered.
 
 Finally, this study handles spillover by removing observations that are neighbors, neighbors of neighbors, and neighbors of neighbors of neighbors of treated and dropped observations. The justification for this is based on imprecise initial findings of potential positive spillover to immediate neighbors of treated areas and potentially negative spillover in neighbor of neighbors. This point will be addressed further in the [Model Justification](#sec-model) section.
 
+## Model Justification {#sec-model}
+
+Papp and Oremus utilize a difference and difference casual model with multiple estimators. For our project, we selected two of these estimators for simplicity: 
+
+### *Two Way Fixed Effects (TWFE)*
+
+::: panel-tabset
+### Overview
+
+**Overview:** Year and zip code fixed effects with a single treatment indicator.
+
+### Estimand
+
+**Estimand:** ATT (average over all treated units). Example: average change in plastic bag share over all treated zip codes.
+
+### Core approach
+
+**Core approach:** OLS regression with unit and time fixed effects; single treatment indicator.
+
+### Handles staggered adoption?
+
+**Handles staggered adoption:** Yes, but the results can be biased when treatment effects are heterogeneous. In our case this could be an issue as the different bag laws may vary in their outcomes. 
+### Control group
+
+**Control Group:** All untreated units **and already-treated units** (implicitly).
+:::
+
+### *Callaway & Sant'Anna (CS)*
+
+::: panel-tabset
+### Overview
+
+**Overview:** Aggregate cohort-specific DiD estimates using clean comparisons only. Uses `base_period = "universal"` for a shared baseline across cohorts.
+
+### Estimand
+
+**Estimand:** Cohort-specific ATT (g,t) for each treatment cohort *g* and period *t*. Treatment cohort defined as first clean year after policy (`firstCS`).
+
+### Core approach
+
+**Core approach:** Compute group-time treatment effects and aggregate across cohorts using valid comparisons.
+
+### Handles staggered adoption?
+
+**Handles staggered adoption:** Not only does this model handle staggered adoption (eg. plastic bag laws being implemented at different rates), it is specifically designed for it. 
+
+### Control group
+
+**Control Group:** Not-yet-treated units.
+:::
+
+The difference and difference approach requires a core assumption of parallel trends. This assumption states treatment and control units, locations (zip code or grid cell) with and without bag policy, would follow the same trend in the absence of policy. The outcome variable, percent plastic bag share of total items collected, must be parallel in treatment and control areas before policy is enacted. This allows a causal identification that without policy in a counterfactual scenario, the trend lines likely would have continued in the pre-treatment trajectory.
+
+### Testing assumptions and violations
+
+**Parallel Trends** This assumption was tested visually with a plot of plastic bags as percent of cleanup items against time for the cleanups in control areas and clean-ups in treated areas (Fig S5). The first policies occurred in 2017, with staggered implementation across treatment locations from 2016 until 2023 for the 182 policies analyzed.
+
+![](parallel_trends.jpg)
+
+Cleanup data from control and treated areas should show variation due to regional and contextual differences. However, the trend between the two requires parallel lines to infer causal impact of the policy treatments due to omitted time-varying confounders. The figure shows a negative slope in treated areas and a positive slope in control areas, with an intersection point near the point of first treatment in 2017.
+
+The volume of data collection is shown in the plot below comparing the cleanup counts over time between control and treatment areas. Prior to policy implementation in 2017, there is a strong case for parallel trends in the cleanups themselves. This plot does not illustrate the outcome variable of interest and cannot stand alone to support the direct causal claim of bag policy changing plastic bag share of total items collected.
+
+The trend is further visualized in the dynamic effects model ([Figure 2](#fig-2) panel b and d). For a strong parallel trend, treated units in the years before the policies should show no differential trend in plastic bag share relative to controls, expressed as a fraction of the baseline control mean 4.5%. However, the width of the 95% confidence interval spanning values substantially different from zero suggests imprecision and an inability to rule out pre-existing differential trends.
+
+**Stable Unit Treatment Value Assumption (SUTVA)**
+
+There must be no spillovers between treated units and control units. The policy impact in one location (zip code or grid cell) must not impact the outcome in areas without policies. The study acknowledges the interconnectedness of waterways as well as potential behavioral spillover like outsourcing plastic bag purchases to neighboring areas without policies. There could also be positive spillover effects such as changing behavior of neighboring control area stores to supply less plastic bags resulting in decreased pollution. Spillover could also occur through the confirmation bias in the cleanup locations themselves to find more plastic bags with increased awareness. Both positive and negative spillover would violate the SUTVA and dilute the treatment effect.
+
+To test for spillover, Papp and Oremus compare zip codes of neighboring treatment areas, neighbors of neighbors and neighbors of neighbors of neighbors to the control areas to test for any significant effect (Fig 3B).
+
+![](SUTVA.png) Fig. 3 Spillover Analysis (B) Panel shows the effect of bag policies on plastic bag litter across these treatment groups, for all of the United States. Regression outcomes are according to eq. S1 using five estimators \[TWFE and (31–34)\] and using the zip code by year aggregation level. Zip codes with repealed policies (and all neighbors) are dropped from the analysis. The outcome variables are plastic bags’ share of total items collected on shoreline cleanups documented in TIDES, divided by the control mean. Thick lines show a 90% confidence interval, and thin lines show a 95% confidence interval. Standard errors are clustered by zip code.
+
+All neighboring zip codes of treatment areas do not have statistically significant effects, indicating that the spillover assumption is met. However the immediate neighbors may have slight positive effects while the neighbors of neighbors indicate slight negative effects (Fig 3B). To remediate any potential doubt, Papp and Oremus remove 3 degrees of location away from the treated location, such as 3 zip codes away, for the final analysis.
+
+**Strict Exogeneity** To meet this assumption the treatment must be independent of the error term across all time periods. Papp and Oremus propose a scenario that while the decision to implement a policy in a locality may be endogenous, the timing of implementation is likely exogenous due to the process of law implementation. Exogeneity is examined in the dynamic effects model showing treated units in pretreatment years compared to control. However, divergence from the control units before the ban could reflect either anticipation effects or omitted time-varying confounders. The bias created from contaminating the base year in the former threatens causal identification, while the latter threatens the parallel trends assumption.
+
+### Model Variations
+
+**Overall effects:** Tested by a two-way fixed effects regression.
+
+$$y_{it} = \beta D_{it} + \gamma_i + \delta_t + \epsilon_{it}$$ 
+
+-  $y_{it}$, the outcome variable, is the plastic bag percent share of total items 
+
+-  i, the unit, is the 0.1 latitude/longitude grid cell 
+
+-  t, the time, is years Dit, the dummy variable, is one in years after the beginning of a plastic bag policy in unit i 
+
+-  i , a fixed effect, controls for the spatial unit i, a fixed effect, controls for year
+
+The overall effects output one summary number, answering the question on average, do bag policies work. The collapsed estimate hides any effect over time which the dynamic effects model can answer.
+
+Results are presented with spatial units in both the main analysis, grid cell, and zip code as a robustness measure. Grid cells are uniform, yet arbitrary in terms of boundaries while zip codes are variable sizes and follow administrative boundaries. The side by side comparison provides sufficient evidence that the spatial aggregation choice isn't driving the results.
+
+**Dynamic effects:** Event-study two-way fixed effects
+
+$$y_{it} = \beta_k \sum_{k=-3}^{6} D_{k(i)} + \gamma_i + \delta_t + \epsilon_{it}$$
+
+-  $y_{it}$, the outcome variable, is the plastic bag percent share of total items 
+
+-  i, the unit, is the 0.1 latitude/longitude grid cell 
+
+-  t, the time, is years Dk(i), the dummy variable, is one if the introduction of the policy was k years away for unit i 
+
+-  i , a fixed effect, controls for the spatial unit i, a fixed effect, controls for year
+
+The dynamic effects model answers the question of does bag policy work and when. For a causal interpretation of this model in figure 2, with results normalized by the control mean, the parallel trends should be visualized with a flat trend pre-treatment and statistically indistinguishable from zero to indicate no differential trend in plastic bag share relative to controls.
+
+**Unbalanced vs balanced**
+
+The balanced panel is a subset of locations that have at least one annual cleanup a year. The unbalanced panel is inclusive of all locations with cleanups though the clean up dates may be sporadic and subject to seasonal variation affecting pollution patterns. Both panels are inputted to the model estimators and shown side by side.
+
+### Estimator comparisons
+
+Papp and Oremus utilize multiple estimators. The focus of our analysis is on the Two-way fixed effect (TWFE) and Callaway and Sant’Anna (2021) estimation methods. A standard two-way fixed effect creates bias in heterogeneous treatment effects. With policy enactments varied through time, the estimator must account for this bias. Callaway and Sant’Anna (2021) created a cohort-specific average treatment effect on the treated (g,t) for each treatment cohort g and period that addresses this bias.
 
 ## Code Replication
 
@@ -154,7 +270,6 @@ prepare_panel <- function(file,
   data <- data %>% mutate(time = year)
 
   # First treatment year — convert outside mutate to avoid recycling issues
-  # EXPLAIN MORE
   fe <- data$firstEffect
   if (inherits(fe, "POSIXct") || inherits(fe, "Date")) {
     data$firstY <- as.numeric(format(as.Date(fe), "%Y"))
@@ -384,15 +499,14 @@ Here we plot out our model results, in four panels representing:
 
 -   D : Dynamic Balanced effects
 
+The balanced data comes from the original study, and is balanced on whether there were consistent yearly cleanups. The overall effects are the static single value effects, wheras the dynamic effects add the year into the model, which gives a Year-Over-Year effect of plastic bag policies on the prevelance in cleanups. 
+
 ```{r}
 #| warning: false
 #| message: false
 #| fig.show: hide
 
 
-# ==============================================================
-# PLOTS
-# ==============================================================
 my_palette <- palette[1:2]
 
 x_labels_unbal <- c(
@@ -505,126 +619,6 @@ In the plot we see similar trends to the paper by [@papp2025], with both estimat
 
 In the dynamic panels (C and D), both estimators show increasing reductions in the post-treatment years, but with substantial uncertainty. For example, the CS estimate at year 3 in the unbalanced panel ranges from a \~10% increase to over a \~100% decrease. The wide confidence intervals, particularly in the balanced panel with only 992 observations, reflect the small sample size. However, the primary limitation of this analysis is a violation of the parallel trends assumption: control areas experienced an anomalous spike in plastic bag share after 2021, likely driven by changes in cleanup composition during COVID recovery, making causal interpretation of these estimates difficult.
 
-## Model Justification {#sec-model}
-
-Papp and Oremus utilize a difference and difference casual model with multiple estimators. 
-
-The difference and difference approach requires a core assumption of parallel trends. This assumption states treatment and control units, locations (zip code or grid cell) with and without bag policy, would follow the same trend in the absence of policy. The outcome variable, percent plastic bag share of total items collected, must be parallel in treatment and control areas before policy is enacted. This allows a causal identification that without policy in a counterfactual scenario, the trend lines likely would have continued in the pre-treatment trajectory. 
-
-### Testing assumptions and violations 
-
-**Parallel Trends**
-This assumption was tested visually with a plot of plastic bags as percent of cleanup items against time for the cleanups in control areas and clean-ups in treated areas (Fig S5). The first policies occurred in 2017, with staggered implementation across treatment locations from 2016 until 2023 for the 182 policies analyzed. 
-
-![](parallel_trends.jpg)
-
-Cleanup data from control and treated areas should show variation due to regional and contextual differences. However, the trend between the two requires parallel lines to infer causal impact of the policy treatments due to omitted time-varying confounders. The figure shows a negative slope in treated areas and a positive slope in control areas, with an intersection point near the point of first treatment in 2017. 
-
-The volume of data collection is shown in the plot below comparing the cleanup counts over time between control and treatment areas. Prior to policy implementation in 2017, there is a strong case for parallel trends in the cleanups themselves. This plot does not illustrate the outcome variable of interest and cannot stand alone to support the direct causal claim of bag policy changing plastic bag share of total items collected. 
-
-The trend is further visualized in the dynamic effects model ([Figure 2](#fig-2) panel b and d). For a strong parallel trend, treated units in the years before the policies should show no differential trend in plastic bag share relative to controls, expressed as a fraction of the baseline control mean 4.5%. However, the width of the 95% confidence interval spanning values substantially different from zero suggests imprecision and an inability to rule out pre-existing differential trends. 
-
-**Stable Unit Treatment Value Assumption (SUTVA)**
-
-There must be no spillovers between treated units and control units. The policy impact in one location (zip code or grid cell) must not impact the outcome in areas without policies. The study acknowledges the interconnectedness of waterways as well as potential behavioral spillover like outsourcing plastic bag purchases to neighboring areas without policies. There could also be positive spillover effects such as changing behavior of neighboring control area stores to supply less plastic bags resulting in decreased pollution. Spillover could also occur through the confirmation bias in the cleanup locations themselves to find more plastic bags with increased awareness. Both positive and negative spillover would violate the SUTVA and dilute the treatment effect. 
-
-To test for spillover, Papp and Oremus compare zip codes of neighboring treatment areas, neighbors of neighbors and neighbors of neighbors of neighbors to the control areas to test for any significant effect (Fig 3B). 
-
-![](SUTVA.png)
-Fig. 3 Spillover Analysis (B) Panel shows the effect of bag policies on plastic bag litter across these treatment groups, for all of the United States. Regression outcomes are according to eq. S1 using five estimators [TWFE and (31–34)] and using the zip code by year aggregation level. Zip codes with repealed policies (and all neighbors) are dropped from the analysis. The outcome variables are plastic bags’ share of total items collected on shoreline cleanups documented in TIDES, divided by the control mean. Thick lines show a 90% confidence interval, and thin lines show a 95% confidence interval. Standard errors are clustered by zip code.
-
-All neighboring zip codes of treatment areas do not have statistically significant effects, indicating that the spillover assumption is met. However the immediate neighbors may have slight positive effects while the neighbors of neighbors indicate slight negative effects (Fig 3B). To remediate any potential doubt, Papp and Oremus remove 3 degrees of location away from the treated location, such as 3 zip codes away, for the final analysis. 
-
-**Strict Exogeneity**
-To meet this assumption the treatment must be independent of the error term across all time periods. Papp and Oremus propose a scenario that while the decision to implement a policy in a locality may be endogenous, the timing of implementation is likely exogenous due to the process of law implementation. Exogeneity is examined in the dynamic effects model showing treated units in pretreatment years compared to control. However, divergence from the control units before the ban could reflect either anticipation effects or omitted time-varying confounders. The bias created from contaminating the base year in the former threatens causal identification, while the latter threatens the parallel trends assumption. 
-
-### Model Variations 
-
-**Overall effects:** Tested by a two-way fixed effects regression. 
-
-$$y_{it} = \beta D_{it} + \gamma_i + \delta_t + \epsilon_{it}$$
-Yit, the outcome variable, is the plastic bag percent share of total items 
-i, the unit, is the 0.1 latitude/longitude grid cell 
-t, the time, is years
-Dit, the dummy variable, is one in years after the beginning of a plastic bag policy in unit i
-i , a fixed effect, controls for the spatial unit 
-i, a fixed effect, controls for year 
-
-The overall effects output one summary number, answering the question on average, do bag policies work. The collapsed estimate hides any effect over time which the dynamic effects model can answer. 
-
-Results are presented with spatial units in both the main analysis, grid cell, and zip code as a robustness measure. Grid cells are uniform, yet arbitrary in terms of boundaries while zip codes are variable sizes and follow administrative boundaries. The side by side comparison provides sufficient evidence that the spatial aggregation choice isn't driving the results. 
-
-**Dynamic effects:**  Event-study two-way fixed effects
-
-$$y_{it} = \beta_k \sum_{k=-3}^{6} D_{k(i)} + \gamma_i + \delta_t + \epsilon_{it}$$
-
-Yit, the outcome variable, is the plastic bag percent share of total items 
-i, the unit, is the 0.1 latitude/longitude grid cell 
-t, the time, is years
-Dk(i), the dummy variable, is one if the introduction of the policy was k years away for unit i
-i , a fixed effect, controls for the spatial unit 
-i, a fixed effect, controls for year 
-
-The dynamic effects model answers the question of does bag policy work and when. For a causal interpretation of this model in figure 2, with results normalized by the control mean, the parallel trends should be visualized with a flat trend pre-treatment and statistically indistinguishable from zero to indicate no differential trend in plastic bag share relative to controls. 
-
-**Unbalanced vs balanced**
-
-The balanced panel is a subset of locations that have at least one annual cleanup a year. The unbalanced panel is inclusive of all locations with cleanups though the clean up dates may be sporadic and subject to seasonal variation affecting pollution patterns. Both panels are inputted to the model estimators and shown side by side. 
-
-### Estimator comparisons 
-Papp and Oremus utilize multiple estimators. The focus of our analysis is on the Two-way fixed effect (TWFE) and Callaway and Sant’Anna (2021) estimation methods. A standard two-way fixed effect creates bias in heterogeneous treatment effects. With policy enactments varied through time, the estimator must account for this bias. Callaway and Sant’Anna (2021) created a cohort-specific average treatment effect on the treated (g,t) for each treatment cohort g and period that addresses this bias. 
-
-
-### *Two Way Fixed Effects (TWFE)*
-
-::: panel-tabset
-### Overview
-
-**Overview:** Year and zip code fixed effects with a single treatment indicator.
-
-### Estimand
-
-**Estimand:** ATT (average over all treated units). Example: average change in plastic bag share over all treated zip codes.
-
-### Core approach
-
-**Core approach:** OLS regression with unit and time fixed effects; single treatment indicator.
-
-### Handles staggered adoption?
-
-**Handles staggered adoption:** Yes, but biased when treatment effects are heterogeneous.
-
-### Control group
-
-**Control Group:** All untreated units **and already-treated units** (implicitly).
-:::
-
-### *Callaway & Sant'Anna (CS)*
-
-::: panel-tabset
-### Overview
-
-**Overview:** Aggregate cohort-specific DiD estimates using clean comparisons only. Uses `base_period = "universal"` for a shared baseline across cohorts.
-
-### Estimand
-
-**Estimand:** Cohort-specific ATT (g,t) for each treatment cohort *g* and period *t*. Treatment cohort defined as first clean year after policy (`firstCS`).
-
-### Core approach
-
-**Core approach:** Compute group-time treatment effects and aggregate across cohorts using valid comparisons.
-
-### Handles staggered adoption?
-
-**Handles staggered adoption:** Yes — explicitly designed for staggered treatment timing.
-
-### Control group
-
-**Control Group:** Not-yet-treated units.
-:::
-
-
-
 ## Limitations
 
 ### Measuring and sampling
@@ -640,5 +634,9 @@ The code in the original study is another limitation for replication. The code t
 ### Study’s conclusion summary
 
 The study assumes "that the sample used in our analysis is representative of all plastic bag litter in the US aquatic environment". This assumption may be a stretch as there are factors the study does not consider. The first is the different outcomes between plastic litter types. The study assumes similar outcomes for plastic caps and bags. This strikes us as a bit of an overgenralization, as plastic bags are more likely to fly away and end up in the Aquatic environment than caps, making the assumption that their prevalence on land and in the water being similar a stretch. Secondly there are some omitted variables that the authors did not consider. One we came up with was beach combing. Beach combing is the practice of removing litter and wrack from beaches using large machines. This usually happens in more resedential areas in an attempt to 'beautify' the beach. This occurs unevenly across our sample sites and is not controlled for in any way, which may have skewed our results.
+
+## Overall Takeaway 
+
+By employing two estimators, TWFE and Callaway & Sant'Anna (2021), across both balanced and unbalanced panels and two levels of spatial aggregation (0.1° grid cells and zip codes), we find consistent evidence of plastic bag share reductions following policy enactment, ranging from 32–63% relative to the control mean. Although our results are largely consistent with the original study, the large confidence intervals and violation of the parallel trends assumption post-2021 limit causal inference. However, the results do indicate plastic bag policy is a promising avenue for addressing plastic pollution, and citizen science data is a useful proxy for aquatic litter trends.
 
 Check out the [project repository on GitHub](https://github.com/petervitale910/EDS241-Final-Project)

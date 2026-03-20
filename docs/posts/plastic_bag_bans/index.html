@@ -262,6 +262,14 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a></li>
   </ul></li>
+  <li><a href="#sec-model" id="toc-sec-model" class="nav-link" data-scroll-target="#sec-model">Model Justification</a>
+  <ul class="collapse">
+  <li><a href="#two-way-fixed-effects-twfe" id="toc-two-way-fixed-effects-twfe" class="nav-link" data-scroll-target="#two-way-fixed-effects-twfe"><em>Two Way Fixed Effects (TWFE)</em></a></li>
+  <li><a href="#callaway-santanna-cs" id="toc-callaway-santanna-cs" class="nav-link" data-scroll-target="#callaway-santanna-cs"><em>Callaway &amp; Sant’Anna (CS)</em></a></li>
+  <li><a href="#testing-assumptions-and-violations" id="toc-testing-assumptions-and-violations" class="nav-link" data-scroll-target="#testing-assumptions-and-violations">Testing assumptions and violations</a></li>
+  <li><a href="#model-variations" id="toc-model-variations" class="nav-link" data-scroll-target="#model-variations">Model Variations</a></li>
+  <li><a href="#estimator-comparisons" id="toc-estimator-comparisons" class="nav-link" data-scroll-target="#estimator-comparisons">Estimator comparisons</a></li>
+  </ul></li>
   <li><a href="#code-replication" id="toc-code-replication" class="nav-link" data-scroll-target="#code-replication">Code Replication</a>
   <ul class="collapse">
   <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">Load Packages</a></li>
@@ -272,20 +280,13 @@ window.Quarto = {
   <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot">Plot</a></li>
   </ul></li>
   <li><a href="#plot-output-and-discussion" id="toc-plot-output-and-discussion" class="nav-link" data-scroll-target="#plot-output-and-discussion">Plot output and discussion</a></li>
-  <li><a href="#sec-model" id="toc-sec-model" class="nav-link" data-scroll-target="#sec-model">Model Justification</a>
-  <ul class="collapse">
-  <li><a href="#testing-assumptions-and-violations" id="toc-testing-assumptions-and-violations" class="nav-link" data-scroll-target="#testing-assumptions-and-violations">Testing assumptions and violations</a></li>
-  <li><a href="#model-variations" id="toc-model-variations" class="nav-link" data-scroll-target="#model-variations">Model Variations</a></li>
-  <li><a href="#estimator-comparisons" id="toc-estimator-comparisons" class="nav-link" data-scroll-target="#estimator-comparisons">Estimator comparisons</a></li>
-  <li><a href="#two-way-fixed-effects-twfe" id="toc-two-way-fixed-effects-twfe" class="nav-link" data-scroll-target="#two-way-fixed-effects-twfe"><em>Two Way Fixed Effects (TWFE)</em></a></li>
-  <li><a href="#callaway-santanna-cs" id="toc-callaway-santanna-cs" class="nav-link" data-scroll-target="#callaway-santanna-cs"><em>Callaway &amp; Sant’Anna (CS)</em></a></li>
-  </ul></li>
   <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a>
   <ul class="collapse">
   <li><a href="#measuring-and-sampling" id="toc-measuring-and-sampling" class="nav-link" data-scroll-target="#measuring-and-sampling">Measuring and sampling</a></li>
   <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
   <li><a href="#studys-conclusion-summary" id="toc-studys-conclusion-summary" class="nav-link" data-scroll-target="#studys-conclusion-summary">Study’s conclusion summary</a></li>
   </ul></li>
+  <li><a href="#overall-takeaway" id="toc-overall-takeaway" class="nav-link" data-scroll-target="#overall-takeaway">Overall Takeaway</a></li>
   </ul>
 </nav>
     </div>
@@ -318,6 +319,97 @@ window.Quarto = {
 <p>A number of observations were dropped resulting in a sample size of 45,067 shoreline cleanups. Of the original 118,414 observations: 15,230 cleanup events dropped that lacked item-level information, 2,625 events were dropped that failed to record distance covered and weight of litter collected, and 2,694 outlier events were dropped that had the top percentile of distance covered per attendee, items collected per attendee, and items collected per attendee per unit distance.</p>
 <p>The resulting 97,775 cleanup events were further reduced to the final sample size based primarily on: areas with existing bag policies, cleanup events with low item identification certainty, and to account for spillover effects. Areas with existing bag policies as of 2016, like California, and areas with bag policies that were implemented but later repealed, like towns and counties in Florida and Texas, were excluded. Including these areas would interfere with treatment measurement, as the policies would not have started during the treatment period. Because cleanup events are often carried out by public volunteers as part of citizen science initiatives, the accuracy of data collection is a concern to this study. For this reason, cleanups with children attendees were excluded, as item identification and recording may be hindered.</p>
 <p>Finally, this study handles spillover by removing observations that are neighbors, neighbors of neighbors, and neighbors of neighbors of neighbors of treated and dropped observations. The justification for this is based on imprecise initial findings of potential positive spillover to immediate neighbors of treated areas and potentially negative spillover in neighbor of neighbors. This point will be addressed further in the <a href="#sec-model">Model Justification</a> section.</p>
+</section>
+</section>
+<section id="sec-model" class="level2">
+<h2 class="anchored" data-anchor-id="sec-model">Model Justification</h2>
+<p>Papp and Oremus utilize a difference and difference casual model with multiple estimators. For our project, we selected two of these estimators for simplicity:</p>
+<section id="two-way-fixed-effects-twfe" class="level3">
+<h3 class="anchored" data-anchor-id="two-way-fixed-effects-twfe"><em>Two Way Fixed Effects (TWFE)</em></h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Overview</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Estimand</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Core approach</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Handles staggered adoption?</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><strong>Overview:</strong> Year and zip code fixed effects with a single treatment indicator.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><strong>Estimand:</strong> ATT (average over all treated units). Example: average change in plastic bag share over all treated zip codes.</p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p><strong>Core approach:</strong> OLS regression with unit and time fixed effects; single treatment indicator.</p>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<p><strong>Handles staggered adoption:</strong> Yes, but the results can be biased when treatment effects are heterogeneous. In our case this could be an issue as the different bag laws may vary in their outcomes. ### Control group</p>
+<p><strong>Control Group:</strong> All untreated units <strong>and already-treated units</strong> (implicitly).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="callaway-santanna-cs" class="level3">
+<h3 class="anchored" data-anchor-id="callaway-santanna-cs"><em>Callaway &amp; Sant’Anna (CS)</em></h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Overview</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Estimand</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">Core approach</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false" href="">Handles staggered adoption?</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-5" role="tab" aria-controls="tabset-2-5" aria-selected="false" href="">Control group</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p><strong>Overview:</strong> Aggregate cohort-specific DiD estimates using clean comparisons only. Uses <code>base_period = "universal"</code> for a shared baseline across cohorts.</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p><strong>Estimand:</strong> Cohort-specific ATT (g,t) for each treatment cohort <em>g</em> and period <em>t</em>. Treatment cohort defined as first clean year after policy (<code>firstCS</code>).</p>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p><strong>Core approach:</strong> Compute group-time treatment effects and aggregate across cohorts using valid comparisons.</p>
+</div>
+<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
+<p><strong>Handles staggered adoption:</strong> Not only does this model handle staggered adoption (eg. plastic bag laws being implemented at different rates), it is specifically designed for it.</p>
+</div>
+<div id="tabset-2-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-5-tab">
+<p><strong>Control Group:</strong> Not-yet-treated units.</p>
+</div>
+</div>
+</div>
+<p>The difference and difference approach requires a core assumption of parallel trends. This assumption states treatment and control units, locations (zip code or grid cell) with and without bag policy, would follow the same trend in the absence of policy. The outcome variable, percent plastic bag share of total items collected, must be parallel in treatment and control areas before policy is enacted. This allows a causal identification that without policy in a counterfactual scenario, the trend lines likely would have continued in the pre-treatment trajectory.</p>
+</section>
+<section id="testing-assumptions-and-violations" class="level3">
+<h3 class="anchored" data-anchor-id="testing-assumptions-and-violations">Testing assumptions and violations</h3>
+<p><strong>Parallel Trends</strong> This assumption was tested visually with a plot of plastic bags as percent of cleanup items against time for the cleanups in control areas and clean-ups in treated areas (Fig S5). The first policies occurred in 2017, with staggered implementation across treatment locations from 2016 until 2023 for the 182 policies analyzed.</p>
+<p><img src="parallel_trends.jpg" class="img-fluid"></p>
+<p>Cleanup data from control and treated areas should show variation due to regional and contextual differences. However, the trend between the two requires parallel lines to infer causal impact of the policy treatments due to omitted time-varying confounders. The figure shows a negative slope in treated areas and a positive slope in control areas, with an intersection point near the point of first treatment in 2017.</p>
+<p>The volume of data collection is shown in the plot below comparing the cleanup counts over time between control and treatment areas. Prior to policy implementation in 2017, there is a strong case for parallel trends in the cleanups themselves. This plot does not illustrate the outcome variable of interest and cannot stand alone to support the direct causal claim of bag policy changing plastic bag share of total items collected.</p>
+<p>The trend is further visualized in the dynamic effects model (<a href="#fig-2">Figure 2</a> panel b and d). For a strong parallel trend, treated units in the years before the policies should show no differential trend in plastic bag share relative to controls, expressed as a fraction of the baseline control mean 4.5%. However, the width of the 95% confidence interval spanning values substantially different from zero suggests imprecision and an inability to rule out pre-existing differential trends.</p>
+<p><strong>Stable Unit Treatment Value Assumption (SUTVA)</strong></p>
+<p>There must be no spillovers between treated units and control units. The policy impact in one location (zip code or grid cell) must not impact the outcome in areas without policies. The study acknowledges the interconnectedness of waterways as well as potential behavioral spillover like outsourcing plastic bag purchases to neighboring areas without policies. There could also be positive spillover effects such as changing behavior of neighboring control area stores to supply less plastic bags resulting in decreased pollution. Spillover could also occur through the confirmation bias in the cleanup locations themselves to find more plastic bags with increased awareness. Both positive and negative spillover would violate the SUTVA and dilute the treatment effect.</p>
+<p>To test for spillover, Papp and Oremus compare zip codes of neighboring treatment areas, neighbors of neighbors and neighbors of neighbors of neighbors to the control areas to test for any significant effect (Fig 3B).</p>
+<p><img src="SUTVA.png" class="img-fluid"> Fig. 3 Spillover Analysis (B) Panel shows the effect of bag policies on plastic bag litter across these treatment groups, for all of the United States. Regression outcomes are according to eq. S1 using five estimators [TWFE and (31–34)] and using the zip code by year aggregation level. Zip codes with repealed policies (and all neighbors) are dropped from the analysis. The outcome variables are plastic bags’ share of total items collected on shoreline cleanups documented in TIDES, divided by the control mean. Thick lines show a 90% confidence interval, and thin lines show a 95% confidence interval. Standard errors are clustered by zip code.</p>
+<p>All neighboring zip codes of treatment areas do not have statistically significant effects, indicating that the spillover assumption is met. However the immediate neighbors may have slight positive effects while the neighbors of neighbors indicate slight negative effects (Fig 3B). To remediate any potential doubt, Papp and Oremus remove 3 degrees of location away from the treated location, such as 3 zip codes away, for the final analysis.</p>
+<p><strong>Strict Exogeneity</strong> To meet this assumption the treatment must be independent of the error term across all time periods. Papp and Oremus propose a scenario that while the decision to implement a policy in a locality may be endogenous, the timing of implementation is likely exogenous due to the process of law implementation. Exogeneity is examined in the dynamic effects model showing treated units in pretreatment years compared to control. However, divergence from the control units before the ban could reflect either anticipation effects or omitted time-varying confounders. The bias created from contaminating the base year in the former threatens causal identification, while the latter threatens the parallel trends assumption.</p>
+</section>
+<section id="model-variations" class="level3">
+<h3 class="anchored" data-anchor-id="model-variations">Model Variations</h3>
+<p><strong>Overall effects:</strong> Tested by a two-way fixed effects regression.</p>
+<p><span class="math display">\[y_{it} = \beta D_{it} + \gamma_i + \delta_t + \epsilon_{it}\]</span></p>
+<ul>
+<li><p><span class="math inline">\(y_{it}\)</span>, the outcome variable, is the plastic bag percent share of total items</p></li>
+<li><p>i, the unit, is the 0.1 latitude/longitude grid cell</p></li>
+<li><p>t, the time, is years Dit, the dummy variable, is one in years after the beginning of a plastic bag policy in unit i</p></li>
+<li><p>i , a fixed effect, controls for the spatial unit i, a fixed effect, controls for year</p></li>
+</ul>
+<p>The overall effects output one summary number, answering the question on average, do bag policies work. The collapsed estimate hides any effect over time which the dynamic effects model can answer.</p>
+<p>Results are presented with spatial units in both the main analysis, grid cell, and zip code as a robustness measure. Grid cells are uniform, yet arbitrary in terms of boundaries while zip codes are variable sizes and follow administrative boundaries. The side by side comparison provides sufficient evidence that the spatial aggregation choice isn’t driving the results.</p>
+<p><strong>Dynamic effects:</strong> Event-study two-way fixed effects</p>
+<p><span class="math display">\[y_{it} = \beta_k \sum_{k=-3}^{6} D_{k(i)} + \gamma_i + \delta_t + \epsilon_{it}\]</span></p>
+<ul>
+<li><p><span class="math inline">\(y_{it}\)</span>, the outcome variable, is the plastic bag percent share of total items</p></li>
+<li><p>i, the unit, is the 0.1 latitude/longitude grid cell</p></li>
+<li><p>t, the time, is years Dk(i), the dummy variable, is one if the introduction of the policy was k years away for unit i</p></li>
+<li><p>i , a fixed effect, controls for the spatial unit i, a fixed effect, controls for year</p></li>
+</ul>
+<p>The dynamic effects model answers the question of does bag policy work and when. For a causal interpretation of this model in figure 2, with results normalized by the control mean, the parallel trends should be visualized with a flat trend pre-treatment and statistically indistinguishable from zero to indicate no differential trend in plastic bag share relative to controls.</p>
+<p><strong>Unbalanced vs balanced</strong></p>
+<p>The balanced panel is a subset of locations that have at least one annual cleanup a year. The unbalanced panel is inclusive of all locations with cleanups though the clean up dates may be sporadic and subject to seasonal variation affecting pollution patterns. Both panels are inputted to the model estimators and shown side by side.</p>
+</section>
+<section id="estimator-comparisons" class="level3">
+<h3 class="anchored" data-anchor-id="estimator-comparisons">Estimator comparisons</h3>
+<p>Papp and Oremus utilize multiple estimators. The focus of our analysis is on the Two-way fixed effect (TWFE) and Callaway and Sant’Anna (2021) estimation methods. A standard two-way fixed effect creates bias in heterogeneous treatment effects. With policy enactments varied through time, the estimator must account for this bias. Callaway and Sant’Anna (2021) created a cohort-specific average treatment effect on the treated (g,t) for each treatment cohort g and period that addresses this bias.</p>
 </section>
 </section>
 <section id="code-replication" class="level2">
@@ -432,44 +524,43 @@ window.Quarto = {
 <span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">time =</span> year)</span>
 <span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First treatment year — convert outside mutate to avoid recycling issues</span></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># EXPLAIN MORE</span></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  fe <span class="ot">&lt;-</span> data<span class="sc">$</span>firstEffect</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">inherits</span>(fe, <span class="st">"POSIXct"</span>) <span class="sc">||</span> <span class="fu">inherits</span>(fe, <span class="st">"Date"</span>)) {</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>firstY <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">format</span>(<span class="fu">as.Date</span>(fe), <span class="st">"%Y"</span>))</span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>firstY <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(<span class="fu">as.character</span>(fe)))</span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter types of bag bans </span></span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>  dataMain <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"charge"</span>, </span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"complete"</span>, <span class="st">"</span></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="st">                       partial"</span>, </span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"control"</span>))</span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Group-level treatment variables </span></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>  dataMain <span class="ot">&lt;-</span> dataMain <span class="sc">%&gt;%</span></span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="sc">!!</span><span class="fu">sym</span>(group_id_var)) <span class="sc">%&gt;%</span> <span class="co"># !! unquotes it so the column is evaluated, sym does the same thing so its double checking </span></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>      <span class="at">treat      =</span> treatedAny,</span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>      <span class="at">treatEver  =</span> <span class="fu">sum</span>(treatedAny) <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>      <span class="at">timeToTreat =</span> <span class="fu">if_else</span>(treatEver, time <span class="sc">-</span> firstY, <span class="dv">0</span>),</span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>      <span class="at">firstSA    =</span> <span class="fu">if_else</span>(treatEver, firstY <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">10000</span>), <span class="co"># No treatment -&gt; no first year</span></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>      <span class="at">treatDCDH  =</span> treatedAny <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> time <span class="sc">&gt;=</span> firstY, </span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>      <span class="at">firstCS    =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(firstY), <span class="dv">0</span>, firstY <span class="sc">+</span> <span class="dv">1</span>) <span class="co"># First 'clean' year  </span></span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Drop units with inconsistent firstCS (varying treatment cohort)</span></span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>  dataMain <span class="ot">&lt;-</span> dataMain <span class="sc">%&gt;%</span></span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="sc">!!</span><span class="fu">sym</span>(group_id_var)) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">min_cs =</span> <span class="fu">min</span>(firstCS), <span class="at">max_cs =</span> <span class="fu">max</span>(firstCS)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(min_cs <span class="sc">==</span> max_cs)</span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>  dataMain <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="sc">!!</span><span class="fu">sym</span>(group_id_var), time)</span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  fe <span class="ot">&lt;-</span> data<span class="sc">$</span>firstEffect</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">inherits</span>(fe, <span class="st">"POSIXct"</span>) <span class="sc">||</span> <span class="fu">inherits</span>(fe, <span class="st">"Date"</span>)) {</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>firstY <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">format</span>(<span class="fu">as.Date</span>(fe), <span class="st">"%Y"</span>))</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>firstY <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(<span class="fu">as.character</span>(fe)))</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter types of bag bans </span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>  dataMain <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"charge"</span>, </span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"complete"</span>, <span class="st">"</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="st">                       partial"</span>, </span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"control"</span>))</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Group-level treatment variables </span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>  dataMain <span class="ot">&lt;-</span> dataMain <span class="sc">%&gt;%</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="sc">!!</span><span class="fu">sym</span>(group_id_var)) <span class="sc">%&gt;%</span> <span class="co"># !! unquotes it so the column is evaluated, sym does the same thing so its double checking </span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>      <span class="at">treat      =</span> treatedAny,</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>      <span class="at">treatEver  =</span> <span class="fu">sum</span>(treatedAny) <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>      <span class="at">timeToTreat =</span> <span class="fu">if_else</span>(treatEver, time <span class="sc">-</span> firstY, <span class="dv">0</span>),</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>      <span class="at">firstSA    =</span> <span class="fu">if_else</span>(treatEver, firstY <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">10000</span>), <span class="co"># No treatment -&gt; no first year</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>      <span class="at">treatDCDH  =</span> treatedAny <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> time <span class="sc">&gt;=</span> firstY, </span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>      <span class="at">firstCS    =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(firstY), <span class="dv">0</span>, firstY <span class="sc">+</span> <span class="dv">1</span>) <span class="co"># First 'clean' year  </span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Drop units with inconsistent firstCS (varying treatment cohort)</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>  dataMain <span class="ot">&lt;-</span> dataMain <span class="sc">%&gt;%</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="sc">!!</span><span class="fu">sym</span>(group_id_var)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">min_cs =</span> <span class="fu">min</span>(firstCS), <span class="at">max_cs =</span> <span class="fu">max</span>(firstCS)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(min_cs <span class="sc">==</span> max_cs)</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>  dataMain <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="sc">!!</span><span class="fu">sym</span>(group_id_var), time)</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -659,113 +750,111 @@ window.Quarto = {
 <li><p>C : Dynamic unbalanced effects</p></li>
 <li><p>D : Dynamic Balanced effects</p></li>
 </ul>
+<p>The balanced data comes from the original study, and is balanced on whether there were consistent yearly cleanups. The overall effects are the static single value effects, wheras the dynamic effects add the year into the model, which gives a Year-Over-Year effect of plastic bag policies on the prevelance in cleanups.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># PLOTS</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>my_palette <span class="ot">&lt;-</span> palette[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>x_labels_unbal <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"0.1° Cell x Year</span><span class="sc">\n</span><span class="st"> Cleanups = "</span>, <span class="fu">comma</span>(count_unbal_cell),</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">"</span><span class="sc">\n</span><span class="st"> Obs = "</span>, <span class="fu">comma</span>(nobs_unbal_cell)),</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"Zip Code x Year</span><span class="sc">\n</span><span class="st"> Cleanups = "</span>, <span class="fu">comma</span>(count_unbal_zip),</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>         <span class="st">"</span><span class="sc">\n</span><span class="st"> Obs = "</span>, <span class="fu">comma</span>(nobs_unbal_zip))</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>x_labels_bal <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"0.1° Cell x Year</span><span class="sc">\n</span><span class="st"> Cleanups = "</span>, <span class="fu">comma</span>(count_bal_cell),</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">"</span><span class="sc">\n</span><span class="st"> Obs = "</span>, <span class="fu">comma</span>(nobs_bal_cell)),</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"Zip Code x Year</span><span class="sc">\n</span><span class="st"> Cleanups = "</span>, <span class="fu">comma</span>(count_bal_zip),</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>         <span class="st">"</span><span class="sc">\n</span><span class="st"> Obs = "</span>, <span class="fu">comma</span>(nobs_bal_zip))</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>my_palette <span class="ot">&lt;-</span> palette[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>x_labels_unbal <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"0.1° Cell x Year</span><span class="sc">\n</span><span class="st"> Cleanups = "</span>, <span class="fu">comma</span>(count_unbal_cell),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"</span><span class="sc">\n</span><span class="st"> Obs = "</span>, <span class="fu">comma</span>(nobs_unbal_cell)),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"Zip Code x Year</span><span class="sc">\n</span><span class="st"> Cleanups = "</span>, <span class="fu">comma</span>(count_unbal_zip),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">"</span><span class="sc">\n</span><span class="st"> Obs = "</span>, <span class="fu">comma</span>(nobs_unbal_zip))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>x_labels_bal <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"0.1° Cell x Year</span><span class="sc">\n</span><span class="st"> Cleanups = "</span>, <span class="fu">comma</span>(count_bal_cell),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>         <span class="st">"</span><span class="sc">\n</span><span class="st"> Obs = "</span>, <span class="fu">comma</span>(nobs_bal_cell)),</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"Zip Code x Year</span><span class="sc">\n</span><span class="st"> Cleanups = "</span>, <span class="fu">comma</span>(count_bal_zip),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>         <span class="st">"</span><span class="sc">\n</span><span class="st"> Obs = "</span>, <span class="fu">comma</span>(nobs_bal_zip))</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>shapes_static  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">17</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>shapes_dynamic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">17</span>)</span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>shapes_static  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">17</span>)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>shapes_dynamic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">17</span>)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Panel A: Overall, Unbalanced ----</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(static_unbal, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> estimate, <span class="at">color =</span> model, <span class="at">shape =</span> model)) <span class="sc">+</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow, <span class="at">ymax =</span> confHigh),</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow90, <span class="at">ymax =</span> confHigh90),</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.35</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> my_palette) <span class="sc">+</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> shapes_static) <span class="sc">+</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> x_labels_unbal) <span class="sc">+</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">25</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">50</span>)) <span class="sc">+</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Plastic Bags (Share of Items)</span><span class="sc">\n</span><span class="st">∆ Relative to Control Mean (%)"</span>,</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Aggregation Level"</span>,</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Overall Effects"</span>, <span class="at">subtitle =</span> <span class="st">"Unbalanced Panel"</span>) <span class="sc">+</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>  add_common_theme</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Panel C: Overall, Balanced ----</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>c_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(static_bal, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> estimate, <span class="at">color =</span> model, <span class="at">shape =</span> model)) <span class="sc">+</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow, <span class="at">ymax =</span> confHigh),</span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow90, <span class="at">ymax =</span> confHigh90),</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.35</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> my_palette) <span class="sc">+</span></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> shapes_static) <span class="sc">+</span></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> x_labels_bal) <span class="sc">+</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">25</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">50</span>)) <span class="sc">+</span></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Plastic Bags (Share of Items)</span><span class="sc">\n</span><span class="st">∆ Relative to Control Mean (%)"</span>,</span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Aggregation Level"</span>,</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Overall Effects"</span>, <span class="at">subtitle =</span> <span class="st">"Balanced Panel"</span>) <span class="sc">+</span></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>  add_common_theme</span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Panel B: Dynamic, Unbalanced ----</span></span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dynamic_unbal, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> estimate, <span class="at">color =</span> model, <span class="at">shape =</span> model)) <span class="sc">+</span></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow, <span class="at">ymax =</span> confHigh),</span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>)) <span class="sc">+</span></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow90, <span class="at">ymax =</span> confHigh90),</span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> <span class="fl">0.35</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>)) <span class="sc">+</span></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>)) <span class="sc">+</span></span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> my_palette) <span class="sc">+</span></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> shapes_dynamic) <span class="sc">+</span></span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>, <span class="fl">5.5</span>)) <span class="sc">+</span></span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">125</span>, <span class="dv">75</span>, <span class="dv">25</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">127.5</span>, <span class="dv">85</span>)) <span class="sc">+</span></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Plastic Bags (Share of Items)</span><span class="sc">\n</span><span class="st">∆ Relative to Control Mean (%)"</span>,</span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Years Since Policy"</span>,</span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Dynamic Effects"</span>,</span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"0.1° Cell x Year Aggregation; Unbalanced Panel"</span>) <span class="sc">+</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>  add_common_theme</span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Panel D: Dynamic, Balanced ----</span></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dynamic_bal, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> estimate, <span class="at">color =</span> model, <span class="at">shape =</span> model)) <span class="sc">+</span></span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow, <span class="at">ymax =</span> confHigh),</span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>)) <span class="sc">+</span></span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow90, <span class="at">ymax =</span> confHigh90),</span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> <span class="fl">0.35</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>)) <span class="sc">+</span></span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>)) <span class="sc">+</span></span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> my_palette) <span class="sc">+</span></span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> shapes_dynamic) <span class="sc">+</span></span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>, <span class="fl">5.5</span>)) <span class="sc">+</span></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">125</span>, <span class="dv">75</span>, <span class="dv">25</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">127.5</span>, <span class="dv">85</span>)) <span class="sc">+</span></span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Plastic Bags (Share of Items)</span><span class="sc">\n</span><span class="st">∆ Relative to Control Mean (%)"</span>,</span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Years Since Policy"</span>,</span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Dynamic Effects"</span>,</span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"0.1° Cell x Year Aggregation; Balanced Panel"</span>) <span class="sc">+</span></span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>  add_common_theme</span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Assemble with patchwork </span></span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>final_plot <span class="ot">&lt;-</span> (a <span class="sc">+</span> c_plot) <span class="sc">/</span> (b <span class="sc">+</span> d) <span class="sc">+</span></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">"A"</span>) <span class="sc">+</span></span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span></span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/Figure2.jpeg"</span>, final_plot, <span class="at">width =</span> <span class="dv">11</span>, <span class="at">height =</span> <span class="dv">13</span>, <span class="at">unit =</span> <span class="st">"in"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Panel A: Overall, Unbalanced ----</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(static_unbal, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> estimate, <span class="at">color =</span> model, <span class="at">shape =</span> model)) <span class="sc">+</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow, <span class="at">ymax =</span> confHigh),</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow90, <span class="at">ymax =</span> confHigh90),</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.35</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> my_palette) <span class="sc">+</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> shapes_static) <span class="sc">+</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> x_labels_unbal) <span class="sc">+</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">25</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">50</span>)) <span class="sc">+</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Plastic Bags (Share of Items)</span><span class="sc">\n</span><span class="st">∆ Relative to Control Mean (%)"</span>,</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Aggregation Level"</span>,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Overall Effects"</span>, <span class="at">subtitle =</span> <span class="st">"Unbalanced Panel"</span>) <span class="sc">+</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  add_common_theme</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Panel C: Overall, Balanced ----</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>c_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(static_bal, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> estimate, <span class="at">color =</span> model, <span class="at">shape =</span> model)) <span class="sc">+</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow, <span class="at">ymax =</span> confHigh),</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow90, <span class="at">ymax =</span> confHigh90),</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.35</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> my_palette) <span class="sc">+</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> shapes_static) <span class="sc">+</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> x_labels_bal) <span class="sc">+</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">25</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">50</span>)) <span class="sc">+</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Plastic Bags (Share of Items)</span><span class="sc">\n</span><span class="st">∆ Relative to Control Mean (%)"</span>,</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Aggregation Level"</span>,</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Overall Effects"</span>, <span class="at">subtitle =</span> <span class="st">"Balanced Panel"</span>) <span class="sc">+</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>  add_common_theme</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Panel B: Dynamic, Unbalanced ----</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dynamic_unbal, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> estimate, <span class="at">color =</span> model, <span class="at">shape =</span> model)) <span class="sc">+</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow, <span class="at">ymax =</span> confHigh),</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>)) <span class="sc">+</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow90, <span class="at">ymax =</span> confHigh90),</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> <span class="fl">0.35</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>)) <span class="sc">+</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>)) <span class="sc">+</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> my_palette) <span class="sc">+</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> shapes_dynamic) <span class="sc">+</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>, <span class="fl">5.5</span>)) <span class="sc">+</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">125</span>, <span class="dv">75</span>, <span class="dv">25</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">127.5</span>, <span class="dv">85</span>)) <span class="sc">+</span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Plastic Bags (Share of Items)</span><span class="sc">\n</span><span class="st">∆ Relative to Control Mean (%)"</span>,</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Years Since Policy"</span>,</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Dynamic Effects"</span>,</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"0.1° Cell x Year Aggregation; Unbalanced Panel"</span>) <span class="sc">+</span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  add_common_theme</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Panel D: Dynamic, Balanced ----</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dynamic_bal, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> estimate, <span class="at">color =</span> model, <span class="at">shape =</span> model)) <span class="sc">+</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow, <span class="at">ymax =</span> confHigh),</span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>)) <span class="sc">+</span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> confLow90, <span class="at">ymax =</span> confHigh90),</span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> <span class="fl">0.35</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>)) <span class="sc">+</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>)) <span class="sc">+</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> my_palette) <span class="sc">+</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Estimator"</span>, <span class="at">values =</span> shapes_dynamic) <span class="sc">+</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>, <span class="fl">5.5</span>)) <span class="sc">+</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">125</span>, <span class="dv">75</span>, <span class="dv">25</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">127.5</span>, <span class="dv">85</span>)) <span class="sc">+</span></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Plastic Bags (Share of Items)</span><span class="sc">\n</span><span class="st">∆ Relative to Control Mean (%)"</span>,</span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Years Since Policy"</span>,</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Dynamic Effects"</span>,</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"0.1° Cell x Year Aggregation; Balanced Panel"</span>) <span class="sc">+</span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>  add_common_theme</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="co"># Assemble with patchwork </span></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>final_plot <span class="ot">&lt;-</span> (a <span class="sc">+</span> c_plot) <span class="sc">/</span> (b <span class="sc">+</span> d) <span class="sc">+</span></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">"A"</span>) <span class="sc">+</span></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/Figure2.jpeg"</span>, final_plot, <span class="at">width =</span> <span class="dv">11</span>, <span class="at">height =</span> <span class="dv">13</span>, <span class="at">unit =</span> <span class="st">"in"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -785,88 +874,6 @@ Figure&nbsp;1: The final plot output
 <p>In the plot we see similar trends to the paper by <span class="citation" data-cites="papp2025">(<a href="#ref-papp2025" role="doc-biblioref">Papp and Oremus 2025</a>)</span>, with both estimators finding a reduction in plastic bags relative to the control mean. In the unbalanced panel (Panel A), TWFE estimates a ~38% reduction and CS estimates a ~48% reduction at the cell level, with slightly smaller effects at the zip code level (~32% and ~40% respectively). In the balanced panel (Panel B), TWFE estimates a ~50% reduction and CS estimates a ~63% reduction at the cell level, though the CS confidence interval is very wide and crosses zero, indicating high uncertainty.</p>
 <p>In the dynamic panels (C and D), both estimators show increasing reductions in the post-treatment years, but with substantial uncertainty. For example, the CS estimate at year 3 in the unbalanced panel ranges from a ~10% increase to over a ~100% decrease. The wide confidence intervals, particularly in the balanced panel with only 992 observations, reflect the small sample size. However, the primary limitation of this analysis is a violation of the parallel trends assumption: control areas experienced an anomalous spike in plastic bag share after 2021, likely driven by changes in cleanup composition during COVID recovery, making causal interpretation of these estimates difficult.</p>
 </section>
-<section id="sec-model" class="level2">
-<h2 class="anchored" data-anchor-id="sec-model">Model Justification</h2>
-<p>Papp and Oremus utilize a difference and difference casual model with multiple estimators.</p>
-<p>The difference and difference approach requires a core assumption of parallel trends. This assumption states treatment and control units, locations (zip code or grid cell) with and without bag policy, would follow the same trend in the absence of policy. The outcome variable, percent plastic bag share of total items collected, must be parallel in treatment and control areas before policy is enacted. This allows a causal identification that without policy in a counterfactual scenario, the trend lines likely would have continued in the pre-treatment trajectory.</p>
-<section id="testing-assumptions-and-violations" class="level3">
-<h3 class="anchored" data-anchor-id="testing-assumptions-and-violations">Testing assumptions and violations</h3>
-<p><strong>Parallel Trends</strong> This assumption was tested visually with a plot of plastic bags as percent of cleanup items against time for the cleanups in control areas and clean-ups in treated areas (Fig S5). The first policies occurred in 2017, with staggered implementation across treatment locations from 2016 until 2023 for the 182 policies analyzed.</p>
-<p><img src="parallel_trends.jpg" class="img-fluid"></p>
-<p>Cleanup data from control and treated areas should show variation due to regional and contextual differences. However, the trend between the two requires parallel lines to infer causal impact of the policy treatments due to omitted time-varying confounders. The figure shows a negative slope in treated areas and a positive slope in control areas, with an intersection point near the point of first treatment in 2017.</p>
-<p>The volume of data collection is shown in the plot below comparing the cleanup counts over time between control and treatment areas. Prior to policy implementation in 2017, there is a strong case for parallel trends in the cleanups themselves. This plot does not illustrate the outcome variable of interest and cannot stand alone to support the direct causal claim of bag policy changing plastic bag share of total items collected.</p>
-<p>The trend is further visualized in the dynamic effects model (<a href="#fig-2">Figure 2</a> panel b and d). For a strong parallel trend, treated units in the years before the policies should show no differential trend in plastic bag share relative to controls, expressed as a fraction of the baseline control mean 4.5%. However, the width of the 95% confidence interval spanning values substantially different from zero suggests imprecision and an inability to rule out pre-existing differential trends.</p>
-<p><strong>Stable Unit Treatment Value Assumption (SUTVA)</strong></p>
-<p>There must be no spillovers between treated units and control units. The policy impact in one location (zip code or grid cell) must not impact the outcome in areas without policies. The study acknowledges the interconnectedness of waterways as well as potential behavioral spillover like outsourcing plastic bag purchases to neighboring areas without policies. There could also be positive spillover effects such as changing behavior of neighboring control area stores to supply less plastic bags resulting in decreased pollution. Spillover could also occur through the confirmation bias in the cleanup locations themselves to find more plastic bags with increased awareness. Both positive and negative spillover would violate the SUTVA and dilute the treatment effect.</p>
-<p>To test for spillover, Papp and Oremus compare zip codes of neighboring treatment areas, neighbors of neighbors and neighbors of neighbors of neighbors to the control areas to test for any significant effect (Fig 3B).</p>
-<p><img src="SUTVA.png" class="img-fluid"> Fig. 3 Spillover Analysis (B) Panel shows the effect of bag policies on plastic bag litter across these treatment groups, for all of the United States. Regression outcomes are according to eq. S1 using five estimators [TWFE and (31–34)] and using the zip code by year aggregation level. Zip codes with repealed policies (and all neighbors) are dropped from the analysis. The outcome variables are plastic bags’ share of total items collected on shoreline cleanups documented in TIDES, divided by the control mean. Thick lines show a 90% confidence interval, and thin lines show a 95% confidence interval. Standard errors are clustered by zip code.</p>
-<p>All neighboring zip codes of treatment areas do not have statistically significant effects, indicating that the spillover assumption is met. However the immediate neighbors may have slight positive effects while the neighbors of neighbors indicate slight negative effects (Fig 3B). To remediate any potential doubt, Papp and Oremus remove 3 degrees of location away from the treated location, such as 3 zip codes away, for the final analysis.</p>
-<p><strong>Strict Exogeneity</strong> To meet this assumption the treatment must be independent of the error term across all time periods. Papp and Oremus propose a scenario that while the decision to implement a policy in a locality may be endogenous, the timing of implementation is likely exogenous due to the process of law implementation. Exogeneity is examined in the dynamic effects model showing treated units in pretreatment years compared to control. However, divergence from the control units before the ban could reflect either anticipation effects or omitted time-varying confounders. The bias created from contaminating the base year in the former threatens causal identification, while the latter threatens the parallel trends assumption.</p>
-</section>
-<section id="model-variations" class="level3">
-<h3 class="anchored" data-anchor-id="model-variations">Model Variations</h3>
-<p><strong>Overall effects:</strong> Tested by a two-way fixed effects regression.</p>
-<p><span class="math display">\[y_{it} = \beta D_{it} + \gamma_i + \delta_t + \epsilon_{it}\]</span> Yit, the outcome variable, is the plastic bag percent share of total items i, the unit, is the 0.1 latitude/longitude grid cell t, the time, is years Dit, the dummy variable, is one in years after the beginning of a plastic bag policy in unit i i , a fixed effect, controls for the spatial unit i, a fixed effect, controls for year</p>
-<p>The overall effects output one summary number, answering the question on average, do bag policies work. The collapsed estimate hides any effect over time which the dynamic effects model can answer.</p>
-<p>Results are presented with spatial units in both the main analysis, grid cell, and zip code as a robustness measure. Grid cells are uniform, yet arbitrary in terms of boundaries while zip codes are variable sizes and follow administrative boundaries. The side by side comparison provides sufficient evidence that the spatial aggregation choice isn’t driving the results.</p>
-<p><strong>Dynamic effects:</strong> Event-study two-way fixed effects</p>
-<p><span class="math display">\[y_{it} = \beta_k \sum_{k=-3}^{6} D_{k(i)} + \gamma_i + \delta_t + \epsilon_{it}\]</span></p>
-<p>Yit, the outcome variable, is the plastic bag percent share of total items i, the unit, is the 0.1 latitude/longitude grid cell t, the time, is years Dk(i), the dummy variable, is one if the introduction of the policy was k years away for unit i i , a fixed effect, controls for the spatial unit i, a fixed effect, controls for year</p>
-<p>The dynamic effects model answers the question of does bag policy work and when. For a causal interpretation of this model in figure 2, with results normalized by the control mean, the parallel trends should be visualized with a flat trend pre-treatment and statistically indistinguishable from zero to indicate no differential trend in plastic bag share relative to controls.</p>
-<p><strong>Unbalanced vs balanced</strong></p>
-<p>The balanced panel is a subset of locations that have at least one annual cleanup a year. The unbalanced panel is inclusive of all locations with cleanups though the clean up dates may be sporadic and subject to seasonal variation affecting pollution patterns. Both panels are inputted to the model estimators and shown side by side.</p>
-</section>
-<section id="estimator-comparisons" class="level3">
-<h3 class="anchored" data-anchor-id="estimator-comparisons">Estimator comparisons</h3>
-<p>Papp and Oremus utilize multiple estimators. The focus of our analysis is on the Two-way fixed effect (TWFE) and Callaway and Sant’Anna (2021) estimation methods. A standard two-way fixed effect creates bias in heterogeneous treatment effects. With policy enactments varied through time, the estimator must account for this bias. Callaway and Sant’Anna (2021) created a cohort-specific average treatment effect on the treated (g,t) for each treatment cohort g and period that addresses this bias.</p>
-</section>
-<section id="two-way-fixed-effects-twfe" class="level3">
-<h3 class="anchored" data-anchor-id="two-way-fixed-effects-twfe"><em>Two Way Fixed Effects (TWFE)</em></h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Overview</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Estimand</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Core approach</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Handles staggered adoption?</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">Control group</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p><strong>Overview:</strong> Year and zip code fixed effects with a single treatment indicator.</p>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p><strong>Estimand:</strong> ATT (average over all treated units). Example: average change in plastic bag share over all treated zip codes.</p>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<p><strong>Core approach:</strong> OLS regression with unit and time fixed effects; single treatment indicator.</p>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<p><strong>Handles staggered adoption:</strong> Yes, but biased when treatment effects are heterogeneous.</p>
-</div>
-<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
-<p><strong>Control Group:</strong> All untreated units <strong>and already-treated units</strong> (implicitly).</p>
-</div>
-</div>
-</div>
-</section>
-<section id="callaway-santanna-cs" class="level3">
-<h3 class="anchored" data-anchor-id="callaway-santanna-cs"><em>Callaway &amp; Sant’Anna (CS)</em></h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Overview</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Estimand</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">Core approach</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false" href="">Handles staggered adoption?</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-5" role="tab" aria-controls="tabset-2-5" aria-selected="false" href="">Control group</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<p><strong>Overview:</strong> Aggregate cohort-specific DiD estimates using clean comparisons only. Uses <code>base_period = "universal"</code> for a shared baseline across cohorts.</p>
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<p><strong>Estimand:</strong> Cohort-specific ATT (g,t) for each treatment cohort <em>g</em> and period <em>t</em>. Treatment cohort defined as first clean year after policy (<code>firstCS</code>).</p>
-</div>
-<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
-<p><strong>Core approach:</strong> Compute group-time treatment effects and aggregate across cohorts using valid comparisons.</p>
-</div>
-<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
-<p><strong>Handles staggered adoption:</strong> Yes — explicitly designed for staggered treatment timing.</p>
-</div>
-<div id="tabset-2-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-5-tab">
-<p><strong>Control Group:</strong> Not-yet-treated units.</p>
-</div>
-</div>
-</div>
-</section>
-</section>
 <section id="limitations" class="level2">
 <h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
 <section id="measuring-and-sampling" class="level3">
@@ -881,11 +888,15 @@ Figure&nbsp;1: The final plot output
 <section id="studys-conclusion-summary" class="level3">
 <h3 class="anchored" data-anchor-id="studys-conclusion-summary">Study’s conclusion summary</h3>
 <p>The study assumes “that the sample used in our analysis is representative of all plastic bag litter in the US aquatic environment”. This assumption may be a stretch as there are factors the study does not consider. The first is the different outcomes between plastic litter types. The study assumes similar outcomes for plastic caps and bags. This strikes us as a bit of an overgenralization, as plastic bags are more likely to fly away and end up in the Aquatic environment than caps, making the assumption that their prevalence on land and in the water being similar a stretch. Secondly there are some omitted variables that the authors did not consider. One we came up with was beach combing. Beach combing is the practice of removing litter and wrack from beaches using large machines. This usually happens in more resedential areas in an attempt to ‘beautify’ the beach. This occurs unevenly across our sample sites and is not controlled for in any way, which may have skewed our results.</p>
+</section>
+</section>
+<section id="overall-takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="overall-takeaway">Overall Takeaway</h2>
+<p>By employing two estimators, TWFE and Callaway &amp; Sant’Anna (2021), across both balanced and unbalanced panels and two levels of spatial aggregation (0.1° grid cells and zip codes), we find consistent evidence of plastic bag share reductions following policy enactment, ranging from 32–63% relative to the control mean. Although our results are largely consistent with the original study, the large confidence intervals and violation of the parallel trends assumption post-2021 limit causal inference. However, the results do indicate plastic bag policy is a promising avenue for addressing plastic pollution, and citizen science data is a useful proxy for aquatic litter trends.</p>
 <p>Check out the <a href="https://github.com/petervitale910/EDS241-Final-Project">project repository on GitHub</a></p>
 
 
 
-</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
